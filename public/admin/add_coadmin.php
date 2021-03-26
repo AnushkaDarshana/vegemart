@@ -36,7 +36,7 @@
         $password = $_POST["password"];
         $userType="coadmin";
 
-        $sql_e = "SELECT * FROM users WHERE email='".$email."'";            
+        $sql_e = "SELECT * FROM `users` WHERE email='".$email."'";            
         $res_e = mysqli_query($con, $sql_e);           
                     
         if(mysqli_num_rows($res_e) > 0){
@@ -46,34 +46,32 @@
             </script>";
                     
         }else{
-            $password_hash = md5($password); 
+            $salt = md5(uniqid(rand(), true));
+            $password_hash = md5($salt.$password); 
+
             if($imageName==""){
                 $imageName="default.png";
             }
             
-            $user = "INSERT INTO `users` (`email`,`password`, `userType`) VALUES ('".$email."','".$password_hash."','".$userType."');";
+            $user = "INSERT INTO `users` (`email`,`password`, `salt`,`userType`) VALUES ('".$email."','".$password_hash."','".$salt."','".$userType."');";
             $result1= mysqli_query($con,$user);
             $user_id = mysqli_insert_id($con);
 
             $admin = "INSERT INTO `admin` (`user_id`,`name`,`contactNum`,`address1`,`address2`,`city`,`profilePic`) VALUES ('".$user_id."','".$name."','".$phoneNum."','".$address1."','".$address2."','".$city."','".$imageName."');";
             $result2= mysqli_query($con,$admin);
 
-            if ($result1 == true){
-                echo 'done1';
-            }else{
-                if($resut2 ==true){
-                    echo 'done2';
-                }else{
-                    echo 'failed';
-                }
+            if (($result1 == true) && ($resut2 ==true)) {
+                $message = base64_encode(urlencode("Successfully Edited!"));
+                header('Location:co-admin_mgt.php?msg=' . $message);
+                $logString = "ADMIN added ===> Co-Admin". $row['id'] ." to the system.";
+                writeAppLog($logString, "./logs");
+                exit();
+            } 
+            else {
+                $message = base64_encode(urlencode("SQL Error while Registering"));
+                header('Location:co-admin_mgt.php.php?msg=' . $message);
+                exit();
             }
-
-            // if ($result1 == true && $result2 == true ){ 
-            //     header('Location:co-admin_mgt.php?msg=' . $message);
-            // }
-            // else{
-            //     echo'failed';
-            // }
         }
     }
 ?>  

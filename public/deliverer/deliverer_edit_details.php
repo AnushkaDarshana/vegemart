@@ -31,12 +31,15 @@
                                         <label>Last Name</label>
                                         <input class="input-box" type="text" name="editLName" placeholder="Edit last name" value="<?php echo $row['lName']?>" required>
                                     </div>
-                                        <!-- while($rowEmail = mysqli_fetch_assoc($emailquery))
-                // q                          echo"<div class="input-row">
-                //                                 <label>Email</label> 
-                //                                 <input class="input-box" type="email" name="editEmail" placeholder="Edit email" value="echo $rowEmail['email']" required>
-                //                             </div>";
-                                        } -->
+                                    <?php
+                                        while($rowEmail = mysqli_fetch_assoc($emailquery)){?>
+                                            <div class="input-row">
+                                                <label>Email</label> 
+                                                <input class="input-box" type="email" name="editEmail" placeholder="Edit email" value="<?php echo $rowEmail['email']?>" required>
+                                            </div>
+                                    <?php
+                                        }
+                                    ?>
                                     <div class="input-row">
                                         <label>Phone number</label>
                                         <input class="input-box" type="text" name="editPhoneNum" placeholder="Edit contact number" value="<?php echo $row['phoneNum']?>" required>
@@ -79,7 +82,7 @@
                                 <div class="column is-1 pl-1 pr-1"></div>
                             </div>
                             <div class="row">
-                                <input type="hidden" value="<?php echo $row['delivererID']?>" name="editID">
+                                <input type="hidden" value="<?php echo $row['user_id']?>" name="editID">
                                 <input class="form-button"  type="submit" name="submit" value="Save">
                                 <input class="form-button" type="button" name="cancel" onclick="window.location.replace('deliverer_home.php')" value="Cancel">                                           
                                 <a style="color:#3e8e41; font-size:16px; margin-top:10%;" href="#">Deactivate account</a>

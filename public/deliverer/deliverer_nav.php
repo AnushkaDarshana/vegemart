@@ -17,17 +17,26 @@
             
             <ul class="main-nav">
                 <li><a href="./deliverer_home.php">Home</a></li>
-                <li><a href="../about_us.php">About</a></li>
+                <li><a href="#">About</a></li>
+                
                 <li><a href="./my_deliveries.php">My Deliveries</a></li>
-                <li><a href="http://localhost/vegemart/src/logout.php">Logout</a></li>
                 <?php  
-                    if(isset($_SESSION["loggedInDelivererID"])){
-                        if (isset($_SESSION["loggedInDelivererID"])) {
-                            $userID = $_SESSION["loggedInDelivererID"];
-                        }
-                        $retrieveInfo =  "SELECT * FROM deliverer WHERE delivererID='$userID';"; //Selecting all data from Table
+                    if(!isset($_SESSION["loggedInDelivererID"]))
+                    {
+                        echo "<script>
+                        alert('You have to login first');
+                        window.location.href='../login.php';
+                        </script>";
+                    }   
+
+                    else if(isset($_SESSION["loggedInDelivererID"])){
+
+                        $userID = $_SESSION["loggedInDelivererID"];
+                        
+                        $retrieveInfo =  "SELECT * FROM `deliverer` WHERE `user_id`='$userID';"; //Selecting all data from Table
                         $resultInfo = mysqli_query($con, $retrieveInfo); //Passing SQL
                         while($rowUser  = mysqli_fetch_assoc($resultInfo)){
+                            
                             echo "
                         <li>
                         <div class=\"nav-dropdown\">
