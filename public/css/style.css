@@ -18,6 +18,10 @@
     background-color:#1cc4a2;
 }
 
+a{
+    cursor: pointer;
+}
+
 /* margins */
 .ml-0 {
     margin-left: 0 !important;

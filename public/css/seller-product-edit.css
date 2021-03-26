@@ -16,10 +16,15 @@ p{
     font-weight: 500;
 }
 
+div p{
+    color: #138D75; 
+    text-align:center;
+}
+
 .updateForm {
     box-shadow: 4px 4px 20px -8px rgba(0, 0, 0, 0.75);
     background-color: white;
-    border-radius: 15px;
+    border-radius: 20px;
     padding: 1rem;
     margin: 10px;
     align-self: center;
@@ -29,10 +34,9 @@ p{
 .input-row{
     display: flex;
     flex-wrap: wrap;
-    padding: 8px 20px;
+    padding: 8px 15px;
     text-align: left;
 }
-
 
 label{
     text-align: left;
@@ -45,8 +49,20 @@ label{
     flex-wrap: wrap;
     text-align: left;
     font-size: 14px;
-    min-height: 25px;
-    min-width: 250px;
+    min-height: 28px;
+    min-width: 200px;
+    color: #232523;
+    background-color: whitesmoke;
+    border-color: transparent;
+}
+
+.bid-box{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: left;
+    font-size: 14px;
+    min-height: 28px;
+    min-width: 80px;
     color: #232523;
     background-color: whitesmoke;
     border-color: transparent;
@@ -55,27 +71,23 @@ label{
 .img-row{
     display: flex;
     flex-wrap: wrap;
-    place-items: center;
-    padding: 8px 20px;
-    text-align: left;
+    margin:12px;
+    align-items: center;
 }
 
 .image-input{
     display: flex;
-    flex: 1 0 150px;
+    margin-left:12px;
     align-self: center;
     font-size: 14px;
     min-height: 25px;
-    max-width: 200px;
-    margin:0 3em;
     color: #232523;
-    background-color: transparent;
+    background-color:transparent;
     border-color: transparent;
-    text-align: center;
 }
 
 .item-img{
-    max-height: 200px;
+    max-height: 100px;
     text-align: center;
 }
 
@@ -88,6 +100,21 @@ textarea{
     background-color: whitesmoke;
     border-color: transparent;
     align-self: flex-end;
+}
+
+.bid-btn{
+    display: inline-flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    white-space: nowrap;
+    margin: 1em 0 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 0 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 15px;
 }
 
 .updateForm .form-button{
@@ -111,4 +138,65 @@ textarea{
     color: white;
 }
 
+/* Popup box BEGIN */
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+}
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+  
+.popup {
+    margin: 70px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 30%;
+    position: relative;
+    transition: all 5s ease-in-out;
+}
+  
+.popup h2 {
+    margin-top: 0;
+    color: #333;
+    font-family: Tahoma, Arial, sans-serif;
+}
 
+.content p{
+    padding: 0;
+    margin: 0;
+}
+
+.popup-pic{
+    margin:0 12em 1em;
+    text-align: center;
+    height: 70px;
+    width:70px;
+} 
+
+.popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+.popup .close:hover {
+    color: #06D85F;
+}
+.popup .content {
+    max-height: 30%;
+    overflow: auto;
+}

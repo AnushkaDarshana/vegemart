@@ -73,11 +73,13 @@ td a:hover{
 }
 
 .card {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    background-color:#FDFEFE;
-    /* padding: 2em; */
+    box-shadow: 4px 4px 20px -8px rgba(0, 0, 0, 0.75);
+    border-radius: 20px;
+    background-color:rgba( 234, 250, 241, 0.6);
+    padding: 1em 2em;
     margin: auto;
     align-self: center;
+    text-align: center;
 }
 
 .input-box{
@@ -94,13 +96,18 @@ td a:hover{
     align-self: center;
 }
 
+#topic_title{
+    background-color: white;
+}
+
 textarea{
     display: flex;
     flex-wrap: wrap;
     font-size: 14px;
     text-align: start;
+    margin: 0 1em;
     color: #232523;
-    background-color: whitesmoke;
+    background-color: white;
     border-color: transparent;
     align-self: center;
 }
@@ -126,6 +133,108 @@ textarea{
     color: white;
 }
 
+.tab{
+    align-items: center;
+}
+
+#tab-button{
+    border: none;
+    border-color: rgb(149, 192, 169);
+    padding: 15px 32px;
+    text-align: center;
+    font-family:Candara; 
+    text-decoration: none;
+    margin: auto;
+    display: inline-block;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#tab-button:hover{
+    border-color: rgb(149, 192, 169);
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24);
+}
+
+.button {
+    background-color: #138D75;
+    border-color: transparent;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    justify-content: center;
+    padding-bottom: calc(0.5em - 1px);
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-top: calc(0.5em - 1px);
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 0.3em;
+    margin: 1.5em;
+}
+
+button > i{
+    color: white !important
+}
+
+#like-btn{
+    background-color: transparent;
+    border-color: transparent;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    justify-content: center;
+    padding-bottom: 0.1em;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-top: calc(0.5em - 1px);
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 0.3em;
+    margin: 1.5em;
+}
+
+.topics{
+    display: flex;
+    place-items: center;
+    justify-content: center;
+}
+
+.topics ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 150px;
+}
+  
+.topics li a {
+    border-radius: 50px;
+    background-color:#b3dbd3;
+    display: block;
+    color: #000;
+    padding: 8px 12px;
+    margin-bottom: 1em;
+    text-decoration: none;
+  }
+  
+  /* Change the link color on hover */
+.topics li a:hover {
+    background-color:#138D75;
+    color: white;
+}
+
+.content{
+    align-self: center;
+    justify-content: center;
+    margin-right: 1.5em;
+    padding: 0 1em;
+}
+
+.user-image {
+    width: 4rem;
+    margin-top: 1.5em;
+    padding: 0;
+    border-radius: 100%;
+}
 
 /* /* Popup box BEGIN  */
 .overlay {
@@ -197,93 +306,4 @@ textarea{
     .popup{
       width: 70%;
     }
-}
-
-
-
-
-
-
-.tab{
-    align-items: center;
-}
-
-#tab-button{
-    border: none;
-    border-color: rgb(149, 192, 169);
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    margin: auto;
-    display: inline-block;
-    font-size: 15px;
-    cursor: pointer;
-}
-
-#tab-button:hover{
-    border-color: rgb(149, 192, 169);
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24);
-}
-
-.button {
-    background-color: #138D75;
-    border-color: transparent;
-    color: #fff;
-    font-size: 1rem;
-    cursor: pointer;
-    justify-content: center;
-    padding-bottom: calc(0.5em - 1px);
-    padding-left: 2em;
-    padding-right: 2em;
-    padding-top: calc(0.5em - 1px);
-    text-align: center;
-    white-space: nowrap;
-    border-radius: 0.3em;
-    margin: 1.5em;
-}
-
-button > i{
-    color: white !important
-}
-
-.topics{
-    display: flex;
-    place-items: center;
-    justify-content: center;
-}
-
-.topics ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    width: 150px;
-}
-  
-.topics li a {
-    border-radius: 50px;
-    background-color:#b3dbd3;
-    display: block;
-    color: #000;
-    padding: 8px 12px;
-    margin-bottom: 1em;
-    text-decoration: none;
-  }
-  
-  /* Change the link color on hover */
-.topics li a:hover {
-    background-color:#138D75;
-    color: white;
-}
-
-.content{
-    align-self: center;
-    justify-content: center;
-    margin-right: 1.5em;
-    padding: 0 1em;
-}
-
-.user-image {
-    width: 4rem;
-    margin-top: 1.5em;
-    padding: 0;
 }
