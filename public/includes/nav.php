@@ -9,6 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
         <link href="images/logo.png" rel="shortcut icon">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" rel="stylesheet">
+        <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
         <script src="https://kit.fontawesome.com/85eb26c5dd.js" crossorigin="anonymous"></script>
         <style>
             * {
@@ -215,8 +216,9 @@
             <ul class="main-nav">
                 <li><a href="http://localhost/vegemart/public/products.php">Home</a></li>
                 <li><a href="#">About</a></li>
-                <li><a href="http://localhost/vegemart/public/forum.php">Forum</a></li>
-                <li><a href="http://localhost/vegemart/public/help_desk.php">Help Desk</a></li>
+                <li><a href="http://localhost/vegemart/public/forum_home.php">Forum</a></li>
+                <li><a href="http://localhost/vegemart/public/shopping_cart.php"><i class="fas fa-shopping-cart mr-0" style="font-size:16px; color:black; padding-right:0.4em;"></i>Cart</a></li>
+                
                 <?php  
                     if(isset($_SESSION["loggedInUserID"])||isset($_SESSION["loggedInSellerID"])){
                         if (isset($_SESSION["loggedInUserID"])) {
@@ -225,13 +227,13 @@
                         elseif (isset($_SESSION["loggedInSellerID"])) {
                             $userID = $_SESSION["loggedInSellerID"];
                         }
-                        $retrieveInfo =  "SELECT * FROM client WHERE id='$userID';"; //Selecting all data from Table
+                        $retrieveInfo =  "SELECT * FROM `client` WHERE `user_id`='$userID';"; //Selecting all data from Table
                         $resultInfo = mysqli_query($con, $retrieveInfo); //Passing SQL
                         while($rowUser  = mysqli_fetch_assoc($resultInfo)){
                             echo "
                         <li>
                         <div class=\"nav-dropdown\">
-                        <i class=\"fa fa-bell\" style=\"font-size:16px; color:black; margin-left:1em; margin-right:0; padding-right:0;\"></i><button onclick=\"dropFunc()\" class=\"notifbtn\">Messages</button>
+                            <i class=\"fa fa-bell\" style=\"font-size:16px; color:black; margin-left:1em; margin-right:0; padding-right:0;\"></i><button onclick=\"dropFunc()\" class=\"notifbtn\">Notifications</button>
                             <div id=\"notifDrop\" class=\"dropdown-content\">
                                 <a href=\"#home\">You have a message from Nimal Bandara</a>
                             </div>
@@ -243,6 +245,7 @@
                             <img class=\"dp\" src=\"http://localhost/vegemart/public/images/users/{$rowUser['profilePic']}\" alt=\"Avatar\">
                             <div class=\"dropdown-content\">
                                 <a href=\"http://localhost/vegemart/public/buyer_profile_edit.php\">View Profile</a>
+                                <a href=\"http://localhost/vegemart/public/help_desk.php\">Help Desk</a>
                                 <a href=\"http://localhost/vegemart/src/logout.php\">Logout</a>
                             </div>
                         </div>

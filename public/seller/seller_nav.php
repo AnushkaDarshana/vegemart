@@ -29,8 +29,8 @@
                 }
                 ?>
                 <li><a href="#">About</a></li>
-                <li><a href="http://localhost/vegemart/public/forum.php">Forum</a></li>
-                <li><a href="http://localhost/vegemart/public/help_desk">Help Desk</a></li>
+                <li><a href="http://localhost/vegemart/public/forum_home.php">Forum</a></li>
+                
                 <?php  
                     if(isset($_SESSION["loggedInUserID"])||isset($_SESSION["loggedInSellerID"])){
                         if (isset($_SESSION["loggedInUserID"])) {
@@ -39,7 +39,7 @@
                         elseif (isset($_SESSION["loggedInSellerID"])) {
                             $userID = $_SESSION["loggedInSellerID"];
                         }
-                        $retrieveInfo =  "SELECT * FROM client WHERE id='$userID';"; //Selecting all data from Table
+                        $retrieveInfo =  "SELECT * FROM `client` WHERE `user_id`='$userID';"; //Selecting all data from Table
                         $resultInfo = mysqli_query($con, $retrieveInfo); //Passing SQL
                         while($rowUser  = mysqli_fetch_assoc($resultInfo)){
                             echo "
@@ -62,6 +62,7 @@
                             if(isset($_SESSION["loggedInSellerID"])){
                                 echo" <a href=\"http://localhost/vegemart/public/seller/seller_profile_edit.php\">View Profile</a>";
                              }
+                                echo"<a href=\"http://localhost/vegemart/public/help_desk.php\">Help Desk</a>";
                                 echo"<a href=\"http://localhost/vegemart/src/logout.php\">Logout</a>
                             </div>
                         </div>
