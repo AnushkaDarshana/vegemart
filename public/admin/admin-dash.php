@@ -159,7 +159,7 @@
 
                             <div class="column is-4 pl-0 has-text-centered">
                             <img src="../images/forum.jpg" alt="image" class="image" >
-                                <button class="card-button" onClick="location.href='http://localhost/vegemart/public/admin/forum_admin.php';">Forum Reports</button>                               
+                                <button class="card-button" onClick="location.href='http://localhost/vegemart/public/admin/forum_review.php';">Forum Reports</button>                               
                             </div>
                             <div class="column is-4 pl-0 has-text-centered">
                             <img src="../images/feedbk.jpg" alt="image" class="image" >
