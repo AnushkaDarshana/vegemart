@@ -15,34 +15,32 @@
             while($row = mysqli_fetch_assoc($productQuery)){?>
         <div class="row">
             <div class="columns group">
-                <div class="column is-2 pl-1 pr-1"></div>
-                <div class="column is-8 pl-1 pr-1">
+                <div class="column is-1 pl-1 pr-1"></div>
+                <div class="column is-10 pl-1 pr-1">
                     <div class="row">
                         <div class="updateForm">
-                            <h2 style="font-size:20px;">Update Product</h2><br>
+                            <h2 style="font-size:20px;" class="mb-0">Update Product</h2>
                             <form id="UpdateProduct" action="../../src/seller/seller_product_edit_submit.php" method="post" enctype="multipart/form-data">
-                            <div class="columns group">
-                                <div class="column is-4 pl-1">
-                                <input type="hidden" class="input-box" id="editProductID" name="editProductID" value="<?php echo $row['productID']?>" required/><br>
+                            <input type="hidden" class="input-box" id="editProductID" name="editProductID" value="<?php echo $row['productID']?>" required/><br>
+                            <div class="columns group mt-0">
+                                   
+                                <div class="column is-5 pl-1 pr-0 mr-0 has-text-left">
+                                    <h3 style="font-size:16px;">Update Product Details</h3>
                                     <div class="image-row">
-                                        <img class="item-img" src= "../images/products/<?php echo $row['imageName']?>"> <br>
-                                        <label for="image">Dispaly Picture</label><br>
-                                        <input type="file" class="image-input" id="fileToUpload" name="fileToUpload"/><br>                                
+                                        <img class="item-img" src= "../images/products/<?php echo $row['imageName']?>">   
+                                    </div> 
+                                    <div class="input-row">
+                                        <label>Display Picture</label>
+                                        <input class="image-input" type="file" id="fileToUpload" name="fileToUpload"/>   
                                     </div>
-                                </div>
-                                <div class="column is-8 pl-1 has-text-left">
                                     <div class="input-row">
                                         <label for="productName">Product Name:</label>
                                         <input type="text" class="input-box" id="productName" name="editProductName" placeholder="Product Name" value="<?php echo $row['name']?>" readonly=true required/><br>
                                     </div>
-                                    <div class="input-row">                                              
+                                    <!-- <div class="input-row">                                              
                                         <label for="quantity">Quantity (kg):</label>
                                         <input type="text" class="input-box" id="quantity" name="editQuantity" placeholder="Quantity" value="<?php echo $row['quantity']?>" required/><br>
-                                    </div>
-                                    <div class="input-row">                                               
-                                        <label for="minPrice">Minimum price per unit(Rs):</label>
-                                        <input type="text" class="input-box" id="minPrice" name="editMinPrice" placeholder="Minimum price" value="<?php echo $row['minPrice']?>" required/><br>
-                                    </div>
+                                    </div> -->
                                     <div class="input-row">                                               
                                         <label for="address">Address Line 1:</label>
                                         <input type="text" class="input-box" id="address1" name="editAddress1" placeholder="Address line 1" value="<?php echo $row['address1']?>" required /><br>
@@ -61,21 +59,76 @@
                                     </div>
                                     <br>
                                 </div>
-                                <?php    
-                                }
-                                mysqli_close($con);
-                            ?>                                  
-                                <br>
-                                <input class="form-button"  type="submit" name="submit" value="Save">
+                                <div class="column is-7 ml-1 pl-1">
+                                    <h3 style="font-size:16px;">Update Bid Quantity</h3>
+                                    
+
+                                <?php
+                            
+                                    //retrieve quantity sets
+                                    $quantitySetQuery = "SELECT * FROM quantitysets where `productID` ='$productID' AND quantitySetStatus = 0";
+                                    $quantitySetExecuteQuery = mysqli_query($con,$quantitySetQuery);  
+                                    while ($rowquantitySet = mysqli_fetch_assoc($quantitySetExecuteQuery)) {  
+
+                                ?>
+                                <div class="columns group mt-0 mb-0">
+                                    <div class="column is-4 mt-0 pl-1 pr-1">
+                                        <h3>Rs. <?php echo $rowquantitySet['minPrice']?></h3>
+                                    </div>
+                                    <div class="column is-4 mt-0 pl-1 pr-1">
+                                        <h3><?php echo $rowquantitySet['quantity']?> kg</h3>
+                                    </div>
+                                    
+                                    <a class="button" href="../../src/seller/removeQuanitySet.php?id=<?php echo $rowquantitySet['quantityID']?>" id="removeOne"><i class="fa fa-minus" style=" margin-left:1em;margin-top: 1em; color:red; font-size:24px; text-align:left;"></i></a><br>
+                                </div>
+
+                                <?php
+                                    }
+                                        
+                                ?>
+                                <form method="POST" id="add" action = "../../src/seller/quantitySet_add.php" enctype="multipart/form-data">
+
+                                    <div class="columns group">
+                                        <div class="column is-6 pl-1 pr-1">
+                                            <h2>Minimum price per unit(Rs)</h2>
+                                            <div class="input-row">
+                                                <!-- <label for="bid_minPrice">Minimum price per unit(Rs):</label> -->
+                                                <input type="number" class="input-box" id="minPrice" name="minPrice" placeholder="ex: 30" min="30" step="10" /><br>
+                                            </div>
+                                        </div>
+                                        <div class="column is-6 pl-1 pr-1">
+                                            <h2>Quantity (kg):</h2>
+                                            <div class="input-row">
+                                                <input type="number" class="input-box" id="quantity" name="quantity" placeholder="ex: 10" min="10" step="5" /><br>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <input type="hidden" class="input-box" id="productID" name="productID" value="<?php echo $productID ?>" required /><br>
+                                    <div class="addon-group" id="addon-group"></div>
+
+                                    <input class="form-button" formaction="../../src/seller/quantitySet_add.php" type="submit" name="add" value="+">                            
+
+                                    <br>
+
+                                    <div class="row mt-1">                                        
+                                    </div>
+                                </form>
+                                  
+
+                                <?php } mysqli_close($con);?>     
+                                    </div>  
+                                </div>
+                                
+                                <input class="form-button"  type="submit" name="submit" form="UpdateProduct" value="Save">
                                 <input class="form-button" type="button" name="cancel" onclick="window.location.replace('seller_home.php')" value="Cancel">                                           
-                                <a style="color:#138D75; font-size:18px; font-family:Candara ; margin-top:10%;" href="#">Delete Product</a>
-                            </div>
+                                
                             </form>
-                        </div>
+                        
                     </div>                  
                     <h3 class="error-msg"><?php include_once ('../includes/message.php'); ?></h3>
-                    </div>
-                <div class="column is-2 pl-1 pr-1"></div>
+                </div>
+                <div class="column is-1 pl-1 pr-1"></div>
             </div>
         </div>
         <?php include_once "../includes/footer.php"; ?>

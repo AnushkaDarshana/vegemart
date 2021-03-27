@@ -6,6 +6,7 @@
         <link rel="stylesheet" type="text/css" href="../css/my-deliveries.css">
         <link rel="stylesheet" href="../css/style.css"> 
         <link rel="stylesheet" href="../css/footer.css">
+        <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
         <title>My Deliveries | Vegemart</title>
     </head>
     <body>

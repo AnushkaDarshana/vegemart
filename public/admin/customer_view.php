@@ -38,10 +38,10 @@
         
         <table class="user" id="myTable">
             <tr>
-                <th>Seller ID</th>
+                <th>Customer ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Seller Email</th>
+                <th>Customer Email</th>
                 <th>Contact No.</th>
                 <th>No</th>
                 <th>Street</th>
@@ -55,22 +55,27 @@
                 $sql ="SELECT * FROM `users` WHERE userType='$userType'";
                 $result = mysqli_query($con,$sql);        
                 while($row = mysqli_fetch_assoc($result)){ 
-                $sellerID=$row['id']; 
-                $sql_seller ="SELECT * FROM `client` WHERE id='$sellerID'"; 
-                $result_seller = mysqli_query($con,$sql_seller);
-                while($row_seller = mysqli_fetch_assoc($result_seller)){
-            
+                $userID =$row['id']; 
+                $sql_cus ="SELECT * FROM `client` WHERE user_id='$userID'"; 
+                $result_cus = mysqli_query($con,$sql_cus);
+                while($row_cus = mysqli_fetch_assoc($result_cus)){
+                    if ($row['active_status'] == 1){
+                        $active_status = "active";
+                    }
+                    else{
+                        $active_status = "Non-active";
+                    }
                     echo "
                         <tr>                  
                             <td>".$row['id']."</td>
-                            <td>".$row_seller['fName']."</td>
-                            <td>".$row_seller['lName']."</td>
+                            <td>".$row_cus['fName']."</td>
+                            <td>".$row_cus['lName']."</td>
                             <td>".$row['email']."</td>
-                            <td>".$row_seller['phoneNum']."</td>
-                            <td>".$row_seller['address1']."</td>
-                            <td>".$row_seller['address2']."</td>
-                            <td>".$row_seller['city']."</td>
-                            <td>".$row['active_status']."</td>
+                            <td>".$row_cus['phoneNum']."</td>
+                            <td>".$row_cus['address1']."</td>
+                            <td>".$row_cus['address2']."</td>
+                            <td>".$row_cus['city']."</td>
+                            <td> $active_status</td>
                         </tr>";
                     
                     } 
@@ -107,7 +112,8 @@
             <div class="col-0"></div>
             <div class="col-11">
          <h3>Details of Selected Customer</h3>
-                
+
+            <form action= "cus_details.php" method ="POST">       
                 <div class="update-box">
 
                     <table>
@@ -115,46 +121,43 @@
                             <th>Customer ID :</th>
                             <td><input class="input-l" type="text" placeholder="ID" id="id" name="id" readonly="true" required></td>
                             <th>Postbox No. :</th>
-                            <td><input class="input-m" type="text" placeholder="Postbox" id="postal_number" readonly="true" required></td>
+                            <td><input class="input-m" type="text" placeholder="Postbox" id="postal_number" name="address1" required></td>
                             <th>Customer Email :</th>
-                            <td><input class="input-l" type="text" placeholder="Customer Email" id="email" readonly="true" required></td>
+                            <td><input class="input-l" type="text" placeholder="Customer Email" id="email" name="email" required></td>
                         </tr>
                         <tr>
                             <th>First Name :</th>
-                            <td><input width="50px" class="input-l" type="text" placeholder="First Name" id="fname" readonly="true" required></td>
+                            <td><input width="50px" class="input-l" type="text" placeholder="First Name" id="fname" name="fName"  required></td>
                             <th>Street Name :</th>
-                            <td><input class="input-l" type="text" placeholder="Street" id="street" readonly="true" required></td>
+                            <td><input class="input-l" type="text" placeholder="Street" id="street" name="address2"  required></td>
                             <th>Contact No. :</th>
-                            <td><input class="input-l" type="text" placeholder="Contact" id="contact_number" readonly="true" required></td>
+                            <td><input class="input-l" type="text" placeholder="Contact" id="contact_number" name="phoneNum"  required></td>
                         </tr>
                         <tr>
                             <th>Last Name :</th>
-                            <td><input width="50px" class="input-l" type="text" placeholder="Last Name" id="lname" readonly="true" required></td>
+                            <td><input width="50px" class="input-l" type="text" placeholder="Last Name" id="lname" name="lName"  required></td>
                             <th>City :</th>
-                            <td><input class="input-l" type="text" placeholder="City" id="city" readonly="true" required></td>
+                            <td><input class="input-l" type="text" placeholder="City" id="city" name="city" required></td>
                             <th>Active Status :</th>
-                            <td><input class="input-s" type="text" id="active_status" placeholder="Status" readonly="true" required></td>
+                            <td><input class="input-l" type="text" id="active_status" placeholder="Status" name="active_status" required></td>
                         </tr>
                     </table>
 
 
                 </div>
-                
+                <div class="row">
+                <div class="col-3"></div>
+                <div class="col-2"><input name= "update" type ="submit" value="Update "class="button"></div>
+                <div class="col-2"><input name= "delete" type ="submit" value="Delete "class="button"></div>
+
+                <div class="col-2"><a href="logs.php" class="button"> View Activity Logs </a></div>
+                <div class="col-2"><a href="admin-dash.php" class="button"> Back </a></div>
+                </div>
             </form>
         </div>
         <br/> 
         <div>
-
-       <!--script for onClickNav() for the navigation menu-->
-    <script src="../../js/onClickNav.js"></script>
-    <div class="row">
-        <div class="col-3"></div>
-        <div class="col-2"><a href="#" class="button"> View Activity Logs </a></div>
-        <div class="col-2"><a href="#" class="button"> Update </a></div>
-        <div class="col-2"><a href="#" class="button"> Delete </a></div>
-        <div class="col-2"><a href="admin-dash.php" class="button"> Back </a></div>
-        
-    </div>
+    
 
 
     </body>

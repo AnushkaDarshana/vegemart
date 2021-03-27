@@ -32,8 +32,6 @@
         $productID= $_POST['editProductID'];
        // echo"$productID";
         $newName = $_POST['editProductName'];
-        $newQuantity = $_POST['editQuantity'];
-        $newminPrice = $_POST['editMinPrice'];
         $imageName = $_FILES["fileToUpload"]["name"];
         $imageData = $_FILES["fileToUpload"]["tmp_name"];
         $imageType = $_FILES["fileToUpload"]["type"];
@@ -42,10 +40,10 @@
         $newCity = $_POST['editCity'];
          
         if($imageName==""){
-                $updateQuery= "UPDATE `products` SET `name` = '".$newName."', `quantity` = '".$newQuantity."', `minPrice` ='".$newminPrice."', `address1` = '".$newAddress1."', `address2` = '".$newAddress2."', `city` = '".$newCity."' WHERE `productID` = '".$productID."' ";   
+                $updateQuery= "UPDATE `products` SET `name` = '".$newName."', `address1` = '".$newAddress1."', `address2` = '".$newAddress2."', `city` = '".$newCity."' WHERE `productID` = '".$productID."' ";   
         }
         else{
-                $updateQuery= "UPDATE `products` SET `name` = '".$newName."', `quantity` = '".$newQuantity."', `minPrice` ='".$newminPrice."',`imageName` = '".$imageName."' , `address1` = '".$newAddress1."', `address2` = '".$newAddress2."', `city` = '".$newCity."' WHERE `productID` = '".$productID."' ";   
+                $updateQuery= "UPDATE `products` SET `name` = '".$newName."',`imageName` = '".$imageName."' , `address1` = '".$newAddress1."', `address2` = '".$newAddress2."', `city` = '".$newCity."' WHERE `productID` = '".$productID."' ";   
         } 
 
         if (mysqli_query($con,$updateQuery) === TRUE) {

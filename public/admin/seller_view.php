@@ -56,9 +56,15 @@
                 $result = mysqli_query($con,$sql);        
                 while($row = mysqli_fetch_assoc($result)){ 
                 $sellerID=$row['id']; 
-                $sql_seller ="SELECT * FROM `client` WHERE id='$sellerID'"; 
+                $sql_seller ="SELECT * FROM `client` WHERE user_id='$sellerID'"; 
                 $result_seller = mysqli_query($con,$sql_seller);
                 while($row_seller = mysqli_fetch_assoc($result_seller)){
+                    if ($row['active_status'] == 1){
+                        $active_status = "active";
+                    }
+                    else{
+                        $active_status = "Non-active";
+                    }
             
                     echo "
                         <tr>                  
@@ -70,7 +76,7 @@
                             <td>".$row_seller['address1']."</td>
                             <td>".$row_seller['address2']."</td>
                             <td>".$row_seller['city']."</td>
-                            <td>".$row['active_status']."</td>
+                            <td> $active_status</td>
                         </tr>";
                     
                     } 
@@ -87,9 +93,9 @@
         {
             table.rows[i].onclick = function()
             {
-                document.getElementById("fname").value = this.cells[1].innerHTML;
+                document.getElementById("fName").value = this.cells[1].innerHTML;
                 document.getElementById("id").value = this.cells[0].innerHTML;
-                document.getElementById("lname").value = this.cells[2].innerHTML;
+                document.getElementById("lName").value = this.cells[2].innerHTML;
                 document.getElementById("email").value = this.cells[3].innerHTML;
                 document.getElementById("street").value = this.cells[6].innerHTML;
                 document.getElementById("postal_number").value = this.cells[5].innerHTML;
@@ -108,55 +114,56 @@
             <div class="col-0"></div>
             <div class="col-11">
          <h3>Details of Selected Seller</h3>
-                
+
+         <form action= "seller_details.php" method ="POST">       
                 <div class="update-box">
 
                     <table>
                         <tr>
                             <th>Seller ID :</th>
-                            <td><input class="input-l" type="text" placeholder="ID" id="id" name="id" readonly="true" required></td>
+                            <td><input class="input-l" type="text" placeholder="ID" id="id" name="id" readonly=true required></td>
                             <th>Postbox No. :</th>
-                            <td><input class="input-m" type="text" placeholder="Postbox" id="postal_number" readonly="true" required></td>
+                            <td><input class="input-m" type="text" placeholder="Postbox" id="postal_number" name="address1" required></td>
                             <th>Seller Email :</th>
-                            <td><input class="input-l" type="text" placeholder="Seller Email" id="email" readonly="true" required></td>
+                            <td><input class="input-l" type="text" placeholder="Seller Email" id="email" name="email" required></td>
                         </tr>
                         <tr>
                             <th>First Name :</th>
-                            <td><input width="50px" class="input-l" type="text" placeholder="First Name" id="fname" readonly="true" required></td>
+                            <td><input width="50px" class="input-l" type="text" placeholder="First Name" id="fName" name="fName"  required></td>
                             <th>Street Name :</th>
-                            <td><input class="input-l" type="text" placeholder="Street" id="street" readonly="true" required></td>
+                            <td><input class="input-l" type="text" placeholder="Street" id="street" name="address2" required></td>
                             <th>Contact No. :</th>
-                            <td><input class="input-l" type="text" placeholder="Contact" id="contact_number" readonly="true" required></td>
+                            <td><input class="input-l" type="text" placeholder="Contact" id="contact_number" name="phoneNum"  required></td>
                         </tr>
                         <tr>
                             <th>Last Name :</th>
-                            <td><input width="50px" class="input-l" type="text" placeholder="Last Name" id="lname" readonly="true" required></td>
+                            <td><input width="50px" class="input-l" type="text" placeholder="Last Name" id="lName" name="lName"  required></td>
                             <th>City :</th>
-                            <td><input class="input-l" type="text" placeholder="City" id="city" readonly="true" required></td>
+                            <td><input class="input-l" type="text" placeholder="City" id="city" name="city" required></td>
                             <th>Active Status :</th>
-                            <td><input class="input-s" type="text" id="active_status" placeholder="Status" readonly="true" required></td>
+                            <td><input class="input-s" type="text" id="active_status" placeholder="Status" name="active_status" required></td>
                         </tr>
                         
                     </table>
 
-
                 </div>
+                <div class="row">
+                <div class="col-3"></div>     
+                <div class="col-2"><input name= "update" type ="submit" value="Update "class="button"></div>
+                <div class="col-2"><input name= "delete" type ="submit" value="Delete "class="button"></div>
+
+                <div class="col-2"><a href="logs.php" class="button"> View Activity Logs </a></div>
+                <div class="col-2"><a href="admin-dash.php" class="button"> Back </a></div>
+
+        </div>
                 
             </form>
         </div>
         <br/> 
         <div>
                   
-       <!--script for onClickNav() for the navigation menu-->
-    <script src="../../js/onClickNav.js"></script>
-    <div class="row">
-        <div class="col-3"></div>
-        <div class="col-2"><a href="#" class="button"> View Activity Logs </a></div>
-        <div class="col-2"><a href="#" class="button"> Update </a></div>
-        <div class="col-2"><a href="#" class="button"> Delete </a></div>
-        <div class="col-2"><a href="admin-dash.php" class="button"> Back </a></div>
 
-        </div>
+    
 
 
     </body>

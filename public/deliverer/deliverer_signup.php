@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title>Rider</title>
+        <title>Rider | Vegemart</title>
         <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
         <link type="text/css" rel=stylesheet href="../css/deliverer-signup.css">
         <script src="https://kit.fontawesome.com/85eb26c5dd.js" crossorigin="anonymous"></script>

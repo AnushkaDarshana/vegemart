@@ -6,7 +6,7 @@ body{
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background-image: url(../images/bg.jpg);    
+    background-image: url('../images/bg.png');    
     background-size: cover;
     backdrop-filter: brightness(60%); 
     background-repeat: no-repeat; 
@@ -84,7 +84,7 @@ body{
       border: none;
       outline: none;
       color: #fff;
-      background: #03a9f4;
+      background: #138D75;
       padding: 10px 20px;
       cursor: pointer;
       border-radius: 5px;
@@ -101,7 +101,7 @@ body{
       border: none;
       outline: none;
       color: #fff;
-      background: #03a9f4;
+      background:#138D75;
       padding: 10px 20px;
       cursor: pointer;
       border-radius: 5px;

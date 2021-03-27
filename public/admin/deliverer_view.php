@@ -38,10 +38,10 @@
         
         <table class="user" id="myTable">
             <tr>
-                <th>Seller ID</th>
+                <th>Deliverer ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Seller Email</th>
+                <th>Deliverer Email</th>
                 <th>Contact No.</th>
                 <th>No</th>
                 <th>Street</th>
@@ -56,24 +56,30 @@
                 $sql ="SELECT * FROM `users` WHERE userType='$userType'";
                 $result = mysqli_query($con,$sql);        
                 while($row = mysqli_fetch_assoc($result)){ 
-                $sellerID=$row['id']; 
-                $sql_seller ="SELECT * FROM `deliverer` WHERE delivererID='$sellerID'"; 
-                $result_seller = mysqli_query($con,$sql_seller);
-                while($row_seller = mysqli_fetch_assoc($result_seller)){
+                $delivererID=$row['id']; 
+                $sql_deliverer ="SELECT * FROM `deliverer` WHERE delivererID='$delivererID'"; 
+                $result_deliverer = mysqli_query($con,$sql_deliverer);
+                while($row_deliverer = mysqli_fetch_assoc($result_deliverer)){
+                    if ($row['active_status'] == 1){
+                        $active_status = "active";
+                    }
+                    else{
+                        $active_status = "Non-active";
+                    }
             
                     echo "
                         <tr>                  
                             <td>".$row['id']."</td>
-                            <td>".$row_seller['fName']."</td>
-                            <td>".$row_seller['lName']."</td>
+                            <td>".$row_deliverer['fName']."</td>
+                            <td>".$row_deliverer['lName']."</td>
                             <td>".$row['email']."</td>
-                            <td>".$row_seller['phoneNum']."</td>
-                            <td>".$row_seller['address1']."</td>
-                            <td>".$row_seller['address2']."</td>
-                            <td>".$row_seller['city']."</td>
-                            <td>".$row_seller['vehicle']."</td>
-                            <td>".$row_seller['vehicleNo']."</td>
-                            <td>".$row['active_status']."</td>
+                            <td>".$row_deliverer['phoneNum']."</td>
+                            <td>".$row_deliverer['address1']."</td>
+                            <td>".$row_deliverer['address2']."</td>
+                            <td>".$row_deliverer['city']."</td>
+                            <td>".$row_deliverer['vehicle']."</td>
+                            <td>".$row_deliverer['vehicleNo']."</td>
+                            <td> $active_status</td>
                         </tr>";
                     
                     } 
@@ -114,6 +120,7 @@
             <div class="col-11">
          <h3>Details of Selected Deliverer</h3>
                 
+         <form action= "deliverer_details.php" method ="POST">       
                 <div class="update-box">
 
                     <table>
@@ -121,55 +128,55 @@
                             <th>Deliverer ID :</th>
                             <td><input class="input-l" type="text" placeholder="ID" id="id" name="id" readonly=true required></td>
                             <th>Deliverer Email :</th>
-                            <td><input class="input-l" type="text" placeholder="Customer Email" id="email"  required></td>
+                            <td><input class="input-l" type="text" placeholder="Customer Email" id="email" name="email"  required></td>
                             <th>Postbox No. :</th>
-                            <td><input class="input-m" type="text" placeholder="Postbox" id="postal_number"  required></td>
+                            <td><input class="input-m" type="text" placeholder="Postbox" id="postal_number" name="address1" required></td>
                             
                             
                         </tr>
                         <tr>
                             <th>First Name :</th>
-                            <td><input width="50px" class="input-l" type="text" placeholder="First Name" id="fname"  required></td>
+                            <td><input width="50px" class="input-l" type="text" placeholder="First Name" id="fname" name="fName" required></td>
                             <th>Vehicle :</th>
-                            <td><input class="input-l" type="text" placeholder="Vehicle" id="vehicle"  required></td>  
+                            <td><input class="input-l" type="text" placeholder="Vehicle" id="vehicle" name="vehicle" required></td>  
                             <th>Street Name :</th>
-                            <td><input class="input-l" type="text" placeholder="Street" id="street"  required></td>                  
+                            <td><input class="input-l" type="text" placeholder="Street" id="street" name="address2" required></td>                  
 
                         </tr>
                         <tr>
                             <th>Last Name :</th>
-                            <td><input width="50px" class="input-l" type="text" placeholder="Last Name" id="lname"  required></td>
+                            <td><input width="50px" class="input-l" type="text" placeholder="Last Name" id="lname" name="lName" required></td>
                             <th>Vehicle No. :</th>
-                            <td><input class="input-l" type="text" placeholder="Number plate" id="vehicle_no"  required></td>
+                            <td><input class="input-l" type="text" placeholder="Number plate" id="vehicle_no" name="vehicleNo"  required></td>
                             <th>City :</th>
-                            <td><input class="input-l" type="text" placeholder="City" id="city"  required></td>
+                            <td><input class="input-l" type="text" placeholder="City" id="city" name="city"required></td>
                             
                         </tr>
                         <tr>
                             <th>Contact No. :</th>
-                            <td><input class="input-l" type="text" placeholder="Contact" id="contact_number"  required></td>
+                            <td><input class="input-l" type="text" placeholder="Contact" id="contact_number" name="phoneNum"  required></td>
                             <th>Active Status :</th>
-                            <td><input class="input-s" type="text" id="active_status" placeholder="Status" readonly=true required></td>
+                            <td><input class="input-s" type="text" id="active_status" placeholder="Status" name="active_status" required></td>
                             <!-- <td></td> -->
                             
                         </tr>
                     </table>
 
                 </div>
-                
+                <div class="row">
+                <div class="col-3"></div>
+                <div class="col-2"><input name= "update" type ="submit" value="Update "class="button"></div>
+                <div class="col-2"><input name= "delete" type ="submit" value="Delete "class="button"></div>
+
+                <div class="col-2"><a href="logs.php" class="button"> View Activity Logs </a></div>
+                <div class="col-2"><a href="admin-dash.php" class="button"> Back </a></div>
+    
+                </div>
             </form>
         </div>
         <br/> 
         <div>
                   
-    <!--script for onClickNav() for the navigation menu-->
-    <script src="../../js/onClickNav.js"></script>
-    <div class="row">
-        <div class="col-3"></div>
-        <div class="col-2"><a href="#" class="button"> View Activity Logs </a></div>
-        <div class="col-2"><a href="#" class="button"> Update </a></div>
-        <div class="col-2"><a href="#" class="button"> Delete </a></div>
-        <div class="col-2"><a href="admin-dash.php" class="button"> Back </a></div>
-    </div>
+    
     </body>
 </html>

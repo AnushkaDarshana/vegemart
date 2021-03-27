@@ -28,7 +28,7 @@
         border-radius: 15px;
         padding: 1rem;
         margin: 5%;
-        margin-top: 15%!important;
+        margin-top: 16%!important;
         align-self: center;
         text-align: left;
         
@@ -102,7 +102,7 @@
                         <div class="text-align:left mb-0 pl-5 pr-1">
                             <h3 id="heading" class="mt-0 mb-0" style="color:#323131;font-size:420%"><span class="cursive">Fresh</span> Vegetables</h3>
                             <h2 id="heading" class="mt-0" style="color:#323131;font-size:180%"><span class="light-green">NOW AT YOUR DOORSTEP</span></h2>
-                            <p id="heading" class="mt-0" style="color:#323131;font-size:130%"><span class="light-green"></span>Shopping for fruit and veg in Colombo is rarely a pleasure. You're either fumbling through unopenable plastic bags at othe shops or side-stepping dried puddles of crow poo at the market. The thing about vegetable shopping here is that you'll never find everything you want within a single venue. And as for enjoying the experience, well, that's unlikely.</p>                    
+                            <p id="heading" class="mt-0" style="color:#323131;font-size:130%"><span class="light-green"></span>Shopping for vegetables in Colombo is rarely a pleasure. You're either fumbling through unopenable plastic bags at othe shops or side-stepping dried puddles of crow poo at the market. The thing about vegetable shopping here is that you'll never find everything you want within a single venue. And as for enjoying the experience, well, that's unlikely.</p>                    
                             
                             <div class="row has-text-left mt-1 mb-1 mr-1">
                                     <button class="button" onClick="location.href='http://localhost/vegemart/public/products.php';"><i class="fas fa-shopping-basket mr-1"></i></i>Shop now</button>

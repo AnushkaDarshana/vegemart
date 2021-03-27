@@ -3,7 +3,15 @@
     include ('../src/session.php');
 ?>
 <?php
-    if (isset($_SESSION["loggedInUserID"])) {
+    if(!isset($_SESSION["loggedInUserID"]) )
+    {
+            echo "<script>
+            alert('You have to login first');
+            window.location.href='../public/login.php';
+            </script>";
+    }  
+
+    else if (isset($_SESSION["loggedInUserID"])) {
         $userID = $_SESSION["loggedInUserID"];
     }
 ?>
@@ -102,7 +110,7 @@
                             <h3 class="mb-0 mt-0" style="text-align:left;"><?php echo $rowseller['city']?></h3><br>
                             <?php
                                 $userID=$_SESSION["loggedInUserID"];
-                                $user = "SELECT * FROM client WHERE id='$userID';";  
+                                $user = "SELECT * FROM client WHERE user_id='$userID';";  
                                 $userQuery=mysqli_query($con,$user);
                                 while ($rowuser  = mysqli_fetch_assoc($userQuery)) {
                             ?>
@@ -189,7 +197,7 @@
                             <input type="text" name="order_id" value="ItemNo12345" style="display: none;">
                             <input type="text" name="items" value="Vegemart Cart" style="display: none;">
                             <input type="text" name="currency" value="LKR" style="display: none;">
-                            <input type="text" name="amount" value="<?php echo "$total"?>" style="display: none;">
+                            <input type="text" name="amount" value="<?php echo "$total"+50?>" style="display: none;">
 
                             <input type="text" name="first_name" value="Imashi" style="display: none;">
                             <input type="text" name="last_name" value="Dissanayaka" style="display: none;">

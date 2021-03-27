@@ -41,16 +41,12 @@
                                             <option value="Tomato">Tomato</option>                                          
                                         </select>          
                                     </div>
-                                    <div class="input-row">                                              
-                                        <label for="quantity">Quantity (g):</label>
-                                        <input type="number" class="input-box" id="quantity" name="quantity" placeholder="ex: 500" min="250" step="50" required/><br>
-                                        type="number" name="quantity"  min="250" step="50"
-                                    </div>
-                                    <div class="input-row">                                               
+                                    
+                                    <!-- <div class="input-row">                                               
                                         <label for="minPrice">Minimum price per unit(Rs):</label>
                                         <input type="text" class="input-box" id="minPrice" name="minPrice" placeholder="ex: 100" required/><br>
-                                    </div>
-
+                                    </div> -->
+                                    
                                     <div class="input-row">                                               
                                         <label for="image">Image:</label>
                                         <input class="image-input has-text-left"type="file" id="fileToUpload" name="fileToUpload" required/><br> 
@@ -71,19 +67,8 @@
                                         <label for="description">Description:</label>                                             
                                         <textarea rows="5" cols="35" name="description" form="addProduct" placeholder="Product description"></textarea>
                                     </div>                               
-                                    <div class="input-row">                                              
-                                        <label for="date">Date of product Expiration:</label>
-                                        <input type="date" class="input-box" name="expirationDate"><br>
-                                    </div>                          
-                                    <br>
-                                    <p>For advertisements please fill the checkbox</p>
-                                    <div class="input-row">
-                                        <label for="ad">Advertisement</label>
-                                        <input type="checkbox" id="ad" name="ad" value="ad" onclick="abc()"/> 
-                                    <div class="input-row">                                              
-                                        <label for="date" style="display:none;" id="label">Date of product availability:</label>
-                                        <input type="date" class="input-box" id="date" name="availableDate" style="display:none;"><br>
-                                    </div>
+                                    <p style="color: red; text-align:center;">Your products will be automatically removed after 5 days.</p>                        
+                                    
                                 </div>
                                 
                             </div>
@@ -99,24 +84,9 @@
                 <div class="column is-3 pl-1 pr-1"></div>
             </div>
         </div>
-    <script>
-    function abc(){
-        var checkBox=document.getElementById("ad");
-        var date=document.getElementById("date"); 
-        var label=document.getElementById("label");  
-        if(checkBox.checked==true){
-            date.style.display="block";
-            label.style.display="block";            
-        }
-        else{
-            date.style.display="none"; 
-            label.style.display="none";           
-        }
-
-    };
-    </script>
-        
-        <?php include_once "../includes/footer.php"; ?>   
+    
+    
+    <?php include_once "../includes/footer.php"; ?>   
     </body>
 </html>
 

@@ -42,6 +42,7 @@
         $confirmPassword = $_POST["confirmPassword"];
         $userType = "deliverer";
         $active_status=1;
+
         if ($password === $confirmPassword) {
             $sql_e = "SELECT * FROM users WHERE email='".$email."'";
             $res_e = mysqli_query($con, $sql_e);
@@ -52,15 +53,20 @@
                 </script>";
                         
             }else{
-                $password_hash = md5($password);   
-                $id=rand();    
+                $salt = md5(uniqid(rand(), true));
+                $password_hash = md5($salt.$password); 
+
                 if($imageName==""){
                     $imageName="default.png";
                 }
-                $deliverer = "INSERT INTO `deliverer` (`delivererID`, `fName`,`lName`,`phoneNum`,`vehicle`,`vehicleNo`,`address1`,`address2`,`city`,`profilePic`) VALUES ('".$id."','".$fName."','".$lName."','".$phoneNum."','".$vehicle."','".$vehicleNo."','".$address1."','".$address2."','".$city."','".$imageName."');";
-                $user = "INSERT INTO `users` (`id`,`email`,`password`, `userType`, `active_status`) VALUES ('".$id."','".$email."','".$password_hash."','".$userType."','".$active_status."');";
-                mysqli_query($con,$deliverer);
+                $user = "INSERT INTO `users` (`email`,`password`,`salt`, `userType`, `active_status`) VALUES ('".$email."','".$password_hash."','".$salt."','".$userType."','".$active_status."');";
                 mysqli_query($con,$user);
+                
+                $user_id = mysqli_insert_id($con);
+
+                $deliverer = "INSERT INTO `deliverer` (`user_id`, `fName`,`lName`,`phoneNum`,`vehicle`,`vehicleNo`,`address1`,`address2`,`city`,`profilePic`) VALUES ('".$user_id."','".$fName."','".$lName."','".$phoneNum."','".$vehicle."','".$vehicleNo."','".$address1."','".$address2."','".$city."','".$imageName."');";
+                mysqli_query($con,$deliverer);
+               
                 header('Location:../../public/login.php');
             }
                               

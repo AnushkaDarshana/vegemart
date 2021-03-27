@@ -5,7 +5,8 @@
         <link type="text/css" rel=stylesheet href="../css/profile-edit.css">
         <link rel="stylesheet" href="../css/style.css"> 
         <link rel="stylesheet" href="../css/footer.css">
-        <title>Edit Profile</title>
+        <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
+        <title>Edit Profile | Vegemart</title>
     </head>
     <body>
 

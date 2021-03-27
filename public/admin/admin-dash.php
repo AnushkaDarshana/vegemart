@@ -20,32 +20,64 @@
         
             <div class="column is-3 mt-3 pt-2 ml-2 mr-0 pl-2 pr-2">
                 <fieldset>
-                    <legend><b>Profile Details:</b></legend>
-                    <div class="row has-text-centered ml-1 mr-1 mb-1">
+                    <legend><b>Admin Profile Details:</b></legend>
+                    <div class="row has-text-centered ml-2 mr-2 mb-1">
                         <img src="../images/users/admin.jpg" alt="image" class="image" >              
-                    </div>            
+                    </div> 
+
+                <div class="column is-5 mt-0 ml-1 pl-0 pr-0">
                     <table style="font-family:Candara;">
                         <tr>
                             <td style="font-weight:600;">Admin ID</td>
-                            <td>AD_01</td>
                         </tr>
                         <tr>
-                            <td style="font-weight:600;">Admin Name</td>
-                            <td>Admin</td>
+                            <td style="font-weight:600;">Name</td>
                         </tr>
                         <tr>
-                            <td style="font-weight:600;">Admin Email</td>
-                            <td>admin123@gmail.com</td>
+                            <td style="font-weight:600;">Email</td>
                         </tr>
                         <tr>
                             <td style="font-weight:600;">Contact No.</td>
-                            <td>011-5894236</td>
                         </tr>
                         <tr>
-                            <td style="font-weight:600;">Admin Type</td>
-                            <td>Admin</td>
+                            <td style="font-weight:600;">Address</td>
                         </tr>
-                    </table> 
+                    </table>
+                </div>
+
+                <div class="column is-2 mt-0 ml-0 pl-0 pr-0">
+                    <table class="user" id="myTable"> 
+                    
+                    <?php
+                        $userType="admin";
+                        $sql ="SELECT * FROM `users` WHERE userType='$userType'";
+                        $result = mysqli_query($con,$sql);        
+                        while($row = mysqli_fetch_assoc($result)){ 
+                            $adminID=$row['id']; 
+                            $sql_admin ="SELECT * FROM `admin` WHERE adminID='$adminID'"; 
+                            $result_admin = mysqli_query($con,$sql_admin);
+                            while($row_admin = mysqli_fetch_assoc($result_admin)){                       
+                            echo "<tr>                  
+                                    <td>".$row['id']."</td>
+                                    </tr>";
+                            echo "<tr>
+                                    <td>".$row_admin['name']."</td>
+                                    </tr>";
+                            echo "<tr>
+                                    <td>".$row['email']."</td>
+                                    </tr>";
+                            echo "<tr>
+                                    <td>".$row_admin['contactNum']."</td>
+                                    </tr>";
+                            echo "<tr>
+                                    <td>".$row_admin['address1']." ".$row_admin['address2']." ".$row_admin['city']."</td>
+                                    </tr>";                        
+                            }
+                        }
+                        echo "</table>";
+                    ?>
+                    </div>
+ 
                 </fieldset>
             </div>
             
@@ -55,10 +87,16 @@
                     <div class="card pl-1 pr-1 ml-0 mr-0 pt-1 pb-1">
                         <h2 id="title" class="has-text-left pl-1">User Management</h2>
                         <div class="columns group has-text-centered">
-                            <div class="column is-3 pl-0 has-text-centered">
-                                <img src="../images/users/co-admin.png" alt="image" class="image">
-                                <button class="card-button" onClick="location.href='http://localhost/vegemart/public/admin/co-admin_mgt.php';">Co-Admin Management</button>
-                            </div>
+
+                            <?php
+                            if(isset($_SESSION["loggedInAdminID"])) {
+                                echo "
+                                <div class=\"column is-3 pl-0 has-text-centered\">
+                                <img src=\"../images/users/co-admin.png\" alt=\"image\" class=\"image\">
+                                <button class=\"card-button\" onClick=\"location.href='http://localhost/vegemart/public/admin/co-admin_mgt.php';\">Co-Admin Management</button>
+                            </div>";      
+                            }
+                        ?>
                             <div class="column is-3 pl-0 has-text-centered">
                                 <img src="../images/users/farmer2.jpg" alt="image" class="image">
                                 <button class="card-button" onClick="location.href='http://localhost/vegemart/public/admin/seller_view.php';">Seller Management</button>                               
@@ -121,11 +159,11 @@
 
                             <div class="column is-4 pl-0 has-text-centered">
                             <img src="../images/forum.jpg" alt="image" class="image" >
-                                <button class="card-button" onClick="location.href='http://localhost/vegemart/public/admin/forum_admin.php';">Forum Reports</button>                               
+                                <button class="card-button" onClick="location.href='http://localhost/vegemart/public/admin/forum_review.php';">Forum Reports</button>                               
                             </div>
                             <div class="column is-4 pl-0 has-text-centered">
                             <img src="../images/feedbk.jpg" alt="image" class="image" >
-                                <button class="card-button" onClick="location.href='http://localhost/vegemart/public/admin/helpdesk_admin.php';">Help Desk</button>                        
+                                <button class="card-button" onClick="location.href='http://localhost/vegemart/public/admin/helpdesk_complaints.php';">Help Desk</button>                        
                             </div>
 
                             <div class="column is-2 pl-0 has-text-centered"></div>

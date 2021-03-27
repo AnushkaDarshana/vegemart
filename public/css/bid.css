@@ -5,6 +5,46 @@ h1,h2,h3,h4,h5,h6,p,span,i {
     flex-wrap: wrap;
 }
 
+h4{
+    text-align:left; 
+    padding:0.2em 1em;
+    margin-top: 1em;
+    margin-left: 1em;
+}
+table {
+    width: 100%;
+  }
+
+th{
+    text-align: center;
+}
+ th
+
+td{
+    text-align: center;
+    vertical-align: top;
+    padding:0 0.1em;
+}
+
+td h3{
+    margin: auto;
+    padding: 0;
+}
+
+.heading{
+    flex: 1;
+    background-color: rgba(19, 141, 117, 0.1);
+    padding: 0.1rem;
+}
+
+#myTable tr:nth-child(even) {
+    background-color:rgba(19, 141, 117, 0.15);
+
+}
+#myTable tr:nth-child(odd) {
+    background-color:rgba( 234, 250, 241, 0.6);
+}
+
 #title{
     text-align:left; 
     padding: 0 1.2em; 
@@ -14,6 +54,17 @@ h1,h2,h3,h4,h5,h6,p,span,i {
     color: black;
 }
 
+.sub{
+    font-family: Candara;
+    font-size: 1.2em;
+    color: #138D75;
+    font-weight: 600;
+    text-align: center !important;
+    text-transform: uppercase;
+    padding-bottom: 0%;
+    margin-bottom: 0.5em;
+}
+
 .bid-card {
     box-shadow: 4px 6px 25px -8px rgba(0, 0, 0, 0.75);
     border-radius: 15px;
@@ -21,6 +72,10 @@ h1,h2,h3,h4,h5,h6,p,span,i {
     margin: 0.5rem;
     align-self: center;
     text-align: left;
+}
+
+#bid-section{
+    background-color: rgba(19, 141, 117, 0.1);
 }
 
 #seller-info h3{
@@ -33,104 +88,10 @@ h1,h2,h3,h4,h5,h6,p,span,i {
     text-align: left;
 }
 
-.star-colored {
-    color: gold !important;
-}
-
-#ab{
-    text-decoration: none;
-    color:#138D75; 
-    font-size:12px; 
-    text-align:left;
-}
-
-.sub{
-    font-family: Candara;
-    font-size: 1.2em;
-    color: #909497;
-    text-transform: uppercase;
-    padding-bottom: 0%;
-    margin-bottom: 0;
-}
-
-#best-bid{
-    background-color: #E8F6F3;
-    padding: 1.1em 0.1em;
-    text-align: left;
-    /* color: white; */
-}
-
-/* #best-bid h2{
-    font-family: Candara;
-    font-size: 1.6em;
-} */
-
-#best-bid p{
-    font-size: 1.2em;
-}
-
-.best-bid-dp{
-    float: left;
-    border-radius: 100%;
-    text-align: center;
-    max-height: 60px;
-    cursor:pointer;
-    margin:5px 10px 0 10px;
-} 
-
-.coin-img{
-    float: left;
-    text-align: center;
-    max-height: 35px;
-    cursor:pointer;
-    margin:5px 10px;
-    padding-top: 0;
-}
-
 .item-image {
-    width: 320px;
-    padding: 1em;
+    width: 120px;
+    padding: 1px;
     margin: auto;
-    text-align: center;
-}
-
-#best-bid h2{
-    font-size: 1.6em;
-    text-align: left;
-    padding-left: 0.4em;
-}
-
-#other-bids{
-    background-color:#F2F4F4;
-    margin: auto;
-    padding: 0.1em 1em;
-    text-align: left;
-}
-
-#other-bids h2{
-    font-size: 1.6em;
-    text-align: left;
-    padding-left: 0.4em;
-}
-
-#other-bids p{
-    text-align: left;
-    padding-left: 0.4em;
-}
-
-.user-dp{
-    float: left;
-    border-radius: 100%;
-    text-align: center;
-    max-height: 45px;
-    cursor:pointer;
-    margin:0 10px ;
-} 
-
-hr{
-    margin: 0%;
-    padding: 0%;
-    color: #909497;
     text-align: center;
 }
 
@@ -148,7 +109,7 @@ hr{
     margin: 1em;
     text-align: center;
     white-space: nowrap;
-    border-radius: 25px;
+    border-radius: 5px;
 }
 
 .form-button:hover,button:hover{
@@ -156,17 +117,15 @@ hr{
     color: white;
 }
 
-
 .input-box{
-    font-size: 16px;
-    padding: 0 1em;
+    font-size: 15px;
+    padding: 0.5em;
     margin: 5px 10px;
-    min-height: 40px;
-    max-width: 180px;
+    max-width: 220px;
     color: #171817;
     background-color: rgb(236, 236, 236);
     border-color: transparent;
-    border-radius: 25px;
+    border-radius: 5px;
 }
 
 .input-box::placeholder{
@@ -248,6 +207,7 @@ hr{
 }
 /* Popup box END */
 
+/* not used
 span{
     position: relative;
     right:50px;
@@ -259,7 +219,82 @@ span{
     display: none;
     color: (blue);
     cursor: pointer;
+} 
+#other-bids{
+    background-color:#F2F4F4;
+    margin: auto;
+    padding: 0.1em 1em;
+    text-align: left;
 }
 
+#other-bids h2{
+    font-size: 1.6em;
+    text-align: left;
+    padding-left: 0.4em;
+}
 
+#other-bids p{
+    text-align: left;
+    padding-left: 0.4em;
+}
 
+.user-dp{
+    float: left;
+    border-radius: 100%;
+    text-align: center;
+    max-height: 30px;
+    cursor:pointer;
+    margin:0 10px ;
+} 
+.star-colored {
+    color: gold !important;
+}
+
+#ab{
+    text-decoration: none;
+    color:#138D75; 
+    font-size:12px; 
+    text-align:left;
+}
+
+#best-bid{
+    background-color: #E8F6F3;
+    padding: 1.1em 0.1em;
+    text-align: left;
+    color: white;
+}
+
+#best-bid p{
+    font-size: 1.2em;
+}
+
+#best-bid h2{
+    font-size: 1.6em;
+    text-align: left;
+    padding-left: 0.4em;
+}
+
+.best-bid-dp{
+    float: left;
+    border-radius: 100%;
+    text-align: center;
+    max-height: 60px;
+    cursor:pointer;
+    margin:5px 10px 0 10px;
+} 
+
+.coin-img{
+    float: left;
+    text-align: center;
+    max-height: 35px;
+    cursor:pointer;
+    margin:5px 10px;
+    padding-top: 0;
+}
+
+hr{
+    margin: 0%;
+    padding: 0%;
+    color: #909497;
+    text-align: center;
+} */

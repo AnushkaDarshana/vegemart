@@ -6,7 +6,7 @@
         <link rel="stylesheet" type="text/css" href="../css/delivery.css">
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <link rel="stylesheet" type="text/css" href="../css/footer.css">
-
+        <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
         <title> Ongoing Delivery</title>
     </head>
     <body>

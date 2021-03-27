@@ -12,7 +12,8 @@
     </head>
 
     <body>
-        <?php include_once "./includes/nav.php"; ?>
+        <?php include_once "./includes/nav.php"; 
+        ?>
         <!--slideshow starts here -->
         <div class="slideshow-container mt-0 pt-0 pb-0 mb-0">
             <div class="columns group mt-0 mb-0">
@@ -93,8 +94,6 @@
                 <div class="dropdown">
                     <div class="ul-class" id="myDropdown">
                         <ul>
-                            <li><input type="text" size="1.75" name="min_price" pattern="\d*" title="Should be valid price" class="dropdown-input" placeholder="Min price"></li>            
-                            <li><input type="text" size="1.75" name="max_price" pattern="\d*"  title="Should be valid price" class="dropdown-input" placeholder="Max price"></li>
                             <li><select name="location" class="dropdown-input">
                                 <option style="color:gray">  Location </option>
                                     <?php 
@@ -152,13 +151,25 @@
                     <div class= "block" onclick= "window.location.href = 'bid.php?id=<?php echo $rowProduct['productID'] ?>'" style="cursor: pointer;">
                         <img src= images/products/<?php echo $rowProduct['imageName'] ?>>
                         <h3 style="text-transform: capitalize;"><?php echo $rowProduct['name'] ?></h3>
+                        <?php
+                        include ('../config/dbconfig.php');
+                        include ('../src/session.php');
+                        $productID = $rowProduct['productID'];
+                        $quantity = "SELECT quantity FROM quantitysets where productID ='$productID' ";
+                        $qauantityQuery = mysqli_query($con,$quantity);
+                        $totalQuantity=0;
+                        while ($rowQuantity = mysqli_fetch_assoc($qauantityQuery)) {
+                            $totalQuantity=$totalQuantity+$rowQuantity['quantity'];
+                        }
+                        ?>
+                        <h3 style="text-transform: capitalize;"><?php echo $totalQuantity ?> kg</h3>                        
                         <h3>Location: <?php echo $rowProduct['city'] ?> </h3>
-                        <h3>Rs. <?php echo $rowProduct['minPrice']  ?>(250g)</h3>
+                        <!-- <h3>Rs. <?php// echo $rowProduct['minPrice']  ?>(250g)</h3> -->
                     </div>
                 <?php
                 }
                 include_once ('../src/products.php');
-                while($rowProduct  = mysqli_fetch_assoc($resultProduct)){
+                while($rowProduct  = mysqli_fetch_assoc($resultProduct)){                    
                     showProducts($rowProduct);
                 } 
                 mysqli_close($con);

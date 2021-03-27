@@ -2,6 +2,8 @@
     
     include ('../../config/dbconfig.php');
     include ('../session.php');
+
+    if(isset($productID))
              
     $target_dir = "../../public/images/products/";
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -32,35 +34,30 @@
         $imageData = $_FILES["fileToUpload"]["tmp_name"];
         $imageType = $_FILES["fileToUpload"]["type"];
         $productName = $_POST['productName'];
-        $quantity = $_POST['quantity'];  
-        $minPrice = $_POST['minPrice'];
         $address1 = $_POST['address1'];
         $address2 = $_POST['address2'];
         $city = $_POST['city'];
         $description = $_POST['description'];
-        $expirationDate = $_POST['expirationDate'];
-        $availableDate = $_POST['availableDate'];
         $sellerID = $_SESSION["loggedInSellerID"];  
-        // $productID = rand();
-        //$adID = rand();                            
-                    
-        $insertProduct = "INSERT INTO `products` (`sellerID`,`name`,`quantity`,`minPrice`,`imageName`,`address1`,`address2`,`city`,`description`,`exdate`,`datetime`) VALUES ('".$sellerID."','".$productName."','".$quantity."','".$minPrice."','".$imageName."','".$address1."','".$address2."','".$city."','".$description."','".$expirationDate."',NOW());";
+        $expirationDateQuery = "SELECT DATE_ADD(NOW(),INTERVAL 5 DAY) AS DateAdd;";
+        $expirationDateResult = mysqli_query($con,$expirationDateQuery); 
+        $rowExpirationDate = mysqli_fetch_assoc($expirationDateResult);
+        $expirationDate = $rowExpirationDate['DateAdd'];
+        
+              
+        $insertProduct = "INSERT INTO `products` (`sellerID`,`name`,`imageName`,`address1`,`address2`,`city`,`description`,`expireDate`) VALUES ('".$sellerID."','".$productName."','".$imageName."','".$address1."','".$address2."','".$city."','".$description."','".$expirationDate."');";
            // $advertise =  "INSERT INTO `advertisements` (`adID`,`productID`) VALUES ('".$adID."','".$productID."');";      
-        if (mysqli_query($con, $insertProduct)) {                            
-            $message = base64_encode(urlencode("Product Added."));
-            if (isset($_POST['ad'])){
-                $advertiseProduct = "INSERT INTO `advertisements` (`adID`,`productID`,`avdate`) VALUES ('".$adID."','".$productID."','".$availableDate."');";     
-                if (mysqli_query($con,$advertiseProduct)){
-                    header('Location:../../public/seller/seller_home.php?msg=' . $message);
-                }
-                else{
-                    header('Location:../../public/seller/seller_product_add.php?msg=' . $message);
-                }                
-            }else{
-                header('Location:../../public/seller/seller_home.php?msg=' . $message);
-            }
+        if (mysqli_query($con, $insertProduct)) {  
+            
+            $maxquery = mysqli_query($con,"SELECT MAX(productID) FROM `products`");
+            $row = mysqli_fetch_row($maxquery);
+            $maxId = $row[0];
+
+            header("Location:../../public/seller/seller_product_quantityset.php?id=". $maxId);
             exit();
         }
+        
+        
         else{                           
             $message = base64_encode(urlencode("SQL Error while Adding products"));
             header('Location:../../public/seller/seller_product_add.php?msg=' . $message);

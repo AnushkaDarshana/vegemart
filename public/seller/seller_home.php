@@ -2,6 +2,7 @@
      ob_start();
     include ('../../config/dbconfig.php');
     include ('../../src/session.php');
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,15 +40,15 @@
                                             <div class="row  pl-2 has-text-left">
                                                 <h2 class="mb-1 pl-1" style="font-size:27px;"><?php echo $rowUser['fName'] . " " . $rowUser['lName'] ?></h2><br>        
                                                 <div class="column is-3">
-                                                    <h3 class="mb-0 mt-0 pr-1" style="text-align-left">Phone:</h3><br>
-                                                    <h3 class="mb-0 mt-0" style="text-align-left">Location:</h3><br>
+                                                    <h3 class="mb-0 mt-0 pr-1" style="text-align:left">Phone:</h3><br>
+                                                    <h3 class="mb-0 mt-0" style="text-align:left">Location:</h3><br>
                                                 </div>
                                                 
                                                 <div class="column is-4 has-text-left pb-1 pl-1">
-                                                    <h3 class="mb-0 mt-0" style="text-align-left"><?php echo $rowUser['phoneNum']?> </h3><br>
-                                                    <h3 class="mb-0 mt-0" style="text-align-left"><?php echo $rowUser['address1']?></h3>
-                                                    <h3 class="mb-0 mt-0" style="text-align-left"><?php echo $rowUser['address2']?></h3>
-                                                    <h3 class="mb-0 mt-0" style="text-align-left"><?php echo $rowUser['city']?></h3>                
+                                                    <h3 class="mb-0 mt-0" style="text-align:left"><?php echo $rowUser['phoneNum']?> </h3><br>
+                                                    <h3 class="mb-0 mt-0" style="text-align:left"><?php echo $rowUser['address1']?></h3>
+                                                    <h3 class="mb-0 mt-0" style="text-align:left"><?php echo $rowUser['address2']?></h3>
+                                                    <h3 class="mb-0 mt-0" style="text-align:left"><?php echo $rowUser['city']?></h3>                
                                                 </div> 
                                                 <?php
                                                         include "../../src/seller/seller_dashboard/map.php";
@@ -84,17 +85,18 @@
                         <div class="row item-legend has-text-centered mt-0">
                         <h1 id="title" style="padding-bottom:0;">Available products</h1>
                             <div class="columns group">
-                                <div class="column is-3">
+                                <div class="column is-2">
                                     <h4></h4>
                                 </div>
                                 <div class="column is-2">
                                     <h4>Item</h4>
                                 </div>
                                 <div class="column is-2">
-                                    <h4>Unit Price (Rs.)</h4>
+                                    <h4>Quantity (kg)</h4>
                                 </div>
-                                <div class="column is-2">
-                                    <h4>Quantity (grams)</h4>
+                                
+                                <div class="column is-3">
+                                    <h4></h4>
                                 </div>
                                 <div class="column is-3">
                                     <h4></h4>
@@ -104,32 +106,80 @@
                         <?php
                             include ('../../src/seller/seller_dashboard/product_details.php');
                             while ($row = mysqli_fetch_assoc($result)) {
+                                $productID = $row['productID'];
+                                $expireDateQuery = "SELECT unix_timestamp(`expireDate`) * 1000 as stamp FROM products WHERE productID='$productID';";                                    
+                                    $expireDateResult = mysqli_query($con, $expireDateQuery);
+                                    while ($rowExpireDate = mysqli_fetch_assoc($expireDateResult)) {
+                            ?>
+                            <script>
+                                // Set the date we're counting down to
+                                
+                                var countDownDate<?=$productID?> = new Date(<?=$rowExpireDate['stamp']?>).getTime();
+                               
+                                // Update the count down every 1 second
+                                var x = setInterval(function() {
+
+                                    // Get today's date and time
+                                    var now = new Date().getTime();
+                                                
+                                            // Find the distance between now and the count down date
+                                    var distance<?=$productID?> = countDownDate<?=$productID?> - now;
+                                                
+                                            // Time calculations for days, hours, minutes and seconds
+                                            var days = Math.floor(distance<?=$productID?> / (1000 * 60 * 60 * 24));
+                                            var hours = Math.floor((distance<?=$productID?> % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                            var minutes = Math.floor((distance<?=$productID?> % (1000 * 60 * 60)) / (1000 * 60));
+                                            var seconds = Math.floor((distance<?=$productID?> % (1000 * 60)) / 1000);
+                                                
+                                            
+                                            // If the count down is over, product will be removed 
+                                            if (distance<?=$productID?> < 0) {
+                                                clearInterval(x);                                                
+                                                var productID=<?php echo $productID ?>;
+                                                window.location.href='http://localhost/vegemart/src/seller/removeProduct.php?id='+productID;                                                                                          
+                                            }
+                                            }, 1000);
+                                            </script>
+                            <?php                              
+                                
+                                }
                             ?>
                                 <div class="item-table">
                                     <div class="row item-row has-text-centered mb-0">
                                         <div class="columns group">
-                                            <div class="column is-3">
+                                            <div class="column is-2">
                                                 <img class="item-img" src= "../images/products/<?php echo $row['imageName']?>">
                                             </div>
                                             <div class="column is-2">
                                                 <h4><?php echo $row['name'] ?> </h4>
                                             </div>
+                                            <?php
+                                                $quantity = "SELECT quantity FROM quantitysets where productID ='$productID' ";
+                                                $qauantityQuery = mysqli_query($con,$quantity);
+                                                $totalQuantity=0;
+                                                while ($rowQuantity = mysqli_fetch_assoc($qauantityQuery)) {
+                                                    $totalQuantity=$totalQuantity+$rowQuantity['quantity'];
+                                                }
+                                                ?>
                                             <div class="column is-2">
-                                                <h4><?php echo $row['minPrice'] ?> </h4>
-                                            </div>
-                                            <div class="column is-2">
-                                                <h4><?php echo $row['quantity'] ?></h4>
+                                                <h4><?php echo $totalQuantity ?></h4>
                                             </div>
                                             <?php
                                                 if(isset($_SESSION["loggedInSellerID"])){
                                             ?>
-                                                <div class="column is-3">
-                                                    <button class="button" onClick="location.href='http://localhost/vegemart/public/seller/seller_product_edit.php?id=<?php echo $row['productID']?>';">Update Product</button>               
-                                                </div>
+                                            <div class="column is-3 pt-2">
+                                                <button class="button" onClick="location.href='http://localhost/vegemart/public/seller/seller_product_edit.php?id=<?php echo $row['productID']?>';">Update Product</button>               
+                                            </div>
+
+                                            <div class="column is-3 pt-2">
+                                                <button class="button" style="background-color:#E74C3C" onClick="location.href='http://localhost/vegemart/src/seller/removeProduct.php?id=<?php echo $row['productID']?>';">Delete Product</button>               
+                                            </div>
+                                                
                                             <?php
                                                 }
                                             ?>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             <?php

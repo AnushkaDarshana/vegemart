@@ -41,7 +41,6 @@
         $imageName = $_FILES["profilePic"]["name"];
         $imageData = $_FILES["profilePic"]["tmp_name"];
         $imageType = $_FILES["profilePic"]["type"];
-        $newUsername = $_POST['editUsername'];
         $oldPassword = md5($_POST['Password']);
         $newPassword = md5($_POST['editPassword']);
         $newConfirmPassword = md5($_POST['editConfirmPassword']);
@@ -63,10 +62,10 @@
                     } 
                         $updateUser= "UPDATE `users` SET email = '".$newEmail."',`password` = '".$newPassword."' WHERE id = '".$id."' ";
                     if($imageName==""){
-                        $updateQuery= "UPDATE `client` SET fName = '".$newFName."', lName = '".$newLName."', phoneNum = '".$newPhoneNum."', address1 = '".$newAddress1."', address2 = '".$newAddress2."', city = '".$newCity."' WHERE id = '".$id."' ";
+                        $updateQuery= "UPDATE `client` SET fName = '".$newFName."', lName = '".$newLName."', phoneNum = '".$newPhoneNum."', address1 = '".$newAddress1."', address2 = '".$newAddress2."', city = '".$newCity."' WHERE user_id = '".$id."' ";
                     }
                     else{
-                        $updateQuery= "UPDATE `client` SET fName = '".$newFName."', lName = '".$newLName."', phoneNum = '".$newPhoneNum."',profilePic = '".$imageName."', address1 = '".$newAddress1."', address2 = '".$newAddress2."', city = '".$newCity."' WHERE id = '".$id."' ";   
+                        $updateQuery= "UPDATE `client` SET fName = '".$newFName."', lName = '".$newLName."', phoneNum = '".$newPhoneNum."',profilePic = '".$imageName."', address1 = '".$newAddress1."', address2 = '".$newAddress2."', city = '".$newCity."' WHERE user_id = '".$id."' ";   
                     }   
                     if (mysqli_query($con,$updateQuery) && mysqli_query($con,$updateUser)) {
                         $message = base64_encode(urlencode("Successfully Edited!"));

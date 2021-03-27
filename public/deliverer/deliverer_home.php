@@ -12,6 +12,7 @@
         <link rel="stylesheet" type="text/css" href="../css/deliverer-home.css">
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <link rel="stylesheet" type="text/css" href="../css/footer.css">
+        <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
         <title>Deliverer Dashboard | Vegemart</title>
     </head>
     <body>
@@ -84,31 +85,81 @@
                             </div>
                         </div>
                     </div>
+
+                    <?php
+                        include ('../../config/dbconfig.php');
+                        include ('../../src/session.php');
+
+                        $deliveries = "SELECT * FROM orders where `paymentStatus` = 1 AND `delivery` = 1";
+                        $deliveryquery = mysqli_query($con,$deliveries);
+                       
+                        while ($rowdelivery = mysqli_fetch_assoc($deliveryquery)) {
+                            $buyerID = $rowdelivery['buyerID'];
+                            $sellerID = $rowdelivery['sellerID'];
+                            
+
+                            //buyer details
+                            $buyerInfo = "SELECT * FROM client WHERE `user_id` ='$buyerID' ";      
+                            $buyerquery = mysqli_query($con,$buyerInfo); 
+                            
+                            //seller details
+                            $sellerInfo = "SELECT * FROM client WHERE `user_id` ='$sellerID' ";      
+                            $sellerquery = mysqli_query($con,$sellerInfo);  
+                            
+                            
+                    ?>
+
                     <div class="row item-row mt-0">
                         <div class="columns group">
+                            <?php
+                                while ($rowSeller = mysqli_fetch_assoc($sellerquery)) {                                    
+                            ?>
                             <div class="column is-2">
-                                <p class="mb-0 pb-0">Anushka Darshana</p>
+                                <p class="mb-0 pb-0"><?php echo $rowSeller['fName'] . " " . $rowSeller['lName']?></p>
                             </div>
                             <div class="column is-3">
-                                <p class="mb-0 pb-0">D. M. Rupasinghe mawatha,</p>
-                                <p>Anuradhapura</p>
+                                <p class="mb-0 pb-0"><?php echo $rowSeller['address1']?>,</p>
+                                <p class="mb-0 pb-0"><?php echo $rowSeller['address2']?>,</p>
+                                <p><?php echo $rowSeller['city']?></p>
                             </div>
+                            <?php
+                                }
+                            
+                            ?>
+                            <?php
+                               
+                                    ?>
                             <div class="column is-1">
                                 <p class="mb-0 pb-0">Carrot</p>
                                 <p class="mb-0 pb-0">Beans</p>
                             </div>
+
+                            <?php
+                                                                
+                            ?>
                             <div class="column is-1">
                                 <p class="mb-0 pb-0">5</p>
                                 <p class="mb-0 pb-0">5</p>
                             </div>
+                            <?php
+                                while ($rowBuyer = mysqli_fetch_assoc($buyerquery)) {                                    
+                            ?>
                             <div class="column is-2">
-                                <p class="mb-0 pb-0">Chanaka Malshan</p>
+                                <p class="mb-0 pb-0"><?php echo $rowBuyer['fName'] . " " . $rowBuyer['lName']?></p>
                             </div>
+                            
                             <div class="column is-3">
-                                <p class="mb-0 pb-0">R.M Bandara mawatha,</p>
-                                <p class="mb-0 pb-0">Anuradhapura</p>
+                                <p class="mb-0 pb-0"><?php echo $rowBuyer['address1']?>,</p>
+                                <p class="mb-0 pb-0"><?php echo $rowBuyer['address2']?></p>
+                                <p class="mb-0 pb-0"><?php echo $rowBuyer['city']?></p>
                                 <button class="button mt-1" onClick="location.href='http://localhost/vegemart/public/deliverer/delivery.php';">Accept</button>
                             </div>
+
+                            <?php
+                                }
+                            }
+                            ?>
+                            
                         </div>
                     </div>
                 </div>

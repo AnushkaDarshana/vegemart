@@ -10,7 +10,7 @@
         elseif (isset($_SESSION["loggedInSellerID"])) {
             $userID = $_SESSION["loggedInSellerID"];
         }
-    $retrieveInfo =  "SELECT * FROM client WHERE id='$userID';"; //Selecting all data from Table
+    $retrieveInfo =  "SELECT * FROM `client` WHERE `user_id`='$userID';"; //Selecting all data from Table
     $resultInfo = mysqli_query($con, $retrieveInfo); //Passing SQL
         while($rowUser  = mysqli_fetch_assoc($resultInfo)){
             echo "<img class=\"dp\" src=\"http://localhost/vegemart/images/users/{$rowUser['profilePic']}\" alt=\"Avatar\">";

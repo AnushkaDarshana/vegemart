@@ -39,10 +39,16 @@
                         $sql ="SELECT * FROM `users` WHERE userType='$userType'";
                         $result = mysqli_query($con,$sql);        
                         while($row = mysqli_fetch_assoc($result)){ 
-                            $adminID=$row['id']; 
-                            $sql_admin ="SELECT * FROM `admin` WHERE adminID='$adminID'"; 
-                            $result_admin = mysqli_query($con,$sql_admin);
-                            while($row_admin = mysqli_fetch_assoc($result_admin)){                       
+                        $adminID =$row['id']; 
+                        $sql_admin ="SELECT * FROM `admin` WHERE `user_id`='$adminID'"; 
+                        $result_admin = mysqli_query($con,$sql_admin);
+                        while($row_admin = mysqli_fetch_assoc($result_admin)){  
+                            if ($row['active_status'] == 1){
+                                $active_status = "active";
+                            }
+                            else{
+                                $active_status = "Non-active";
+                            }                     
                             echo "
                                 <tr>                  
                                     <td>".$row['id']."</td>
@@ -52,7 +58,7 @@
                                     <td>".$row_admin['address1']."</td>
                                     <td>".$row_admin['address2']."</td>
                                     <td>".$row_admin['city']."</td>
-                                    <td>".$row['active_status']."</td>                                  
+                                    <td> $active_status</td>                                  
                                 </tr>";                         
                             }
                         }
@@ -95,13 +101,8 @@
                                     <td><input class="input-l" type="text" placeholder="City" id="city" name="city"  required></td>
                                 </tr>
                                 <tr>
-                                    <th>Password : </th>
-                                    <td><input class="input-l" type="password" placeholder="Password" id="password" name="password"
-                                    pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"></td>
-                                </tr>
-                                <tr>
                                     <th> Status : </th>
-                                    <td><input class="input-m" type="text" placeholder="Active status" id="status" name="status"  required></td>
+                                    <td><input class="input-l" type="text" placeholder="Active status" id="status" name="status"  required></td>
                                 </tr>
                             </table>
 

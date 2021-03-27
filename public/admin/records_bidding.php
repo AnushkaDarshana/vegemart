@@ -19,6 +19,39 @@
             <div class="columns group mt-0">
                 <div class="column is-1"></div>
                 <div class="column is-10 pl-1">
+                    
+                    <table class="user" id="myTable">
+            <tr>
+                <th>Bid ID</th>
+                <th>Date</th>
+                <th>Start Time</th>
+                <th>Product Name</th>
+                <th>Total Quantity sold (kg)</th>
+                <th>Highest Bidder</th>
+                <th>Highest Bid</th>
+                <th> </th>
+            </tr>
+        
+            <?php
+    
+                $sql ="SELECT * FROM `bidding`";
+                $result = mysqli_query($con,$sql);        
+                while($row = mysqli_fetch_assoc($result)){ 
+            
+                    echo "
+                        <tr>
+                            <td>".$row['bidID']."</td>
+                            <td>".$row['date']."</td>
+                            <td>".$row['startTime']."</td>
+                            <td>".$row['bidQuantity']."</td>
+                            <td>".$row['userID']."</td>
+                            <td>".$row['bidPrice']."</td>
+                        </tr>";
+                    
+                    } 
+            echo "</table>";
+            ?>
+
                     <table class="user" id="myTable">
                         <tr>
                             <th>Bid ID</th>                           

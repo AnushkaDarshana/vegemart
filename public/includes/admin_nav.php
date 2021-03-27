@@ -13,9 +13,9 @@
             
             <ul class="main-nav">
                 <li><a href="http://localhost/vegemart/public/admin/admin-dash.php">Home</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="http://localhost/vegemart/public/about_us.php">About</a></li>
                 <li><a href="http://localhost/vegemart/src/logout.php">Logout</a></li>
-
+                <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
             </ul>
         </header>
         <script>

@@ -7,7 +7,7 @@
         <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">   
         <link rel="stylesheet" href="../css/footer.css">  
         <link rel="stylesheet" href="../css/style.css">
-        
+        <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
         <title>Advertising | Vegemart</title>
     </head>
 

@@ -6,7 +6,8 @@
         <link rel="stylesheet" type="text/css" href="../css/delivery-done.css">
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <link rel="stylesheet" type="text/css" href="../css/footer.css">
-        <title>Order Complete | Vegemart</title>
+        <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
+        <title>Delivery Complete | Vegemart</title>
     </head>
     <body>  
         <?php include "../deliverer/deliverer_nav.php"; ?>  

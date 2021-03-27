@@ -9,7 +9,7 @@
 
     // Check if file already exists
     if (file_exists($target_file)) {
-        echo "Sorry, file already exists.";
+       // echo "Sorry, file already exists.";
         $uploadOk = 0;
     }
               
@@ -43,7 +43,7 @@
 
         if ($password === $confirmPassword) {
             
-            $sql_e = "SELECT * FROM users WHERE email='".$email."'";            
+            $sql_e = "SELECT * FROM `users` WHERE email='".$email."'";            
             $res_e = mysqli_query($con, $sql_e);           
                           
             if(mysqli_num_rows($res_e) > 0){
@@ -53,15 +53,18 @@
                 </script>";
                         
             }else{
-                $password_hash = md5($password); 
+                $salt = md5(uniqid(rand(), true));
+                $password_hash = md5($salt.$password); 
                 if($imageName==""){
                     $imageName="default.png";
                 }  
-                $id = rand(); 
-                $client = "INSERT INTO `client` (`id`, `fName`,`lName`,`phoneNum`,`address1`,`address2`,`city`,`profilePic`) VALUES ('".$id."','".$fName."','".$lName."','".$phoneNum."','".$address1."','".$address2."','".$city."','".$imageName."');";
-                $user = "INSERT INTO `users` (`id`,`email`,`password`, `userType`, `active_status`) VALUES ('".$id."','".$email."','".$password_hash."','".$userType."','".$active_status."');";
-                mysqli_query($con,$client);
+                $user = "INSERT INTO `users` (`email`,`password`,`salt`, `userType`, `active_status`) VALUES ('".$email."','".$password_hash."','".$salt."','".$userType."','".$active_status."');";
                 mysqli_query($con,$user);
+                
+                $user_id = mysqli_insert_id($con);
+                
+                $client = "INSERT INTO `client` ( `user_id`,`fName`,`lName`,`phoneNum`,`address1`,`address2`,`city`,`profilePic`) VALUES ('".$user_id."','".$fName."','".$lName."','".$phoneNum."','".$address1."','".$address2."','".$city."','".$imageName."');";                
+                mysqli_query($con,$client);     
                 header('Location:../public/login.php');
             }
                               
