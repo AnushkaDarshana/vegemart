@@ -39,7 +39,7 @@
                                     <div class="column is-3">
                                         <h2></h2>
                                     </div>
-                                    <div class="column is-3">
+                                    <div class="column is-2">
                                         <h2>Item</h2>
                                     </div>
                                     <div class="column is-3">
@@ -56,64 +56,52 @@
                             </div>
                         </div>
                         <div class="block item-row has-text-centered mb-0">
+
+                            <?php
+                                $userID = $_SESSION["loggedInUserID"];
+                                $orderQuery = "SELECT * FROM orders WHERE userID='$userID' AND paymentStatus=0";
+                                $resultOrder = mysqli_query($con, $orderQuery);
+                                while ($rowOrder  = mysqli_fetch_assoc($resultOrder)) {
+                                    $productID = $rowOrder['productID'];
+                                    $bidID = $rowOrder['bidID'];
+
+                                    $productQuery = "SELECT * FROM products WHERE productID='$productID'";
+                                    $resultProduct = mysqli_query($con, $productQuery);
+                                    while ($rowProduct  = mysqli_fetch_assoc($resultProduct)) {
+                                        ?>
                                 <div class="columns group">
                                     <div class="column is-3">
-                                        <img class="item-img" src="http://localhost/vegemart/public/images/products/carrot.jpg">                                        
+                                        <img class="item-img" src="http://localhost/vegemart/public/images/products/<?php echo $rowProduct['imageName'] ?>">                                        
                                     </div>
                                     
                                     <div class="column is-2 mt-1">
-                                        <h3>Carrot</h3>
+                                        <h3><?php echo $rowProduct['name'] ?></h3>
                                     </div>
+                                    <?php
+                                    } ?>
+                                    <?php
+                                        $bidPrice = "SELECT * FROM bidding WHERE bidID='$bidID'";
+                                    $resultBid = mysqli_query($con, $bidPrice);
+                                    while ($rowBid  = mysqli_fetch_assoc($resultBid)) {
+                                        ?>
                                     <div class="column is-3 mt-1">
-                                        <h3>550.00</h3>
+                                        <h3><?php echo $rowBid['bidPrice'] ?>.00</h3>
                                     </div>
                                     <div class="column is-2 mt-1">
-                                        <h3>10</h3>
+                                        <h3><?php echo $rowBid['bidQuantity'] ?></h3>
                                     </div>
+                                    <?php
+                                    } ?>
                                     <div class="column is-2">
-                                        <button class="button" onClick="location.href='http://localhost/vegemart/public/seller/seller_product_edit.php?id=<?php echo $row['productID']?>';">Order Details</button>               
+                                        <button class="button" onClick="location.href='http://localhost/vegemart/public/order_confirm.php?id=<?php echo $rowOrder['orderID'] ?>'">Order Details</button>               
                                     </div>
                                 </div>
                                 <hr>
-                                <div class="columns group">
-                                    <div class="column is-3">
-                                        <img class="item-img" src="http://localhost/vegemart/public/images/products/carrot.jpg">                                        
-                                    </div>
-                                    
-                                    <div class="column is-2 mt-1">
-                                        <h3>Carrot</h3>
-                                    </div>
-                                    <div class="column is-3 mt-1">
-                                        <h3>550.00</h3>
-                                    </div>
-                                    <div class="column is-2 mt-1">
-                                        <h3>10</h3>
-                                    </div>
-                                    <div class="column is-2">
-                                        <button class="button" onClick="location.href='http://localhost/vegemart/public/seller/seller_product_edit.php?id=<?php echo $row['productID']?>';">Order Details</button>               
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="columns group">
-                                    <div class="column is-3">
-                                        <img class="item-img" src="http://localhost/vegemart/public/images/products/carrot.jpg">                                        
-                                    </div>
-                                    
-                                    <div class="column is-2 mt-1">
-                                        <h3>Carrot</h3>
-                                    </div>
-                                    <div class="column is-3 mt-1">
-                                        <h3>550.00</h3>
-                                    </div>
-                                    <div class="column is-2 mt-1">
-                                        <h3>10</h3>
-                                    </div>
-                                    <div class="column is-2">
-                                        <button class="button" onClick="location.href='http://localhost/vegemart/public/seller/seller_product_edit.php?id=<?php echo $row['productID']?>';">Order Details</button>               
-                                    </div>
-                                </div>
-                                <hr>
-                            </div>
+                                <?php
+                                }
+                                ?>
+                                
+                        </div>
                         
                     </div>
                 <!-- items ends here -->

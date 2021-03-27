@@ -1,7 +1,9 @@
 <?php
+include ('../src/session.php'); 
+include ('../config/dbconfig.php');
 
 $merchant_id         = $_POST['1215900'];
-$order_id             = $_POST['1'];
+$order_id             = $_POST["order_id"];
 $payhere_amount     = $_POST['250.00'];
 $payhere_currency    = $_POST['LKR'];
 $status_code         = $_POST['status_code'];

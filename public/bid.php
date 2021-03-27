@@ -177,7 +177,7 @@ include('../src/session.php');
                         <div class="columns group mt-0">
                             <div class="column is-3 pl-0 mt-0">
                                 <p class="sub" style="text-align:left; padding:0 0.2em;"><i style="text-align:center; margin:0.4em;" class="fas fa-hourglass-start"></i>Auction End Time</p>
-                                <h4 class="mb-0 mt-0 pl-1" style="text-align:left; padding:0.1em;"><?php echo $endTime ?></h4>
+                                <h4 class="mb-0 mt-0 pl-1" style="text-align:center; padding:0.1em;"><?php echo $endTime ?></h4>
                             </div>
 
                             <?php
