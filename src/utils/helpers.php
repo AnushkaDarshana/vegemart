@@ -20,3 +20,5 @@
     // fwrite($fp, date("Y/m/d  "));
     // fwrite($fp, date("h:i:s a P GMT ")); //P=GMT T=+5.30
 ?>
+
+

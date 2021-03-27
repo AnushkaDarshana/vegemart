@@ -75,10 +75,6 @@
                                             <input class="input-box" type="text" name="editCity" placeholder="Edit city" value=<?php echo $row['city']?> required>                            
                                         </div>
                                         <div class="input-row">
-                                            <label>Password</label> 
-                                            <input class="input-box" type="password" name="Password" placeholder="Current password" required>                                         
-                                        </div>
-                                        <div class="input-row">
                                             <label>New Password</label> 
                                             <input class="input-box" type="password" name="editPassword" id="new_password" onkeyup="check()" placeholder="Change password">                                         
                                         </div>
@@ -87,6 +83,12 @@
                                             <input class="input-box" type="password" name="editConfirmPassword" id="confirm_new_password" onkeyup="check()" placeholder="Confirm password"> 
                                         </div>
                                         <span id="message"></span>
+                                        <br>
+                                        <span>Enter your password to confirm</span>
+                                        <div class="input-row">
+                                            <label>Password</label> 
+                                            <input class="input-box" type="password" name="Password" placeholder="Current password" required>                                         
+                                        </div>
                                     </div>
                                     <div class="column is-1 pl-1 pr-1"></div>
                                 </div>

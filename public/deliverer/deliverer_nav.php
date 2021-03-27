@@ -33,7 +33,7 @@
 
                         $userID = $_SESSION["loggedInDelivererID"];
                         
-                        $retrieveInfo =  "SELECT * FROM deliverer WHERE delivererID='$userID';"; //Selecting all data from Table
+                        $retrieveInfo =  "SELECT * FROM `deliverer` WHERE `user_id`='$userID';"; //Selecting all data from Table
                         $resultInfo = mysqli_query($con, $retrieveInfo); //Passing SQL
                         while($rowUser  = mysqli_fetch_assoc($resultInfo)){
                             

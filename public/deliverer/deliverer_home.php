@@ -20,10 +20,10 @@
         <div class="row">
         <?php         
             $userID = $_SESSION["loggedInDelivererID"];
-            $retrieveInfo =  "SELECT * FROM deliverer WHERE delivererID='$userID';"; //Selecting all data from Table
+            $retrieveInfo =  "SELECT * FROM `deliverer` WHERE `user_id`='$userID';"; //Selecting all data from Table
             $resultInfo = mysqli_query($con, $retrieveInfo); //Passing SQL
             while($rowUser  = mysqli_fetch_assoc($resultInfo)){
-                $_SESSION["loggedInDelivererID"] = $rowUser['delivererID'];
+                $_SESSION["loggedInDelivererID"] = $rowUser['user_id'];
                 echo "
                 <h1 id=\"heading\" style=\"text-align:left; font-family: Candara; color: #138D75; margin:0.2em 1em 0;\">Hello ".$rowUser['fName']."! Welcome to Deliverer dashboard </h1>";
             }
@@ -96,7 +96,7 @@
                         while ($rowdelivery = mysqli_fetch_assoc($deliveryquery)) {
                             $buyerID = $rowdelivery['buyerID'];
                             $sellerID = $rowdelivery['sellerID'];
-                            
+                            $productID = $rowdelivery['productID'];
 
                             //buyer details
                             $buyerInfo = "SELECT * FROM client WHERE `user_id` ='$buyerID' ";      
@@ -106,7 +106,9 @@
                             $sellerInfo = "SELECT * FROM client WHERE `user_id` ='$sellerID' ";      
                             $sellerquery = mysqli_query($con,$sellerInfo);  
                             
-                            
+                            //product details
+                            $productInfo = "SELECT * FROM products WHERE `productID` ='$productID' ";      
+                            $productquery = mysqli_query($con,$productInfo);
                     ?>
 
                     <div class="row item-row mt-0">
@@ -127,15 +129,15 @@
                             
                             ?>
                             <?php
-                               
-                                    ?>
+                                while ($rowSeller = mysqli_fetch_assoc($productquery)) {                                    
+                            ?>
                             <div class="column is-1">
                                 <p class="mb-0 pb-0">Carrot</p>
                                 <p class="mb-0 pb-0">Beans</p>
                             </div>
 
                             <?php
-                                                                
+                                }                                  
                             ?>
                             <div class="column is-1">
                                 <p class="mb-0 pb-0">5</p>

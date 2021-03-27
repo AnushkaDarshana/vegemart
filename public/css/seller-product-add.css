@@ -1,75 +1,118 @@
 @import url(./style.css);
-
 body {
-    background-image: url('../images/bg1.png');
+    background-image: url('../images/back2.jpg');
     background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
-h1,h2,h3,h4,h5,h6,p{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
     flex-wrap: wrap;
-    text-transform: capitalize;
 }
 
-p{
+p {
     font-weight: 500;
 }
 
-.addForm {
-    background-color: #fff;
+.tab {
+    align-items: center;
+    border: 1px solid rgb(245, 245, 245);
+}
+
+.tabButton {
+    display: inline-block;
+    font-family: Candara;
+    border: none;
+    outline: none;
+    background-color: rgb(245, 245, 245);
+    color: black;
+    padding: 16px;
+    text-align: center;
+    text-decoration: none;
+    margin: auto;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.tabButton:hover {
+    background-color: #ddd;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24);
+}
+
+.tabButton.active {
+    background-color: #c4c5c5;
+    color: #000;
+}
+
+label {
+    font-family: Candara;
+    text-align: left;
+    flex: 1 0 100px;
+    font-size: 18px;
+}
+
+.updateForm {
+    box-shadow: 4px 4px 20px -8px rgba(0, 0, 0, 0.75);
+    background-color: white;
     border-radius: 15px;
     padding: 1rem;
     margin: 10px;
     align-self: center;
+    align-items: center;
 }
-.input-row{
+
+.input-row {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    padding: 8px 20px;
+    margin: 12px;
     text-align: left;
 }
 
-label{
-    flex: 1 0 160px;
-    font-size: 17px;
-    vertical-align: top;
-}
-
-.input-box{
+.input-box {
     display: flex;
+    flex: 1 0 150px;
     flex-wrap: wrap;
-    font-size: 14px;
-    min-height: 25px;
-    min-width: 250px;
+    font-size: 15px;
+    margin: 0px 10px;
+    min-height: 30px;
     color: #232523;
     background-color: whitesmoke;
     border-color: transparent;
-    align-self: flex-start;
 }
 
-.image-input{
-    display: flex;    
+.img-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 12px;
+    align-items: center;
+}
+
+.image-input {
+    display: flex;
+    margin-left: 12px;
+    align-self: center;
     font-size: 14px;
     min-height: 25px;
-    margin-left:0px;
-    text-align:left !important;
     color: #232523;
     background-color: transparent;
     border-color: transparent;
 }
 
-textarea{
-    display: flex;
-    flex-wrap: wrap;
-    font-size: 14px;
-    text-align: start;
-    color: #232523;
-    background-color: whitesmoke;
-    border-color: transparent;
-    align-self: flex-end;
+.user-img {
+    max-height: 150px;
+    text-align: center;
+    border-radius: 50%;
 }
 
-.addForm .form-button{
+.updateForm .form-button {
     display: inline-flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -77,7 +120,7 @@ textarea{
     margin: 20px;
     border: none;
     outline: none;
-    background:#4db151;;
+    background: #138D75;
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 5px;
@@ -85,71 +128,51 @@ textarea{
     font-size: 1rem;
 }
 
-.addForm .form-button:hover{
-    background-color: #3e8e41;
+.updateForm .form-button:hover {
+    background-color: #1cc4a2;
     color: white;
 }
 
-/* Popup box BEGIN */
-.overlay {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.7);
-    transition: opacity 500ms;
-    visibility: hidden;
-    opacity: 0;
-}
-.overlay:target {
-    visibility: visible;
-    opacity: 1;
-}
-  
-.popup {
-    margin: 70px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 5px;
-    width: 30%;
-    position: relative;
-    transition: all 5s ease-in-out;
-}
-  
-.popup h2 {
-    margin-top: 0;
-    color: #333;
-    font-family: Tahoma, Arial, sans-serif;
+span {
+    font-size: 14px;
+    padding: 5px;
 }
 
-.content p{
-    padding: 0;
-    margin: 0;
+select {
+    display: flex;
+    flex-wrap: wrap;
+    color: #232523;
+    font-size: 14px;
+    width: 150px;
+    padding: 5px;
+    border: none;
+    background-color: whitesmoke;
+    min-height: 25px;
+    min-width: 300px;
 }
 
-.popup-pic{
-    margin:0 12em 1em;
-    text-align: center;
-    height: 70px;
-    width:70px;
-} 
-
-.popup .close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    transition: all 200ms;
-    font-size: 30px;
-    font-weight: bold;
-    text-decoration: none;
-    color: #333;
-}
-.popup .close:hover {
-    color: #06D85F;
-}
-.popup .content {
-    max-height: 30%;
-    overflow: auto;
+select option {
+    color: black;
+    padding: 5px;
+    background-color: whitesmoke;
 }
 
+select option:hover {
+    background-color: rgb(206, 203, 212);
+}
+
+.row a {
+    color: #138D75;
+    font-size: 18px;
+    margin-top: 10%;
+}
+
+
+/* Target Internet Explorer 9 to undo the custom arrow */
+
+@media screen and (min-width:0\0) {
+    select {
+        background: none\9;
+        padding: 5px\9;
+    }
+}

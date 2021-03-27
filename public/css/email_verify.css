@@ -110,12 +110,12 @@ body{
   }
   .reset input[type="reset" i]:hover
   {
-      background-color: #3e8e41;
+      background-color: #1cc4a2;
       color: white;
   }
   .reset input[type="submit" i]:hover
   {
-      background-color: #3e8e41;
+      background-color: #1cc4a2;
       color: white;
   }
   .anchor{

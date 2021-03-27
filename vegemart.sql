@@ -3,9 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+<<<<<<< HEAD
 -- Generation Time: Mar 25, 2021 at 08:25 PM
+=======
+-- Generation Time: Mar 26, 2021 at 06:21 PM
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 -- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.9
+-- PHP Version: 7.3.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,6 +33,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admin` (
   `adminID` int(11) NOT NULL,
+  `user_id` int(10) NOT NULL,
   `name` varchar(50) NOT NULL,
   `contactNum` varchar(20) NOT NULL,
   `address1` varchar(50) NOT NULL,
@@ -37,6 +42,7 @@ CREATE TABLE `admin` (
   `profilePic` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+<<<<<<< HEAD
 -- --------------------------------------------------------
 
 --
@@ -48,6 +54,16 @@ CREATE TABLE `advertisements` (
   `productID` int(10) NOT NULL,
   `avdate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+=======
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`adminID`, `user_id`, `name`, `contactNum`, `address1`, `address2`, `city`, `profilePic`) VALUES
+(1, 1, 'admin', '+94712344760', '', 'Main road', 'Colombo', 'admin.jpg'),
+(2, 3, 'Dineshya', '+94712344760', '87', 'Main road', 'Colombo', 'dineshya.jpg'),
+(3, 1477694811, 'Jason', '+94712345678', '38 C', 'Kandy road', 'Colombo', 'jason.jpg');
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 
 -- --------------------------------------------------------
 
@@ -68,6 +84,7 @@ CREATE TABLE `bidding` (
   `bidStatus` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+<<<<<<< HEAD
 --
 -- Dumping data for table `bidding`
 --
@@ -77,6 +94,8 @@ INSERT INTO `bidding` (`bidID`, `sellerID`, `productID`, `quantityID`, `userID`,
 (112, 22, 887607558, 64, 18, 15, 250, '2021-03-26 00:22:54.000000', '2021-03-26 02:22:54.000000', 0),
 (113, 22, 887607558, 63, 18, 10, 100, '2021-03-26 00:33:30.000000', '2021-03-26 02:33:30.000000', 0);
 
+=======
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 -- --------------------------------------------------------
 
 --
@@ -99,7 +118,11 @@ CREATE TABLE `cart` (
 
 CREATE TABLE `client` (
   `id` int(10) NOT NULL,
+<<<<<<< HEAD
   `user_id` int(11) NOT NULL,
+=======
+  `user_id` int(10) NOT NULL,
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
   `fName` varchar(50) NOT NULL,
   `lName` varchar(50) NOT NULL,
   `phoneNum` varchar(12) NOT NULL,
@@ -114,11 +137,18 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`id`, `user_id`, `fName`, `lName`, `phoneNum`, `address1`, `address2`, `city`, `profilePic`) VALUES
+<<<<<<< HEAD
 (6, 17, 'Imashi', 'Dissanayake', '+94715329635', '75/2', 'Bandarawella road', 'Badulla', 'default.png'),
 (7, 18, 'Imashi', 'Dissanayake', '+94715329635', '75/2', 'Bandarawella road', 'Badulla', 'default.png'),
 (8, 19, 'Imashi', 'Dissanayake', '+94715329635', '75/2', 'Bandarawella road', 'Badulla', 'default.png'),
 (10, 21, 'Imashi', 'Dissanayake', '+94715329635', '75/2', 'Bandarawella road', 'Badulla', 'default.png'),
 (11, 22, 'Anushka', 'Vithanage', '+10715279016', 'Pan-Philippine Hwy c', 'Bandarawella road', 'Badulla', 'default.png');
+=======
+(8, 19, 'Imashi', 'Dissanayake', '+94715329635', '75/2', 'Bandarawella road', 'Badulla', 'default.png'),
+(10, 0, 'Imashi', 'Dissanayake', '+94715329635', '75/2', 'Bandarawella road', 'Badulla', 'default.png'),
+(11, 22, 'Anushka', 'Vithanage', '+10715279016', 'Pan-Philippine Hwy c', 'Bandarawella road', 'Badulla', 'default.png'),
+(16, 5, 'Nimal', 'Perera', '+94776589300', '65,', 'Colombo road', 'Pilimathalawa', 'nimal.jpg');
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 
 -- --------------------------------------------------------
 
@@ -128,7 +158,11 @@ INSERT INTO `client` (`id`, `user_id`, `fName`, `lName`, `phoneNum`, `address1`,
 
 CREATE TABLE `deliverer` (
   `id` int(11) NOT NULL,
+<<<<<<< HEAD
   `delivererID` int(10) NOT NULL,
+=======
+  `user_id` int(10) NOT NULL,
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
   `fName` varchar(20) NOT NULL,
   `lName` varchar(20) NOT NULL,
   `phoneNum` varchar(10) NOT NULL,
@@ -144,9 +178,14 @@ CREATE TABLE `deliverer` (
 -- Dumping data for table `deliverer`
 --
 
+<<<<<<< HEAD
 INSERT INTO `deliverer` (`id`, `delivererID`, `fName`, `lName`, `phoneNum`, `vehicle`, `vehicleNo`, `address1`, `address2`, `city`, `profilePic`) VALUES
 (1, 1477694803, 'Imashi', 'Dissanayake', '+947153296', 'bike', 'WP KC5123', '75/2', 'Bandarawella road', 'Badulla', 'default.png'),
 (2, 1477694803, 'Anushka', 'Darshana', '0564612', 'Bike', 'KC 5176', '75', '32', 'Badulla', '');
+=======
+INSERT INTO `deliverer` (`id`, `user_id`, `fName`, `lName`, `phoneNum`, `vehicle`, `vehicleNo`, `address1`, `address2`, `city`, `profilePic`) VALUES
+(2, 1477694810, 'Amal', 'Silva', '+947775238', 'bike', 'WP HV-9834', '60 A', 'Kandy road', 'Peradeniya', 'amal1.jpg');
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 
 -- --------------------------------------------------------
 
@@ -162,6 +201,7 @@ CREATE TABLE `deliveries` (
   `pickupStatus` tinyint(1) NOT NULL,
   `deliveryStatus` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+<<<<<<< HEAD
 
 --
 -- Dumping data for table `deliveries`
@@ -169,6 +209,8 @@ CREATE TABLE `deliveries` (
 
 INSERT INTO `deliveries` (`deliveryID`, `buyerID`, `sellerID`, `acceptStatus`, `pickupStatus`, `deliveryStatus`) VALUES
 (1, 18, 22, 0, 0, 0);
+=======
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 
 -- --------------------------------------------------------
 
@@ -186,6 +228,7 @@ CREATE TABLE `forum_posts` (
   `post_status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+<<<<<<< HEAD
 --
 -- Dumping data for table `forum_posts`
 --
@@ -196,6 +239,8 @@ INSERT INTO `forum_posts` (`post_id`, `topic_id`, `post_text`, `post_create_time
 (41, 26, 'you are working', '2021-03-24 04:39:29.000000', 17, 1, 1),
 (42, 2, 'alerts work or?', '2021-03-24 15:59:06.000000', 22, 0, 0);
 
+=======
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 -- --------------------------------------------------------
 
 --
@@ -210,6 +255,7 @@ CREATE TABLE `forum_topics` (
   `topic_status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+<<<<<<< HEAD
 --
 -- Dumping data for table `forum_topics`
 --
@@ -219,21 +265,23 @@ INSERT INTO `forum_topics` (`topic_id`, `topic_title`, `topic_create_time`, `top
 (25, 'fgfdg', '2021-03-24 04:35:50.000000', 17, 1),
 (26, 'Farming in Sri Lanka', '2021-03-24 04:39:29.000000', 17, 1);
 
+=======
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 -- --------------------------------------------------------
 
 --
--- Table structure for table `logs`
+-- Table structure for table `orders`
 --
 
-CREATE TABLE `logs` (
-  `logID` int(20) NOT NULL,
-  `userID` int(20) NOT NULL,
-  `userType` varchar(20) NOT NULL,
-  `active_status` int(2) NOT NULL,
-  `login_status` int(2) NOT NULL,
-  `date_time` datetime NOT NULL
+CREATE TABLE `orders` (
+  `orderID` int(10) NOT NULL,
+  `buyerID` int(10) NOT NULL,
+  `sellerID` int(10) NOT NULL,
+  `paymentStatus` tinyint(1) NOT NULL,
+  `delivery` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+<<<<<<< HEAD
 --
 -- Dumping data for table `logs`
 --
@@ -295,6 +343,8 @@ INSERT INTO `orders` (`orderID`, `buyerID`, `sellerID`, `paymentStatus`, `delive
 (4, 17, 22, 1, 1),
 (5, 17, 22, 1, 1);
 
+=======
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 -- --------------------------------------------------------
 
 --
@@ -324,8 +374,16 @@ INSERT INTO `products` (`productID`, `sellerID`, `name`, `imageName`, `address1`
 (887607554, 22, 'Beans', 'KzyH8w_WANaUXwcympIyDGKuvfhg6RzOxwhhar3k2Ug.png', '75/2', 'Bandarawella road', 'Badulla', '', '0000-00-00', '00:00:00', '2021-03-24 14:08:44.000000', 0),
 (887607555, 22, 'Beans', 'Registration.jpeg', '101/3', 'Kandy road', 'Kandy', '', '0000-00-00', '00:00:00', '2021-03-24 14:17:57.000000', 0),
 (887607556, 22, 'Beans', 'game-of-thrones-dragon-eyes-season-8-uhdpaper.com-4K-64.jpg', '35/2', 'galle road', 'Galle', '', '0000-00-00', '00:00:00', '2021-03-24 14:21:33.000000', 0),
+<<<<<<< HEAD
 (887607557, 22, 'Beans', 'cq5dam.web_.1200.675-1200x640.jpeg', 'Pan-Philippine Hwy c', 'Bandarawella road', 'Badulla', '', '0000-00-00', '00:00:00', '2021-03-24 19:07:35.000000', 1),
 (887607558, 22, 'Beans', 'game-of-thrones-dragon-eyes-season-8-uhdpaper.com-4K-64.jpg', 'Pan-Philippine Hwy c', 'Bandarawella road', 'Badulla', '', '0000-00-00', '00:00:00', '2021-03-24 19:21:56.000000', 1);
+=======
+(887607557, 22, 'Beans', 'beans.png', 'Pan-Philippine Hwy c', 'Bandarawella road', 'Badulla', '', '0000-00-00', '00:00:00', '2021-03-24 19:07:35.000000', 0),
+(887607558, 22, 'Beans', 'beetroot.jpg', 'Pan-Philippine Hwy c', 'Bandarawella road', 'Badulla', '', '0000-00-00', '00:00:00', '2021-03-24 19:21:56.000000', 0),
+(887607559, 22, 'Beans', 'beans.png', 'gfnbgf', 'ghfah', 'htha', 'ergerg', '2021-03-23', '00:00:00', '2021-03-24 19:55:45.000000', 1),
+(887607560, 22, 'Carrot', 'carrots.jpg', 'fgfetg', 'trhgre', 'rthgt', 'thrt', '2021-03-31', '00:00:00', '2021-03-24 20:05:15.000000', 0),
+(887607561, 22, 'Broccoli', 'broccoli.jpg', 'gdhzdg', 'bhdbh', 'fbhdf', 'ghbdg', '2021-03-10', '00:00:00', '2021-03-24 20:11:04.000000', 1);
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 
 -- --------------------------------------------------------
 
@@ -351,7 +409,17 @@ INSERT INTO `quantitysets` (`quantityID`, `productID`, `quantity`, `minPrice`) V
 (61, 887607557, 20, 30),
 (62, 887607557, 20, 30),
 (63, 887607558, 10, 30),
+<<<<<<< HEAD
 (64, 887607558, 15, 210);
+=======
+(64, 887607558, 15, 210),
+(77, 887607559, 30, 540),
+(78, 887607559, 45, 670),
+(79, 887607560, 50, 50),
+(80, 887607560, 60, 60),
+(81, 887607561, 80, 80),
+(82, 887607561, 90, 90);
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 
 -- --------------------------------------------------------
 
@@ -384,7 +452,13 @@ CREATE TABLE `tokens` (
 --
 
 INSERT INTO `tokens` (`id`, `email`, `token`) VALUES
+<<<<<<< HEAD
 (37, 'anushka.darshana01@gmail.com', '1c3f7c7bb26a607e0c0bb052589941ee6051a3397690f');
+=======
+(37, 'anushka.darshana01@gmail.com', '1c3f7c7bb26a607e0c0bb052589941ee6051a3397690f'),
+(40, 'imashi921a@gmail.com', '04238f4c8e0f107d83e8501c91db9100605da5f179875'),
+(41, 'imashi921a@gmail.com', 'c3ac8c7939ecf8f7bcc85f89d04bbf6d605dcd22b4915');
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 
 -- --------------------------------------------------------
 
@@ -396,6 +470,7 @@ CREATE TABLE `users` (
   `id` int(10) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(60) NOT NULL,
+  `salt` varchar(60) NOT NULL,
   `userType` varchar(50) NOT NULL,
   `active_status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -404,6 +479,7 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
+<<<<<<< HEAD
 INSERT INTO `users` (`id`, `email`, `password`, `userType`, `active_status`) VALUES
 (2, 'admin@gmail.com', '2d44afcd2d9f0c2985ab86ec9b870b16', 'admin', 1),
 (17, 'imashi@gmail.com', '2d44afcd2d9f0c2985ab86ec9b870b16', 'user', 1),
@@ -413,6 +489,17 @@ INSERT INTO `users` (`id`, `email`, `password`, `userType`, `active_status`) VAL
 (22, 'anushka.darshana01@gmail.com', '2d44afcd2d9f0c2985ab86ec9b870b16', 'seller', 1),
 (1477694802, 'deliverer@gmail.com', '2d44afcd2d9f0c2985ab86ec9b870b16', 'deliverer', 1),
 (1477694803, 'del@gmail.com', '2d44afcd2d9f0c2985ab86ec9b870b16', 'deliverer', 1);
+=======
+INSERT INTO `users` (`id`, `email`, `password`, `salt`, `userType`, `active_status`) VALUES
+(0, 'vegemartucsc@gmail.com', '7c1189d877d6154a0366a2d2d4793826', 'd829e4018cdf98871a0f056450515123', 'admin', 1),
+(1, 'admin@gmail.com', '534c8ec2e562e32ec42088c853aebeb3', '540ff499c99ec2f2c0076832df8235c9', 'admin', 1),
+(3, 'dineshya@gmail.com', '826f40e114d3283e71766cab07cc2e97', '429cf1eda35b68d74b2b7b0eb8b1821c', 'coadmin', 1),
+(5, 'nimal@gmail.com', 'b1d9e4baf760f2e383d44ca539b0d06c', '228595dc765d652f77f924fe1a525b1f', 'seller', 1),
+(19, 'imashi921a@gmail.com', 'a906e43dd7d1f9609a5b92b33e920536', 'cb08eca56a228f609db6580d4ed68232', 'user', 1),
+(22, 'anushka.darshana01@gmail.com', '9c60ab62c1474127352fdefa48678726', '82cf285fd6c4f5f76822185c343db4a3', 'seller', 1),
+(1477694810, 'amal@gmail.com', '1770c87e99a811cc785e2b4d89b337ce', '6003e31727211089532a78587ad59373', 'deliverer', 1),
+(1477694811, 'jason@gmail.com', 'eea0d32a19c478bea3140360cc1150c5', '7114187f525cf74cfc572c0df0d81fed', 'coadmin', 0);
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 
 --
 -- Indexes for dumped tables
@@ -422,6 +509,7 @@ INSERT INTO `users` (`id`, `email`, `password`, `userType`, `active_status`) VAL
 -- Indexes for table `admin`
 --
 ALTER TABLE `admin`
+<<<<<<< HEAD
   ADD PRIMARY KEY (`adminID`);
 
 --
@@ -430,6 +518,10 @@ ALTER TABLE `admin`
 ALTER TABLE `advertisements`
   ADD PRIMARY KEY (`adID`),
   ADD KEY `productID` (`productID`);
+=======
+  ADD PRIMARY KEY (`adminID`),
+  ADD KEY `user_id` (`user_id`);
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 
 --
 -- Indexes for table `bidding`
@@ -438,8 +530,12 @@ ALTER TABLE `bidding`
   ADD PRIMARY KEY (`bidID`),
   ADD KEY `userID` (`userID`),
   ADD KEY `productID` (`productID`),
+<<<<<<< HEAD
   ADD KEY `bidding_ibfk_3` (`sellerID`),
   ADD KEY `quantityID` (`quantityID`);
+=======
+  ADD KEY `bidding_ibfk_3` (`sellerID`);
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 
 --
 -- Indexes for table `cart`
@@ -463,7 +559,11 @@ ALTER TABLE `client`
 --
 ALTER TABLE `deliverer`
   ADD PRIMARY KEY (`id`),
+<<<<<<< HEAD
   ADD KEY `delivererID` (`delivererID`);
+=======
+  ADD KEY `delivererID` (`user_id`);
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 
 --
 -- Indexes for table `deliveries`
@@ -489,8 +589,9 @@ ALTER TABLE `forum_topics`
   ADD KEY `topic_owner` (`topic_owner`);
 
 --
--- Indexes for table `logs`
+-- Indexes for table `orders`
 --
+<<<<<<< HEAD
 ALTER TABLE `logs`
   ADD PRIMARY KEY (`logID`),
   ADD KEY `userID` (`userID`);
@@ -498,6 +599,8 @@ ALTER TABLE `logs`
 --
 -- Indexes for table `orders`
 --
+=======
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`orderID`),
   ADD KEY `orders_ibfk_1` (`buyerID`),
@@ -545,7 +648,11 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bidding`
 --
 ALTER TABLE `bidding`
+<<<<<<< HEAD
   MODIFY `bidID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+=======
+  MODIFY `bidID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 
 --
 -- AUTO_INCREMENT for table `cart`
@@ -557,7 +664,11 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
+<<<<<<< HEAD
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+=======
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 
 --
 -- AUTO_INCREMENT for table `deliverer`
@@ -575,23 +686,34 @@ ALTER TABLE `deliveries`
 -- AUTO_INCREMENT for table `forum_posts`
 --
 ALTER TABLE `forum_posts`
+<<<<<<< HEAD
   MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+=======
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 
 --
 -- AUTO_INCREMENT for table `forum_topics`
 --
 ALTER TABLE `forum_topics`
+<<<<<<< HEAD
   MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+=======
+  MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 
 --
--- AUTO_INCREMENT for table `logs`
+-- AUTO_INCREMENT for table `orders`
 --
+<<<<<<< HEAD
 ALTER TABLE `logs`
   MODIFY `logID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
+=======
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 ALTER TABLE `orders`
   MODIFY `orderID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
@@ -599,13 +721,21 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
+<<<<<<< HEAD
   MODIFY `productID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=887607559;
+=======
+  MODIFY `productID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=887607562;
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 
 --
 -- AUTO_INCREMENT for table `quantitysets`
 --
 ALTER TABLE `quantitysets`
+<<<<<<< HEAD
   MODIFY `quantityID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+=======
+  MODIFY `quantityID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 
 --
 -- AUTO_INCREMENT for table `reviews`
@@ -617,13 +747,21 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `tokens`
 --
 ALTER TABLE `tokens`
+<<<<<<< HEAD
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+=======
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
+<<<<<<< HEAD
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1477694804;
+=======
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1477694812;
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 
 --
 -- Constraints for dumped tables
@@ -633,6 +771,7 @@ ALTER TABLE `users`
 -- Constraints for table `admin`
 --
 ALTER TABLE `admin`
+<<<<<<< HEAD
   ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`adminID`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -640,6 +779,9 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `advertisements`
   ADD CONSTRAINT `advertisements_ibfk_1` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`) ON DELETE CASCADE ON UPDATE CASCADE;
+=======
+  ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 
 --
 -- Constraints for table `bidding`
@@ -647,8 +789,12 @@ ALTER TABLE `advertisements`
 ALTER TABLE `bidding`
   ADD CONSTRAINT `bidding_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `bidding_ibfk_2` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`) ON DELETE CASCADE ON UPDATE CASCADE,
+<<<<<<< HEAD
   ADD CONSTRAINT `bidding_ibfk_3` FOREIGN KEY (`sellerID`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `bidding_ibfk_4` FOREIGN KEY (`quantityID`) REFERENCES `quantitysets` (`quantityID`);
+=======
+  ADD CONSTRAINT `bidding_ibfk_3` FOREIGN KEY (`sellerID`) REFERENCES `users` (`id`);
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 
 --
 -- Constraints for table `cart`
@@ -669,7 +815,11 @@ ALTER TABLE `client`
 -- Constraints for table `deliverer`
 --
 ALTER TABLE `deliverer`
+<<<<<<< HEAD
   ADD CONSTRAINT `deliverer_ibfk_1` FOREIGN KEY (`delivererID`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+=======
+  ADD CONSTRAINT `deliverer_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 
 --
 -- Constraints for table `deliveries`
@@ -692,12 +842,15 @@ ALTER TABLE `forum_topics`
   ADD CONSTRAINT `forum_topics_ibfk_1` FOREIGN KEY (`topic_owner`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+<<<<<<< HEAD
 -- Constraints for table `logs`
 --
 ALTER TABLE `logs`
   ADD CONSTRAINT `logs_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+=======
+>>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`

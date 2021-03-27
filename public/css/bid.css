@@ -1,60 +1,67 @@
 @import url(./style.css);
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css");
-
-h1,h2,h3,h4,h5,h6,p,span,i {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+i {
     flex-wrap: wrap;
 }
 
-h4{
-    text-align:left; 
-    padding:0.2em 1em;
+h4 {
+    text-align: left;
+    padding: 0.2em 1em;
     margin-top: 1em;
     margin-left: 1em;
 }
+
 table {
     width: 100%;
-  }
-
-th{
-    text-align: center;
-}
- th
-
-td{
-    text-align: center;
-    vertical-align: top;
-    padding:0 0.1em;
 }
 
-td h3{
+th {
+    text-align: center;
+}
+
+th td {
+    text-align: center;
+    vertical-align: top !important;
+    padding: 0 0.1em;
+}
+
+td h3 {
     margin: auto;
     padding: 0;
 }
 
-.heading{
+.heading {
     flex: 1;
     background-color: rgba(19, 141, 117, 0.1);
     padding: 0.1rem;
 }
 
 #myTable tr:nth-child(even) {
-    background-color:rgba(19, 141, 117, 0.15);
-
+    background-color: rgba(19, 141, 117, 0.15);
 }
+
 #myTable tr:nth-child(odd) {
-    background-color:rgba( 234, 250, 241, 0.6);
+    background-color: rgba( 234, 250, 241, 0.6);
 }
 
-#title{
-    text-align:left; 
-    padding: 0 1.2em; 
-    font-family:Candara; 
+#title {
+    text-align: left;
+    padding: 0 1.2em;
+    font-family: Candara;
     margin: auto;
     font-size: 27px;
     color: black;
 }
 
-.sub{
+.sub {
     font-family: Candara;
     font-size: 1.2em;
     color: #138D75;
@@ -74,16 +81,16 @@ td h3{
     text-align: left;
 }
 
-#bid-section{
+#bid-section {
     background-color: rgba(19, 141, 117, 0.1);
 }
 
-#seller-info h3{
+#seller-info h3 {
     margin: 0.1em 0;
     padding-bottom: 2px;
 }
 
-.seller-info a{
+.seller-info a {
     font-size: 10px;
     text-align: left;
 }
@@ -95,7 +102,9 @@ td h3{
     text-align: center;
 }
 
-.form-button,button,input[type=submit] {
+.form-button,
+button,
+input[type=submit] {
     background-color: #138D75;
     border-color: transparent;
     color: #fff;
@@ -112,12 +121,13 @@ td h3{
     border-radius: 5px;
 }
 
-.form-button:hover,button:hover{
+.form-button:hover,
+button:hover {
     background-color: #1cc4a2;
     color: white;
 }
 
-.input-box{
+.input-box {
     font-size: 15px;
     padding: 0.5em;
     margin: 5px 10px;
@@ -128,13 +138,17 @@ td h3{
     border-radius: 5px;
 }
 
-.input-box::placeholder{
+.input-box::placeholder {
     font-size: 16px;
     color: rgba(0, 0, 0, 0.75);
 }
 
+
 /* Bid win popup */
+
+
 /* Popup box BEGIN */
+
 .overlay {
     position: fixed;
     top: 0;
@@ -146,11 +160,12 @@ td h3{
     visibility: hidden;
     opacity: 0;
 }
+
 .overlay:target {
     visibility: visible;
     opacity: 1;
 }
-  
+
 .popup {
     margin: 70px auto;
     padding: 20px;
@@ -160,24 +175,24 @@ td h3{
     position: relative;
     transition: all 5s ease-in-out;
 }
-  
+
 .popup h2 {
     margin-top: 0;
     color: #333;
     font-family: Tahoma, Arial, sans-serif;
 }
 
-.content p{
+.content p {
     padding: 0;
     margin: 0;
 }
 
-.popup-pic{
-    margin:0 12em 1em;
+.popup-pic {
+    margin: 0 12em 1em;
     text-align: center;
     height: 70px;
-    width:70px;
-} 
+    width: 70px;
+}
 
 .popup .close {
     position: absolute;
@@ -189,23 +204,28 @@ td h3{
     text-decoration: none;
     color: #333;
 }
+
 .popup .close:hover {
     color: #06D85F;
 }
+
 .popup .content {
     max-height: 30%;
     overflow: auto;
 }
-  
-@media screen and (max-width: 700px){
-    .box{
-      width: 70%;
+
+@media screen and (max-width: 700px) {
+    .box {
+        width: 70%;
     }
-    .popup{
-      width: 70%;
+    .popup {
+        width: 70%;
     }
 }
+
+
 /* Popup box END */
+
 
 /* not used
 span{
