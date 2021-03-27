@@ -14,16 +14,21 @@
         $productID = $rowWinBid["productID"];
 
         $items = "INSERT INTO `orders` (`userID`,`sellerID`,`bidID`,`productID`,`quantityID`) VALUES ('" . $userID . "','" . $sellerID . "','" . $bidID . "','" . $productID . "','" . $quantityID . "');";
-        mysqli_query($con, $items);        
-
-
+        mysqli_query($con, $items);
+        
+        $resultQuery= "UPDATE `bidding` SET `result`=1 WHERE `bidID`='$bidID' ";
+        if ($con->query($resultQuery) === true) {
+            echo "Record updated successfully";           
+        }
+        else{
+            echo "Error updating record: " . $con->error;
+        }
         //bid has been finished
         $bidStatus= "UPDATE `bidding` SET `bidStatus`=1 WHERE `quantityID`='$quantityID' ";
         if ($con->query($bidStatus) === true) {
             //quantityset should be removed
             $quantityStatus= "UPDATE `quantitysets` SET `quantitySetStatus`=1 WHERE `quantityID`='$quantityID' ";
-            if ($con->query($quantityStatus) === true) {
-
+            if ($con->query($quantityStatus) === true) {                
                 //checkwhether quantitysets remaining for the product
                 $quantitySetQuery = "SELECT * FROM `quantitysets` WHERE productID='".$productID."' AND quantitySetStatus=0";
                 $resultQuantitySet = mysqli_query($con, $quantitySetQuery);
