@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2021 at 09:43 AM
+-- Generation Time: Mar 27, 2021 at 09:52 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -58,13 +58,6 @@ CREATE TABLE `bidding` (
   `notification` tinyint(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `bidding`
---
-
-INSERT INTO `bidding` (`bidID`, `sellerID`, `productID`, `quantityID`, `userID`, `bidQuantity`, `bidPrice`, `startTime`, `endTime`, `bidStatus`, `notification`) VALUES
-(137, 1477694804, 887607566, 72, 1477694805, 20, 125, '2021-03-27 13:29:50.000000', '2021-03-27 13:34:50.000000', 1, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -80,13 +73,6 @@ CREATE TABLE `cart` (
   `quantityID` int(10) NOT NULL,
   `cartStatus` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`cartItemID`, `userID`, `sellerID`, `bidID`, `productID`, `quantityID`, `cartStatus`) VALUES
-(45, 1477694805, 1477694804, 137, 887607566, 72, 0);
 
 -- --------------------------------------------------------
 
@@ -105,14 +91,6 @@ CREATE TABLE `client` (
   `city` text NOT NULL,
   `profilePic` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `client`
---
-
-INSERT INTO `client` (`id`, `user_id`, `fName`, `lName`, `phoneNum`, `address1`, `address2`, `city`, `profilePic`) VALUES
-(12, 1477694804, 'Anushka', 'Vithanage', '+10715279016', 'Pan-Philippine Hwy c', 'Bandarawella road', 'Badulla', 'default.png'),
-(13, 1477694805, 'Imashi', 'Dissanayake', '+94715329635', '75/2', 'Bandarawella road', 'Badulla', 'default.png');
 
 -- --------------------------------------------------------
 
@@ -182,21 +160,6 @@ CREATE TABLE `forum_topics` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `logs`
---
-
-CREATE TABLE `logs` (
-  `logID` int(20) NOT NULL,
-  `userID` int(20) NOT NULL,
-  `userType` varchar(20) NOT NULL,
-  `active_status` int(2) NOT NULL,
-  `login_status` int(2) NOT NULL,
-  `date_time` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `orders`
 --
 
@@ -229,14 +192,6 @@ CREATE TABLE `products` (
   `notification` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`productID`, `sellerID`, `name`, `imageName`, `address1`, `address2`, `city`, `description`, `expireDate`, `availability`, `notification`) VALUES
-(887607565, 1477694804, 'Beans', 'cq5dam.web_.1200.675-1200x640.jpeg', 'Pan-Philippine Hwy c', 'Bandarawella road', 'Badulla', '', '2021-03-27 13:27:32.000000', 0, 1),
-(887607566, 1477694804, 'Beans', 'cq5dam.web_.1200.675-1200x640.jpeg', '101/2', 'Kandy road', 'Kandy', '', '2021-04-01 13:27:45.000000', 1, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -250,14 +205,6 @@ CREATE TABLE `quantitysets` (
   `minPrice` int(10) NOT NULL,
   `quantitySetStatus` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `quantitysets`
---
-
-INSERT INTO `quantitysets` (`quantityID`, `productID`, `quantity`, `minPrice`, `quantitySetStatus`) VALUES
-(71, 887607565, 10, 100, 0),
-(72, 887607566, 20, 100, 1);
 
 -- --------------------------------------------------------
 
@@ -285,13 +232,6 @@ CREATE TABLE `tokens` (
   `token` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tokens`
---
-
-INSERT INTO `tokens` (`id`, `email`, `token`) VALUES
-(37, 'anushka.darshana01@gmail.com', '1c3f7c7bb26a607e0c0bb052589941ee6051a3397690f');
-
 -- --------------------------------------------------------
 
 --
@@ -306,14 +246,6 @@ CREATE TABLE `users` (
   `userType` varchar(50) NOT NULL,
   `active_status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `email`, `password`, `salt`, `userType`, `active_status`) VALUES
-(1477694804, 'anushka.darshana01@gmail.com', '3a9f62300af827a37b62ca652b387ddf', '074f1223163a20fb89cb5b928ad1a48d', 'seller', 1),
-(1477694805, 'imashi@gmail.com', '8716c46cabe2c8e936d235b5989a6608', 'a1962a567817a9ccdf33ee892e2414e4', 'user', 1);
 
 --
 -- Indexes for dumped tables
@@ -385,13 +317,6 @@ ALTER TABLE `forum_topics`
   ADD KEY `topic_owner` (`topic_owner`);
 
 --
--- Indexes for table `logs`
---
-ALTER TABLE `logs`
-  ADD PRIMARY KEY (`logID`),
-  ADD KEY `userID` (`userID`);
-
---
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
@@ -442,85 +367,79 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bidding`
 --
 ALTER TABLE `bidding`
-  MODIFY `bidID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+  MODIFY `bidID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cartItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `cartItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `deliverer`
 --
 ALTER TABLE `deliverer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `deliveries`
 --
 ALTER TABLE `deliveries`
-  MODIFY `deliveryID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `deliveryID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `forum_posts`
 --
 ALTER TABLE `forum_posts`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `forum_topics`
 --
 ALTER TABLE `forum_topics`
-  MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
-
---
--- AUTO_INCREMENT for table `logs`
---
-ALTER TABLE `logs`
-  MODIFY `logID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+  MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `orderID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=887607567;
+  MODIFY `productID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `quantitysets`
 --
 ALTER TABLE `quantitysets`
-  MODIFY `quantityID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `quantityID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `reviewID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6546557;
+  MODIFY `reviewID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `tokens`
 --
 ALTER TABLE `tokens`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1477694806;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- Constraints for dumped tables
@@ -582,12 +501,6 @@ ALTER TABLE `forum_posts`
 --
 ALTER TABLE `forum_topics`
   ADD CONSTRAINT `forum_topics_ibfk_1` FOREIGN KEY (`topic_owner`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `logs`
---
-ALTER TABLE `logs`
-  ADD CONSTRAINT `logs_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `orders`
