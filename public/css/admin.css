@@ -126,6 +126,28 @@ legend {
     color: white;
 }
 
+.tab{
+    align-items: center;
+}
+
+#tab-button{
+    border: none;
+    border-color: rgb(149, 192, 169);
+    padding: 15px 32px;
+    text-align: center;
+    font-family:Candara; 
+    text-decoration: none;
+    margin: auto;
+    display: inline-block;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#tab-button:hover{
+    border-color: rgb(149, 192, 169);
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24);
+}
+
 button > i{
     color: white !important
 }

@@ -4,10 +4,14 @@
 --
 -- Host: 127.0.0.1
 <<<<<<< HEAD
+<<<<<<< HEAD
 -- Generation Time: Mar 25, 2021 at 08:25 PM
 =======
 -- Generation Time: Mar 26, 2021 at 06:21 PM
 >>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
+=======
+-- Generation Time: Mar 27, 2021 at 12:35 PM
+>>>>>>> 131ce5c38239701995c368adb0f4362ac8cd267d
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.3.22
 
@@ -147,8 +151,14 @@ INSERT INTO `client` (`id`, `user_id`, `fName`, `lName`, `phoneNum`, `address1`,
 (8, 19, 'Imashi', 'Dissanayake', '+94715329635', '75/2', 'Bandarawella road', 'Badulla', 'default.png'),
 (10, 0, 'Imashi', 'Dissanayake', '+94715329635', '75/2', 'Bandarawella road', 'Badulla', 'default.png'),
 (11, 22, 'Anushka', 'Vithanage', '+10715279016', 'Pan-Philippine Hwy c', 'Bandarawella road', 'Badulla', 'default.png'),
+<<<<<<< HEAD
 (16, 5, 'Nimal', 'Perera', '+94776589300', '65,', 'Colombo road', 'Pilimathalawa', 'nimal.jpg');
 >>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
+=======
+(16, 5, 'Nimal', 'Perera', '+94776589300', '65,', 'Colombo road', 'Pilimathalawa', 'nimal.jpg'),
+(17, 1477694812, 'Anne', 'Holmes', '+94714462899', '22/B', 'Baker St', 'London', 'ann.jpg'),
+(18, 1477694813, 'gfdg', 'fdvdf', '+94712345678', 'fdg', 'fdg', 'fgdf', 'default.png');
+>>>>>>> 131ce5c38239701995c368adb0f4362ac8cd267d
 
 -- --------------------------------------------------------
 
@@ -229,11 +239,15 @@ CREATE TABLE `forum_posts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 131ce5c38239701995c368adb0f4362ac8cd267d
 --
 -- Dumping data for table `forum_posts`
 --
 
 INSERT INTO `forum_posts` (`post_id`, `topic_id`, `post_text`, `post_create_time`, `post_owner`, `review_status`, `post_status`) VALUES
+<<<<<<< HEAD
 (3, 2, 'Vegetable prices usually ease as supplies with the Maha and Yala season harvest come in. In Sri Lanka vegetables are not freely imported and exported, except for potatoes and onions, which may lead to unusual price spikes, until supplies improve analysts say.', '2021-03-18 21:44:04.000000', 22, 1, 1),
 (40, 25, 'rgdfgdf', '2021-03-24 04:35:50.000000', 17, 1, 1),
 (41, 26, 'you are working', '2021-03-24 04:39:29.000000', 17, 1, 1),
@@ -241,6 +255,10 @@ INSERT INTO `forum_posts` (`post_id`, `topic_id`, `post_text`, `post_create_time
 
 =======
 >>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
+=======
+(1, 1, 'dGrfsgfgfe', '2021-03-24 00:50:54.000000', 19, 1, 0);
+
+>>>>>>> 131ce5c38239701995c368adb0f4362ac8cd267d
 -- --------------------------------------------------------
 
 --
@@ -256,17 +274,48 @@ CREATE TABLE `forum_topics` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 131ce5c38239701995c368adb0f4362ac8cd267d
 --
 -- Dumping data for table `forum_topics`
 --
 
 INSERT INTO `forum_topics` (`topic_id`, `topic_title`, `topic_create_time`, `topic_owner`, `topic_status`) VALUES
+<<<<<<< HEAD
 (2, 'Middleman traders', '2021-03-05 21:42:46.000000', 17, 1),
 (25, 'fgfdg', '2021-03-24 04:35:50.000000', 17, 1),
 (26, 'Farming in Sri Lanka', '2021-03-24 04:39:29.000000', 17, 1);
 
 =======
 >>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
+=======
+(1, 'nsnfsdnflka', '2021-03-24 00:50:19.000000', 19, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `help_desk`
+--
+
+CREATE TABLE `help_desk` (
+  `complaint_id` int(10) NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `email` text NOT NULL,
+  `date_time` datetime NOT NULL,
+  `issue` varchar(150) NOT NULL,
+  `description` text NOT NULL,
+  `complaint_status` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `help_desk`
+--
+
+INSERT INTO `help_desk` (`complaint_id`, `user_id`, `email`, `date_time`, `issue`, `description`, `complaint_status`) VALUES
+(1, 19, 'imashi921a@gmail.com', '2021-03-17 12:22:22', 'My post is not showing', 'The forum post i published is not showing. ', 0);
+
+>>>>>>> 131ce5c38239701995c368adb0f4362ac8cd267d
 -- --------------------------------------------------------
 
 --
@@ -496,10 +545,14 @@ INSERT INTO `users` (`id`, `email`, `password`, `salt`, `userType`, `active_stat
 (3, 'dineshya@gmail.com', '826f40e114d3283e71766cab07cc2e97', '429cf1eda35b68d74b2b7b0eb8b1821c', 'coadmin', 1),
 (5, 'nimal@gmail.com', 'b1d9e4baf760f2e383d44ca539b0d06c', '228595dc765d652f77f924fe1a525b1f', 'seller', 1),
 (19, 'imashi921a@gmail.com', 'a906e43dd7d1f9609a5b92b33e920536', 'cb08eca56a228f609db6580d4ed68232', 'user', 1),
+<<<<<<< HEAD
 (22, 'anushka.darshana01@gmail.com', '9c60ab62c1474127352fdefa48678726', '82cf285fd6c4f5f76822185c343db4a3', 'seller', 1),
 (1477694810, 'amal@gmail.com', '1770c87e99a811cc785e2b4d89b337ce', '6003e31727211089532a78587ad59373', 'deliverer', 1),
 (1477694811, 'jason@gmail.com', 'eea0d32a19c478bea3140360cc1150c5', '7114187f525cf74cfc572c0df0d81fed', 'coadmin', 0);
 >>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
+=======
+(22, 'anushka.darshana01@gmail.com', '9c60ab62c1474127352fdefa48678726', '82cf285fd6c4f5f76822185c343db4a3', 'seller', 1);
+>>>>>>> 131ce5c38239701995c368adb0f4362ac8cd267d
 
 --
 -- Indexes for dumped tables
@@ -589,6 +642,13 @@ ALTER TABLE `forum_topics`
   ADD KEY `topic_owner` (`topic_owner`);
 
 --
+-- Indexes for table `help_desk`
+--
+ALTER TABLE `help_desk`
+  ADD PRIMARY KEY (`complaint_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `orders`
 --
 <<<<<<< HEAD
@@ -665,10 +725,14 @@ ALTER TABLE `cart`
 --
 ALTER TABLE `client`
 <<<<<<< HEAD
+<<<<<<< HEAD
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 =======
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 >>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
+=======
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+>>>>>>> 131ce5c38239701995c368adb0f4362ac8cd267d
 
 --
 -- AUTO_INCREMENT for table `deliverer`
@@ -701,6 +765,12 @@ ALTER TABLE `forum_topics`
 =======
   MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 >>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
+
+--
+-- AUTO_INCREMENT for table `help_desk`
+--
+ALTER TABLE `help_desk`
+  MODIFY `complaint_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -758,10 +828,14 @@ ALTER TABLE `tokens`
 --
 ALTER TABLE `users`
 <<<<<<< HEAD
+<<<<<<< HEAD
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1477694804;
 =======
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1477694812;
 >>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
+=======
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+>>>>>>> 131ce5c38239701995c368adb0f4362ac8cd267d
 
 --
 -- Constraints for dumped tables
@@ -843,6 +917,7 @@ ALTER TABLE `forum_topics`
 
 --
 <<<<<<< HEAD
+<<<<<<< HEAD
 -- Constraints for table `logs`
 --
 ALTER TABLE `logs`
@@ -851,6 +926,14 @@ ALTER TABLE `logs`
 --
 =======
 >>>>>>> 3d083644f7404503870dac2f2331cfc977c2102f
+=======
+-- Constraints for table `help_desk`
+--
+ALTER TABLE `help_desk`
+  ADD CONSTRAINT `help_desk_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+>>>>>>> 131ce5c38239701995c368adb0f4362ac8cd267d
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
