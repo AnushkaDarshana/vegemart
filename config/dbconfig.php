@@ -1,5 +1,5 @@
 <?php
-    $con = mysqli_connect("127.0.0.1","root","","vegemart");
+    $con = mysqli_connect("127.0.0.1","root","","vegemart2");
           
     if(!$con)
         {

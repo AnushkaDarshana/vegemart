@@ -163,7 +163,7 @@
                             </div>
                             <div class="column is-4 pl-0 has-text-centered">
                             <img src="../images/feedbk.jpg" alt="image" class="image" >
-                                <button class="card-button" onClick="location.href='http://localhost/vegemart/public/admin/helpdesk_admin.php';">Help Desk</button>                        
+                                <button class="card-button" onClick="location.href='http://localhost/vegemart/public/admin/helpdesk_complaints.php';">Help Desk</button>                        
                             </div>
 
                             <div class="column is-2 pl-0 has-text-centered"></div>
