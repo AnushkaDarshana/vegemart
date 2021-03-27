@@ -26,10 +26,6 @@
     <?php include "./includes/nav.php"; ?>  
         <div class="row">
             <div class="columns group mt-0">
-<<<<<<< HEAD
-                <!-- items starts here -->
-=======
->>>>>>> 131ce5c38239701995c368adb0f4362ac8cd267d
                 <div class="column is-1 mt-0 pt-2"></div>
                 <div class="column is-10 mt-0 pt-2">
                     <div class="row pl-2 pr-1 mt-0">
@@ -62,32 +58,62 @@
                         <div class="block item-row has-text-centered mb-0">
                                 <div class="columns group">
                                     <div class="column is-3">
-                                        <img class="item-img" src="http://localhost/vegemart/public/images/products/carrot.jpg">
-                                        </br>
-                                        <h1 style="color:#138D75; font-size:17px; text-align:center; margin:0 0;">Order details</h1>
+                                        <img class="item-img" src="http://localhost/vegemart/public/images/products/carrot.jpg">                                        
                                     </div>
                                     
-                                    <div class="column is-2 mt-2">
+                                    <div class="column is-2 mt-1">
                                         <h3>Carrot</h3>
                                     </div>
-                                    <div class="column is-3 mt-2">
+                                    <div class="column is-3 mt-1">
                                         <h3>550.00</h3>
                                     </div>
-                                    <div class="column is-2 mt-2">
+                                    <div class="column is-2 mt-1">
                                         <h3>10</h3>
                                     </div>
-<<<<<<< HEAD
-                                    <div class="column is-2 pt-2">
+                                    <div class="column is-2">
                                         <button class="button" onClick="location.href='http://localhost/vegemart/public/seller/seller_product_edit.php?id=<?php echo $row['productID']?>';">Order Details</button>               
-=======
-                                    <div class="column is-2 mt-2">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="columns group">
+                                    <div class="column is-3">
+                                        <img class="item-img" src="http://localhost/vegemart/public/images/products/carrot.jpg">                                        
+                                    </div>
+                                    
+                                    <div class="column is-2 mt-1">
+                                        <h3>Carrot</h3>
+                                    </div>
+                                    <div class="column is-3 mt-1">
+                                        <h3>550.00</h3>
+                                    </div>
+                                    <div class="column is-2 mt-1">
                                         <h3>10</h3>
->>>>>>> 131ce5c38239701995c368adb0f4362ac8cd267d
+                                    </div>
+                                    <div class="column is-2">
+                                        <button class="button" onClick="location.href='http://localhost/vegemart/public/seller/seller_product_edit.php?id=<?php echo $row['productID']?>';">Order Details</button>               
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="columns group">
+                                    <div class="column is-3">
+                                        <img class="item-img" src="http://localhost/vegemart/public/images/products/carrot.jpg">                                        
+                                    </div>
+                                    
+                                    <div class="column is-2 mt-1">
+                                        <h3>Carrot</h3>
+                                    </div>
+                                    <div class="column is-3 mt-1">
+                                        <h3>550.00</h3>
+                                    </div>
+                                    <div class="column is-2 mt-1">
+                                        <h3>10</h3>
+                                    </div>
+                                    <div class="column is-2">
+                                        <button class="button" onClick="location.href='http://localhost/vegemart/public/seller/seller_product_edit.php?id=<?php echo $row['productID']?>';">Order Details</button>               
                                     </div>
                                 </div>
                                 <hr>
                             </div>
-<<<<<<< HEAD
                         
                     </div>
                 <!-- items ends here -->
@@ -95,38 +121,6 @@
                 <div class="column is-1 mt-0 pt-2"></div>
                 
 
-=======
-                            <div class="block item-row has-text-centered mb-0" >
-                                <div class="columns group">
-                                    <div class="column is-3">
-                                        <img class="item-img" src="http://localhost/vegemart/public/images/products/Tomato.jpg"><br>
-                                        <h2 style="color:green; font-size:16px; text-align:center; margin:0 0;">Order details</h2>
-                                    </div>
-                                    <div class="column is-2 mt-2">
-                                        <h3>Tomato</h3>
-                                
-                                    </div>
-                                    <div class="column is-3 mt-2">
-                                        <h3>550.00</h3>
-                                    </div>
-                                    <div class="column is-2 mt-2">
-                                        <h3>10</h3>
-                                    </div>  
-                                    <div class="column is-2 mt-2">
-                                        <button onclick= "window.location.href">Order details</button>
-                                    </div>              
-                                </div>
-                                <hr>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    <br><br>
-                    <a id="ab" href="http://localhost/vegemart/public/products.php"><i class="fa fa-hand-o-left pr-1" style="font-size:22px; font-weight:500; color:#3e8e41;"></i>Continue shopping</a>
-                </div>
-
-                <div class="column is-1 mt-0 pt-2"></div>
->>>>>>> 131ce5c38239701995c368adb0f4362ac8cd267d
             </div>
         </div>
         <br>

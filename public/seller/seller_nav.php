@@ -1,13 +1,6 @@
 <?php     
     include ('../../src/session.php');
     include ('../../config/dbconfig.php');
-    if(!isset($_SESSION["loggedInSellerID"]))
-    {
-        echo "<script>
-        alert('You have to login first');
-        window.location.href='../../public/login.php';
-        </script>";
-    }   
 ?>
 <!DOCTYPE html>
 <html lang="en">

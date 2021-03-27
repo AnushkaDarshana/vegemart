@@ -2,9 +2,7 @@
     
     include ('../../config/dbconfig.php');
     include ('../session.php');
-
-    if(isset($productID))
-             
+        
     $target_dir = "../../public/images/products/";
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
@@ -12,7 +10,7 @@
 
     // Check if file already exists
     if (file_exists($target_file)) {
-        echo "Sorry, file already exists.";
+       // echo "Sorry, file already exists.";
         $uploadOk = 0;
     }
               
@@ -20,13 +18,16 @@
     else {
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
             echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+            echo 123;
         } 
         else {
             $message = base64_encode(urlencode("Sorry, there was an error uploading your file."));
             header('Location:../../public/seller/seller_product_add.php?msg=' . $message);
+            echo 456;
             exit();
             }
     }
+    
           
     //Uploading to Database
     if (isset($_POST['submit'])){
@@ -46,7 +47,7 @@
         
               
         $insertProduct = "INSERT INTO `products` (`sellerID`,`name`,`imageName`,`address1`,`address2`,`city`,`description`,`expireDate`) VALUES ('".$sellerID."','".$productName."','".$imageName."','".$address1."','".$address2."','".$city."','".$description."','".$expirationDate."');";
-           // $advertise =  "INSERT INTO `advertisements` (`adID`,`productID`) VALUES ('".$adID."','".$productID."');";      
+             
         if (mysqli_query($con, $insertProduct)) {  
             
             $maxquery = mysqli_query($con,"SELECT MAX(productID) FROM `products`");
