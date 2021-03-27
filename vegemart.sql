@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2021 at 06:21 PM
+-- Generation Time: Mar 27, 2021 at 12:35 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.3.22
 
@@ -104,7 +104,9 @@ INSERT INTO `client` (`id`, `user_id`, `fName`, `lName`, `phoneNum`, `address1`,
 (8, 19, 'Imashi', 'Dissanayake', '+94715329635', '75/2', 'Bandarawella road', 'Badulla', 'default.png'),
 (10, 0, 'Imashi', 'Dissanayake', '+94715329635', '75/2', 'Bandarawella road', 'Badulla', 'default.png'),
 (11, 22, 'Anushka', 'Vithanage', '+10715279016', 'Pan-Philippine Hwy c', 'Bandarawella road', 'Badulla', 'default.png'),
-(16, 5, 'Nimal', 'Perera', '+94776589300', '65,', 'Colombo road', 'Pilimathalawa', 'nimal.jpg');
+(16, 5, 'Nimal', 'Perera', '+94776589300', '65,', 'Colombo road', 'Pilimathalawa', 'nimal.jpg'),
+(17, 1477694812, 'Anne', 'Holmes', '+94714462899', '22/B', 'Baker St', 'London', 'ann.jpg'),
+(18, 1477694813, 'gfdg', 'fdvdf', '+94712345678', 'fdg', 'fdg', 'fgdf', 'default.png');
 
 -- --------------------------------------------------------
 
@@ -164,6 +166,13 @@ CREATE TABLE `forum_posts` (
   `post_status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `forum_posts`
+--
+
+INSERT INTO `forum_posts` (`post_id`, `topic_id`, `post_text`, `post_create_time`, `post_owner`, `review_status`, `post_status`) VALUES
+(1, 1, 'dGrfsgfgfe', '2021-03-24 00:50:54.000000', 19, 1, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -177,6 +186,36 @@ CREATE TABLE `forum_topics` (
   `topic_owner` int(10) NOT NULL,
   `topic_status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `forum_topics`
+--
+
+INSERT INTO `forum_topics` (`topic_id`, `topic_title`, `topic_create_time`, `topic_owner`, `topic_status`) VALUES
+(1, 'nsnfsdnflka', '2021-03-24 00:50:19.000000', 19, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `help_desk`
+--
+
+CREATE TABLE `help_desk` (
+  `complaint_id` int(10) NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `email` text NOT NULL,
+  `date_time` datetime NOT NULL,
+  `issue` varchar(150) NOT NULL,
+  `description` text NOT NULL,
+  `complaint_status` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `help_desk`
+--
+
+INSERT INTO `help_desk` (`complaint_id`, `user_id`, `email`, `date_time`, `issue`, `description`, `complaint_status`) VALUES
+(1, 19, 'imashi921a@gmail.com', '2021-03-17 12:22:22', 'My post is not showing', 'The forum post i published is not showing. ', 0);
 
 -- --------------------------------------------------------
 
@@ -319,9 +358,7 @@ INSERT INTO `users` (`id`, `email`, `password`, `salt`, `userType`, `active_stat
 (3, 'dineshya@gmail.com', '826f40e114d3283e71766cab07cc2e97', '429cf1eda35b68d74b2b7b0eb8b1821c', 'coadmin', 1),
 (5, 'nimal@gmail.com', 'b1d9e4baf760f2e383d44ca539b0d06c', '228595dc765d652f77f924fe1a525b1f', 'seller', 1),
 (19, 'imashi921a@gmail.com', 'a906e43dd7d1f9609a5b92b33e920536', 'cb08eca56a228f609db6580d4ed68232', 'user', 1),
-(22, 'anushka.darshana01@gmail.com', '9c60ab62c1474127352fdefa48678726', '82cf285fd6c4f5f76822185c343db4a3', 'seller', 1),
-(1477694810, 'amal@gmail.com', '1770c87e99a811cc785e2b4d89b337ce', '6003e31727211089532a78587ad59373', 'deliverer', 1),
-(1477694811, 'jason@gmail.com', 'eea0d32a19c478bea3140360cc1150c5', '7114187f525cf74cfc572c0df0d81fed', 'coadmin', 0);
+(22, 'anushka.darshana01@gmail.com', '9c60ab62c1474127352fdefa48678726', '82cf285fd6c4f5f76822185c343db4a3', 'seller', 1);
 
 --
 -- Indexes for dumped tables
@@ -391,6 +428,13 @@ ALTER TABLE `forum_topics`
   ADD KEY `topic_owner` (`topic_owner`);
 
 --
+-- Indexes for table `help_desk`
+--
+ALTER TABLE `help_desk`
+  ADD PRIMARY KEY (`complaint_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
@@ -452,7 +496,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `deliverer`
@@ -477,6 +521,12 @@ ALTER TABLE `forum_posts`
 --
 ALTER TABLE `forum_topics`
   MODIFY `topic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `help_desk`
+--
+ALTER TABLE `help_desk`
+  MODIFY `complaint_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -512,7 +562,7 @@ ALTER TABLE `tokens`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1477694812;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Constraints for dumped tables
@@ -572,6 +622,12 @@ ALTER TABLE `forum_posts`
 --
 ALTER TABLE `forum_topics`
   ADD CONSTRAINT `forum_topics_ibfk_1` FOREIGN KEY (`topic_owner`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `help_desk`
+--
+ALTER TABLE `help_desk`
+  ADD CONSTRAINT `help_desk_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `orders`
