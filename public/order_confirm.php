@@ -192,16 +192,17 @@
                     <div class="payhere has-text-centered">
                         <form method="post" action="https://sandbox.payhere.lk/pay/checkout">
                             <input type="hidden" name="merchant_id" value="1215900" style="display: none;"> <!-- Replace your Merchant ID -->
-                            <input type="hidden" name="return_url" value="http://localhost/vegemart/src/order_done.php?id=<?php echo $orderID ?>" style="display: none;">
+                            <input type="hidden" name="return_url" id="url" style="display: none;">
                             <input type="hidden" name="cancel_url" value="http://localhost/vegemart/public/order_confirm" style="display: none;">
                             <input type="hidden" name="notify_url" value="http://localhost/vegemart/src/payment.php" style="display: none;">
 
+                            <!-- order details -->
                             <input type="text" name="order_id" value="<?php echo $orderID ?>" style="display: none;">
                             <input type="text" name="items" value="<?php echo $productName ?>" style="display: none;">
-                            <input type="text" name="currency" value="LKR" style="display: none;">                            
-                            
+                            <input type="text" name="currency" value="LKR" style="display: none;">                       
                             <input type="text" name="amount" id="amount" style="display: none;">
 
+                            <!-- Customer details -->
                             <input type="text" name="first_name" value="<?php echo $fname ?>" style="display: none;">
                             <input type="text" name="last_name" value="<?php echo $lname ?>" style="display: none;">
                             <input type="text" name="email" value="<?php echo $email ?>" style="display: none;">
@@ -209,7 +210,7 @@
                             <input type="text" name="address" value="<?php echo $address1 . " " . $address2 ?>" style="display: none;">
                             <input type="text" name="city" value="<?php echo $city ?>" style="display: none;">
                             <input type="hidden" name="country" value="Sri Lanka" style="display: none;">
-                            <button class="button" type="submit" onclick="abc()">Pay</button>
+                            <button class="button" type="submit">Pay</button>
                         </form>
                     </div>  
                 </div>
@@ -223,7 +224,7 @@
                     </div>    
                     <div class="column is-7 has-text-left mt-1"> 
                         <label for="delivery">Delivery</label>
-                        <input style="text-align:left;" type="checkbox" id="delivery" class="delivery" name="delivery" value="delivery" onclick="abc(this)">     
+                        <input style="text-align:left;" type="checkbox" id="delivery" class="delivery" name="delivery" value="delivery" onclick="delivery(this)">     
                         <p>Delivery is provided within the district only</p>                                           
                     </div>                               
                 </div>
@@ -236,7 +237,7 @@
                     </div>    
                     <div class="column is-7 has-text-left mt-1"> 
                         <label for="selfpick">Self Pickup</label>
-                        <input style="text-align:left;" type="checkbox" id="selfpick" class="delivery" name="delivery" value="selfpick" onclick="abc(this)">
+                        <input style="text-align:left;" type="checkbox" id="selfpick" class="delivery" name="delivery" value="selfpick" onclick="delivery(this)">
                         <p>Please pickup during the day of purchase</p>                                             
                     </div>                               
                 </div>
@@ -247,19 +248,21 @@
     </body>
 </html>
 <script>
-    function abc(id){
+    function delivery(id){
         var checkBox=document.getElementById("delivery");
         var selfpick = document.getElementById("selfpick");
         var charge=document.getElementById("charge"); 
         var label=document.getElementById("label"); 
         var total= document.getElementById("total");
         var amount=document.getElementById("amount"); 
+        var url=document.getElementById("url"); 
         if(checkBox.checked==true){
             charge.style.display="block";
             label.style.display="block"; 
             <?php $x= "$price"+50?>            
             total.innerHTML = "Rs. <?php echo "$x"?>.00";
-            amount.value = <?php echo "$x"?>;            
+            amount.value = <?php echo "$x"?>;  
+            url.value="http://localhost/vegemart/src/order_done.php?amount=<?php echo "$x"?>";          
         }
         else{
             charge.style.display="none"; 
@@ -273,7 +276,7 @@
             <?php $x= "$price"?>            
             total.innerHTML = "Rs. <?php echo "$x"?>.00";
             amount.value = <?php echo "$x"?>; 
-
+            url.value="http://localhost/vegemart/src/order_done.php?amount=<?php echo "$x"?>";
         }
         var myCheckbox = document.getElementsByName("delivery");
         Array.prototype.forEach.call(myCheckbox,function(el){

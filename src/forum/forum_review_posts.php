@@ -28,7 +28,7 @@
             $post_create_time = $posts_info['fmt_post_create_time'];
             $post_owner = stripslashes($posts_info['post_owner']);
             // Get information from user table
-            $user_info = "SELECT CONCAT(fName, ' ', lName) AS name, profilePic FROM client WHERE `user_id`=$post_owner";
+            $user_info = "SELECT CONCAT(`fName`, ' ', `lName`) AS name, profilePic FROM `client` WHERE `user_id`=$post_owner";
             $user_info_res = mysqli_fetch_array(mysqli_query($con, $user_info));
             $post_owner = $user_info_res['name'];
             $post_owner_pic = $user_info_res['profilePic'];
@@ -58,9 +58,9 @@
         if (isset($_POST['accepted'])) {
             $topic_id=$_POST["topic_id"];
             $verify_status = "SELECT `topic_status` from `forum_topics` where `topic_id` = " . $topic_id;
-            $verify_status_res = mysqli_query($con, $verify_status_res) or trigger_error(mysqli_error($con));
+            $verify_status_res = mysqli_query($con, $verify_status) or trigger_error(mysqli_error($con));
 
-            $topic_status = $verify_status_res['topic_status'];
+            $topic_status = $verify_status['topic_status'];
 
             if ($topic_status == 0) {
                 $updateStatus= "UPDATE `forum_topics` SET `topic_status` = 1 where `topic_id` = " . $topic_id;
@@ -69,7 +69,11 @@
             $updateQuery= "UPDATE `forum_posts` SET `review_status` = 1, `post_status` = 1 WHERE post_id = " . $post_id;
 
             if (mysqli_query($con, $updateQuery) === true && mysqli_query($con, $updateStatus) === true) {
-                $message = base64_encode(urlencode("Successfully Edited!"));
+                $message = base64_encode(urlencode("Successful!"));
+
+                $notification = "INSERT INTO `notification` (`type`,`forUser`,`entityID`, `notif_read`, `notif_time`) VALUES (11,'".$post_owner."', '".$post_id."',0, now());";
+                mysqli_query($con,$notification); 
+
                 header('Location:../../public\admin\forum_review.php?msg='.$message);
                 exit();
             } else {
@@ -82,8 +86,12 @@
             $updateQuery= "UPDATE `forum_posts` SET `review_status` = 1, `post_status` = 0 WHERE post_id = " . $post_id;
         
             if (mysqli_query($con, $updateQuery) === true) {
-                $message = base64_encode(urlencode("Successfully Edited!"));
+                $message = base64_encode(urlencode("Successful!"));
                 header('Location:../../public\admin\forum_review.php?msg='.$message);
+
+                $notification = "INSERT INTO `notification` (`type`,`forUser`,`entityID`, `notif_read`, `notif_time`) VALUES (11,'".$post_owner."', '".$post_id."',0, now());";
+                mysqli_query($con,$notification); 
+
                 $logString = "ADMIN rejected post ". $post_id;
                 writeAppLog($logString, "../logs");
                 exit();

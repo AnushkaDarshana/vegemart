@@ -220,6 +220,9 @@
                 <li><a href="http://localhost/vegemart/public/shopping_cart.php"><i class="fas fa-shopping-cart mr-0" style="font-size:16px; color:black; padding-right:0.4em;"></i>Cart</a></li>
                 
                 <?php  
+                    
+
+
                     if(isset($_SESSION["loggedInUserID"])||isset($_SESSION["loggedInSellerID"])){
                         if (isset($_SESSION["loggedInUserID"])) {
                             $userID = $_SESSION["loggedInUserID"];

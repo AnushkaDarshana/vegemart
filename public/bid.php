@@ -17,7 +17,14 @@ include('../src/session.php');
 </head>
 
 <body>
-    <?php include "./includes/nav.php"; ?>
+<?php 
+    if (isset($_SESSION["loggedInUserID"])) {
+        include_once "./includes/nav.php";
+    }
+    else{
+        include_once "./includes/index_nav.php";
+    }
+    ?>
     <div class="heading">
         <h1 class="mt-1 mb-1 pt-0 ml-2 has-text-left" id="title">Bid now!</h1>
     </div>
@@ -33,7 +40,11 @@ include('../src/session.php');
                 <tr>
                     <td>
                     <?php
-                        $userID = $_SESSION["loggedInUserID"];
+                        if(isset($_SESSION["loggedInUserID"]) )
+                        {
+                            $userID = $_SESSION["loggedInUserID"];
+                        }
+                        
                         if(isset($_GET['id'])){
                             $productID = $_GET['id'];
                         }

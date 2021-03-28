@@ -11,14 +11,16 @@
     </head>
 
     <body>
-        <header class="index-header">
+    <header class="index-header">
             <a href="./index.php"><img class="logopic" src='images/logob.png'></a>            
             <ul class="main-nav">
                 <li><a href="http://localhost/vegemart/public/about_us.php">About us</a></li>
+                <li><a href="http://localhost/vegemart/public/products.php">Shop now</a></li>
+                <li><a href="http://localhost/vegemart/public/forum_home.php">Forum</a></li>
+                <li><a href="http://localhost/vegemart/public/help_desk.php">Help Desk</a></li>
                 <li><button class="loginbtn" onClick="location.href='http://localhost/vegemart/public/login.php';">Login</button><li>
-                
             </ul>
-        </header> 
+        </header>
          
     </body>
 </html>

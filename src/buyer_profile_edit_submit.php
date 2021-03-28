@@ -12,6 +12,25 @@
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
+
+    // Check if file already exists
+    if (file_exists($target_file)) {
+        echo "Sorry, file already exists.";
+        $uploadOk = 0;
+    }
+              
+    // if everything is ok, try to upload file
+    else{
+        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+        } 
+        else {
+        $message = base64_encode(urlencode("Sorry, there was an error uploading your file."));
+        header('Location:../../public/seller/seller_product_edit.php?msg=' . $message);
+        exit();
+        }
+    }
+
     if(isset($_POST['submit'])){
         $id= $_POST['editID'];
         $newFName = $_POST['editFName'];
@@ -29,7 +48,7 @@
         $resultuser = mysqli_query($con, $user);
         while($row = mysqli_fetch_assoc($resultuser)){
             $salt = $row['salt'];
-            $oldPassword = md5($salt.$_POST['Password']);
+            $oldPassword = md5($salt.$_POST['password']);
             $newPassword = md5($salt.$_POST['editPassword']);
             $newConfirmPassword = md5($salt.$_POST['editConfirmPassword']);
 

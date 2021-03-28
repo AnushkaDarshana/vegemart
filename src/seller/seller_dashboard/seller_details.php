@@ -23,7 +23,6 @@
                 $sellerID=$_SESSION["loggedInUserToSellerID"];
             }
         }
-        //$sellerID=22;
         
         $retrieveInfo =  "SELECT * FROM client WHERE user_id='$sellerID';"; //Selecting all data from Table according to sellerID
         $resultInfo = mysqli_query($con, $retrieveInfo); //Passing SQL      

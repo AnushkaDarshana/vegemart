@@ -12,7 +12,15 @@
     </head>
 
     <body>
-        <?php include_once "./includes/nav.php"; 
+        <?php
+            include ('../src/session.php'); 
+            include ('../config/dbconfig.php'); 
+            if (isset($_SESSION["loggedInUserID"])) {
+                include_once "./includes/nav.php";
+            }
+            else{
+                include_once "./includes/index_nav.php";
+            }
         ?>
         <!--slideshow starts here -->
         <div class="slideshow-container mt-0 pt-0 pb-0 mb-0">
