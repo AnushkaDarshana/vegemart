@@ -135,11 +135,6 @@
                                 <button class="card-button" onClick="location.href='http://localhost/vegemart/public/admin/records_deliverer.php';">Delieverer Records</button> 
                             </div>
                         </div>
-                        <div class="columns group has-text-centered mt-1">
-                            <div class="column is-4 pl-1 pr-0 has-text-centered">
-                            <img src="../images/marketing.jpg" alt="image" class="image" >
-                                <button class="card-button" onClick="location.href='http://localhost/vegemart/public/admin/records_ads.php';">Advertisement Records</button>
-                            </div>
                             <div class="column is-4 pl-1 pr-0 has-text-centered">
                             <img src="../images/bid.jpg" alt="image" class="image" >
                                 <button class="card-button" onClick="location.href='http://localhost/vegemart/public/admin/records_bidding.php';">Auction Records</button>                               
