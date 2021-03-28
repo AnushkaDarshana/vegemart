@@ -1,7 +1,53 @@
 <?php
     include ('../../config/dbconfig.php');
+    // Sales total Graph
+    $sql ="SELECT p.`productID`,p.`name`, Qsum.`tot_quantity` 
+            FROM `products` p, (SELECT `productID`, SUM(`quantity`) AS tot_quantity 
+                                FROM `quantitysets`qs, (SELECT `quantityID` 
+                                                        FROM `cart` c, (SELECT `cartItemID`    
+                                                                        FROM `orders` 
+                                                                        WHERE `paymentStatus` = 1) s 
+                                                        WHERE c.`cartItemID`= s.`cartItemID` ) q 
+                                WHERE qs.`quantityID`= q.`quantityID`GROUP BY `productID`) Qsum 
+            WHERE p.`productID`= Qsum.productID";
+
+    $result = mysqli_query($con,$sql);
+    $a=array(); 
+    $b=array();   
+
+    while($row = mysqli_fetch_assoc($result)){
+        array_push($a, $row['name']);
+        array_push($b, $row['tot_quantity']);
+     }
+     $js_array_a = json_encode($a);
+     $js_array_b = json_encode($b);
+
+     // City Graph
+        $sql1 ="SELECT p.`city`, ct.`tot_count` 
+                FROM `products` p, (SELECT `productID`, COUNT(`productID`) AS tot_count 
+                                    FROM `quantitysets`qs, (SELECT `quantityID` 
+                                                            FROM `cart` c, (SELECT `cartItemID`    
+                                                                            FROM `orders` 
+                                                                            WHERE `paymentStatus` = 1) s 
+                                                            WHERE c.`cartItemID`= s.`cartItemID` ) q 
+                                    WHERE qs.`quantityID`= q.`quantityID`
+                                    GROUP BY `productID`) ct
+                WHERE p.`productID` = ct.productID";
+
+        $result1 = mysqli_query($con,$sql1);
+        $c=array(); 
+        $d=array();   
+    
+        while($row1 = mysqli_fetch_assoc($result1)){
+            array_push($c, $row1['city']);
+            array_push($d, $row1['tot_count']);
+         }
+         $js_array_c = json_encode($c);
+         $js_array_d = json_encode($d);
+    
 ?>
 
+                        
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -143,7 +189,7 @@
             var chart = new Chart('product_type_chart', {
                 type: 'bar',
                 data: {
-                    labels: ['Beans', 'Beetroot', 'Broccoli', 'Cabbage', 'Carrot', 'Cucumber', 'Eggplant', 'Garlic', 'Onion', 'Pumpkin',' Potato', 'Tomato'],
+                    labels: <?php echo $js_array_a ?>,
                     datasets: [{
                         barPercentage: 1,
                         barThickness: 2,
@@ -154,7 +200,7 @@
                         borderColor:'rgba(189, 58, 87, 1)',
                         borderWidth: 1,
                         label: 'Number of products sold in (kg)',
-                        data: [765, 323, 451, 195, 383, 652, 497, 757, 153, 524, 436, 177]
+                        data: <?php echo $js_array_b ?>
                     }]
                 },
                 options: {
@@ -179,12 +225,12 @@
             var PieChart  = new Chart('product_location_chart', {
                 type: 'pie',
                 data: {
-                    labels: ['Kandy', 'Matale', 'Nuwara Eliya', 'Badulla', 'Anuradhapura'],
+                    labels: <?php echo $js_array_c ?>,
                     datasets: [{
                         label: 'Number of Sales',
                         backgroundColor: ['#F1948A','#5DADE2' ,'#E163BB', '#F9E79F', '#76D7C4',],
                         borderWidth: 0.5,
-                        data: [ 32, 45, 19, 38, 15]
+                        data: <?php echo $js_array_d ?>
                     }]
                 },
                 options: {
