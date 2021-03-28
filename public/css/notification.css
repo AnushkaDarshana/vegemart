@@ -4,10 +4,6 @@ h1,h2,h3,h4,h5,h6,p,span,i {
     flex-wrap: wrap;
 }
 
-h1,h2,h3,h4{
-    text-transform: capitalize;
-}
-
 .heading{
     flex: 1;
 }
@@ -21,9 +17,12 @@ h1,h2,h3,h4{
     color: black;
 }
 
-.th{
-    font-size: 1rem;
+.notif{
+    background-color: #F2F3F4;
+    padding: 0.5em 1.5em 0;
+    cursor: pointer;
 }
+
 .item-table h1 {
     display: grid;
     place-items: center;
@@ -91,6 +90,6 @@ button > i{
     text-decoration: none;
     font-size:20px; 
     font-weight: bold;
-    margin: 2em; 
-    text-align:center;
+    margin: 2rem; 
+    text-align:left;
 }

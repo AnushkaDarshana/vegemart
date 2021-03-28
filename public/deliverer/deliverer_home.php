@@ -19,14 +19,11 @@
         <?php include "../deliverer/deliverer_nav.php"; ?>   
         <div class="row">
         <?php         
-
-            
             $userID = $_SESSION["loggedInDelivererID"];
             $retrieveInfo =  "SELECT * FROM `deliverer` WHERE `user_id`='$userID';"; //Selecting all data from Table
             $resultInfo = mysqli_query($con, $retrieveInfo); //Passing SQL
             while($rowUser  = mysqli_fetch_assoc($resultInfo)){
                 $_SESSION["loggedInDelivererID"] = $rowUser['user_id'];
-                $city = $rowUser['city'];
                 echo "
                 <h1 id=\"heading\" style=\"text-align:left; font-family: Candara; color: #138D75; margin:0.2em 1em 0;\">Hello ".$rowUser['fName']."! Welcome to Deliverer dashboard </h1>";
             }
@@ -34,41 +31,36 @@
         <div class="columns group">
             <div class="column is-3 mt-1 pl-2 pr-0">
                 <h1 id="title" class="mt-1 mb-1">Select your Location</h1>
-                <form class="location" action="" method="get" >
+                <form class="location">
                     <label class="select-box">
-                    <?php $default_state = $city;?>
-                        <select name="location" id="location" class="custom-select location" onchange='this.form.submit()' placeholder="Select Location" >
-                            <option value='<?php echo $default_state?>' selected='selected'><?php echo $default_state?></option>
-                            <option id="city" value="Anuradhapura">Anuradhapura</option>
-                            <option id="city" value="Badulla">Badulla</option>
-                            <option id="city" value="Batticaloa">Batticaloa</option>
-                            <option id="city" value="Colombo">Colombo</option>
-                            <option id="city" value="Galle">Galle</option>
-                            <option id="city" value="Gampaha">Gampaha</option>
-                            <option id="city" value="Jaffna">Jaffna</option>
-                            <option id="city" value="Kalutara">Kalutara</option>
-                            <option id="city" value="Kandy">Kandy</option>
-                            <option id="city" value="Kegalle">Kegalle</option>
-                            <option id="city" value="Kilinochchi">Kilinochchi</option>
-                            <option id="city" value="Kurunegala">Kurunegala</option>
-                            <option id="city" value="Mannar">Mannar</option>
-                            <option id="city" value="Matale">Matale</option>
-                            <option id="city" value="Matara">Matara</option>
-                            <option id="city" value="Moneragala">Moneragala</option>
-                            <option id="city" value="Mullaitivu">Mullaitivu</option>
-                            <option id="city" value="Nuwara Eliya">Nuwara Eliya</option>
-                            <option id="city" value="Polonnaruwa">Polonnaruwa</option>
-                            <option id="city" value="Puttalam">Puttalam</option>
-                            <option id="city" value="Ratnapura">Ratnapura</option>
-                            <option id="city" value="Trincomalee">Trincomalee</option>
-                            <option id="city" value="Vavuniya">Vavuniya</option>
+                        <select name="location" id="location" class="custom-select location" placeholder="Select Location">
+                            <option>Anuradhapura</option>
+                            <option>Badulla</option>
+                            <option>Batticaloa</option>
+                            <option>Colombo</option>
+                            <option>Galle</option>
+                            <option>Gampaha</option>
+                            <option>Jaffna</option>
+                            <option>Kalutara</option>
+                            <option>Kandy</option>
+                            <option>Kegalle</option>
+                            <option>Kilinochchi</option>
+                            <option>Kurunegala</option>
+                            <option>Mannar</option>
+                            <option>Matale</option>
+                            <option>Matara</option>
+                            <option>Moneragala</option>
+                            <option>Mullaitivu</option>
+                            <option>Nuwara Eliya</option>
+                            <option>Polonnaruwa</option>
+                            <option>Puttalam</option>
+                            <option>Ratnapura</option>
+                            <option>Trincomalee</option>
+                            <option>Vavuniya</option>
                         </select>
                     </label>
                 </form>
             </div>
-            <script>
-            
-            </script>
             <div class="column is-9 mt-0 pl-1 pr-2">
                 <div class="items-grid">
                     <div class="row item-legend">
@@ -98,15 +90,13 @@
                         include ('../../config/dbconfig.php');
                         include ('../../src/session.php');
 
-                        $deliveries = "SELECT * FROM orders where `delivery` = 1 AND `acceptDelivery` = 0";
+                        $deliveries = "SELECT * FROM orders where `paymentStatus` = 1 AND `delivery` = 1";
                         $deliveryquery = mysqli_query($con,$deliveries);
                        
                         while ($rowdelivery = mysqli_fetch_assoc($deliveryquery)) {
-                            $orderID = $rowdelivery['orderID'];
-                            $buyerID = $rowdelivery['userID'];
+                            $buyerID = $rowdelivery['buyerID'];
                             $sellerID = $rowdelivery['sellerID'];
-                            $productID = $rowdelivery['productID'];
-                            $quantityID = $rowdelivery['quantityID'];
+                            $productID = $rowdelivery['cartItemID'];
 
                             //buyer details
                             $buyerInfo = "SELECT * FROM client WHERE `user_id` ='$buyerID' ";      
@@ -119,10 +109,6 @@
                             //product details
                             $productInfo = "SELECT * FROM products WHERE `productID` ='$productID' ";      
                             $productquery = mysqli_query($con,$productInfo);
-
-                            //quantity details
-                            $quantityInfo = "SELECT * FROM quantitysets WHERE `quantityID` ='$quantityID' ";      
-                            $quantityquery = mysqli_query($con,$quantityInfo);
                     ?>
 
                     <div class="row item-row mt-0">
@@ -143,24 +129,20 @@
                             
                             ?>
                             <?php
-                                while ($rowProduct = mysqli_fetch_assoc($productquery)) {                                    
+                                while ($rowSeller = mysqli_fetch_assoc($productquery)) {                                    
                             ?>
                             <div class="column is-1">
-                                <p class="mb-0 pb-0"><?php echo $rowProduct['name']?></p>
+                                <p class="mb-0 pb-0">Carrot</p>
+                                <p class="mb-0 pb-0">Beans</p>
                             </div>
 
                             <?php
                                 }                                  
                             ?>
-                            <?php
-                                while ($rowQuantity = mysqli_fetch_assoc($quantityquery)) {
-                            ?>
                             <div class="column is-1">
-                                <p class="mb-0 pb-0"><?php echo $rowQuantity['quantity']?></p>
+                                <p class="mb-0 pb-0">5</p>
+                                <p class="mb-0 pb-0">5</p>
                             </div>
-                            <?php
-                                }
-                            ?>
                             <?php
                                 while ($rowBuyer = mysqli_fetch_assoc($buyerquery)) {                                    
                             ?>
@@ -306,5 +288,3 @@
         <?php include_once "../includes/footer.php"; ?>
     </body>
 </html>
-
-

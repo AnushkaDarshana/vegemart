@@ -172,7 +172,7 @@
                         ?>
                         <h3 style="text-transform: capitalize;"><?php echo $totalQuantity ?> kg</h3>                        
                         <h3>Location: <?php echo $rowProduct['city'] ?> </h3>
-                        <!-- <h3>Rs. <?php// echo $rowProduct['minPrice']  ?>(250g)</h3> -->
+                        <!-- <h3>Rs. // echo $rowProduct['minPrice']  (250g)</h3> -->
                     </div>
                 <?php
                 }
