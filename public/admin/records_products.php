@@ -22,7 +22,7 @@
      $js_array_a = json_encode($a);
      $js_array_b = json_encode($b);
 
-     // City Graph
+     // Location Graph
         $sql1 ="SELECT p.`city`, ct.`tot_count` 
                 FROM `products` p, (SELECT `productID`, COUNT(`productID`) AS tot_count 
                                     FROM `quantitysets`qs, (SELECT `quantityID` 
@@ -45,6 +45,25 @@
          $js_array_c = json_encode($c);
          $js_array_d = json_encode($d);
     
+    //Total orders
+    $sql2 ="SELECT COUNT(orderID) AS total
+            FROM orders";
+    $result2 = mysqli_query($con,$sql2);
+    $row2 = mysqli_fetch_assoc($result2);
+    
+    //Successful orders
+    $sql3 ="SELECT COUNT(orderID) AS total1
+            FROM orders
+            WHERE `paymentStatus` = 1"; 
+    $result3 = mysqli_query($con,$sql3);
+    $row3 = mysqli_fetch_assoc($result3);
+
+    //Failed orders
+    $sql4 ="SELECT COUNT(orderID) AS total2
+            FROM orders
+            WHERE `paymentStatus` = 0"; 
+    $result4 = mysqli_query($con,$sql4);
+    $row4 = mysqli_fetch_assoc($result4);
 ?>
 
                         
@@ -70,7 +89,7 @@
                                 <i class="fa fa-shopping-cart mt-1 mb-1" style="font-size:50px; padding:0.2em 0.1em; margin:0.2em 0;color:#138D75;"></i>
                             </div>
                             <div class="column is-5 pl-0 has-text-left">
-                                <h2 style="font-size:22px;" class="mb-0 pb-0">568</h2>
+                                <h2 style="font-size:22px;" class="mb-0 pb-0"><?php echo $row2['total'];?> </h2>
                                 <h3 class="mt-0 pt-0">Total Sales</h3>
                             </div>
                             <div class="column is-4 pl-0 has-text-left">
@@ -86,7 +105,7 @@
                                 <i class="fa fa-check-circle mt-1 mb-1" style="font-size:50px; padding:0.2em 0.1em; margin:0.2em 0;color:#34DB98;"></i>
                             </div>
                             <div class="column is-5 pl-0 has-text-left">
-                                <h2 style="font-size:22px;" class="mb-0 pb-0">546</h2>
+                                <h2 style="font-size:22px;" class="mb-0 pb-0"><?php echo $row3['total1'];?></h2>
                                 <h3 class="mt-0 pt-0">Successfully sold</h3>
                             </div>
                             <div class="column is-4 pl-0 has-text-left">
@@ -102,7 +121,7 @@
                                 <i class="fa fa-exclamation-circle" style="font-size:50px; padding:0.2em 0.1em; margin:0.2em 0;color:#EB694F ;"></i>
                             </div>
                             <div class="column is-5 pl-0 has-text-left">
-                                <h2 style="font-size:22px;" class="mb-0 pb-0">12</h2>
+                                <h2 style="font-size:22px;" class="mb-0 pb-0"><?php echo $row4['total2'];?></h2>
                                 <h3 class="mt-0 pt-0">Failed Orders</h3>
                             </div>
                             <div class="column is-4 pl-0 has-text-left">
