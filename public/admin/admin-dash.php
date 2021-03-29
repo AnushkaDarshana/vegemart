@@ -85,7 +85,7 @@
             <h1 style="text-align:center; font-size: 30px; margin-bottom:0;">ADMIN DASHBOARD</h1>
                 <div class="row mt-2 ml-0 mr-0">
                     <div class="card pl-1 pr-1 ml-0 mr-0 pt-1 pb-1">
-                        <h2 id="title" class="has-text-left pl-1">User Management 1</h2>
+                        <h2 id="title" class="has-text-left pl-1">User Management </h2>
                         <div class="columns group has-text-centered">
 
                             <?php
