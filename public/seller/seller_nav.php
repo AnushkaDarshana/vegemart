@@ -45,7 +45,7 @@
                             echo "
                         <li>
                         <div class=\"nav-dropdown\">
-                        <i class=\"fa fa-bell\" style=\"font-size:16px; color:black; margin-left:1em; margin-right:0; padding-right:0;\"></i><button onclick=\"dropFunc()\" class=\"notifbtn\">Messages</button>
+                        <i class=\"fa fa-bell\" style=\"font-size:16px; color:black; margin-left:1em; margin-right:0; padding-right:0;\"></i><button class=\"notifbtn\" onClick=\"location.href='http://localhost/vegemart/public/seller/seller_notification.php';\">Messages</button>
                             <div id=\"notifDrop\" class=\"dropdown-content\">
                                 <a href=\"#home\">You have a message from Nimal Bandara</a>
                             </div>

@@ -92,12 +92,18 @@
                             if(isset($_SESSION["loggedInAdminID"])) {
                                 echo "
                                 <div class=\"column is-3 pl-0 has-text-centered\">
+<<<<<<< HEAD
                                 <img src=\"../images/users/co-admin.png\" alt=\"image\" class=\"image\">
                                 <button class=\"card-button\" onClick=\"location.href='https://localhost/vegemart/public/admin/co-admin_mgt.php';\">Co-Admin Management</button>
+=======
+                                <img src=\"../images/co-admin.png\" alt=\"image\" class=\"image\">
+                                <button class=\"card-button\" onClick=\"location.href='http://localhost/vegemart/public/admin/co-admin_mgt.php';\">Co-Admin Management</button>
+>>>>>>> 3088d010a7304ce2297951052849c5e8217fb95d
                             </div>";      
                             }
                         ?>
                             <div class="column is-3 pl-0 has-text-centered">
+<<<<<<< HEAD
                                 <img src="../images/users/farmer2.jpg" alt="image" class="image">
                                 <button class="card-button" onClick="location.href='https://localhost/vegemart/public/admin/seller_view.php';">Seller Management</button>                               
                             </div>
@@ -109,6 +115,19 @@
                             <div class="column is-3 pl-2 has-text-centered">
                                 <img src="../images/users/deliverer.jpg" alt="image" class="image">
                                 <button class="card-button" onClick="location.href='https://localhost/vegemart/public/admin/deliverer_view.php';">Delieverer Management</button> 
+=======
+                                <img src="../images/farmer2.jpg" alt="image" class="image">
+                                <button class="card-button" onClick="location.href='http://localhost/vegemart/public/admin/seller_view.php';">Seller Management</button>                               
+                            </div>
+                            <div class="column is-3 pl-0 has-text-centered">
+                                <img src="../images/customer.jpg" alt="image" class="image">
+                                <button class="card-button" onClick="location.href='http://localhost/vegemart/public/admin/customer_view.php';">Customer Management</button> 
+                                
+                            </div>
+                            <div class="column is-3 pl-0 has-text-centered">
+                                <img src="../images/deliverer.jpg" alt="image" class="image">
+                                <button class="card-button" onClick="location.href='http://localhost/vegemart/public/admin/deliverer_view.php';">Delieverer Management</button> 
+>>>>>>> 3088d010a7304ce2297951052849c5e8217fb95d
                             </div>
                         </div>
                     </div>
@@ -136,12 +155,15 @@
                             </div>
                         </div>
                         <div class="columns group has-text-centered mt-1">
-                            <div class="column is-2 pl-1 pr-0 has-text-centered"></div>
-                            <div class="column is-4 pl-3 pr-3 has-text-centered">
+                            <div class="column is-4 pl-0 has-text-centered">
+                                <img src="../images/prod.jpg" alt="image" class="image">
+                                <button class="card-button" onClick="location.href='http://localhost/vegemart/public/admin/records_products.php';">Product Sales Records</button>
+                            </div>
+                            <div class="column is-4 pl-1 pr-0 has-text-centered">
                             <img src="../images/bid.jpg" alt="image" class="image" >
                                 <button class="card-button" onClick="location.href='https://localhost/vegemart/public/admin/records_bidding.php';">Auction Records</button>                               
                             </div>
-                            <div class="column is-4 pl-3 pr-3 has-text-centered">
+                            <div class="column is-4 pl-1 pr-1 has-text-centered">
                                 <img src="../images/pay.jpg" alt="image" class="image" >
                                 <button class="card-button" onClick="location.href='https://localhost/vegemart/public/admin/records_payment.php';">Payment Records</button>                               
                             </div>                           
@@ -154,11 +176,11 @@
                         <div class="columns group has-text-centered mt-0 pt-0">
                             <div class="column is-2 pl-0 has-text-centered"></div>
 
-                            <div class="column is-4 pl-3 pr-3 has-text-centered">
+                            <div class="column is-4 pl-0 has-text-centered">
                             <img src="../images/forum.jpg" alt="image" class="image" >
                                 <button class="card-button" onClick="location.href='https://localhost/vegemart/public/admin/forum_review.php';">Forum Reports</button>                               
                             </div>
-                            <div class="column is-4 pl-3 pr-3 has-text-centered">
+                            <div class="column is-4 pl-0 has-text-centered">
                             <img src="../images/feedbk.jpg" alt="image" class="image" >
                                 <button class="card-button" onClick="location.href='https://localhost/vegemart/public/admin/helpdesk_complaints.php';">Help Desk</button>                        
                             </div>

@@ -1,72 +1,7 @@
 <?php
     include ('../../config/dbconfig.php');
-    // Sales total Graph
-    $sql ="SELECT p.`productID`,p.`name`, Qsum.`tot_quantity` 
-            FROM `products` p, (SELECT `productID`, SUM(`quantity`) AS tot_quantity 
-                                FROM `quantitysets`qs, (SELECT `quantityID` 
-                                                        FROM `cart` c, (SELECT `cartItemID`    
-                                                                        FROM `orders` 
-                                                                        WHERE `paymentStatus` = 1) s 
-                                                        WHERE c.`cartItemID`= s.`cartItemID` ) q 
-                                WHERE qs.`quantityID`= q.`quantityID`GROUP BY `productID`) Qsum 
-            WHERE p.`productID`= Qsum.productID";
-
-    $result = mysqli_query($con,$sql);
-    $a=array(); 
-    $b=array();   
-
-    while($row = mysqli_fetch_assoc($result)){
-        array_push($a, $row['name']);
-        array_push($b, $row['tot_quantity']);
-     }
-     $js_array_a = json_encode($a);
-     $js_array_b = json_encode($b);
-
-     // Location Graph
-        $sql1 ="SELECT p.`city`, ct.`tot_count` 
-                FROM `products` p, (SELECT `productID`, COUNT(`productID`) AS tot_count 
-                                    FROM `quantitysets`qs, (SELECT `quantityID` 
-                                                            FROM `cart` c, (SELECT `cartItemID`    
-                                                                            FROM `orders` 
-                                                                            WHERE `paymentStatus` = 1) s 
-                                                            WHERE c.`cartItemID`= s.`cartItemID` ) q 
-                                    WHERE qs.`quantityID`= q.`quantityID`
-                                    GROUP BY `productID`) ct
-                WHERE p.`productID` = ct.productID";
-
-        $result1 = mysqli_query($con,$sql1);
-        $c=array(); 
-        $d=array();   
-    
-        while($row1 = mysqli_fetch_assoc($result1)){
-            array_push($c, $row1['city']);
-            array_push($d, $row1['tot_count']);
-         }
-         $js_array_c = json_encode($c);
-         $js_array_d = json_encode($d);
-    
-    //Total orders
-    $sql2 ="SELECT COUNT(orderID) AS total
-            FROM orders";
-    $result2 = mysqli_query($con,$sql2);
-    $row2 = mysqli_fetch_assoc($result2);
-    
-    //Successful orders
-    $sql3 ="SELECT COUNT(orderID) AS total1
-            FROM orders
-            WHERE `paymentStatus` = 1"; 
-    $result3 = mysqli_query($con,$sql3);
-    $row3 = mysqli_fetch_assoc($result3);
-
-    //Failed orders
-    $sql4 ="SELECT COUNT(orderID) AS total2
-            FROM orders
-            WHERE `paymentStatus` = 0"; 
-    $result4 = mysqli_query($con,$sql4);
-    $row4 = mysqli_fetch_assoc($result4);
 ?>
 
-                        
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -89,7 +24,7 @@
                                 <i class="fa fa-shopping-cart mt-1 mb-1" style="font-size:50px; padding:0.2em 0.1em; margin:0.2em 0;color:#138D75;"></i>
                             </div>
                             <div class="column is-5 pl-0 has-text-left">
-                                <h2 style="font-size:22px;" class="mb-0 pb-0"><?php echo $row2['total'];?> </h2>
+                                <h2 style="font-size:22px;" class="mb-0 pb-0">568</h2>
                                 <h3 class="mt-0 pt-0">Total Sales</h3>
                             </div>
                             <div class="column is-4 pl-0 has-text-left">
@@ -105,7 +40,7 @@
                                 <i class="fa fa-check-circle mt-1 mb-1" style="font-size:50px; padding:0.2em 0.1em; margin:0.2em 0;color:#34DB98;"></i>
                             </div>
                             <div class="column is-5 pl-0 has-text-left">
-                                <h2 style="font-size:22px;" class="mb-0 pb-0"><?php echo $row3['total1'];?></h2>
+                                <h2 style="font-size:22px;" class="mb-0 pb-0">546</h2>
                                 <h3 class="mt-0 pt-0">Successfully sold</h3>
                             </div>
                             <div class="column is-4 pl-0 has-text-left">
@@ -121,7 +56,7 @@
                                 <i class="fa fa-exclamation-circle" style="font-size:50px; padding:0.2em 0.1em; margin:0.2em 0;color:#EB694F ;"></i>
                             </div>
                             <div class="column is-5 pl-0 has-text-left">
-                                <h2 style="font-size:22px;" class="mb-0 pb-0"><?php echo $row4['total2'];?></h2>
+                                <h2 style="font-size:22px;" class="mb-0 pb-0">12</h2>
                                 <h3 class="mt-0 pt-0">Failed Orders</h3>
                             </div>
                             <div class="column is-4 pl-0 has-text-left">
@@ -208,7 +143,7 @@
             var chart = new Chart('product_type_chart', {
                 type: 'bar',
                 data: {
-                    labels: <?php echo $js_array_a ?>,
+                    labels: ['Beans', 'Beetroot', 'Broccoli', 'Cabbage', 'Carrot', 'Cucumber', 'Eggplant', 'Garlic', 'Onion', 'Pumpkin',' Potato', 'Tomato'],
                     datasets: [{
                         barPercentage: 1,
                         barThickness: 2,
@@ -219,7 +154,7 @@
                         borderColor:'rgba(189, 58, 87, 1)',
                         borderWidth: 1,
                         label: 'Number of products sold in (kg)',
-                        data: <?php echo $js_array_b ?>
+                        data: [765, 323, 451, 195, 383, 652, 497, 757, 153, 524, 436, 177]
                     }]
                 },
                 options: {
@@ -244,12 +179,12 @@
             var PieChart  = new Chart('product_location_chart', {
                 type: 'pie',
                 data: {
-                    labels: <?php echo $js_array_c ?>,
+                    labels: ['Kandy', 'Matale', 'Nuwara Eliya', 'Badulla', 'Anuradhapura'],
                     datasets: [{
                         label: 'Number of Sales',
                         backgroundColor: ['#F1948A','#5DADE2' ,'#E163BB', '#F9E79F', '#76D7C4',],
                         borderWidth: 0.5,
-                        data: <?php echo $js_array_d ?>
+                        data: [ 32, 45, 19, 38, 15]
                     }]
                 },
                 options: {

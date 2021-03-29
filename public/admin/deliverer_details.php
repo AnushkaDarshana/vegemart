@@ -17,7 +17,7 @@
 		$city = $_POST['city'];
         $active_status = $_POST['active_status'];
     
-        $sql1 ="UPDATE deliverer SET  fName='$fName', lName='$lName', phoneNum='$phoneNum',vehicle='$vehicle', vehicleNo='$vehicleNo', address1='$address1',address2='$address2',city='$city' WHERE delivererID='$id'";
+        $sql1 ="UPDATE deliverer SET  fName='$fName', lName='$lName', phoneNum='$phoneNum',vehicle='$vehicle', vehicleNo='$vehicleNo', address1='$address1',address2='$address2',city='$city' WHERE user_id='$id'";
         $sql2 = "UPDATE users SET email ='$email', active_status ='$active_status'  WHERE id='$id' ";
 		$result1 = mysqli_query($con, $sql1);
 		$result2 = mysqli_query($con, $sql2);

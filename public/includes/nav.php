@@ -220,9 +220,6 @@
                 <li><a href="https://localhost/vegemart/public/shopping_cart.php"><i class="fas fa-shopping-cart mr-0" style="font-size:16px; color:black; padding-right:0.4em;"></i>Cart</a></li>
                 
                 <?php  
-                    
-
-
                     if(isset($_SESSION["loggedInUserID"])||isset($_SESSION["loggedInSellerID"])){
                         if (isset($_SESSION["loggedInUserID"])) {
                             $userID = $_SESSION["loggedInUserID"];
@@ -236,7 +233,8 @@
                             echo "
                         <li>
                         <div class=\"nav-dropdown\">
-                            <i class=\"fa fa-bell\" style=\"font-size:16px; color:black; margin-left:1em; margin-right:0; padding-right:0;\"></i><button onclick=\"dropFunc()\" class=\"notifbtn\">Notifications</button>
+                            <i class=\"fa fa-bell\" style=\"font-size:16px; color:black; margin-left:1em; margin-right:0; padding-right:0;\"></i>
+                            <button class=\"notifbtn\" onClick=\"location.href='http://localhost/vegemart/public/notification.php';\">Notifications</button>
                             <div id=\"notifDrop\" class=\"dropdown-content\">
                                 <a href=\"#home\">You have a message from Nimal Bandara</a>
                             </div>
