@@ -1,6 +1,13 @@
 <?php include('../../config/dbconfig.php'); ?>
 <?php
     session_start();
+    if((!isset($_SESSION["loggedInAdminID"])) && (!isset($_SESSION["loggedInCoAdminID"])))
+    {
+        echo "<script>
+        alert('You have to login first');
+        window.location.href='../../public/login.php';
+        </script>";
+    }  
 ?> 
 
 <!DOCTYPE html>
@@ -81,22 +88,20 @@
                 </fieldset>
             </div>
             
-            <div class="column is-8 mt-0 ml-2 pl-1 pr-1">
+        <div class="column is-8 mt-0 ml-2 pl-1 pr-1">
             <h1 style="text-align:center; font-size: 30px; margin-bottom:0;">ADMIN DASHBOARD</h1>
                 <div class="row mt-2 ml-0 mr-0">
                     <div class="card pl-1 pr-1 ml-0 mr-0 pt-1 pb-1">
                         <h2 id="title" class="has-text-left pl-1">User Management </h2>
-                        <div class="columns group has-text-centered">
-
-                            <?php
+                        <?php
                             if(isset($_SESSION["loggedInAdminID"])) {
-                                echo "
-                                <div class=\"column is-3 pl-0 pr-2 has-text-centered\">
-                                <img src=\"../images/co-admin.png\" alt=\"image\" class=\"image\">
-                                <button class=\"card-button\" onClick=\"location.href='https://localhost/vegemart/public/admin/co-admin_mgt.php';\">Co-Admin Management</button>
-                            </div>";      
-                            }
-                        ?>
+                            ?>  
+                        <div class="columns group has-text-centered">                                                      
+                            <div class="column is-3 pl-0 pr-2 has-text-centered">
+                                <img src="../images/co-admin.png" alt="image" class="image">
+                                <button class="card-button" onClick="location.href='https://localhost/vegemart/public/admin/co-admin_mgt.php';">Co-Admin Management</button>
+                            </div>
+                        
                             <div class="column is-3 pl-0 pr-2 has-text-centered">
                                 <img src="../images/farmer2.jpg" alt="image" class="image">
                                 <button class="card-button" onClick="location.href='https://localhost/vegemart/public/admin/seller_view.php';">Seller Management</button>                               
@@ -111,6 +116,29 @@
                                 <button class="card-button" onClick="location.href='https://localhost/vegemart/public/admin/deliverer_view.php';">Delieverer Management</button> 
                             </div>
                         </div>
+                        <?php      
+                            }
+                            else{
+                        ?>
+                        <div class="columns group has-text-centered">                                                      
+                            
+                            <div class="column is-4 pl-4 pr-5 has-text-centered">
+                                <img src="../images/farmer2.jpg" alt="image" class="image">
+                                <button class="card-button" onClick="location.href='https://localhost/vegemart/public/admin/seller_view.php';">Seller Management</button>                               
+                            </div>
+                            <div class="column is-4 pl-4 pr-5 has-text-centered">
+                                <img src="../images/customer1.jpg" alt="image" class="image">
+                                <button class="card-button" onClick="location.href='https://localhost/vegemart/public/admin/customer_view.php';">Customer Management</button> 
+                                
+                            </div>
+                            <div class="column is-4 pl-4 pr-5 has-text-centered">
+                                <img src="../images/deliverer.jpg" alt="image" class="image">
+                                <button class="card-button" onClick="location.href='https://localhost/vegemart/public/admin/deliverer_view.php';">Delieverer Management</button> 
+                            </div>
+                        </div>
+                        <?php
+                            }
+                        ?>
                     </div>
                 </div>
 
