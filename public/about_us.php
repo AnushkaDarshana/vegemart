@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/footer.css">
     <title> About Us | Vegemart </title>
     <style> 
+    
     body  {
         
         background-image: url('images/abt1.png');
