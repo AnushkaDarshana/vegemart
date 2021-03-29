@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
+    <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
     <title>Vegemart</title>
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/style.css"> 
@@ -105,7 +105,7 @@
                             <p id="heading" class="mt-0" style="color:#323131;font-size:130%"><span class="light-green"></span>Shopping for vegetables in Colombo is rarely a pleasure. You're either fumbling through unopenable plastic bags at othe shops or side-stepping dried puddles of crow poo at the market. The thing about vegetable shopping here is that you'll never find everything you want within a single venue. And as for enjoying the experience, well, that's unlikely.</p>                    
                             
                             <div class="row has-text-left mt-1 mb-1 mr-1">
-                                    <button class="button" onClick="location.href='http://localhost/vegemart/public/products.php';"><i class="fas fa-shopping-basket mr-1"></i></i>Shop now</button>
+                                    <button class="button" onClick="location.href='https://localhost/vegemart/public/products.php';"><i class="fas fa-shopping-basket mr-1"></i></i>Shop now</button>
                             </div>
                         </div> 
                     </div>
@@ -161,7 +161,7 @@
                                 <p style="font-size:140%">With "Delivery Malli" we thought of touching the hearts of our customers becoming their most trusted brother in delivering the harvest vegitables fruits and other harvest products.</p>
                                 <p style="font-size:140%">Experience the goodness of the online delivery booking in Vegemart!</p>      
                                 <div class="row has-text-right mt-1 mb-1 mr-1">
-                                    <button class="button" onClick="location.href='http://localhost/vegemart/public/deliverer/deliverer_signup.php';"><i class="fas fa-truck mr-1" ></i>Join as a Rider</button>
+                                    <button class="button" onClick="location.href='https://localhost/vegemart/public/deliverer/deliverer_signup.php';"><i class="fas fa-truck mr-1" ></i>Join as a Rider</button>
                                 </div> 
                             </div>
                         </div>

@@ -45,7 +45,7 @@
                             if ($active_status == 1) {
                             $_SESSION["loggedInUserID"] =$row['id'];
                             $_SESSION["userType"] =$row['userType'];
-                            //header('Location:../public/products.php');
+                            header('Location:../public/products.php');
                             }
                         } elseif ($row['userType'] === "deliverer") {
                             if ($active_status == 1) {

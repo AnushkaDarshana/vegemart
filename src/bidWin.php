@@ -13,14 +13,29 @@
         $userID = $rowWinBid["userID"];
         $sellerID = $rowWinBid["sellerID"];
         $productID = $rowWinBid["productID"];
+        $bidPrice = $rowWinBid["bidPrice"];
+        
+        //date that notification will be sent your account will be suspended if you don't do the payment within 2 days
+        $cartExpirationDateQuery = "SELECT DATE_ADD(NOW(),INTERVAL 2 MINUTE) AS DateAdd;";
+        $cartExpirationDateResult = mysqli_query($con,$cartExpirationDateQuery); 
+        $rowCartExpirationDate = mysqli_fetch_assoc($cartExpirationDateResult);
+        $cartExpirationDate = $rowCartExpirationDate['DateAdd'];
 
-        $items = "INSERT INTO `orders` (`userID`,`sellerID`,`bidID`,`productID`,`quantityID`) VALUES ('" . $userID . "','" . $sellerID . "','" . $bidID . "','" . $productID . "','" . $quantityID . "');";
+        $items = "INSERT INTO `orders` (`userID`,`sellerID`,`bidID`,`productID`,`quantityID`,`notifyDate`) VALUES ('" . $userID . "','" . $sellerID . "','" . $bidID . "','" . $productID . "','" . $quantityID . "','" . $cartExpirationDate . "');";
         mysqli_query($con, $items);
         
         $resultQuery= "UPDATE `bidding` SET `result`=1 WHERE `bidID`='$bidID' ";
         if ($con->query($resultQuery) === true) {
             echo "Record updated successfully"; 
             
+            $to=$email;
+            $from='vegemartucsc@gmail.com';
+            $subject= 'Action needed:pay Rs.'.$bidPrice.' to complete your purchase for'.$productName;
+            $message='You have won the bid on, '.$productName.'. If delivery is required another Rs.50.00 will be added';
+            $header="From: {$from}\r\nContent-Type: text/html;";
+
+            $send_result=mail($to,$subject,$message,$header);  
+
             $logString = "Buyer ". $userID . " won the bid " . $bidID;
             writeAppLog($logString, "./logs");
 

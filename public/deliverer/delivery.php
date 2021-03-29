@@ -6,7 +6,7 @@
         <link rel="stylesheet" type="text/css" href="../css/delivery.css">
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <link rel="stylesheet" type="text/css" href="../css/footer.css">
-        <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
+        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
         <title> Ongoing Delivery</title>
     </head>
     <body>
@@ -56,7 +56,7 @@
                                 </div>
                             </div>
                             <div class="row pb-1">
-                                <button class="button" onClick="location.href='http://localhost/vegemart/public/deliverer/delivery_done.php';">Confirm Delivery</button><br>
+                                <button class="button" onClick="location.href='https://localhost/vegemart/public/deliverer/delivery_done.php';">Confirm Delivery</button><br>
 
                             </div>
                         </div>

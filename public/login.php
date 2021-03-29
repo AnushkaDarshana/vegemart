@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Login</title>
-        <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
+        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
         <link type="text/css" rel=stylesheet href="./css/login.css">
         <script src="https://kit.fontawesome.com/85eb26c5dd.js" crossorigin="anonymous"></script>
         

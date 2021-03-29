@@ -19,7 +19,7 @@
         }
     }    
     else{
-        echo"<li><button class=\"loginbtn\" onClick=\"location.href='http://localhost/vegemart/login.php';\">Login</button><li>";
+        echo"<li><button class=\"loginbtn\" onClick=\"location.href='https://localhost/vegemart/login.php';\">Login</button><li>";
     } 
 
     if ($_POST["op"] != "addpost") {

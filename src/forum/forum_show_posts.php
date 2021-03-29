@@ -60,7 +60,7 @@
                     "<div class=\"columns group pl-1 pr-2\">
                         <div class=\"column is-2\">
                             <div class=\"row\">
-                                <img class=\"user-image\" src=\"http://localhost/vegemart/public/images/users/$post_owner_pic\" alt=\"\">
+                                <img class=\"user-image\" src=\"https://localhost/vegemart/public/images/users/$post_owner_pic\" alt=\"\">
                                 <h4>$post_owner<br></h4>
                             </div>                                   
                         </div>

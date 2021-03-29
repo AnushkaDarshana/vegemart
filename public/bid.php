@@ -9,7 +9,7 @@ include('../src/session.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
+    <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
     <link rel="stylesheet" type="text/css" href="./css/bid.css">
     <link rel="stylesheet" type="text/css" href="./css/style.css">
     <link rel="stylesheet" type="text/css" href="./css/footer.css">
@@ -82,7 +82,7 @@ include('../src/session.php');
                         while ($rowProduct  = mysqli_fetch_assoc($resultProduct)) {
                     ?>
                         <h3><?php echo $rowProduct['name'] ?></h3>
-                        <img class="item-image" src="http://localhost/vegemart/public/images/products/<?php echo $rowProduct['imageName'] ?>" alt="product">
+                        <img class="item-image" src="https://localhost/vegemart/public/images/products/<?php echo $rowProduct['imageName'] ?>" alt="product">
                     </td>
                     
                 </tr>
@@ -364,7 +364,7 @@ include('../src/session.php');
                 <p>Unfortunatley You have lost the bid for item Potato</p>
                 <p>To shop for more items click the button below</p>
                 <div class="has-text-centered mt-1">
-                    <button class="button" onClick="location.href='http://localhost/vegemart/public/shopping_cart.php?';"><i class="fas fa-shopping-basket mr-1"></i></i>Browse more products</button>
+                    <button class="button" onClick="location.href='https://localhost/vegemart/public/shopping_cart.php?';"><i class="fas fa-shopping-basket mr-1"></i></i>Browse more products</button>
                 </div>
             </div>
         </div>

@@ -49,7 +49,7 @@
                         <p class=\"justify-text\">$post_text</p>
                         <p style=\"color:grey;\" class=\" mt-0 mb-0 pt-0 has-text-right\">$post_create_time</p>
                                   
-                        <a href=\"http://localhost/vegemart/public/forum_edit_mypost.php?pid=$post_id&tid=$topicid\" class=\"mt-0 mb-0 pt-0 has-text-right\" style=\"text-decoration: none; color:#138D75;\">Edit Post</a>                                                                                                
+                        <a href=\"https://localhost/vegemart/public/forum_edit_mypost.php?pid=$post_id&tid=$topicid\" class=\"mt-0 mb-0 pt-0 has-text-right\" style=\"text-decoration: none; color:#138D75;\">Edit Post</a>                                                                                                
                     <hr>";
                         $popup_block .=
                         "<div id=\"popup1$post_id\" class=\"overlay\">
@@ -75,7 +75,7 @@
         }
     } 
     else {
-        echo"<li><button class=\"loginbtn\" onClick=\"location.href='http://localhost/vegemart/login.php';\">Login</button><li>";
+        echo"<li><button class=\"loginbtn\" onClick=\"location.href='https://localhost/vegemart/login.php';\">Login</button><li>";
     }
     print $display_block;
 ?>

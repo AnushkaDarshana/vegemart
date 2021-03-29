@@ -6,7 +6,7 @@
         <link rel="stylesheet" type="text/css" href="../css/delivery-done.css">
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <link rel="stylesheet" type="text/css" href="../css/footer.css">
-        <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
+        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
         <title>Delivery Complete | Vegemart</title>
     </head>
     <body>  
@@ -20,13 +20,13 @@
                         <div class="card has-text-centered mt-1 mb-1">
                             <h2 class="title mt-0 mb-0">Your job is done!</h2>
                             
-                            <img class="delpic mt-0 pt-1" src="http://localhost/vegemart/public/images/deliverydone.jpg">
+                            <img class="delpic mt-0 pt-1" src="https://localhost/vegemart/public/images/deliverydone.jpg">
                             <p>You successfully delivered order <a href="#">#1656346</a></p>
                             <p>Your payment will be credited to your bank account</p>
                             <p>If you have any questions or queries feel free to contact us at the Vegemart help desk </p><br>
-                            <a id="ab" href="http://localhost/vegemart/public/deliverer/deliverer_home.php"><i class="fa fa-hand-o-left pr-1" style="font-size:22px; font-weight:500; color:#3e8e41;"></i>Back To Home</a>                 
+                            <a id="ab" href="https://localhost/vegemart/public/deliverer/deliverer_home.php"><i class="fa fa-hand-o-left pr-1" style="font-size:22px; font-weight:500; color:#3e8e41;"></i>Back To Home</a>                 
                             <br>
-                            <img class="logo mt-2 mb-1" src="http://localhost/vegemart/public/images/logob.png">
+                            <img class="logo mt-2 mb-1" src="https://localhost/vegemart/public/images/logob.png">
                         </div>
                     </div>
                   </div>

@@ -12,7 +12,7 @@
         <link rel="stylesheet" type="text/css" href="../css/deliverer-home.css">
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <link rel="stylesheet" type="text/css" href="../css/footer.css">
-        <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
+        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
         <title>Deliverer Dashboard | Vegemart</title>
     </head>
     <body>
@@ -154,7 +154,7 @@
                                 <p class="mb-0 pb-0"><?php echo $rowBuyer['address1']?>,</p>
                                 <p class="mb-0 pb-0"><?php echo $rowBuyer['address2']?></p>
                                 <p class="mb-0 pb-0"><?php echo $rowBuyer['city']?></p>
-                                <button class="button mt-1" onClick="location.href='http://localhost/vegemart/public/deliverer/delivery.php';">Accept</button>
+                                <button class="button mt-1" onClick="location.href='https://localhost/vegemart/public/deliverer/delivery.php';">Accept</button>
                             </div>
 
                             <?php

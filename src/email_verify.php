@@ -16,7 +16,7 @@
             $subject="Password reset token";
             $message='A request has been recieved to change the password for your vegemart accoount.';
             $message.='Please follow the url and reset your password.The link will only be valid for one time use only.<br>';
-            $message.='http://localhost/vegemart/public/password_reset.php?token='.$token;
+            $message.='https://localhost/vegemart/public/password_reset.php?token='.$token;
             $header="From: {$from}\r\nContent-Type: text/html;";
 
             $send_result=mail($to,$subject,$message,$header);

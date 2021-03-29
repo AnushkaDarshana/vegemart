@@ -13,7 +13,7 @@ if (!(isset($_SESSION['loggedInSellerID']) || isset($_SESSION['loggedInUserID'])
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
+        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../css/seller-my-sales.css">
         <title>My Sales | Vegemart</title>

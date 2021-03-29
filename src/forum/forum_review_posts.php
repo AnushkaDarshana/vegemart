@@ -42,7 +42,7 @@
                 $display_block .=
                 "<tr>   
                     <form method=post action=\"$_SERVER[PHP_SELF]\">     
-                        <td><img class=\"user-image\" src=\"http://localhost/vegemart/public/images/users/$post_owner_pic\" alt=\"\"><br>
+                        <td><img class=\"user-image\" src=\"https://localhost/vegemart/public/images/users/$post_owner_pic\" alt=\"\"><br>
                         $post_owner</td>
                         <input type=\"hidden\" name=\"topic_id\" value=\"$topicid\"> 
                         <td>$topic_title</td>

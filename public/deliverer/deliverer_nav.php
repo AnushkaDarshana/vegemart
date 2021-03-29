@@ -49,10 +49,10 @@
 
                         <li>
                         <div class=\"nav-dropdown\">
-                            <img class=\"dp\" src=\"http://localhost/vegemart/public/images/users/{$rowUser['profilePic']}\" alt=\"Avatar\">
+                            <img class=\"dp\" src=\"https://localhost/vegemart/public/images/users/{$rowUser['profilePic']}\" alt=\"Avatar\">
                             <div class=\"dropdown-content\">
-                                <a href=\"http://localhost/vegemart/public/deliverer/deliverer_profile_edit.php\">View Profile</a>
-                                <a href=\"http://localhost/vegemart/src/logout.php\">Logout</a>
+                                <a href=\"https://localhost/vegemart/public/deliverer/deliverer_profile_edit.php\">View Profile</a>
+                                <a href=\"https://localhost/vegemart/src/logout.php\">Logout</a>
                             </div>
                         </div>
                         </li>";
@@ -60,7 +60,7 @@
                 }    
                 else{
                     // echo"<li><a href=\"../login.php\">Login</a></li>";
-                    echo"<li><button class=\"loginbtn\" onClick=\"location.href='http://localhost/vegemart/public/login.php';\">Login</button><li>";
+                    echo"<li><button class=\"loginbtn\" onClick=\"location.href='https://localhost/vegemart/public/login.php';\">Login</button><li>";
                 }   
             ?> 
             </ul>
