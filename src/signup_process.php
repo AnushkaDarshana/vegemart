@@ -64,7 +64,15 @@
                 $user_id = mysqli_insert_id($con);
                 
                 $client = "INSERT INTO `client` ( `user_id`,`fName`,`lName`,`phoneNum`,`address1`,`address2`,`city`,`profilePic`) VALUES ('".$user_id."','".$fName."','".$lName."','".$phoneNum."','".$address1."','".$address2."','".$city."','".$imageName."');";                
-                mysqli_query($con,$client);     
+                mysqli_query($con,$client);  
+                
+                $to=$email;
+                $from='vegemartucsc@gmail.com';
+                $subject= 'Account has been created';
+                $message='<b>New account has been created';
+                $header="From: {$from}\r\nContent-Type: text/html;";
+
+                $send_result=mail($to, $subject, $message, $header);
                 header('Location:../public/login.php');
             }
                               

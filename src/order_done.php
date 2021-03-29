@@ -11,18 +11,27 @@
     $orderStatus= "UPDATE `orders` SET `paymentStatus`=1 WHERE `orderID`='$orderID' ";
     if ($con->query($orderStatus) === true) {
 
+            //buyerID
             $userIDQuery = mysqli_query($con, "SELECT userID FROM orders where orderID ='$orderID'");
             $rowUser = mysqli_fetch_row($userIDQuery);
             $userID = $rowUser[0];
         
+            //buyerEmail
             $emailQuery = mysqli_query($con, "SELECT email FROM users where id ='$userID'");
             $rowUserEmail = mysqli_fetch_row($emailQuery);
             $email = $rowUserEmail[0];
 
+            //sellerEmail
+            $emailSellerQuery = mysqli_query($con, "SELECT email FROM users where id ='$userID'");
+            $rowSellerEmail = mysqli_fetch_row($emailSellerQuery);
+            $emailSeller = $rowSellerEmail[0];
 
+            //buyerName
             $userNameQuery = mysqli_query($con, "SELECT fName FROM client where user_id ='$userID'");
             $rowUserName = mysqli_fetch_row($userNameQuery);
             $user = $rowUserName[0];      
+
+            //email to buyer that his payment has been confirmed
 
             $to=$email;
             $from='vegemartucsc@gmail.com';
@@ -31,6 +40,15 @@
             $header="From: {$from}\r\nContent-Type: text/html;";
 
             $send_result=mail($to,$subject,$message,$header);
+
+            //email to seler that buyer did a payment to the order
+
+            $toSeller=$emailSeller;
+            $subjectSeller= 'To order # '.$orderID.' payment has been confirmed';
+            $messageSeller=$user.' did the payment for your products';
+            
+            $send_result=mail($toSeller,$subjectSeller,$messageSeller,$header);
+
             
         $bidIDQuery = mysqli_query($con, "SELECT bidID FROM orders where orderID ='$orderID'");
         while ($rowBidID  = mysqli_fetch_assoc($bidIDQuery)) {

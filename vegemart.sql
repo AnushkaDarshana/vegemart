@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2021 at 10:50 AM
+-- Generation Time: Mar 29, 2021 at 11:33 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -62,38 +62,15 @@ CREATE TABLE `bidding` (
   `startTime` datetime(6) NOT NULL,
   `endTime` datetime(6) NOT NULL,
   `bidStatus` tinyint(1) NOT NULL,
-  `notification` tinyint(3) NOT NULL
+  `result` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `bidding`
 --
 
-INSERT INTO `bidding` (`bidID`, `sellerID`, `productID`, `quantityID`, `userID`, `bidQuantity`, `bidPrice`, `startTime`, `endTime`, `bidStatus`, `notification`) VALUES
-(2, 2, 15, 7, 3, 15, 100, '2021-03-27 15:15:11.000000', '2021-03-27 15:16:11.000000', 1, 2);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `cart`
---
-
-CREATE TABLE `cart` (
-  `cartItemID` int(11) NOT NULL,
-  `userID` int(10) NOT NULL,
-  `sellerID` int(10) NOT NULL,
-  `bidID` int(10) NOT NULL,
-  `productID` int(11) NOT NULL,
-  `quantityID` int(10) NOT NULL,
-  `cartStatus` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`cartItemID`, `userID`, `sellerID`, `bidID`, `productID`, `quantityID`, `cartStatus`) VALUES
-(1, 3, 2, 2, 15, 7, 0);
+INSERT INTO `bidding` (`bidID`, `sellerID`, `productID`, `quantityID`, `userID`, `bidQuantity`, `bidPrice`, `startTime`, `endTime`, `bidStatus`, `result`) VALUES
+(30, 8, 19, 12, 7, 15, 110, '2021-03-29 13:24:53.000000', '2021-03-29 13:25:53.000000', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -118,8 +95,11 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`id`, `user_id`, `fName`, `lName`, `phoneNum`, `address1`, `address2`, `city`, `profilePic`) VALUES
-(1, 2, 'Anushka', 'Vithanage', '+10715279016', 'Pan-Philippine Hwy c', 'Bandarawella road', 'Badulla', 'default.png'),
-(2, 3, 'Imashi', 'Dissanayake', '+94715329635', '75/2', 'Bandarawella road', 'Badulla', 'default.png');
+(1, 2, 'Imashi', 'Dissanayake', '+94715329635', '75/2', 'Bandarawella road', 'Badulla', 'default.png'),
+(3, 5, 'Imashi', 'Dissanayake', '+94715329635', '75/2', 'Bandarawella road', 'Badulla', 'default.png'),
+(4, 6, 'Imashi', 'Dissanayake', '+94715329635', '75/2', 'Bandarawella road', 'Badulla', 'default.png'),
+(5, 7, 'Anushka', 'Vithanage', '+10715279016', 'Pan-Philippine Hwy c', 'Bandarawella road', 'Badulla', 'default.png'),
+(6, 8, 'Imashi', 'Dissanayake', '+94715329635', '75/2', 'Bandarawella road', 'Badulla', 'default.png');
 
 -- --------------------------------------------------------
 
@@ -141,6 +121,13 @@ CREATE TABLE `deliverer` (
   `profilePic` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `deliverer`
+--
+
+INSERT INTO `deliverer` (`id`, `user_id`, `fName`, `lName`, `phoneNum`, `vehicle`, `vehicleNo`, `address1`, `address2`, `city`, `profilePic`) VALUES
+(1, 4, 'Anushka', 'Vithanage', '+107152790', 'bike', 'WP KC-7561', 'Pan-Philippine Hwy cor. Brgy. San Bartolome Rd', 'Bandarawella road', 'Colombo', 'default.png');
+
 -- --------------------------------------------------------
 
 --
@@ -149,9 +136,10 @@ CREATE TABLE `deliverer` (
 
 CREATE TABLE `deliveries` (
   `deliveryID` int(10) NOT NULL,
+  `delivererID` int(11) NOT NULL,
+  `orderID` int(11) NOT NULL,
   `buyerID` int(10) NOT NULL,
   `sellerID` int(10) NOT NULL,
-  `acceptStatus` tinyint(1) NOT NULL,
   `pickupStatus` tinyint(1) NOT NULL,
   `deliveryStatus` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -194,11 +182,37 @@ CREATE TABLE `forum_topics` (
 
 CREATE TABLE `orders` (
   `orderID` int(10) NOT NULL,
-  `cartItemID` int(10) NOT NULL,
-  `buyerID` int(10) NOT NULL,
+  `userID` int(10) NOT NULL,
   `sellerID` int(10) NOT NULL,
+  `bidID` int(10) NOT NULL,
+  `productID` int(10) NOT NULL,
+  `quantityID` int(10) NOT NULL,
   `paymentStatus` tinyint(1) NOT NULL,
-  `delivery` tinyint(1) NOT NULL
+  `delivery` tinyint(1) NOT NULL,
+  `acceptDelivery` tinyint(1) NOT NULL,
+  `notifyStatus` tinyint(1) NOT NULL,
+  `notifyDate` datetime NOT NULL,
+  `canceled_orders` tinyint(1) NOT NULL,
+  `orderCancelDate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`orderID`, `userID`, `sellerID`, `bidID`, `productID`, `quantityID`, `paymentStatus`, `delivery`, `acceptDelivery`, `notifyStatus`, `notifyDate`, `canceled_orders`, `orderCancelDate`) VALUES
+(35, 7, 8, 30, 19, 12, 0, 0, 0, 1, '2021-03-29 13:26:53', 1, '2021-03-29 13:29:19');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment`
+--
+
+CREATE TABLE `payment` (
+  `paymentID` int(10) NOT NULL,
+  `orderID` int(10) NOT NULL,
+  `paid_amount` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -217,16 +231,17 @@ CREATE TABLE `products` (
   `city` varchar(20) NOT NULL,
   `description` text NOT NULL,
   `expireDate` datetime(6) NOT NULL,
-  `availability` tinyint(1) NOT NULL,
-  `notification` tinyint(1) NOT NULL
+  `availability` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`productID`, `sellerID`, `name`, `imageName`, `address1`, `address2`, `city`, `description`, `expireDate`, `availability`, `notification`) VALUES
-(15, 2, 'Beans', 'beans.png', '35/2', 'galle road', 'Galle', '', '2021-04-01 15:14:07.000000', 1, 0);
+INSERT INTO `products` (`productID`, `sellerID`, `name`, `imageName`, `address1`, `address2`, `city`, `description`, `expireDate`, `availability`) VALUES
+(17, 2, 'Beans', 'beans.png', '35/2', 'galle road', 'Galle', '', '2021-04-01 20:53:26.000000', 0),
+(18, 2, 'Beans', 'beans.png', '35/2', 'galle road', 'Galle', '', '2021-04-01 20:53:26.000000', 0),
+(19, 8, 'Beetroot', 'KzyH8w_WANaUXwcympIyDGKuvfhg6RzOxwhhar3k2Ug.png', '75/2', 'Bandarawella road', 'Badulla', '', '2021-04-03 12:00:35.000000', 0);
 
 -- --------------------------------------------------------
 
@@ -247,7 +262,9 @@ CREATE TABLE `quantitysets` (
 --
 
 INSERT INTO `quantitysets` (`quantityID`, `productID`, `quantity`, `minPrice`, `quantitySetStatus`) VALUES
-(7, 15, 15, 100, 1);
+(9, 17, 10, 100, 1),
+(10, 18, 20, 110, 1),
+(12, 19, 15, 110, 1);
 
 -- --------------------------------------------------------
 
@@ -303,8 +320,13 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `email`, `password`, `salt`, `userType`, `active_status`) VALUES
 (1, 'admin@gmail.com', 'd54e415b15556397fecb74004d8ea400', 'bf81f24d984460137f248c0dbc46ef5c', 'admin', 1),
-(2, 'anushka.darshana01@gmail.com', 'e011135bf2132ad03264894c06077105', 'a4c1ad2509c2a4e0c52a1fbaa0368b82', 'seller', 1),
-(3, 'imashi@gmail.com', 'db6d92b786b7462c38a3dc2dc313ee8c', 'e68c55e39a6d3fb08c338304fa9a15b7', 'user', 1);
+(2, 'imashi122@gmail.com', 'd32f8446fec6dd4508fc4f77859ca011', 'a4c1ad2509c2a4e0c52a1fbaa0368b82', 'seller', 1),
+(3, 'buyer@gmail.com', '7b05b9f8cc2b344918ad19b791755a44', 'e68c55e39a6d3fb08c338304fa9a15b7', 'user', 1),
+(4, 'anushka@gmail.com', 'df0d9f656e7a83251b1104c3151cc05c', '096127c727bf82cf7ca25ca820f7be38', 'deliverer', 1),
+(5, 'buyer@gmail.com', 'c09dadd1c979293b2c006e6db2a51c1a', '5762ac887b7d8467947104b2d7434986', 'user', 1),
+(6, 'imashi921a@gmail.com', 'd4a085b820fedeaea0970316007224d7', '2df96916976d98aad67e0b067ea18cb5', 'user', 1),
+(7, 'anushka.darshana01@gmail.com', '3a8acea921b27e158ff25d1ca8dfb5e6', 'b7b9f2404b3e4d16c81db9a473c25e7f', 'user', 1),
+(8, 'imashi@gmail.com', '239f86dd6ac33c0f6d075179f3652a2a', '808fc610c1370ea247cdc9610a60e218', 'seller', 1);
 
 --
 -- Indexes for dumped tables
@@ -328,17 +350,6 @@ ALTER TABLE `bidding`
   ADD KEY `quantityID` (`quantityID`);
 
 --
--- Indexes for table `cart`
---
-ALTER TABLE `cart`
-  ADD PRIMARY KEY (`cartItemID`),
-  ADD KEY `bidID` (`bidID`),
-  ADD KEY `productID` (`productID`),
-  ADD KEY `userID` (`userID`),
-  ADD KEY `sellerID` (`sellerID`),
-  ADD KEY `quantityID` (`quantityID`);
-
---
 -- Indexes for table `client`
 --
 ALTER TABLE `client`
@@ -358,7 +369,9 @@ ALTER TABLE `deliverer`
 ALTER TABLE `deliveries`
   ADD PRIMARY KEY (`deliveryID`),
   ADD KEY `deliveries_ibfk_1` (`buyerID`),
-  ADD KEY `sellerID` (`sellerID`);
+  ADD KEY `sellerID` (`sellerID`),
+  ADD KEY `delivererID` (`delivererID`),
+  ADD KEY `orderID` (`orderID`);
 
 --
 -- Indexes for table `forum_posts`
@@ -380,9 +393,18 @@ ALTER TABLE `forum_topics`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`orderID`),
-  ADD KEY `orders_ibfk_1` (`buyerID`),
+  ADD KEY `orders_ibfk_1` (`userID`),
   ADD KEY `sellerID` (`sellerID`),
-  ADD KEY `cartItemID` (`cartItemID`);
+  ADD KEY `orders_ibfk_4` (`bidID`),
+  ADD KEY `productID` (`productID`),
+  ADD KEY `quantityID` (`quantityID`);
+
+--
+-- Indexes for table `payment`
+--
+ALTER TABLE `payment`
+  ADD PRIMARY KEY (`paymentID`),
+  ADD KEY `orderID` (`orderID`);
 
 --
 -- Indexes for table `products`
@@ -432,31 +454,25 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `bidding`
 --
 ALTER TABLE `bidding`
-  MODIFY `bidID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `cart`
---
-ALTER TABLE `cart`
-  MODIFY `cartItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `bidID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `deliverer`
 --
 ALTER TABLE `deliverer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `deliveries`
 --
 ALTER TABLE `deliveries`
-  MODIFY `deliveryID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `deliveryID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `forum_posts`
@@ -474,19 +490,25 @@ ALTER TABLE `forum_topics`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `orderID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT for table `payment`
+--
+ALTER TABLE `payment`
+  MODIFY `paymentID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `productID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `quantitysets`
 --
 ALTER TABLE `quantitysets`
-  MODIFY `quantityID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `quantityID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `reviews`
@@ -504,7 +526,7 @@ ALTER TABLE `tokens`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
@@ -526,16 +548,6 @@ ALTER TABLE `bidding`
   ADD CONSTRAINT `bidding_ibfk_4` FOREIGN KEY (`quantityID`) REFERENCES `quantitysets` (`quantityID`);
 
 --
--- Constraints for table `cart`
---
-ALTER TABLE `cart`
-  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`bidID`) REFERENCES `bidding` (`bidID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cart_ibfk_3` FOREIGN KEY (`userID`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cart_ibfk_4` FOREIGN KEY (`sellerID`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cart_ibfk_5` FOREIGN KEY (`quantityID`) REFERENCES `quantitysets` (`quantityID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `client`
 --
 ALTER TABLE `client`
@@ -552,7 +564,9 @@ ALTER TABLE `deliverer`
 --
 ALTER TABLE `deliveries`
   ADD CONSTRAINT `deliveries_ibfk_1` FOREIGN KEY (`buyerID`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `deliveries_ibfk_2` FOREIGN KEY (`sellerID`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `deliveries_ibfk_2` FOREIGN KEY (`sellerID`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `deliveries_ibfk_3` FOREIGN KEY (`delivererID`) REFERENCES `deliverer` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `deliveries_ibfk_4` FOREIGN KEY (`orderID`) REFERENCES `orders` (`orderID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `forum_posts`
@@ -571,9 +585,17 @@ ALTER TABLE `forum_topics`
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`buyerID`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`sellerID`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`cartItemID`) REFERENCES `cart` (`cartItemID`);
+  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`userID`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`bidID`) REFERENCES `bidding` (`bidID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `orders_ibfk_5` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `orders_ibfk_6` FOREIGN KEY (`quantityID`) REFERENCES `quantitysets` (`quantityID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `payment`
+--
+ALTER TABLE `payment`
+  ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `orders` (`orderID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `products`

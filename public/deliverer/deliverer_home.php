@@ -26,37 +26,45 @@
                 $_SESSION["loggedInDelivererID"] = $rowUser['user_id'];
                 echo "
                 <h1 id=\"heading\" style=\"text-align:left; font-family: Candara; color: #138D75; margin:0.2em 1em 0;\">Hello ".$rowUser['fName']."! Welcome to Deliverer dashboard </h1>";
+                
+                if(isset($_GET["location"])){
+                    $city = $_GET["location"];
+                }
+                else{
+                    $city = $rowUser['city'];
+                }            
             }
         ?>
         <div class="columns group">
             <div class="column is-3 mt-1 pl-2 pr-0">
                 <h1 id="title" class="mt-1 mb-1">Select your Location</h1>
-                <form class="location">
+                <form class="location" method="get" action="">
                     <label class="select-box">
-                        <select name="location" id="location" class="custom-select location" placeholder="Select Location">
-                            <option>Anuradhapura</option>
-                            <option>Badulla</option>
-                            <option>Batticaloa</option>
-                            <option>Colombo</option>
-                            <option>Galle</option>
-                            <option>Gampaha</option>
-                            <option>Jaffna</option>
-                            <option>Kalutara</option>
-                            <option>Kandy</option>
-                            <option>Kegalle</option>
-                            <option>Kilinochchi</option>
-                            <option>Kurunegala</option>
-                            <option>Mannar</option>
-                            <option>Matale</option>
-                            <option>Matara</option>
-                            <option>Moneragala</option>
-                            <option>Mullaitivu</option>
-                            <option>Nuwara Eliya</option>
-                            <option>Polonnaruwa</option>
-                            <option>Puttalam</option>
-                            <option>Ratnapura</option>
-                            <option>Trincomalee</option>
-                            <option>Vavuniya</option>
+                        <select name="location" id="location" class="custom-select location" placeholder="Select Location" onchange='this.form.submit()'>
+                            <option value='<?php echo $city ?>' selected='selected'><?php echo $city ?></option>
+                            <option value="Anuradhapura">Anuradhapura</option>
+                            <option value="Badulla">Badulla</option>
+                            <option value="Batticaloa">Batticaloa</option>
+                            <option value="Colombo">Colombo</option>
+                            <option value="Galle">Galle</option>
+                            <option value="Gampaha">Gampaha</option>
+                            <option value="Jaffna">Jaffna</option>
+                            <option value="Kalutara">Kalutara</option>
+                            <option value="Kandy">Kandy</option>
+                            <option value="Kegalle">Kegalle</option>
+                            <option value="Kilinochchi">Kilinochchi</option>
+                            <option value="Kurunegala">Kurunegala</option>
+                            <option value="Mannar">Mannar</option>
+                            <option value="Matale">Matale</option>
+                            <option value="Matara">Matara</option>
+                            <option value="Moneragala">Moneragala</option>
+                            <option value="Mullaitivu">Mullaitivu</option>
+                            <option value="Nuwara Eliya">Nuwara Eliya</option>
+                            <option value="Polonnaruwa">Polonnaruwa</option>
+                            <option value="Puttalam">Puttalam</option>
+                            <option value="Ratnapura">Ratnapura</option>
+                            <option value="Trincomalee">Trincomalee</option>
+                            <option value="Vavuniya">Vavuniya</option>
                         </select>
                     </label>
                 </form>
@@ -90,32 +98,46 @@
                         include ('../../config/dbconfig.php');
                         include ('../../src/session.php');
 
-                        $deliveries = "SELECT * FROM orders where `paymentStatus` = 1 AND `delivery` = 1";
-                        $deliveryquery = mysqli_query($con,$deliveries);
-                       
-                        while ($rowdelivery = mysqli_fetch_assoc($deliveryquery)) {
-                            $buyerID = $rowdelivery['buyerID'];
-                            $sellerID = $rowdelivery['sellerID'];
-                            $productID = $rowdelivery['cartItemID'];
+                        //deliveries in the city deliverer staying
+                        
+                        $cityQuery = "SELECT `city` FROM products where `city` ='$city' ";  
+                        $resultCity = mysqli_query($con,$cityQuery);
+                        while ($rowCity= mysqli_fetch_assoc($resultCity)) {
 
-                            //buyer details
-                            $buyerInfo = "SELECT * FROM client WHERE `user_id` ='$buyerID' ";      
-                            $buyerquery = mysqli_query($con,$buyerInfo); 
-                            
-                            //seller details
-                            $sellerInfo = "SELECT * FROM client WHERE `user_id` ='$sellerID' ";      
-                            $sellerquery = mysqli_query($con,$sellerInfo);  
-                            
-                            //product details
-                            $productInfo = "SELECT * FROM products WHERE `productID` ='$productID' ";      
-                            $productquery = mysqli_query($con,$productInfo);
-                    ?>
+                            //deliveries available
+                                $deliveries = "SELECT * FROM orders where `paymentStatus` = 1 AND `delivery` = 1 AND `acceptDelivery` = 0";
+                                $deliveryquery = mysqli_query($con, $deliveries);
+
+                                while ($rowdelivery = mysqli_fetch_assoc($deliveryquery)) {
+                                    $orderID = $rowdelivery['orderID'];
+                                    $buyerID = $rowdelivery['userID'];
+                                    $sellerID = $rowdelivery['sellerID'];
+                                    $productID = $rowdelivery['productID'];
+                                    $quantityID = $rowdelivery['quantityID'];
+
+                                
+                                
+                                    //buyer details
+                                    $buyerInfo = "SELECT * FROM client WHERE `user_id` ='$buyerID' ";
+                                    $buyerquery = mysqli_query($con, $buyerInfo);
+                                
+                                    //seller details
+                                    $sellerInfo = "SELECT * FROM client WHERE `user_id` ='$sellerID' ";
+                                    $sellerquery = mysqli_query($con, $sellerInfo);
+                                
+                                    //product details
+                                    $productInfo = "SELECT * FROM products WHERE `productID` ='$productID' ";
+                                    $productquery = mysqli_query($con, $productInfo);
+
+                                    //quantity details
+                                    $quantityInfo = "SELECT * FROM quantitysets WHERE `quantityID` ='$quantityID' ";
+                                    $quantityquery = mysqli_query($con, $quantityInfo); ?>
 
                     <div class="row item-row mt-0">
                         <div class="columns group">
                             <?php
-                                while ($rowSeller = mysqli_fetch_assoc($sellerquery)) {                                    
-                            ?>
+                                while ($rowSeller = mysqli_fetch_assoc($sellerquery)) {
+                                    ?>
                             <div class="column is-2">
                                 <p class="mb-0 pb-0"><?php echo $rowSeller['fName'] . " " . $rowSeller['lName']?></p>
                             </div>
@@ -125,27 +147,26 @@
                                 <p><?php echo $rowSeller['city']?></p>
                             </div>
                             <?php
+                                } ?>
+                            <?php
+                                while ($rowProduct = mysqli_fetch_assoc($productquery)) {
+                                    ?>
+                            <div class="column is-1">
+                                <p class="mb-0 pb-0"><?php echo $rowProduct['name']?></p>                                
+                            </div>
+                            <?php
                                 }
+                                    while ($rowQuantity = mysqli_fetch_assoc($quantityquery)) {
+                                        ?>
                             
-                            ?>
-                            <?php
-                                while ($rowSeller = mysqli_fetch_assoc($productquery)) {                                    
-                            ?>
                             <div class="column is-1">
-                                <p class="mb-0 pb-0">Carrot</p>
-                                <p class="mb-0 pb-0">Beans</p>
+                                <p class="mb-0 pb-0"><?php echo $rowQuantity['quantity']?></p>
                             </div>
-
+                            
                             <?php
-                                }                                  
-                            ?>
-                            <div class="column is-1">
-                                <p class="mb-0 pb-0">5</p>
-                                <p class="mb-0 pb-0">5</p>
-                            </div>
-                            <?php
-                                while ($rowBuyer = mysqli_fetch_assoc($buyerquery)) {                                    
-                            ?>
+                                    }
+                                    while ($rowBuyer = mysqli_fetch_assoc($buyerquery)) {
+                                        ?>
                             <div class="column is-2">
                                 <p class="mb-0 pb-0"><?php echo $rowBuyer['fName'] . " " . $rowBuyer['lName']?></p>
                             </div>
@@ -154,10 +175,11 @@
                                 <p class="mb-0 pb-0"><?php echo $rowBuyer['address1']?>,</p>
                                 <p class="mb-0 pb-0"><?php echo $rowBuyer['address2']?></p>
                                 <p class="mb-0 pb-0"><?php echo $rowBuyer['city']?></p>
-                                <button class="button mt-1" onClick="location.href='https://localhost/vegemart/public/deliverer/delivery.php';">Accept</button>
+                                <button class="button mt-1" onClick="location.href='https://localhost/vegemart/src/deliverer/accept_delivery.php?id=<?php echo $orderID ?>';">Accept</button>
                             </div>
 
                             <?php
+                                    }
                                 }
                             }
                             ?>

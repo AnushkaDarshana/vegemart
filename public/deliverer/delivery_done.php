@@ -10,7 +10,15 @@
         <title>Delivery Complete | Vegemart</title>
     </head>
     <body>  
-        <?php include "../deliverer/deliverer_nav.php"; ?>  
+        <?php 
+        
+            include "../deliverer/deliverer_nav.php";            
+            include ('../../config/dbconfig.php');
+            include ('../../src/session.php');
+
+            $orderID = $_GET['id'];        
+        
+        ?>  
 
         <div class="row">
             <div class="columns group mt-1 mb-1">
@@ -21,7 +29,7 @@
                             <h2 class="title mt-0 mb-0">Your job is done!</h2>
                             
                             <img class="delpic mt-0 pt-1" src="https://localhost/vegemart/public/images/deliverydone.jpg">
-                            <p>You successfully delivered order <a href="#">#1656346</a></p>
+                            <p>You successfully delivered order <a href="#">#<?php echo $orderID ?></a></p>
                             <p>Your payment will be credited to your bank account</p>
                             <p>If you have any questions or queries feel free to contact us at the Vegemart help desk </p><br>
                             <a id="ab" href="https://localhost/vegemart/public/deliverer/deliverer_home.php"><i class="fa fa-hand-o-left pr-1" style="font-size:22px; font-weight:500; color:#3e8e41;"></i>Back To Home</a>                 

@@ -18,87 +18,51 @@
             <div class="columns group mt-0">
                 <div class="column is-1 mt-0"></div>
                 <div class="column is-10 mt-0">
+                    <?php
+                        include ('../../config/dbconfig.php');
+                        include ('../../src/session.php');
+        
+                        $userID = $_SESSION["loggedInDelivererID"];
+                        $delivery = "SELECT * FROM deliveries WHERE `delivererID` ='$userID' AND deliveryStatus=1";
+                        $deliveryresult = mysqli_query($con, $delivery);
+
+                        while ($rowdelivery = mysqli_fetch_assoc($deliveryresult)) {
+                            $buyerID = $rowdelivery['buyerID'];
+                            $sellerID = $rowdelivery['sellerID'];
+        
+                            //buyer details
+                            $buyerInfo = "SELECT * FROM client WHERE `user_id` ='$buyerID' ";
+                            $buyerquery = mysqli_query($con, $buyerInfo);
+                                        
+                            //seller details
+                            $sellerInfo = "SELECT * FROM client WHERE `user_id` ='$sellerID' ";
+                            $sellerquery = mysqli_query($con, $sellerInfo); ?>
+
                     <table>
                         <tr>
-                            <th>Record ID</th>
-                            <th>Date</th>
                             <th>Seller Name</th>
                             <th>Picked up Location</th>
                             <th>Buyer Name</th>
                             <th>Delivered Location</th>                         
-                            <th>Earned amount (Rs.)</th>
-                            <th></th>
+                            
                         </tr>
                         <tr>
-                            <td>#1</td>
-                            <td>02/01/2020</td>
-                            <td>Nimal Perera</td>
-                            <td>Picked up Location</td>
-                            <td>Thusitha Bandara</td>
-                            <td>Delivered Location</td>
-                            <td>20.00</td>
-                            <td class="has-text-centered"><a href="#">View reciept</a></td>
+                            <?php
+                            while ($rowSeller = mysqli_fetch_assoc($sellerquery)) {?>
+                            <td><?php echo $rowSeller['fName'] . " " . $rowSeller['lName'] ?></td>
+                            <td><?php echo $rowSeller['address1'] . ", " . $rowSeller['address2'] . ", " . $rowSeller['city'] ?></td>
+                            <?php
+                            }
+                            while ($rowUser = mysqli_fetch_assoc($buyerquery)) {
+                                ?>
+                            <td><?php echo $rowUser['fName'] . " " . $rowUser['lName'] ?></td>
+                            <td><?php echo $rowUser['address1'] . ", " . $rowUser['address2'] . ", " . $rowUser['city'] ?></td>
+                            <?php
+                            }
+                        }
+                            ?>                            
                         </tr>
-                        <tr>
-                            <td>#2</td>
-                            <td>07/03/2020</td>                    
-                            <td>Amal Silva</td>
-                            <td>Picked up Location</td>
-                            <td>Kamal Diaz</td>
-                            <td>Delivered Location</td>
-                            <td>40.00</td>
-                            <td  class="has-text-centered"><a href="#">View reciept</a></td>
-                        </tr>
-                        <tr>
-                            <td>#3</td>
-                            <td>02/01/2020</td>                           
-                            <td>Nimal Perera</td>
-                            <td>Picked up Location</td>
-                            <td>Kamal Diaz</td>
-                            <td>Delivered Location</td>
-                            <td>50.00</td>
-                            <td class="has-text-centered"><a href="#">View reciept</a></td>
-                        </tr>
-                        <tr>
-                            <td>#4</td>
-                            <td>07/03/2020</td>                          
-                            <td>Amal Silva</td>
-                            <td>Picked up Location</td>
-                            <td>Nimal Perera</td>
-                            <td>Delivered Location</td>
-                            <td>30.00</td>
-                            <td  class="has-text-centered"><a href="#">View reciept</a></td>
-                        </tr>
-                        <tr>
-                            <td>#5</td>
-                            <td>02/01/2020</td>
-                            <td>Nimal Perera</td>
-                            <td>Picked up Location</td>
-                            <td>Thusitha Bandara</td>
-                            <td>Delivered Location</td>
-                            <td>200.00</td>
-                            <td class="has-text-centered"><a href="#">View reciept</a></td>
-                        </tr>
-                        <tr>
-                            <td>#6</td>
-                            <td>07/03/2020</td>
-                            <td>Amal Silva</td>
-                            <td>Picked up Location</td>
-                            <td>Thusitha Bandara</td>
-                            <td>Delivered Location</td>
-                            <td>740.00</td>
-                            <td  class="has-text-centered"><a href="#">View reciept</a></td>
-                        </tr>
-                        <tr>
-                            <td>#7</td>
-                            <td>02/01/2020</td>
-                            <td>Nimal Perera</td>
-                            <td>Picked up Location</td>
-                            <td>Kamal Diaz</td>
-                            <td>Delivered Location</td>
-                            <td>200.00</td>
-                            <td class="has-text-centered"><a href="#">View reciept</a></td>
-                        </tr>
+                        
                         
                     </table><br><br>
                 </div>

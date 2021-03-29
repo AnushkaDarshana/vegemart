@@ -18,6 +18,7 @@
             <ul class="main-nav">
                 <li><a href="./deliverer_home.php">Home</a></li>
                 <li><a href="#">About</a></li>
+                <li><a href="https://localhost/vegemart/public/help_desk.php">Help Desk</a></li>
                 
                 <li><a href="./my_deliveries.php">My Deliveries</a></li>
                 <?php  
