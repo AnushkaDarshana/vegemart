@@ -13,29 +13,42 @@
 
 
 
+// Location Graph
+$sql1 ="SELECT city, COUNT(`user_id`) AS tot_count 
+        FROM `deliverer` d, (SELECT `id` 
+                        FROM `users` 
+                        WHERE `userType` = 'deliverer') del 
+        WHERE d.`user_id`= del.id 
+        GROUP BY d.city";
 
+$result1 = mysqli_query($con,$sql1);
+        $c=array(); 
+        $d=array();   
 
+while($row1 = mysqli_fetch_assoc($result1)){
+    array_push($c, $row1['city']);
+    array_push($d, $row1['tot_count']);
+    }
+    $js_array_c = json_encode($c);
+    $js_array_d = json_encode($d);
 
-
-
-
-
+    
+    //Total deliverers
     $userType="deliverer";
-    //Total sellers
     $sql2 ="SELECT COUNT(id) AS total
             FROM `users`
             WHERE userType='$userType'";
     $result2 = mysqli_query($con,$sql2);
     $row2 = mysqli_fetch_assoc($result2);
     
-    //active sellers 
+    //active deliverers 
     $sql3 ="SELECT COUNT(id) AS total1
             FROM `users`
             WHERE userType='$userType' and  active_status= 1 "; 
     $result3 = mysqli_query($con,$sql3);
     $row3 = mysqli_fetch_assoc($result3);
 
-    //inactive sellres orders
+    //inactive deliverers 
     $sql4 ="SELECT COUNT(id) AS total2
             FROM `users`
             WHERE userType='$userType' and  active_status= 0 "; 
@@ -190,7 +203,7 @@
                         backgroundColor: '#239B56',
                         borderColor:'rgba(35, 155, 86 , 1)',
                         borderWidth: 1,
-                        label: 'Number of Buyers Joined',
+                        label: 'Number of Deliverers Joined',
                         data: [237, 426, 1842, 2561, 4833, 6252, 9547, 7477, 15753, 13324, 18436, 3417]
                     }]
                 },
@@ -216,12 +229,12 @@
             var PieChart  = new Chart('buyer_location_chart', {
                 type: 'pie',
                 data: {
-                    labels: ['Kandy', 'Nuwara Eliya', 'Matale','Badulla', 'Anuradhapura'],
+                    labels: <?php echo $js_array_c ?>,
                     datasets: [{
-                        label: 'Number of Buyers',
-                        backgroundColor: ['#F9E79F','#8E44AD' ,'#FADBD8', '#C0392B', '#76D7C4',],
+                        label: 'Number of Deliverers',
+                        backgroundColor: ['#F1948A','#5DADE2' ,'#E163BB', '#F9E79F', '#76D7C4',],
                         borderWidth: 0.5,
-                        data: [ 12632, 6245, 9419, 2638, 2415]
+                        data: <?php echo $js_array_d ?>
                     }]
                 },
                 options: {
