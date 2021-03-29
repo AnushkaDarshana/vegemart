@@ -1,26 +1,33 @@
 <?php
     include ('../../config/dbconfig.php');
 
+    
 
 
 
 
 
+    
+    // Location Graph
+    $sql1 ="SELECT city, COUNT(`user_id`) AS tot_count 
+             FROM `client` c, (SELECT `id` 
+                                FROM `users` 
+                                WHERE `userType` = 'seller') s 
+             WHERE c.`user_id`= s.id 
+             GROUP BY c.city";
 
+    $result1 = mysqli_query($con,$sql1);
+        $c=array(); 
+        $d=array();   
 
-
-
-
-
-
-
-
-
-
-
-
-
-    $userType="seller";
+while($row1 = mysqli_fetch_assoc($result1)){
+        array_push($c, $row1['city']);
+        array_push($d, $row1['tot_count']);
+        }
+        $js_array_c = json_encode($c);
+        $js_array_d = json_encode($d);
+    
+$userType="seller";
     //Total sellers
     $sql2 ="SELECT COUNT(id) AS total
             FROM `users`
@@ -35,7 +42,7 @@
     $result3 = mysqli_query($con,$sql3);
     $row3 = mysqli_fetch_assoc($result3);
 
-    //inactive sellres orders
+    //inactive sellers 
     $sql4 ="SELECT COUNT(id) AS total2
             FROM `users`
             WHERE userType='$userType' and  active_status= 0 "; 
@@ -216,12 +223,12 @@
             var PieChart  = new Chart('seller_location_chart', {
                 type: 'pie',
                 data: {
-                    labels: ['Kandy', 'Nuwara Eliya', 'Matale','Badulla', 'Anuradhapura'],
+                    labels: <?php echo $js_array_c ?>,
                     datasets: [{
                         label: 'Number of Sales',
                         backgroundColor: ['#F9E79F','#8E44AD' ,'#FADBD8', '#C0392B', '#76D7C4',],
                         borderWidth: 0.5,
-                        data: [ 32, 45, 19, 38, 15]
+                        data: <?php echo $js_array_d ?>
                     }]
                 },
                 options: {
