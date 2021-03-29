@@ -25,7 +25,6 @@
 
     //create and issue the first query
     $add_topic = "INSERT INTO `forum_topics` (`topic_id`,`topic_title`,`topic_create_time`, `topic_owner`, `topic_status`) VALUES ('','".$topic_title."', now(),'".$userID."', 0);";
-    mysqli_query($con,$add_topic) or die(mysqli_error($con));
    
     $topic_id = mysqli_insert_id($con); //get the id of the last query 
 
@@ -34,7 +33,11 @@
    
     if (mysqli_query($con, $add_topic) === true && mysqli_query($con, $add_post) === true) {
         echo "<script>alert('Your post is sumbitted to review');</script>";
-        $message = base64_encode(urlencode("Successfully Edited!"));
+        $message = base64_encode(urlencode("Successfully Added!"));
+
+        $notification = "INSERT INTO `notification` (`type`,`forUser`,`entityID`, `notif_read`, `notif_time`) VALUES (10,'".$userID."', '".$topic_id."',0, now());";
+        mysqli_query($con,$notification); 
+
         header('Location:../../public/forum_home.php?msg='.$message);
         
         exit();

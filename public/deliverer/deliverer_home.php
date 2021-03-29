@@ -96,7 +96,7 @@
                         while ($rowdelivery = mysqli_fetch_assoc($deliveryquery)) {
                             $buyerID = $rowdelivery['buyerID'];
                             $sellerID = $rowdelivery['sellerID'];
-                            $productID = $rowdelivery['productID'];
+                            $productID = $rowdelivery['cartItemID'];
 
                             //buyer details
                             $buyerInfo = "SELECT * FROM client WHERE `user_id` ='$buyerID' ";      

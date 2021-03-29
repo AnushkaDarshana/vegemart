@@ -12,7 +12,14 @@
     </head>
 
     <body>
-        <?php include_once "./includes/nav.php"; ?>
+    <?php 
+        if (isset($_SESSION["loggedInUserID"])) {
+            include_once "./includes/nav.php";
+        }
+        else{
+            include_once "./includes/index_nav.php";
+        }
+        ?>
         
         <div class="row">
             <div class="heading">

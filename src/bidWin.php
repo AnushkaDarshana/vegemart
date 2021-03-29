@@ -1,10 +1,11 @@
 <?php
     include ('../src/session.php'); 
     include ('../config/dbconfig.php');
+    include ('../src/utils/helpers.php');
 
     $bidID = $_GET['id'];
     
-    $winBidDetailsQuery = "SELECT * FROM bidding WHERE bidID='$bidID'";
+    $winBidDetailsQuery = "SELECT * FROM `bidding` WHERE bidID='$bidID'";
     $winBidDetailsResult = mysqli_query($con, $winBidDetailsQuery);
     while ($rowWinBid  = mysqli_fetch_assoc($winBidDetailsResult)) {
 
@@ -18,7 +19,13 @@
         
         $resultQuery= "UPDATE `bidding` SET `result`=1 WHERE `bidID`='$bidID' ";
         if ($con->query($resultQuery) === true) {
-            echo "Record updated successfully";           
+            echo "Record updated successfully"; 
+            
+            $logString = "Buyer ". $userID . " won the bid " . $bidID;
+            writeAppLog($logString, "./logs");
+
+            $notification = "INSERT INTO `notification` (`type`,`forUser`,`entityID`, `notif_read`, `notif_time`) VALUES (2,'".$userID."', '".$bidID."',0, now());";
+            mysqli_query($con,$notification);        
         }
         else{
             echo "Error updating record: " . $con->error;
@@ -37,6 +44,10 @@
                     $productAvailability= "UPDATE `products` SET `availability`=0 WHERE `productID`='$productID' ";
                     if ($con->query($productAvailability) === true) {
                         echo "Record updated successfully";
+
+                        $notification = "INSERT INTO `notification` (`type`,`forUser`,`entityID`, `notif_read`, `notif_time`) VALUES (1,'".$sellerID."', '".$productID."',0, now());";
+                        mysqli_query($con,$notification);
+
                         header('Location:../public/products.php');
                     }
                     else{
@@ -56,8 +67,6 @@
         else {
             echo "Error updating record: " . $con->error;
         }
-
-        
     }    
 
 ?>

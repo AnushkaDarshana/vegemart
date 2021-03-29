@@ -12,7 +12,15 @@
     </head>
 
     <body>
-        <?php include_once "./includes/nav.php"; 
+        <?php
+            include ('../src/session.php'); 
+            include ('../config/dbconfig.php'); 
+            if (isset($_SESSION["loggedInUserID"])) {
+                include_once "./includes/nav.php";
+            }
+            else{
+                include_once "./includes/index_nav.php";
+            }
         ?>
         <!--slideshow starts here -->
         <div class="slideshow-container mt-0 pt-0 pb-0 mb-0">
@@ -164,7 +172,7 @@
                         ?>
                         <h3 style="text-transform: capitalize;"><?php echo $totalQuantity ?> kg</h3>                        
                         <h3>Location: <?php echo $rowProduct['city'] ?> </h3>
-                        <!-- <h3>Rs. <?php// echo $rowProduct['minPrice']  ?>(250g)</h3> -->
+                        <!-- <h3>Rs. // echo $rowProduct['minPrice']  (250g)</h3> -->
                     </div>
                 <?php
                 }

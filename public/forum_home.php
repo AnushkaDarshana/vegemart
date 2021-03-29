@@ -18,7 +18,14 @@ include('../src/session.php');
     </head>
 
     <body>
-        <?php include "./includes/nav.php"; ?>
+        <?php 
+            if (isset($_SESSION["loggedInUserID"])) {
+                include_once "./includes/nav.php";
+            }
+            else{
+                include_once "./includes/index_nav.php";
+            }
+        ?>
 
         <div class="heading">
             <h1><i class="fa fa-comments" style="font-size:38px; color:white; padding-right:0.2em;"></i>Vegemart Forum</h1>

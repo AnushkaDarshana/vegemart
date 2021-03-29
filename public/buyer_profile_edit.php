@@ -81,7 +81,7 @@
                                 <span>Enter your password to confirm</span>
                                 <div class="input-row">
                                     <label>Password</label> 
-                                    <input class="input-box" type="password" name="Password" placeholder="Current password" required>                                         
+                                    <input class="input-box" type="password" name="password" placeholder="Current password" required>                                         
                                 </div>
                                
                             </div>

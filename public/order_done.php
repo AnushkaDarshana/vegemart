@@ -35,7 +35,10 @@
                         <div class="card has-text-centered mt-1 mb-1">
                             <img class="typic mt-1 pt-1" src="https://www.flaticon.com/svg/static/icons/svg/1145/1145941.svg">
                             <h2 class="title mt-0">We recieved your Order!</h2>
-                            <p>Thank you for placing order <a href="#">#1656346</a></p>
+                            <?php
+                                    $orderID = $_GET['id'];
+                            ?>
+                            <p>Thank you for placing order <a href="#">#<?php echo $orderID ?></a></p>
                             <p>Don't forget to rate the seller and give feedback once you recieve your items</p>
                             <p>If you have any questions or queries feel free to contact us at the Vegemart help desk </p><br>
                                                

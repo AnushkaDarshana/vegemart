@@ -86,20 +86,20 @@
                         <h1 id="title" style="padding-bottom:0;">Available products</h1>
                             <div class="columns group">
                                 <div class="column is-2">
-                                    <h4></h4>
+                                    <h2></h2>
                                 </div>
                                 <div class="column is-2">
-                                    <h4>Item</h4>
+                                    <h2>Item</h2>
                                 </div>
                                 <div class="column is-2">
-                                    <h4>Quantity (kg)</h4>
+                                    <h2>Quantity (kg)</h2>
                                 </div>
                                 
                                 <div class="column is-3">
-                                    <h4></h4>
+                                    <h2></h2>
                                 </div>
                                 <div class="column is-3">
-                                    <h4></h4>
+                                    <h2></h2>
                                 </div>
                             </div>
                         </div>
@@ -151,7 +151,7 @@
                                                 <img class="item-img" src= "../images/products/<?php echo $row['imageName']?>">
                                             </div>
                                             <div class="column is-2">
-                                                <h4><?php echo $row['name'] ?> </h4>
+                                                <h2><?php echo $row['name'] ?> </h2>
                                             </div>
                                             <?php
                                                 $quantity = "SELECT quantity FROM quantitysets where productID ='$productID' ";
@@ -162,7 +162,7 @@
                                                 }
                                                 ?>
                                             <div class="column is-2">
-                                                <h4><?php echo $totalQuantity ?></h4>
+                                                <h2><?php echo $totalQuantity ?></h2>
                                             </div>
                                             <?php
                                                 if(isset($_SESSION["loggedInSellerID"])){

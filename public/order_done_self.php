@@ -35,28 +35,46 @@
                         <div class="card has-text-centered mt-1 mb-1">
                             <img class="typic mt-1 pt-1" src="https://www.flaticon.com/svg/static/icons/svg/1145/1145941.svg">
                             <h2 class="title mt-0">We recieved your Order!</h2>
-                            <p>Thank you for placing order <a href="#">#1656346</a></p>
-                            <p>You can pick up your order at</p>
+                            <?php
+                                    $orderID = $_GET['id'];
+                                    $orderQuery= "SELECT * FROM orders WHERE orderID='$orderID';";  
+                                    $orderResult=mysqli_query($con,$orderQuery);
+                                    while ($rowOrder  = mysqli_fetch_assoc($orderResult)) {
+                                        //get the seller details
+                                        $sellerID=$rowOrder['sellerID'];
+                                        $sellerQuery= "SELECT * FROM client WHERE user_id='$sellerID';";
+                                        $resultSeller=mysqli_query($con, $sellerQuery);
+                                        while ($rowseller  = mysqli_fetch_assoc($resultSeller)) {
+
+                                ?>
+                            <p>Thank you for placing order <a href="#">#<?php echo $orderID ?></a></p>
+                            <p>You can pick up your order at</p>                            
                             
                             <div class="columns group mt-1 mb-1">
                                 <div class="column is-7 mt-0 pl-2 pr-0 mr-0 pb-0 has-text-centered">
                                     <div class="mapouter pl-1">
                                         <div class="gmap_canvas">
-                                            <iframe width="340px" height="320px" id="gmap_canvas" src="https://maps.google.com/maps?q=125%20pilimathalawa%20kandy&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>                               
+                                            <iframe width="340px" height="320px" id="gmap_canvas"  src="https://maps.google.com/maps?q=<?php echo $rowseller['address1']?>%20<?php echo $rowseller['address2']?>%20<?php echo $rowseller['city']?>&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>       
                                         </div>
                                     </div>  
                                 </div>
+                               
                                 <div class="column is-5 mt-0 has-text-left pb-0 pl-0 mr-0">
                                     <h2 style="text-align:left; padding-bottom:0;">Conditions:</h2>
                                     <p style="text-align:left;">Pickup location is shown in the map</p>
                                     <p style="text-align:left;">Self Pickup should be done before 8pm</p><br>
                                     <h2 style="text-align:left; margin-bottom:0; padding-bottom:0;">Seller</h2>
-                                    <h3 style="text-align:left; margin-top:0; padding-top:0;">Anushka Darshana</h3>
-                                    <p style="text-align:left;">No. 44,</p>
-                                    <p style="text-align:left;">D. M. Rupasinghe mawatha,</p>
-                                    <p style="text-align:left;">Badulla</p>   
+                                    <h3 style="text-align:left; margin-top:0; padding-top:0;"><?php echo $rowseller['fName'] . " " . $rowseller['lName'] ?></h3>
+                                    <p style="text-align:left;"><?php echo $rowseller['address1']?>,</p>
+                                    <p style="text-align:left;"><?php echo $rowseller['address2']?>,</p>
+                                    <p style="text-align:left;"><?php echo $rowseller['city']?></p>
+                                    <p style="text-align:left;"><?php echo $rowseller['phoneNum']?></p>   
                                 </div>
                             </div>
+                            <?php
+                                        }
+                                    }
+                            ?>
 
                             <p>Don't forget to rate the seller and give feedback once you recieve your items</p>
                             <p>If you have any questions or queries feel free to contact us at the Vegemart help desk </p><br>

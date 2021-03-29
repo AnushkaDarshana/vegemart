@@ -55,10 +55,15 @@
         $post_text = $_POST['post_text']; 
 
         $insertQuery = "INSERT INTO `forum_posts` (`topic_id`,`post_text`,`post_create_time`, `post_owner`, `review_status`, `post_status`) VALUES ('".$topic_id."','".$post_text."', now(),'".$userID."', 0, 0)";
+        $post_id = mysqli_insert_id($con); 
 
         if (mysqli_query($con, $insertQuery) === true) {
             $message = base64_encode(urlencode("Successfully Edited!"));
             header('Location:../../public/forum_home.php?msg='.$message);
+
+            $notification = "INSERT INTO `notification` (`type`,`forUser`,`entityID`, `notif_read`, `notif_time`) VALUES (10,'".$userID."', '".$post_id."',0, now());";
+            mysqli_query($con,$notification); 
+
             exit();
         } else {
             $message = base64_encode(urlencode("SQL Error while Registering"));

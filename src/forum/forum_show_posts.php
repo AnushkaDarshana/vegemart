@@ -103,7 +103,11 @@
         
     }
     print $display_block; 
+    $sql = "SELECT * FROM `forum_posts`";
+    $result = mysqli_query($con, $sql);
+    if (mysqli_num_rows($result) >0) {
         print $popup_block;
+    }
     
 ?>
     <!-- <html>

@@ -59,9 +59,13 @@
 
                             <?php
                                 $userID = $_SESSION["loggedInUserID"];
-                                $orderQuery = "SELECT * FROM orders WHERE userID='$userID' AND paymentStatus=0";
+                                $orderQuery = "SELECT * FROM orders WHERE userID='$userID' AND paymentStatus=0 AND canceled_orders=0";
                                 $resultOrder = mysqli_query($con, $orderQuery);
+
+                                
+
                                 while ($rowOrder  = mysqli_fetch_assoc($resultOrder)) {
+                                    $orderID = $rowOrder['orderID'];
                                     $productID = $rowOrder['productID'];
                                     $bidID = $rowOrder['bidID'];
 
@@ -98,8 +102,48 @@
                                 </div>
                                 <hr>
                                 <?php
+                                    $expireDateQuery = "SELECT unix_timestamp(`orderCanceledDate`) * 1000 as stamp FROM orders WHERE orderID='$orderID';";                                    
+                                    $expireDateResult = mysqli_query($con, $expireDateQuery);
+                                    while ($rowExpireDate = mysqli_fetch_assoc($expireDateResult)) {
+                                    ?>
+
+                                <!-- order will be removed after 2 days from cart if the user doesn't pay -->
+                                <script>
+                                // Set the date we're counting down to
+                                
+                                var countDownDate<?=$orderID?> = new Date(<?=$rowExpireDate['stamp']?>).getTime();
+                               
+                                // Update the count down every 1 second
+                                var x = setInterval(function() {
+
+                                    // Get today's date and time
+                                    var now = new Date().getTime();
+                                                
+                                            // Find the distance between now and the count down date
+                                    var distance<?=$orderID?> = countDownDate<?=$orderID?> - now;
+                                                
+                                            // Time calculations for days, hours, minutes and seconds
+                                            var days = Math.floor(distance<?=$orderID?> / (1000 * 60 * 60 * 24));
+                                            var hours = Math.floor((distance<?=$orderID?> % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                            var minutes = Math.floor((distance<?=$orderID?> % (1000 * 60 * 60)) / (1000 * 60));
+                                            var seconds = Math.floor((distance<?=$orderID?> % (1000 * 60)) / 1000);
+                                                
+                                            
+                                            // If the count down is over, product will be removed 
+                                            if (distance<?=$orderID?> < 0) {
+                                                clearInterval(x);                                                
+                                                var orderID=<?php echo $orderID ?>;
+                                                window.location.href='http://localhost/vegemart/src/orderRemove.php?id='+orderID;                                                                                          
+                                            }
+                                            }, 1000);
+                                </script>
+                                <?php
+                                    }
                                 }
                                 ?>
+                                
+                                
+
                                 
                         </div>
                         
