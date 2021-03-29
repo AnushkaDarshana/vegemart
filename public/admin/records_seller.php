@@ -1,5 +1,46 @@
 <?php
     include ('../../config/dbconfig.php');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    $userType="seller";
+    //Total sellers
+    $sql2 ="SELECT COUNT(id) AS total
+            FROM `users`
+            WHERE userType='$userType'";
+    $result2 = mysqli_query($con,$sql2);
+    $row2 = mysqli_fetch_assoc($result2);
+    
+    //active sellers 
+    $sql3 ="SELECT COUNT(id) AS total1
+            FROM `users`
+            WHERE userType='$userType' and  active_status= 1 "; 
+    $result3 = mysqli_query($con,$sql3);
+    $row3 = mysqli_fetch_assoc($result3);
+
+    //inactive sellres orders
+    $sql4 ="SELECT COUNT(id) AS total2
+            FROM `users`
+            WHERE userType='$userType' and  active_status= 0 "; 
+    $result4 = mysqli_query($con,$sql4);
+    $row4 = mysqli_fetch_assoc($result4);
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +65,7 @@
                                 <i class="fa fa-user mt-1 mb-1" style="font-size:50px; padding:0.2em 0.1em; margin:0.2em 0;color:#138D75;"></i>
                             </div>
                             <div class="column is-5 pl-0 has-text-left">
-                                <h2 style="font-size:22px;" class="mb-0 pb-0">456</h2>
+                                <h2 style="font-size:22px;" class="mb-0 pb-0"><?php echo $row2['total'];?></h2>
                                 <h3 class="mt-0 pt-0">Total Sellers Joined</h3>
                             </div>
                             <div class="column is-4 pl-0 has-text-left">
@@ -40,7 +81,7 @@
                                 <i class="fa fa-check-circle mt-1 mb-1" style="font-size:50px; padding:0.2em 0.1em; margin:0.2em 0;color:#34DB98;"></i>
                             </div>
                             <div class="column is-5 pl-0 has-text-left">
-                                <h2 style="font-size:22px;" class="mb-0 pb-0">433</h2>
+                                <h2 style="font-size:22px;" class="mb-0 pb-0"><?php echo $row3['total1'];?></h2>
                                 <h3 class="mt-0 pt-0">Active Sellers</h3>
                             </div>
                             <div class="column is-4 pl-0 has-text-left">
@@ -56,7 +97,7 @@
                                 <i class="fa fa-exclamation-circle" style="font-size:50px; padding:0.2em 0.1em; margin:0.2em 0;color:#EB694F ;"></i>
                             </div>
                             <div class="column is-5 pl-0 has-text-left">
-                                <h2 style="font-size:22px;" class="mb-0 pb-0">23</h2>
+                                <h2 style="font-size:22px;" class="mb-0 pb-0"><?php echo $row4['total2'];?></h2>
                                 <h3 class="mt-0 pt-0">Non-active sellers</h3>
                             </div>
                             <div class="column is-4 pl-0 has-text-left">
