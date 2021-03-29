@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
+        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
     </head>
 
     <body>
@@ -36,7 +36,7 @@
             </div>
             <div class="l-footer">
                 
-                    <h1><img class="logo-image" src="http://localhost/vegemart/public/images/logow.png" alt="logo"></h1>
+                    <h1><img class="logo-image" src="https://localhost/vegemart/public/images/logow.png" alt="logo"></h1>
                     <p>Vegemart ia an online website that takes the pride in connecting the farmer community, We strive to give quality products at reasonable price and to collaborate with the farmers to make a difference economkcally. Let's collaborate!  </p>
             </div>
             <ul class="r-footer">

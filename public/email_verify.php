@@ -4,7 +4,7 @@
 <meta charset="utf-8">
   <title>Reset</title>  
   <link rel="stylesheet" href="css/email_verify.css">
-  <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
+  <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
 
 </head>
 <body>

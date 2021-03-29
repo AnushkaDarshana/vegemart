@@ -8,7 +8,7 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
+        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
         <link type="text/css" rel=stylesheet href="../css/profile-edit.css">
         <link rel="stylesheet" type="text/css" href="../css/client-records.css">
         <link rel="stylesheet" type="text/css" href="../css/footer.css"> 

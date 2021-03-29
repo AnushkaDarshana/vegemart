@@ -118,7 +118,7 @@
     else {
         echo" <div id=\"popup2\" class=\"overlay\">
         <div class=\"popup has-text-centered\">
-            <a class=\"close\" href=\"http://localhost/vegemart/public/login.php\">&times;</a>
+            <a class=\"close\" href=\"https://localhost/vegemart/public/login.php\">&times;</a>
             <p><em>Please login to view notifications.</em></p>
             
         </div>

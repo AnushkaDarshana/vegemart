@@ -5,7 +5,12 @@
      $orderID=$_GET['id'];
  
      //order will be removed after 2 days of time if you didn't pay
-     $productAvailable= "UPDATE `orders` SET `canceled_orders`=1 WHERE `orderID`='$orderID' AND paymentStatus=0 ";
+     $cartExpirationDateQuery = "SELECT DATE_ADD(NOW(),INTERVAL 2 MINUTE) AS DateAdd;";
+     $cartExpirationDateResult = mysqli_query($con,$cartExpirationDateQuery); 
+     $rowCartExpirationDate = mysqli_fetch_assoc($cartExpirationDateResult);
+     $cartExpirationDate = $rowCartExpirationDate['DateAdd'];
+
+     $productAvailable= "UPDATE `orders` SET `notifyStatus`=1,`orderCancelDate`='$cartExpirationDate' WHERE `orderID`='$orderID'";
      if ($con->query($productAvailable) === true) {
          echo "Record updated successfully";  
 
@@ -21,15 +26,17 @@
         $rowUserName = mysqli_fetch_row($userNameQuery);
         $user = $rowUserName[0]; 
 
+        
+
         //send email product removed from cart     
         $to=$email;
         $from='vegemartucsc@gmail.com';
-        $subject= $user.' your account will be suspended if';
-        $message='Since you have not paid to order '.$orderID.'. your account has been suspended. You can use help desk to contact admin for more details';
+        $subject= 'Payment for the order '.$orderID.'should be completed within two days';
+        $message=$user.' you have not paid to order '.$orderID.'. you have to complete your payment within two days if you are not able to pay your account will be suspended';
         $header="From: {$from}\r\nContent-Type: text/html;";
 
         $send_result=mail($to,$subject,$message,$header); 
-         header('Location:../public/products.php');
+         header('Location:../public/shopping_cart.php');
     } else {
         header('Location:../public/shopping_cart.php');
      }

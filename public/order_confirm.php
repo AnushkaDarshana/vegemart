@@ -19,7 +19,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
+        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="./css/order-confirm.css">
         <link rel="stylesheet" type="text/css" href="./css/progress-bar.css">
@@ -149,7 +149,7 @@
                             ?>             
                             <div class="columns group mt-0">
                                 <div class="column is-4">
-                                    <img class="item-img" src="http://localhost/vegemart/public/images/products/<?php echo $rowProduct['imageName']?>">
+                                    <img class="item-img" src="https://localhost/vegemart/public/images/products/<?php echo $rowProduct['imageName']?>">
                                 </div>
                                 <div class="column is-4">
                                     <h3><?php echo $rowProduct['name']?></h2>
@@ -193,8 +193,8 @@
                         <form method="post" action="https://sandbox.payhere.lk/pay/checkout">
                             <input type="hidden" name="merchant_id" value="1215900" style="display: none;"> <!-- Replace your Merchant ID -->
                             <input type="hidden" name="return_url" id="url" style="display: none;">
-                            <input type="hidden" name="cancel_url" value="http://localhost/vegemart/public/order_confirm" style="display: none;">
-                            <input type="hidden" name="notify_url" value="http://localhost/vegemart/src/payment.php" style="display: none;">
+                            <input type="hidden" name="cancel_url" value="https://localhost/vegemart/public/order_confirm" style="display: none;">
+                            <input type="hidden" name="notify_url" value="https://localhost/vegemart/src/payment.php" style="display: none;">
 
                             <!-- order details -->
                             <input type="text" name="order_id" value="<?php echo $orderID ?>" style="display: none;">
@@ -219,7 +219,7 @@
                 <div class="columns group">
                     <div class="column is-5 mt-1">
                         <div class="image-row has-text-centered">
-                            <img class="img" src="http://localhost/vegemart/public/images/order_deli.jpg">
+                            <img class="img" src="https://localhost/vegemart/public/images/order_deli.jpg">
                         </div>
                     </div>    
                     <div class="column is-7 has-text-left mt-1"> 
@@ -232,7 +232,7 @@
                 <div class="columns group">
                     <div class="column is-5">
                         <div class="image-row has-text-centered">
-                            <img class="img" src="http://localhost/vegemart/public/images/order_pick.jpg">
+                            <img class="img" src="https://localhost/vegemart/public/images/order_pick.jpg">
                         </div>
                     </div>    
                     <div class="column is-7 has-text-left mt-1"> 
@@ -262,7 +262,7 @@
             <?php $x= "$price"+50?>            
             total.innerHTML = "Rs. <?php echo "$x"?>.00";
             amount.value = <?php echo "$x"?>;  
-            url.value="http://localhost/vegemart/src/order_done.php?amount=<?php echo "$x"?>";          
+            url.value="https://localhost/vegemart/src/order_done.php?amount=<?php echo "$x"?>";          
         }
         else{
             charge.style.display="none"; 
@@ -276,7 +276,7 @@
             <?php $x= "$price"?>            
             total.innerHTML = "Rs. <?php echo "$x"?>.00";
             amount.value = <?php echo "$x"?>; 
-            url.value="http://localhost/vegemart/src/order_done.php?amount=<?php echo "$x"?>";
+            url.value="https://localhost/vegemart/src/order_done.php?amount=<?php echo "$x"?>";
         }
         var myCheckbox = document.getElementsByName("delivery");
         Array.prototype.forEach.call(myCheckbox,function(el){

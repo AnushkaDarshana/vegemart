@@ -7,7 +7,7 @@
         <link rel="stylesheet" type="text/css" href="./css/progress-bar.css">
         <link rel="stylesheet" type="text/css" href="./css/style.css">
         <link rel="stylesheet" type="text/css" href="./css/footer.css">
-        <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
+        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
         <title>Order Complete | Vegemart</title>
     </head>
     <body>  
@@ -79,10 +79,10 @@
                             <p>Don't forget to rate the seller and give feedback once you recieve your items</p>
                             <p>If you have any questions or queries feel free to contact us at the Vegemart help desk </p><br>
                                                 
-                            <img class="logo mt-2 mb-1" src="http://localhost/vegemart/public/images/logob.png">
+                            <img class="logo mt-2 mb-1" src="https://localhost/vegemart/public/images/logob.png">
                         </div>  
                     </div><br>
-                    <a id="ab" href="http://localhost/vegemart/public/products.php"><i class="fa fa-hand-o-left pr-1" style="font-weight:500; color:#138D75;"></i>Continue shopping</a>
+                    <a id="ab" href="https://localhost/vegemart/public/products.php"><i class="fa fa-hand-o-left pr-1" style="font-weight:500; color:#138D75;"></i>Continue shopping</a>
                     <br>
                 </div>
                 <div class="column is-2 mt-0"></div>

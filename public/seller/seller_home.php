@@ -12,7 +12,7 @@
         <link rel="stylesheet" type="text/css" href="../css/seller-home.css">
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <link rel="stylesheet" type="text/css" href="../css/footer.css">
-        <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
+        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
         <title>Seller Dashboard | Vegemart</title>
     </head>
 
@@ -72,7 +72,7 @@
                                 if(isset($_SESSION["loggedInSellerID"])){
                             ?>
                                 <div class="row has-text-right mt-2 mb-1 mr-1">
-                                    <button class="button" onClick="location.href='http://localhost/vegemart/public/seller/seller_profile_edit.php';"><i class="fas fa-cog mr-1"></i>Edit Profile</button>
+                                    <button class="button" onClick="location.href='https://localhost/vegemart/public/seller/seller_profile_edit.php';"><i class="fas fa-cog mr-1"></i>Edit Profile</button>
                                 </div>
                             <?php
                                 }
@@ -136,7 +136,7 @@
                                             if (distance<?=$productID?> < 0) {
                                                 clearInterval(x);                                                
                                                 var productID=<?php echo $productID ?>;
-                                                window.location.href='http://localhost/vegemart/src/seller/removeProduct.php?id='+productID;                                                                                          
+                                                window.location.href='https://localhost/vegemart/src/seller/removeProduct.php?id='+productID;                                                                                          
                                             }
                                             }, 1000);
                                             </script>
@@ -168,11 +168,11 @@
                                                 if(isset($_SESSION["loggedInSellerID"])){
                                             ?>
                                             <div class="column is-3 pt-2">
-                                                <button class="button" onClick="location.href='http://localhost/vegemart/public/seller/seller_product_edit.php?id=<?php echo $row['productID']?>';">Update Product</button>               
+                                                <button class="button" onClick="location.href='https://localhost/vegemart/public/seller/seller_product_edit.php?id=<?php echo $row['productID']?>';">Update Product</button>               
                                             </div>
 
                                             <div class="column is-3 pt-2">
-                                                <button class="button" style="background-color:#E74C3C" onClick="location.href='http://localhost/vegemart/src/seller/removeProduct.php?id=<?php echo $row['productID']?>';">Delete Product</button>               
+                                                <button class="button" style="background-color:#E74C3C" onClick="location.href='https://localhost/vegemart/src/seller/removeProduct.php?id=<?php echo $row['productID']?>';">Delete Product</button>               
                                             </div>
                                                 
                                             <?php
@@ -190,7 +190,7 @@
                             if(isset($_SESSION["loggedInSellerID"])){
                         ?>
                             <div id="addProduct">
-                                <button class="button" onClick="location.href='http://localhost/vegemart/public/seller/seller_product_add.php';">Add New Product</button>
+                                <button class="button" onClick="location.href='https://localhost/vegemart/public/seller/seller_product_add.php';">Add New Product</button>
                             </div>
                         <?php
                             }

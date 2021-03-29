@@ -10,7 +10,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
         <link rel="stylesheet" type="text/css" href="../css/admin.css">
         <link rel="stylesheet" type="text/css" href="../css/style.css">
-        <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
+        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
         <title>Help Desk | Vegemart</title>
     </head>
     <body>

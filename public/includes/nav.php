@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
         <link href="images/logo.png" rel="shortcut icon">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" rel="stylesheet">
-        <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
+        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
         <script src="https://kit.fontawesome.com/85eb26c5dd.js" crossorigin="anonymous"></script>
         <style>
             * {
@@ -211,13 +211,13 @@
 
     <body>
         <header class="header">
-            <a href="./products.php"><img class="logopic" src="http://localhost/vegemart/public/images/logob.png"></a>
+            <a href="./products.php"><img class="logopic" src="https://localhost/vegemart/public/images/logob.png"></a>
             
             <ul class="main-nav">
-                <li><a href="http://localhost/vegemart/public/products.php">Home</a></li>
+                <li><a href="https://localhost/vegemart/public/products.php">Home</a></li>
                 <li><a href="#">About</a></li>
-                <li><a href="http://localhost/vegemart/public/forum_home.php">Forum</a></li>
-                <li><a href="http://localhost/vegemart/public/shopping_cart.php"><i class="fas fa-shopping-cart mr-0" style="font-size:16px; color:black; padding-right:0.4em;"></i>Cart</a></li>
+                <li><a href="https://localhost/vegemart/public/forum_home.php">Forum</a></li>
+                <li><a href="https://localhost/vegemart/public/shopping_cart.php"><i class="fas fa-shopping-cart mr-0" style="font-size:16px; color:black; padding-right:0.4em;"></i>Cart</a></li>
                 
                 <?php  
                     
@@ -245,11 +245,11 @@
 
                         <li>
                         <div class=\"nav-dropdown\">
-                            <img class=\"dp\" src=\"http://localhost/vegemart/public/images/users/{$rowUser['profilePic']}\" alt=\"Avatar\">
+                            <img class=\"dp\" src=\"https://localhost/vegemart/public/images/users/{$rowUser['profilePic']}\" alt=\"Avatar\">
                             <div class=\"dropdown-content\">
-                                <a href=\"http://localhost/vegemart/public/buyer_profile_edit.php\">View Profile</a>
-                                <a href=\"http://localhost/vegemart/public/help_desk.php\">Help Desk</a>
-                                <a href=\"http://localhost/vegemart/src/logout.php\">Logout</a>
+                                <a href=\"https://localhost/vegemart/public/buyer_profile_edit.php\">View Profile</a>
+                                <a href=\"https://localhost/vegemart/public/help_desk.php\">Help Desk</a>
+                                <a href=\"https://localhost/vegemart/src/logout.php\">Logout</a>
                             </div>
                         </div>
                         </li>";
@@ -257,7 +257,7 @@
                 }    
                 else{
                     // echo"<li><a href=\"../login.php\">Login</a></li>";
-                    echo"<li><button class=\"loginbtn\" onClick=\"location.href='http://localhost/vegemart/public/login.php';\">Login</button><li>";
+                    echo"<li><button class=\"loginbtn\" onClick=\"location.href='https://localhost/vegemart/public/login.php';\">Login</button><li>";
                 }   
             ?> 
             </ul>

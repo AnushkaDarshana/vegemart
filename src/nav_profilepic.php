@@ -13,11 +13,11 @@
     $retrieveInfo =  "SELECT * FROM `client` WHERE `user_id`='$userID';"; //Selecting all data from Table
     $resultInfo = mysqli_query($con, $retrieveInfo); //Passing SQL
         while($rowUser  = mysqli_fetch_assoc($resultInfo)){
-            echo "<img class=\"dp\" src=\"http://localhost/vegemart/images/users/{$rowUser['profilePic']}\" alt=\"Avatar\">";
+            echo "<img class=\"dp\" src=\"https://localhost/vegemart/images/users/{$rowUser['profilePic']}\" alt=\"Avatar\">";
         }                       
     }    //$userID=6;
     else{
-        echo"<li><button class=\"loginbtn\" onClick=\"location.href='http://localhost/vegemart/login.php';\">Login</button><li>";
+        echo"<li><button class=\"loginbtn\" onClick=\"location.href='https://localhost/vegemart/login.php';\">Login</button><li>";
     } 
     mysqli_close($con);
 

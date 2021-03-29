@@ -7,7 +7,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
+        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
         <link rel="stylesheet" type="text/css" href="../css/nav.css">
     </head>
 
@@ -18,18 +18,18 @@
             <ul class="main-nav">
                 <?php  
                 if(isset($_SESSION["loggedInSellerID"])){?>
-                    <li><a href="http://localhost/vegemart/public/seller/seller_home.php">Home</a></li>
+                    <li><a href="https://localhost/vegemart/public/seller/seller_home.php">Home</a></li>
                 <?php
                 }
                 ?>
                 <?php  
                 if(isset($_SESSION["loggedInUserID"])){?>
-                    <li><a href="http://localhost/vegemart/public/products.php">Home</a></li>
+                    <li><a href="https://localhost/vegemart/public/products.php">Home</a></li>
                 <?php
                 }
                 ?>
                 <li><a href="#">About</a></li>
-                <li><a href="http://localhost/vegemart/public/forum_home.php">Forum</a></li>
+                <li><a href="https://localhost/vegemart/public/forum_home.php">Forum</a></li>
                 
                 <?php  
                     if(isset($_SESSION["loggedInUserID"])||isset($_SESSION["loggedInSellerID"])){
@@ -54,16 +54,16 @@
 
                         <li>
                         <div class=\"nav-dropdown\">
-                            <img class=\"dp\" src=\"http://localhost/vegemart/public/images/users/{$rowUser['profilePic']}\" alt=\"Avatar\">
+                            <img class=\"dp\" src=\"https://localhost/vegemart/public/images/users/{$rowUser['profilePic']}\" alt=\"Avatar\">
                             <div class=\"dropdown-content\">";
                             if(isset($_SESSION["loggedInUserID"])){
-                               echo" <a href=\"http://localhost/vegemart/public/buyer_profile_edit.php\">View Profile</a>";
+                               echo" <a href=\"https://localhost/vegemart/public/buyer_profile_edit.php\">View Profile</a>";
                             }
                             if(isset($_SESSION["loggedInSellerID"])){
-                                echo" <a href=\"http://localhost/vegemart/public/seller/seller_profile_edit.php\">View Profile</a>";
+                                echo" <a href=\"https://localhost/vegemart/public/seller/seller_profile_edit.php\">View Profile</a>";
                              }
-                                echo"<a href=\"http://localhost/vegemart/public/help_desk.php\">Help Desk</a>";
-                                echo"<a href=\"http://localhost/vegemart/src/logout.php\">Logout</a>
+                                echo"<a href=\"https://localhost/vegemart/public/help_desk.php\">Help Desk</a>";
+                                echo"<a href=\"https://localhost/vegemart/src/logout.php\">Logout</a>
                             </div>
                         </div>
                         </li>";
@@ -71,7 +71,7 @@
                 }    
                 else{
                     // echo"<li><a href=\"../login.php\">Login</a></li>";
-                    echo"<li><button class=\"loginbtn\" onClick=\"location.href='http://localhost/vegemart/public/login.php';\">Login</button><li>";
+                    echo"<li><button class=\"loginbtn\" onClick=\"location.href='https://localhost/vegemart/public/login.php';\">Login</button><li>";
                 }   
             ?> 
             </ul>

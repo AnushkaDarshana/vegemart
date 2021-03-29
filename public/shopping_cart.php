@@ -15,7 +15,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
+        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
         <link rel="stylesheet" type="text/css" href="./css/shopping-cart.css">
         <link rel="stylesheet" type="text/css" href="./css/progress-bar.css">
         <link rel="stylesheet" type="text/css" href="./css/style.css">
@@ -75,7 +75,7 @@
                                         ?>
                                 <div class="columns group">
                                     <div class="column is-3">
-                                        <img class="item-img" src="http://localhost/vegemart/public/images/products/<?php echo $rowProduct['imageName'] ?>">                                        
+                                        <img class="item-img" src="https://localhost/vegemart/public/images/products/<?php echo $rowProduct['imageName'] ?>">                                        
                                     </div>
                                     
                                     <div class="column is-2 mt-1">
@@ -97,17 +97,18 @@
                                     <?php
                                     } ?>
                                     <div class="column is-2">
-                                        <button class="button" onClick="location.href='http://localhost/vegemart/public/order_confirm.php?id=<?php echo $rowOrder['orderID'] ?>'">Order Details</button>               
+                                        <button class="button" onClick="location.href='https://localhost/vegemart/public/order_confirm.php?id=<?php echo $rowOrder['orderID'] ?>'">Order Details</button>               
                                     </div>
                                 </div>
                                 <hr>
+                                <!-- notification will be sent after two days of time to do the payment -->
                                 <?php
-                                    $expireDateQuery = "SELECT unix_timestamp(`orderCanceledDate`) * 1000 as stamp FROM orders WHERE orderID='$orderID';";                                    
+                                    $expireDateQuery = "SELECT unix_timestamp(`notifyDate`) * 1000 as stamp FROM orders WHERE orderID='$orderID' AND paymentStatus=0 AND notifyStatus=0 ;";
                                     $expireDateResult = mysqli_query($con, $expireDateQuery);
                                     while ($rowExpireDate = mysqli_fetch_assoc($expireDateResult)) {
-                                    ?>
+                                ?>
 
-                                <!-- order will be removed after 2 days from cart if the user doesn't pay -->
+                                <!-- buyer will be notified to pay within two days if not suspend account-->
                                 <script>
                                 // Set the date we're counting down to
                                 
@@ -133,18 +134,16 @@
                                             if (distance<?=$orderID?> < 0) {
                                                 clearInterval(x);                                                
                                                 var orderID=<?php echo $orderID ?>;
-                                                window.location.href='http://localhost/vegemart/src/orderRemove.php?id='+orderID;                                                                                          
+                                                window.location.href='https://localhost/vegemart/src/orderRemove.php?id='+orderID;                                                                                          
                                             }
                                             }, 1000);
                                 </script>
+                                
                                 <?php
                                     }
-                                }
+                                    
+                                }                              
                                 ?>
-                                
-                                
-
-                                
                         </div>
                         
                     </div>

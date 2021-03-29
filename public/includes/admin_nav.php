@@ -12,10 +12,10 @@
             <a href="./admin-dash.php"><img class="logopic" src="../images/logob.png"></a>
             
             <ul class="main-nav">
-                <li><a href="http://localhost/vegemart/public/admin/admin-dash.php">Home</a></li>
-                <li><a href="http://localhost/vegemart/public/about_us.php">About</a></li>
-                <li><a href="http://localhost/vegemart/src/logout.php">Logout</a></li>
-                <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
+                <li><a href="https://localhost/vegemart/public/admin/admin-dash.php">Home</a></li>
+                <li><a href="https://localhost/vegemart/public/about_us.php">About</a></li>
+                <li><a href="https://localhost/vegemart/src/logout.php">Logout</a></li>
+                <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
             </ul>
         </header>
         <script>

@@ -109,7 +109,7 @@
                             <input type="submit" class="form-button" name="update" value="Update">
                             <input type="submit" class="form-button" name="delete" value="Delete">
                         </form>
-                        <button class="card-button" onClick="location.href='http://localhost/vegemart/public/admin/admin-dash.php';">Back</button>
+                        <button class="card-button" onClick="location.href='https://localhost/vegemart/public/admin/admin-dash.php';">Back</button>
                     </div>
                 </div>
             </div>
@@ -187,7 +187,7 @@
 
                         </form>
                         <div class="row has-text-centered ml-1 mr-1">
-                            <button class="card-button" onClick="location.href='http://localhost/vegemart/public/admin/admin-dash.php';">Back</button>
+                            <button class="card-button" onClick="location.href='https://localhost/vegemart/public/admin/admin-dash.php';">Back</button>
                         </div>
                     </div>
                     <div class="column is-4"></div>
