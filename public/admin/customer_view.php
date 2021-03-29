@@ -142,15 +142,13 @@
                             <td><input class="input-l" type="text" id="active_status" placeholder="Status" name="active_status" required></td>
                         </tr>
                     </table>
-
-
+                    <br><br>
                 </div>
                 <div class="row">
                 <div class="col-3"></div>
                 <div class="col-2"><input name= "update" type ="submit" value="Update "class="button"></div>
-                <div class="col-2"><input name= "delete" type ="submit" value="Delete "class="button"></div>
-
-                <div class="col-2"><a href="logs.php" class="button"> View Activity Logs </a></div>
+                <div class="col-2"><input name= "delete" type ="submit" value="Suspend "class="button"></div>
+                <div class="col-2"></div>
                 <div class="col-2"><a href="admin-dash.php" class="button"> Back </a></div>
                 </div>
             </form>

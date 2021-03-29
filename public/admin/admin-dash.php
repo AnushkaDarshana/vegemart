@@ -91,7 +91,7 @@
                             <?php
                             if(isset($_SESSION["loggedInAdminID"])) {
                                 echo "
-                                <div class=\"column is-3 pl-0 has-text-centered\">
+                                <div class=\"column is-3 pl-0 pr-2 has-text-centered\">
                                 <img src=\"../images/co-admin.png\" alt=\"image\" class=\"image\">
                                 <button class=\"card-button\" onClick=\"location.href='http://localhost/vegemart/public/admin/co-admin_mgt.php';\">Co-Admin Management</button>
                             </div>";      
@@ -101,8 +101,8 @@
                                 <img src="../images/farmer2.jpg" alt="image" class="image">
                                 <button class="card-button" onClick="location.href='http://localhost/vegemart/public/admin/seller_view.php';">Seller Management</button>                               
                             </div>
-                            <div class="column is-3 pl-0  has-text-centered">
-                                <img src="../images/customer.jpg" alt="image" class="image">
+                            <div class="column is-3 pl-0 pr-2  has-text-centered">
+                                <img src="../images/customer1.jpg" alt="image" class="image">
                                 <button class="card-button" onClick="location.href='http://localhost/vegemart/public/admin/customer_view.php';">Customer Management</button> 
                                 
                             </div>
