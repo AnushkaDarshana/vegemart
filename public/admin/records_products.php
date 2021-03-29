@@ -240,6 +240,7 @@
                     }
                 }
             });
+            
 
             var PieChart  = new Chart('product_location_chart', {
                 type: 'pie',
