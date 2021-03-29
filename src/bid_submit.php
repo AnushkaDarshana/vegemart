@@ -98,7 +98,7 @@
 
                 //calculating the bid ending time
                 
-                $endTimeQuery = "SELECT DATE_ADD(NOW(),INTERVAL 2 MINUTE) AS DateAdd;";
+                $endTimeQuery = "SELECT DATE_ADD(NOW(),INTERVAL 1 MINUTE) AS DateAdd;";
                 $endTimeExecuteQuery = mysqli_query($con,$endTimeQuery); 
                 $rowEndTime = mysqli_fetch_assoc($endTimeExecuteQuery);
                 $endTime = $rowEndTime['DateAdd'];

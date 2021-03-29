@@ -4,7 +4,7 @@
  
      $orderID=$_GET['id'];
  
-     $productAvailable= "UPDATE `orders` SET `canceled_orders`=1 WHERE `orderID`='$orderID' AND notifyStatus=1 ";
+     $productAvailable= "UPDATE `orders` SET `canceled_orders`=1 WHERE `orderID`='$orderID'";
      if ($con->query($productAvailable) === true) {
          echo "Record updated successfully";  
 
@@ -12,7 +12,7 @@
         $rowUser = mysqli_fetch_row($userIDQuery);
         $userID = $rowUser[0];
 
-        $suspendAccount= "UPDATE `users` SET `active_status`=0 WHERE `userID`='$userID'";
+        $suspendAccount= "UPDATE `users` SET `active_status`=0 WHERE `id`='$userID'";
         if ($con->query($productAvailable) === true) {
             echo "Record updated successfully";
 
@@ -31,8 +31,8 @@
             //send email product removed from cart
             $to=$email;
             $from='vegemartucsc@gmail.com';
-            $subject= $user.' your account has been suspended';
-            $message='Visit helpdesk and contact admin for more details';
+            $subject= 'Account suspended.';
+            $message=$user.' your account has been suspended. Visit helpdesk and contact admin for more details';
             $header="From: {$from}\r\nContent-Type: text/html;";
 
             $send_result=mail($to, $subject, $message, $header);

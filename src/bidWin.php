@@ -16,7 +16,7 @@
         $bidPrice = $rowWinBid["bidPrice"];
         
         //date that notification will be sent your account will be suspended if you don't do the payment within 2 days
-        $cartExpirationDateQuery = "SELECT DATE_ADD(NOW(),INTERVAL 2 MINUTE) AS DateAdd;";
+        $cartExpirationDateQuery = "SELECT DATE_ADD(NOW(),INTERVAL 1 MINUTE) AS DateAdd;";
         $cartExpirationDateResult = mysqli_query($con,$cartExpirationDateQuery); 
         $rowCartExpirationDate = mysqli_fetch_assoc($cartExpirationDateResult);
         $cartExpirationDate = $rowCartExpirationDate['DateAdd'];
@@ -28,6 +28,18 @@
         if ($con->query($resultQuery) === true) {
             echo "Record updated successfully"; 
             
+            $userIDQuery = mysqli_query($con, "SELECT userID FROM bidding where bidID ='$bidID'");
+            $rowUser = mysqli_fetch_row($userIDQuery);
+            $userID = $rowUser[0];
+            
+            $emailQuery = mysqli_query($con, "SELECT email FROM users where id ='$userID'");
+            $rowUserEmail = mysqli_fetch_row($emailQuery);
+            $email = $rowUserEmail[0];        
+            
+            $productNameQuery = mysqli_query($con, "SELECT `name` FROM products where productID ='$productID'");
+            $rowProductName = mysqli_fetch_row($productNameQuery);
+            $productName = $rowProductName[0]; 
+
             $to=$email;
             $from='vegemartucsc@gmail.com';
             $subject= 'Action needed:pay Rs.'.$bidPrice.' to complete your purchase for'.$productName;
