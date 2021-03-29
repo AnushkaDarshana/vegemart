@@ -57,7 +57,7 @@
                 $result = mysqli_query($con,$sql);        
                 while($row = mysqli_fetch_assoc($result)){ 
                 $delivererID=$row['id']; 
-                $sql_deliverer ="SELECT * FROM `deliverer` WHERE delivererID='$delivererID'"; 
+                $sql_deliverer ="SELECT * FROM `deliverer` WHERE user_id='$delivererID'"; 
                 $result_deliverer = mysqli_query($con,$sql_deliverer);
                 while($row_deliverer = mysqli_fetch_assoc($result_deliverer)){
                     if ($row['active_status'] == 1){
