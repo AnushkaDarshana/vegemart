@@ -106,7 +106,7 @@
                                     $expireDateQuery = "SELECT unix_timestamp(`notifyDate`) * 1000 as stamp FROM orders WHERE orderID='$orderID' AND paymentStatus=0 AND notifyStatus=0 ;";
                                     $expireDateResult = mysqli_query($con, $expireDateQuery);
                                     while ($rowExpireDate = mysqli_fetch_assoc($expireDateResult)) {
-                                ?>
+                                        ?>
 
                                 <!-- buyer will be notified to pay within two days if not suspend account-->
                                 <script>
@@ -141,9 +141,48 @@
                                 
                                 <?php
                                     }
-                                    
-                                }                              
+
+                                    //2 days after sending notification if the payment is not done account will be suspended
+                                    $suspendAccountQuery = "SELECT unix_timestamp(`orderCancelDate`) * 1000 as `suspend` FROM orders WHERE orderID='$orderID' AND paymentStatus=0 AND notifyStatus=1 ;";
+                                    $suspendAccountResult = mysqli_query($con, $suspendAccountQuery);
+                                    while ($rowSuspendAccountResult = mysqli_fetch_assoc($suspendAccountResult)) {
+                                        ?>
+
+                                <!-- buyer will be notified to pay within two days if not suspend account-->
+                                <script>
+                                // Set the date we're counting down to
+                                
+                                var countDownDate<?=$orderID?> = new Date(<?=$rowSuspendAccountResult['suspend']?>).getTime();
+                               
+                                // Update the count down every 1 second
+                                var x = setInterval(function() {
+
+                                    // Get today's date and time
+                                    var now = new Date().getTime();
+                                                
+                                            // Find the distance between now and the count down date
+                                    var distance<?=$orderID?> = countDownDate<?=$orderID?> - now;
+                                                
+                                            // Time calculations for days, hours, minutes and seconds
+                                            var days = Math.floor(distance<?=$orderID?> / (1000 * 60 * 60 * 24));
+                                            var hours = Math.floor((distance<?=$orderID?> % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                            var minutes = Math.floor((distance<?=$orderID?> % (1000 * 60 * 60)) / (1000 * 60));
+                                            var seconds = Math.floor((distance<?=$orderID?> % (1000 * 60)) / 1000);
+                                                
+                                            
+                                            // If the count down is over, product will be removed 
+                                            if (distance<?=$orderID?> < 0) {
+                                                clearInterval(x);                                                
+                                                var orderID=<?php echo $orderID ?>;
+                                                window.location.href='https://localhost/vegemart/src/accountSuspend.php?id='+orderID;                                                                                          
+                                            }
+                                            }, 1000);
+                                </script>
+                                <?php
+                                    }
+                                }
                                 ?>
+                                
                         </div>
                         
                     </div>

@@ -5,7 +5,7 @@
      $orderID=$_GET['id'];
  
      //order will be removed after 2 days of time if you didn't pay
-     $cartExpirationDateQuery = "SELECT DATE_ADD(NOW(),INTERVAL 2 MINUTE) AS DateAdd;";
+     $cartExpirationDateQuery = "SELECT DATE_ADD(NOW(),INTERVAL 1 MINUTE) AS DateAdd;";
      $cartExpirationDateResult = mysqli_query($con,$cartExpirationDateQuery); 
      $rowCartExpirationDate = mysqli_fetch_assoc($cartExpirationDateResult);
      $cartExpirationDate = $rowCartExpirationDate['DateAdd'];
@@ -31,8 +31,8 @@
         //send email product removed from cart     
         $to=$email;
         $from='vegemartucsc@gmail.com';
-        $subject= 'Payment for the order '.$orderID.'should be completed within two days';
-        $message=$user.' you have not paid to order '.$orderID.'. you have to complete your payment within two days if you are not able to pay your account will be suspended';
+        $subject= 'Payment for the order #'.$orderID.'should be completed within two days';
+        $message=$user.' you have not paid to order #'.$orderID.'. you have to complete your payment within two days if you are not able to pay your account will be suspended';
         $header="From: {$from}\r\nContent-Type: text/html;";
 
         $send_result=mail($to,$subject,$message,$header); 

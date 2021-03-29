@@ -2,17 +2,6 @@
     include ('../../config/dbconfig.php');
 
 
-
-
-
-
-
-
-
-
-
-
-
 // Location Graph
 $sql1 ="SELECT city, COUNT(`user_id`) AS tot_count 
         FROM `deliverer` d, (SELECT `id` 
