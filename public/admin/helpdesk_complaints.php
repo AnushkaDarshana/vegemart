@@ -12,6 +12,7 @@
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
         <title>Help Desk | Vegemart</title>
+        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
     </head>
     <body>
         <?php include "../includes/admin_nav.php"; ?>       

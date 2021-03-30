@@ -1,16 +1,23 @@
 <?php
     include ('../../config/dbconfig.php');
+//Buyers orders number graph
+$sql= "SELECT u.id, total_count 
+FROM users u,(SELECT `userID`, COUNT(`orderID`) AS total_count 
+            FROM `orders` 
+            GROUP BY `userID`) o 
+WHERE u.id = o.userID";
+    
+    $result = mysqli_query($con,$sql);
+    $a=array(); 
+    $b=array();   
 
-
-
-
-
-
-
-
-
-
-    // Location Graph
+    while($row = mysqli_fetch_assoc($result)){
+    array_push($a, $row['id']);
+    array_push($b, $row['total_count']);
+    }
+    $js_array_a = json_encode($a);
+    $js_array_b = json_encode($b);
+// Location Graph
     $sql1 ="SELECT city, COUNT(`user_id`) AS tot_count 
              FROM `client` c, (SELECT `id` 
                                 FROM `users` 
@@ -36,20 +43,28 @@ while($row1 = mysqli_fetch_assoc($result1)){
             WHERE userType='$userType'";
     $result2 = mysqli_query($con,$sql2);
     $row2 = mysqli_fetch_assoc($result2);
-    
     //active buyers
     $sql3 ="SELECT COUNT(id) AS total1
             FROM `users`
             WHERE userType='$userType' and  active_status= 1 "; 
     $result3 = mysqli_query($con,$sql3);
     $row3 = mysqli_fetch_assoc($result3);
-
     //inactive buyers
     $sql4 ="SELECT COUNT(id) AS total2
             FROM `users`
             WHERE userType='$userType' and  active_status= 0 "; 
     $result4 = mysqli_query($con,$sql4);
     $row4 = mysqli_fetch_assoc($result4);
+    //Total orders
+    $sql5 ="SELECT COUNT(orderID) AS total5
+            FROM orders";
+    $result5 = mysqli_query($con,$sql5);
+    $row5 = mysqli_fetch_assoc($result5);
+    //total income
+    $sql6 ="SELECT SUM(`paid_amount`) AS total6 
+            FROM `payment`";
+    $result6 = mysqli_query($con,$sql6);
+    $row6 = mysqli_fetch_assoc($result6);
 ?>
 
 <!DOCTYPE html>
@@ -61,6 +76,7 @@ while($row1 = mysqli_fetch_assoc($result1)){
         <link rel="stylesheet" type="text/css" href="../css/deliverer-home.css">
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <title>Buyer Records | Vegemart</title>
+        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
     </head>
     <body>
         <?php include "../includes/admin_nav.php"; ?>
@@ -119,7 +135,7 @@ while($row1 = mysqli_fetch_assoc($result1)){
             <div class="columns group mb-1">
                 <div class="column is-1"> </div>
                 <div class="column is-5 pl-1">
-                    <h2 style="font-size:22px;" class="has-text-left">No Of Buyers Joined</h2>
+                    <h2 style="font-size:22px;" class="has-text-left">No Of Buyers Based on Orders made</h2>
                     <div class="card pl-1 pr-1 pt-1 pb-1">                       
                         <canvas id="buyer_month_chart"></canvas>
                     </div>
@@ -138,15 +154,14 @@ while($row1 = mysqli_fetch_assoc($result1)){
                         <h2 style="font-size:22px;" class="has-text-left">Total Orders made</h2>
                         <div class="card has-text-centered pt-1 pb-1 pl-1 pr-1">
                             <img id="cash" src="https://www.flaticon.com/svg/static/icons/svg/3500/3500833.svg" alt="cash">
-                            <h2 style="font-size:22px;" class="has-text-centered pt-0 pb-0 mb-0">177 kg</h2>
-                            <h3 class="has-text-centered mt-0 pt-0">December 2020</h3>
+                            <h3 class="has-text-centered mt-0 pt-0">Year 2020</h3>
                             <hr>
                             <div class="columns group">
                                 <div class="column is-6 pl-2 has-text-left">
                                     <h3>Total Orders</h3>
                                 </div>
                                 <div class="column is-6 pl-2 has-text-right">
-                                    <h3>5,313 kg</h3>
+                                    <h3><?php echo $row5['total5'];?> </h3>
                                 </div>
                             </div>
                         </div>
@@ -155,15 +170,14 @@ while($row1 = mysqli_fetch_assoc($result1)){
                         <h2 style="font-size:22px;" class="has-text-left">Total Income</h2>
                         <div class="card has-text-centered pt-1 pb-1 pl-1 pr-1">
                             <img id="cash" src="https://www.flaticon.com/svg/static/icons/svg/2331/2331717.svg" alt="cash">
-                            <h2 style="font-size:22px;" class="has-text-centered pt-0 pb-0 mb-0">1,920</h2>
-                            <h3 class="has-text-centered mt-0 pt-0">December 2020</h3>
+                            <h3 class="has-text-centered mt-0 pt-0">Year 2020</h3>
                             <hr>
                             <div class="columns group">
                                 <div class="column is-6 pl-2 has-text-left">
                                     <h3>Total Income</h3>
                                 </div>
                                 <div class="column is-6 pl-2 has-text-right">
-                                    <h3>538,260</h3>
+                                    <h3>Rs. <?php echo $row6['total6'];?></h3>
                                 </div>
                             </div>
                         </div>
@@ -173,8 +187,7 @@ while($row1 = mysqli_fetch_assoc($result1)){
                         <h2 style="font-size:22px;" class="has-text-left">Total Profit</h2>
                         <div class="card has-text-centered pt-1 pb-1 pl-1 pr-1">
                             <img id="cash" src="https://www.flaticon.com/svg/static/icons/svg/639/639365.svg" alt="cash">
-                            <h2 style="font-size:22px;" class="has-text-centered pt-0 pb-0 mb-0">Rs. 920</h2>
-                            <h3 class="has-text-centered mt-0 pt-0">December 2020</h3>
+                            <h3 class="has-text-centered mt-0 pt-0">Year 2020</h3>
                             <hr>
                             <div class="columns group">
                                 <div class="column is-6 pl-2 has-text-left">
@@ -193,14 +206,14 @@ while($row1 = mysqli_fetch_assoc($result1)){
             var chart = new Chart('buyer_month_chart', {
                 type: 'line',
                 data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    labels: <?php echo $js_array_a ?>,
                     datasets: [{
                         fill: 'false',
                         backgroundColor: '#239B56',
                         borderColor:'rgba(35, 155, 86 , 1)',
                         borderWidth: 1,
-                        label: 'Number of Buyers Joined',
-                        data: [237, 426, 1842, 2561, 4833, 6252, 9547, 7477, 15753, 13324, 18436, 3417]
+                        label: 'Number of Buyers orders',
+                        data: <?php echo $js_array_b ?>
                     }]
                 },
                 options: {

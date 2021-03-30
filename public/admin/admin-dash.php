@@ -20,6 +20,7 @@
         <link rel="stylesheet" type="text/css" href="../css/footer.css">
         <link href="images/logo.png" rel="shortcut icon">
         <title> Admin Dashboard | Vegemart </title>
+        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
     </head>
     <body>
         <?php include "../includes/admin_nav.php"; ?>

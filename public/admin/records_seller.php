@@ -1,13 +1,22 @@
 <?php
     include ('../../config/dbconfig.php');
+    //Sellers product graph
+    $sql= "SELECT p.`productID`,p.`name`, Qsum.`total_count` 
+           FROM `products` p, (SELECT `productID`, COUNT(`quantityID`) AS total_count
+                               FROM `quantitysets`qs
+                               GROUP BY `productID`) Qsum 
+            WHERE p.`productID`= Qsum.productID";
+    $result = mysqli_query($con,$sql);
+    $a=array(); 
+    $b=array();   
 
-    
-
-
-
-
-
-    
+    while($row = mysqli_fetch_assoc($result)){
+        array_push($a, $row['name']);
+        array_push($b, $row['total_count']);
+     }
+     $js_array_a = json_encode($a);
+     $js_array_b = json_encode($b);
+             
     // Location Graph
     $sql1 ="SELECT city, COUNT(`user_id`) AS tot_count 
              FROM `client` c, (SELECT `id` 
@@ -27,27 +36,46 @@ while($row1 = mysqli_fetch_assoc($result1)){
         $js_array_c = json_encode($c);
         $js_array_d = json_encode($d);
     
-$userType="seller";
+        $userType="seller";
     //Total sellers
     $sql2 ="SELECT COUNT(id) AS total
             FROM `users`
             WHERE userType='$userType'";
     $result2 = mysqli_query($con,$sql2);
-    $row2 = mysqli_fetch_assoc($result2);
-    
+    $row2 = mysqli_fetch_assoc($result2); 
     //active sellers 
     $sql3 ="SELECT COUNT(id) AS total1
             FROM `users`
             WHERE userType='$userType' and  active_status= 1 "; 
     $result3 = mysqli_query($con,$sql3);
     $row3 = mysqli_fetch_assoc($result3);
-
     //inactive sellers 
     $sql4 ="SELECT COUNT(id) AS total2
             FROM `users`
             WHERE userType='$userType' and  active_status= 0 "; 
     $result4 = mysqli_query($con,$sql4);
-    $row4 = mysqli_fetch_assoc($result4);
+    $row4 = mysqli_fetch_assoc($result4); 
+    //total quantity 
+    $sql5 ="SELECT SUM(`tot_quantity`) AS total5 
+            FROM `products` p, (SELECT `productID`, SUM(`quantity`) AS tot_quantity 
+                                FROM `quantitysets`qs, (SELECT `quantityID` 
+                                                        FROM `orders` 
+                                                        WHERE `paymentStatus` = 1) s 
+                        GROUP BY `productID`) Qsum 
+            WHERE p.`productID`= Qsum.productID";
+    $result5 = mysqli_query($con,$sql5);
+    $row5 = mysqli_fetch_assoc($result5);
+    //total sales
+    $sql6 ="SELECT COUNT(orderID) AS total6
+            FROM orders
+            WHERE `paymentStatus` = 1"; 
+    $result6 = mysqli_query($con,$sql6);
+    $row6 = mysqli_fetch_assoc($result6);
+    //total income
+    $sql7 ="SELECT SUM(`paid_amount`) AS total7 
+            FROM `payment`";
+    $result7 = mysqli_query($con,$sql7);
+    $row7 = mysqli_fetch_assoc($result7);
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +86,8 @@ $userType="seller";
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
         <link rel="stylesheet" type="text/css" href="../css/deliverer-home.css">
         <link rel="stylesheet" type="text/css" href="../css/style.css">
-        <title>Product Records | Vegemart</title>
+        <title>Seller Records | Vegemart</title>
+        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
     </head>
     <body>
         <?php include "../includes/admin_nav.php"; ?>
@@ -117,7 +146,7 @@ $userType="seller";
             <div class="columns group mb-1">
                 <div class="column is-1"> </div>
                 <div class="column is-5 pl-1">
-                    <h2 style="font-size:22px;" class="has-text-left">No Of Seller Joined</h2>
+                    <h2 style="font-size:22px;" class="has-text-left">No Of Sellers Based on Products</h2>
                     <div class="card pl-1 pr-1 pt-1 pb-1">                       
                         <canvas id="seller_month_chart"></canvas>
                     </div>
@@ -132,36 +161,34 @@ $userType="seller";
             </div>
             <hr>
             <div class="columns group mt-0">
-                <div class="column is-4 pl-3 pr-3 mt-0 mb-2">
+                    <div class="column is-4 pl-3 pr-3 mt-0 mb-2">
+                        <h2 style="font-size:22px;" class="has-text-left">Total No. of Sales</h2>
+                        <div class="card has-text-centered pt-1 pb-1 pl-1 pr-1">
+                            <img id="cash" src="https://www.flaticon.com/svg/static/icons/svg/517/517542.svg" alt="cash">
+                            <h3 class="has-text-centered mt-0 pt-0">Year 2020 </h3>
+                            <hr>
+                            <div class="columns group">
+                                <div class="column is-6 pl-2 has-text-left">
+                                    <h3>Total Sales (No.s) </h3>
+                                </div>
+                                <div class="column is-6 pl-2 has-text-right">
+                                    <h3><?php echo $row6['total6'];?> </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-4 pl-3 pr-3 mt-0 mb-2">
                         <h2 style="font-size:22px;" class="has-text-left">Total Products sold</h2>
                         <div class="card has-text-centered pt-1 pb-1 pl-1 pr-1">
                             <img id="cash" src="https://www.flaticon.com/svg/static/icons/svg/861/861120.svg" alt="cash">
-                            <h2 style="font-size:22px;" class="has-text-centered pt-0 pb-0 mb-0">177 kg</h2>
-                            <h3 class="has-text-centered mt-0 pt-0">December 2020</h3>
+                            <h3 class="has-text-centered mt-0 pt-0">Year 2020 </h3>
                             <hr>
                             <div class="columns group">
                                 <div class="column is-6 pl-2 has-text-left">
                                     <h3>Total Quantity</h3>
                                 </div>
                                 <div class="column is-6 pl-2 has-text-right">
-                                    <h3>5313 kg</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column is-4 pl-3 pr-3 mt-0 mb-2">
-                        <h2 style="font-size:22px;" class="has-text-left">Total Sellers</h2>
-                        <div class="card has-text-centered pt-1 pb-1 pl-1 pr-1">
-                            <img id="cash" src="https://www.flaticon.com/svg/static/icons/svg/517/517542.svg" alt="cash">
-                            <h2 style="font-size:22px;" class="has-text-centered pt-0 pb-0 mb-0">17</h2>
-                            <h3 class="has-text-centered mt-0 pt-0">December 2020</h3>
-                            <hr>
-                            <div class="columns group">
-                                <div class="column is-6 pl-2 has-text-left">
-                                    <h3>Total Sellers</h3>
-                                </div>
-                                <div class="column is-6 pl-2 has-text-right">
-                                    <h3>456</h3>
+                                    <h3><?php echo $row5['total5'];?> kg</h3>
                                 </div>
                             </div>
                         </div>
@@ -171,15 +198,14 @@ $userType="seller";
                         <h2 style="font-size:22px;" class="has-text-left">Total Income of sellers</h2>
                         <div class="card has-text-centered pt-1 pb-1 pl-1 pr-1">
                             <img id="cash" src="https://www.flaticon.com/svg/static/icons/svg/639/639365.svg" alt="cash">
-                            <h2 style="font-size:22px;" class="has-text-centered pt-0 pb-0 mb-0">Rs. 4260</h2>
-                            <h3 class="has-text-centered mt-0 pt-0">December 2020</h3>
+                            <h3 class="has-text-centered mt-0 pt-0">Year 2020</h3>
                             <hr>
                             <div class="columns group">
                                 <div class="column is-6 pl-2 has-text-left">
                                     <h3>Total Income</h3>
                                 </div>
                                 <div class="column is-6 pl-2 has-text-right">
-                                    <h3>Rs. 428,420</h3>
+                                    <h3>Rs. <?php echo $row7['total7'];?></h3>
                                 </div>
                             </div>
                         </div>
@@ -191,14 +217,14 @@ $userType="seller";
             var chart = new Chart('seller_month_chart', {
                 type: 'line',
                 data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    labels: <?php echo $js_array_a ?>,
                     datasets: [{
                         fill: 'false',
                         backgroundColor: '#0A217B',
                         borderColor:'rgba(10, 33, 123, 1)',
                         borderWidth: 1,
-                        label: 'Number of sellers joined',
-                        data: [10, 32, 51, 15, 33, 52, 47, 77, 53, 24, 36, 17]
+                        label: 'Number of sellers selling',
+                        data: <?php echo $js_array_b ?>
                     }]
                 },
                 options: {

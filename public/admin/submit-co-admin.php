@@ -37,7 +37,6 @@ if(isset($_POST['delete'])){
 
 
         $delete_sql = "DELETE FROM co-admin WHERE email = '$email'";
-        
         if (mysqli_query($con,$delete_sql) == TRUE) {
             $message = base64_encode(urlencode("Deleted Successful"));
             header('Location:./view-co-admin.php?msg=' . $message);
@@ -74,8 +73,8 @@ if(isset($_POST['update'])){
 
 
     $update_sql = "UPDATE co-admin 
-    SET name = '$name', email ='$email', phone = '$phone', type ='$type'
-    WHERE email = '$email' ";
+                    SET name = '$name', email ='$email', phone = '$phone', type ='$type'
+                    WHERE email = '$email' ";
     
     if (mysqli_query($con,$update_sql) == TRUE) {
         $message = base64_encode(urlencode("Updated Successful"));

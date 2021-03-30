@@ -7,8 +7,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="../css/admin.css">
-
         <title> Manage Co-admin | Vegemart </title>
+        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
+        
     </head>
     <body>
         <?php include "../includes/admin_nav.php"; ?>
@@ -107,7 +108,7 @@
                             </table>
 
                             <input type="submit" class="form-button" name="update" value="Update">
-                            <input type="submit" class="form-button" name="delete" value="Delete">
+                            <input type="submit" class="form-button" name="delete" value="Suspend">
                         </form>
                         <button class="card-button" onClick="location.href='https://localhost/vegemart/public/admin/admin-dash.php';">Back</button>
                     </div>

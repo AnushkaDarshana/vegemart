@@ -9,6 +9,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> View Co-Admin | Vegemart </title>
+        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
         <link rel="stylesheet" type="text/css" href="../css/admin1.css">
 
         <script src="../../js/manage-user-search.js"></script>
