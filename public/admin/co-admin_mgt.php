@@ -117,9 +117,17 @@
                                     <td><input class="input-l" type="text" placeholder="Active status" id="status" name="status" readonly=true required></td>
                                 </tr>
                             </table>
-
+                            <script>
+                                function myfunction(){
+                                    var x = confirm("Confirm Suspend?");
+                                if (x)
+                                    return true;
+                                else
+                                    return false;
+                                }
+                            </script>
                             <input type="submit" class="form-button" name="update" value="Update">
-                            <input type="submit" class="form-button" name="delete" value="Suspend">
+                            <input type="submit" class="form-button" name="delete" value="Suspend" onclick=" return myfunction()" >
                             <input type="submit" class="form-button" name="activate" value="Activate">
                         </form>
                         <button class="card-button" onClick="location.href='https://localhost/vegemart/public/admin/admin-dash.php';">Back</button>

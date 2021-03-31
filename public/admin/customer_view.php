@@ -24,7 +24,6 @@
         <title> View Customer | Vegemart </title>
         <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
         <link rel="stylesheet" type="text/css" href="../css/admin1.css">
-
         <script src="../../js/manage-user-search.js"></script>
     </head>
     <body>
@@ -33,20 +32,12 @@
         <div>
         <?php include "../includes/admin_nav.php"; ?>
         </div>
+        <br>
         <!--End of nav-->
-
-        <div class="search-user-container">
-            <form name="form-display-selected">
-                <!--heading-->
-		        <h3>Search From Name , Email or ID</h3>
-		        <!--Input-------->
-		        <div class="search-input">
-                    <input type="text" id="myInput" onkeyup="myFunctionCustomer()" 
-                    placeholder="Enter Name , Email or ID"/>
-                </div>
-                <br/>
-            </form>
+        <div class="row">
+        <h2>Vegemart Customer Details</h2>
         </div>
+        
         <div class="row">
             <div class="col-1"></div>
             <div class="col-10">
@@ -181,10 +172,20 @@
                     </table>
                     <br><br>
                 </div>
+                <script>
+                    function myfunction(){
+                        var x = confirm("Confirm Suspend?");
+                    if (x)
+                        return true;
+                    else
+                        return false;
+                    }
+
+                </script>
                 <div class="row">
                 <div class="col-3"></div>
                 <div class="col-2"><input name= "update" type ="submit" value="Update "class="button"></div>
-                <div class="col-2"><input name= "delete" type ="submit" value="Suspend "class="button"></div>
+                <div class="col-2"><input name= "delete" type ="submit" value="Suspend "class="button" onclick=" return myfunction()" ></div>
                 <div class="col-2"><input name= "activate" type ="submit" value="Activate "class="button"></div>
                 <div class="col-2"><a href="admin-dash.php" class="button"> Back </a></div>
                 </div>

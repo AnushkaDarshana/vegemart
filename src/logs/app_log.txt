@@ -2,7 +2,6 @@
 2021-03-29T08:58:02+02:00  Buyer 7 won the bid 25
 2021-03-29T09:02:02+02:00  Buyer 7 won the bid 26
 2021-03-29T09:08:43+02:00  Buyer 7 won the bid 27
-2021-03-29T09:22:46+02:00  Buyer  won the bid 28
 2021-03-29T09:25:45+02:00  Buyer 7 won the bid 29
 2021-03-29T09:56:04+02:00  Buyer 7 won the bid 30
 2021-03-30T14:44:21+02:00  Buyer 11 won the bid 31

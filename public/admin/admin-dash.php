@@ -33,7 +33,6 @@
     <body>
         <?php include "../includes/admin_nav.php"; ?>
         <div class="columns group mb-0">
-        
             <div class="column is-3 mt-3 pt-2 ml-2 mr-0 pl-2 pr-2">
                 <fieldset>
                     <legend><b>Admin Profile Details:</b></legend>

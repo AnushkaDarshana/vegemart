@@ -17,6 +17,27 @@ h1,h2,h3,h4{
     color: #138d75;
 } 
 
+.heading-help {
+    flex: 1;
+    background-color: rgba(19, 141, 117, 0.1);
+    padding: 0.1rem 0.1rem 0.1rem 1rem;
+    color: #138d75;
+} 
+
+.solution-card {
+    box-shadow: 4px 4px 20px -8px rgba(0, 0, 0, 0.75);
+    border-radius: 20px;
+    background-color: #ffffff;
+    padding: 1em 2em;
+    margin: auto;
+    align-self: center;
+    text-align: center;
+}
+
+.solution-card p{
+    text-align: left;
+}
+
 .heading{
     flex: 1;
     padding: 0.2rem;
