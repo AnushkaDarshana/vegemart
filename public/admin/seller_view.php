@@ -1,6 +1,21 @@
 <?php include('../../config/dbconfig.php'); ?>
 <?php
-    session_start();
+    if(empty(session_id())){
+        session_start();
+    }
+    if((!isset($_SESSION["loggedInAdminID"])) && (!isset($_SESSION["loggedInCoAdminID"])))
+    {
+        echo "<script>
+        alert('You have to login first');
+        window.location.href='../../public/login.php';
+        </script>";
+    }  
+    else if(isset($_SESSION["loggedInAdminID"])){
+        $userID = $_SESSION["loggedInAdminID"];
+    } 
+    else if(isset($_SESSION["loggedInCoAdminID"])){
+        $userID = $_SESSION["loggedInCoAdminID"];
+    } 
 ?> 
 <html>
     <head>
@@ -19,10 +34,19 @@
             <?php include "../includes/admin_nav.php"; ?>
         </div>
         <!--End of nav-->
-        <div class="row">
-        <h2>Vegemart Seller Details</h2>
-        </div>
 
+        <div class="search-user-container">
+            <form name="form-display-selected">
+                <!--heading-->
+		        <h3>Search From Name , Email or ID</h3>
+		        <!--Input-------->
+		        <div class="search-input">
+                    <input type="text" id="myInput" onkeyup="myFunctionCustomer()" 
+                    placeholder="Enter Name , Email or ID"/>
+                </div>
+                <br/>
+            </form>
+        </div>
         <div class="row">
             <div class="col-1"></div>
             <div class="col-10">
@@ -98,6 +122,26 @@
                 
             };
         }
+        function myFunctionCustomer() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0]; // for column one
+                td1 = tr[i].getElementsByTagName("td")[2]; // for column two
+                td2 = tr[i].getElementsByTagName("td")[1]; // for column three
+            /* ADD columns here that you want you to filter to be used on */
+                if (td) {
+                if ( (td.innerHTML.toUpperCase().indexOf(filter) > -1) || (td1.innerHTML.toUpperCase().indexOf(filter) > -1) || (td2.innerHTML.toUpperCase().indexOf(filter) > -1) )  {            
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+                }
+            }
+            }
 
 </script>
     </div>
@@ -138,7 +182,7 @@
                         
                     </table>
                 <br><br>
-                    <script>
+                <script>
                         function myfunction(){
                             var x = confirm("Confirm Suspend?");
                         if (x)
@@ -147,7 +191,7 @@
                             return false;
                         }
 
-                    </script>
+                </script>
                 </div>
                 <div class="row">
                 <div class="col-3"></div>     

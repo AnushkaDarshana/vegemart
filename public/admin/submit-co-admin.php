@@ -1,6 +1,22 @@
 <?php
 
- include('../../config/dbconfig.php');
+    include('../../config/dbconfig.php');
+    if(empty(session_id())){
+        session_start();
+    }
+    if((!isset($_SESSION["loggedInAdminID"])) && (!isset($_SESSION["loggedInCoAdminID"])))
+    {
+        echo "<script>
+        alert('You have to login first');
+        window.location.href='../../public/login.php';
+        </script>";
+    }  
+    else if(isset($_SESSION["loggedInAdminID"])){
+        $userID = $_SESSION["loggedInAdminID"];
+    } 
+    else if(isset($_SESSION["loggedInCoAdminID"])){
+        $userID = $_SESSION["loggedInCoAdminID"];
+} 
 
  $id = $_POST["id"];
  $name = $_POST["name"];

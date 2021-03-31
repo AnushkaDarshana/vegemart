@@ -1,6 +1,8 @@
 <?php include('../../config/dbconfig.php'); ?>
 <?php
-    session_start();
+    if(empty(session_id())){
+        session_start();
+    }
     if((!isset($_SESSION["loggedInAdminID"])) && (!isset($_SESSION["loggedInCoAdminID"])))
     {
         echo "<script>
@@ -8,6 +10,12 @@
         window.location.href='../../public/login.php';
         </script>";
     }  
+    else if(isset($_SESSION["loggedInAdminID"])){
+        $userID = $_SESSION["loggedInAdminID"];
+    } 
+    else if(isset($_SESSION["loggedInCoAdminID"])){
+        $userID = $_SESSION["loggedInCoAdminID"];
+    } 
 ?> 
 
 <!DOCTYPE html>
@@ -25,60 +33,70 @@
     <body>
         <?php include "../includes/admin_nav.php"; ?>
         <div class="columns group mb-0">
+        
             <div class="column is-3 mt-3 pt-2 ml-2 mr-0 pl-2 pr-2">
                 <fieldset>
                     <legend><b>Admin Profile Details:</b></legend>
-                    <div class="row has-text-centered ml-2 mr-2 mb-1">
-                        <img src="../images/users/admin.jpg" alt="image" class="image" >              
-                    </div> 
+                    <?php
+                        $sql_admin_profile_pic ="SELECT * FROM `admin` WHERE user_id='$userID'"; 
+                        $result_admin_profile_pic = mysqli_query($con,$sql_admin_profile_pic);
+                        while ($row_admin_profile_pic = mysqli_fetch_assoc($result_admin_profile_pic)) {
+                            ?>
 
-                    <div class="column is-5 mt-0 ml-1 pl-0 pr-0">
+                    <div class="row has-text-centered ml-2 mr-2 mb-1">
+                        <img src="../images/users/<?php echo $row_admin_profile_pic['profilePic']?>" alt="image" class="image" >              
+                    </div> 
+                    <?php
+                        }
+                    ?>
+
+                    <div class="column is-5 mt-0 ml-0 pl-0 pr-0">
                         <table style="font-family:Candara;">
                             <tr>
-                                <td style="font-weight:600;">Admin ID</td>
+                                <td valign="top" style="text-align:left!important;">Name</td>
                             </tr>
                             <tr>
-                                <td style="font-weight:600;">Name</td>
+                                <td valign="top" style="text-align:left!important;">Email</td>
                             </tr>
                             <tr>
-                                <td style="font-weight:600;">Email</td>
+                                <td valign="top" style="text-align:left!important;">Contact No.</td>
                             </tr>
                             <tr>
-                                <td style="font-weight:600;">Contact No.</td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight:600;">Address</td>
-                            </tr>
+                                <td valign="top" style="text-align:left!important;">Address</td>
+                            </tr>                            
                         </table>
                     </div>
 
                     <div class="column is-2 mt-0 ml-0 pl-0 pr-0">
                         <table class="user" id="myTable"> 
                         
-                        <?php
-                            $userType="admin";
-                            $sql ="SELECT * FROM `users` WHERE userType='$userType'";
+                        <?php                             
+                            
+                            $sql ="SELECT * FROM `users` WHERE id='$userID'";                            
                             $result = mysqli_query($con,$sql);        
                             while($row = mysqli_fetch_assoc($result)){ 
                                 $adminID=$row['id']; 
-                                $sql_admin ="SELECT * FROM `admin` WHERE adminID='$adminID'"; 
+                                $sql_admin ="SELECT * FROM `admin` WHERE user_id='$adminID'"; 
                                 $result_admin = mysqli_query($con,$sql_admin);
                                 while($row_admin = mysqli_fetch_assoc($result_admin)){                       
-                                echo "<tr>                  
-                                        <td>".$row['id']."</td>
+                                echo "<tr>
+                                        <td valign=\"top\" style=\"text-align:left!important;\">".$row_admin['name']."</td>
                                         </tr>";
                                 echo "<tr>
-                                        <td>".$row_admin['name']."</td>
+                                        <td valign=\"top\" style=\"text-align:left!important;\">".$row['email']."</td>
                                         </tr>";
                                 echo "<tr>
-                                        <td>".$row['email']."</td>
+                                        <td valign=\"top\" style=\"text-align:left!important;\">".$row_admin['contactNum']."</td>
                                         </tr>";
                                 echo "<tr>
-                                        <td>".$row_admin['contactNum']."</td>
-                                        </tr>";
+                                        <td valign=\"top\" style=\"text-align:left!important;\">".$row_admin['address1']."</td>
+                                    </tr>";   
                                 echo "<tr>
-                                        <td>".$row_admin['address1']." ".$row_admin['address2']." ".$row_admin['city']."</td>
-                                        </tr>";                        
+                                        <td valign=\"top\" style=\"text-align:left!important;\"> ".$row_admin['address2']."</td>
+                                    </tr>"; 
+                                echo "<tr>
+                                        <td valign=\"top\" style=\"text-align:left!important;\">".$row_admin['city']."</td>
+                                    </tr>";                            
                                 }
                             }
                             echo "</table>";

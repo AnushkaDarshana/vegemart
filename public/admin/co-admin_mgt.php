@@ -1,5 +1,16 @@
 <?php include('../../config/dbconfig.php'); ?>
-<?php session_start(); ?>
+<?php 
+    if(empty(session_id())){
+        session_start();
+    }
+    if((!isset($_SESSION["loggedInAdminID"])))
+    {
+        echo "<script>
+        alert('You have to be a Admin to acess');
+        window.location.href='../../public/login.php';
+        </script>";
+    } 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -106,6 +117,7 @@
                                     <td><input class="input-l" type="text" placeholder="Active status" id="status" name="status" readonly=true required></td>
                                 </tr>
                             </table>
+                            <br><br>
                             <script>
                                 function myfunction(){
                                     var x = confirm("Confirm Suspend?");
@@ -114,9 +126,11 @@
                                 else
                                     return false;
                                 }
+
                             </script>
+
                             <input type="submit" class="form-button" name="update" value="Update">
-                            <input type="submit" class="form-button" name="delete" value="Suspend" onclick=" return myfunction()" >
+                            <input type="submit" class="form-button" name="delete" value="Suspend" onclick=" return myfunction()"  >
                             <input type="submit" class="form-button" name="activate" value="Activate">
                         </form>
                         <button class="card-button" onClick="location.href='https://localhost/vegemart/public/admin/admin-dash.php';">Back</button>

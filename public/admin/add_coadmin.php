@@ -2,6 +2,17 @@
     include ('../../config/dbconfig.php'); 
     include ('../../src/session.php'); 
 
+    if(empty(session_id())){
+        session_start();
+    }
+    if((!isset($_SESSION["loggedInAdminID"])))
+    {
+        echo "<script>
+        alert('You have to be a Admin to acess');
+        window.location.href='../../public/login.php';
+        </script>";
+    }  
+
     $target_dir = "../images/users/";
     $target_file = $target_dir . basename($_FILES["profilePic"]["name"]);
     $uploadOk = 1;

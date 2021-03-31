@@ -1,5 +1,22 @@
 <?php
+    if(empty(session_id())){
+        session_start();
+    }
     include ('../../config/dbconfig.php');
+    if((!isset($_SESSION["loggedInAdminID"])) && (!isset($_SESSION["loggedInCoAdminID"])))
+    {
+        echo "<script>
+        alert('You have to login first');
+        window.location.href='../../public/login.php';
+        </script>";
+    }  
+    else if(isset($_SESSION["loggedInAdminID"])){
+        $userID = $_SESSION["loggedInAdminID"];
+    } 
+    else if(isset($_SESSION["loggedInCoAdminID"])){
+        $userID = $_SESSION["loggedInCoAdminID"];
+    } 
+
     // Sales total Graph
     $sql= "SELECT p.`productID`,p.`name`, Qsum.`tot_quantity` 
            FROM `products` p, (SELECT `productID`, SUM(`quantity`) AS tot_quantity 
@@ -52,7 +69,7 @@
     //Failed orders
     $sql4 ="SELECT COUNT(orderID) AS total2
             FROM orders
-            WHERE `paymentStatus` = 0"; 
+            WHERE `canceled_orders` = 1"; 
     $result4 = mysqli_query($con,$sql4);
     $row4 = mysqli_fetch_assoc($result4);
     //Total on-going sales

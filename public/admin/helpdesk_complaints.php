@@ -1,5 +1,21 @@
 <?php
+    if(empty(session_id())){
+        session_start();
+    }
     include ('../../config/dbconfig.php');
+    if((!isset($_SESSION["loggedInAdminID"])) && (!isset($_SESSION["loggedInCoAdminID"])))
+    {
+        echo "<script>
+        alert('You have to login first');
+        window.location.href='../../public/login.php';
+        </script>";
+    }  
+    else if(isset($_SESSION["loggedInAdminID"])){
+        $userID = $_SESSION["loggedInAdminID"];
+    } 
+    else if(isset($_SESSION["loggedInCoAdminID"])){
+        $userID = $_SESSION["loggedInCoAdminID"];
+    } 
 ?>
 
 <!DOCTYPE html>
@@ -33,12 +49,10 @@
                             <th>Email</th>
                             <th>Phone Number</th>
                             <th>Issue</th>
-                            <th>Description</th>
                             <th></th>
-                        </tr>        
-                        <form method="post" action="../../src/forum/forum_review_posts.php">
-                            <?php include_once "../../src/helpdesk_solve_complaint.php"; ?>         
-                        </form>   
+                        </tr> 
+                        <?php include_once "../../src/helpdesk_solve_complaint.php"; ?>                              
+                    </table>                         
                 </div>
             </div>
         </div>

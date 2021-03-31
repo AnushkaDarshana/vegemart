@@ -1,5 +1,21 @@
 <?php
+    if(empty(session_id())){
+        session_start();
+    }
     include ('../../config/dbconfig.php');
+    if((!isset($_SESSION["loggedInAdminID"])) && (!isset($_SESSION["loggedInCoAdminID"])))
+    {
+        echo "<script>
+        alert('You have to login first');
+        window.location.href='../../public/login.php';
+        </script>";
+    }  
+    else if(isset($_SESSION["loggedInAdminID"])){
+        $userID = $_SESSION["loggedInAdminID"];
+    } 
+    else if(isset($_SESSION["loggedInCoAdminID"])){
+        $userID = $_SESSION["loggedInCoAdminID"];
+    } 
 //Deliverers vehicle graph
     $sql= "SELECT `vehicle`, COUNT(`user_id`) AS total_count
             FROM `deliverer` 
@@ -210,7 +226,7 @@ while($row1 = mysqli_fetch_assoc($result1)){
         </div>
         <script>
             var chart = new Chart('buyer_month_chart', {
-                type: 'line',
+                type: 'bar',
                 data: {
                     labels: <?php echo $js_array_a ?>,
                     datasets: [{

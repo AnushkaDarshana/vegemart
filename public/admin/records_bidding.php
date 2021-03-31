@@ -1,5 +1,21 @@
 <?php
+    if(empty(session_id())){
+        session_start();
+    }
     include ('../../config/dbconfig.php');
+    if((!isset($_SESSION["loggedInAdminID"])) && (!isset($_SESSION["loggedInCoAdminID"])))
+    {
+        echo "<script>
+        alert('You have to login first');
+        window.location.href='../../public/login.php';
+        </script>";
+    }  
+    else if(isset($_SESSION["loggedInAdminID"])){
+        $userID = $_SESSION["loggedInAdminID"];
+    } 
+    else if(isset($_SESSION["loggedInCoAdminID"])){
+        $userID = $_SESSION["loggedInCoAdminID"];
+    } 
 ?>
 
 <!DOCTYPE html>
@@ -18,14 +34,14 @@
         <div class="row">
             <h1 id="title" class="has-text-left ml-2 mt-1 mb-0">Auction Records</h1>
             <div class="columns group mt-0">
-                <div class="column is-1"></div>
-                <div class="column is-10 pl-1">
+                
+                <div class="column is-12">
                 <table class="user" id="myTable">
                     <tr>
                         <th>Bid ID</th>
-                        <th>Product ID </th>
-                        <th>Buyer ID</th>
-                        <th>Seller ID</th>
+                        <th>Product </th>
+                        <th>Buyer Name</th>
+                        <th>Seller Name</th>
                         <th>Start Date & Time</th>
                         <th>End Date & Time</th>
                         <th>Total Quantity sold (kg)</th>
@@ -36,21 +52,51 @@
                         $sql ="SELECT * FROM `bidding`";
                         $result = mysqli_query($con,$sql);        
                         while($row = mysqli_fetch_assoc($result)) { 
-                            if ($row['bidStatus']== 1){
+                            $productID = $row['productID'];
+                            $userID = $row['userID'];
+                            $sellerID = $row['sellerID'];
+
+                            echo $userID;
+                            if ($row['bidStatus']== 0){
                                 $bidStatus = "On Going";
                             }
                             else{
-                                $bidStatus = "Not On Going";
+                                $bidStatus = "Finished";
                             }
-                            
+                           
+                            //Product Details
+                            $productQuery = "SELECT * FROM `products` WHERE productID = '$productID'";
+                            $resultProduct = mysqli_query($con,$productQuery);        
+                            while($rowProduct = mysqli_fetch_assoc($resultProduct)) { 
+                                $product = $rowProduct['name'];
+                            }
+
+
+                            //Buyer Details
+                            $buyerQuery = "SELECT * FROM `client` WHERE user_id = '$userID'";
+                            $resultBuyer = mysqli_query($con,$buyerQuery);        
+                            while($rowBuyer = mysqli_fetch_assoc($resultBuyer)) { 
+                                $buyer = $rowBuyer['fName'];
+                            }
+
+
+                            //Seller Details
+                            $sellerQuery = "SELECT * FROM `client` WHERE user_id = '$sellerID'";
+                            $resultSeller = mysqli_query($con,$sellerQuery);        
+                            while($rowSeller = mysqli_fetch_assoc($resultSeller)) { 
+                                $seller = $rowSeller['fName'];
+                            }
+
+                            $startTime = date("Y-m-d h:i:s A", strtotime($row['startTime']));
+                            $endTime = date("Y-m-d h:i:s A", strtotime($row['endTime']));
                             echo "
                                 <tr>
                                     <td>".$row['bidID']."</td>
-                                    <td>".$row['productID']."</td>
-                                    <td>".$row['userID']."</td>
-                                    <td>".$row['sellerID']."</td>
-                                    <td>".$row['startTime']."</td>
-                                    <td>".$row['endTime']."</td>
+                                    <td>".$product."</td>
+                                    <td>".$buyer."</td>
+                                    <td>".$seller."</td>                                    
+                                    <td>".$startTime."</td>
+                                    <td>".$endTime."</td>
                                     <td>".$row['bidQuantity']."</td>
                                     <td>".$row['bidPrice']."</td>
                                     <td>$bidStatus</td>   
@@ -60,7 +106,7 @@
                     echo "</table>";
                     ?>
                 </div>
-                <div class="column is-1"></div>
+               
             </div>
         </div>
     </body>
