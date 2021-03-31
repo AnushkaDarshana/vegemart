@@ -1,7 +1,3 @@
-<?php     
-    include ('../../src/session.php');
-    include ('../../config/dbconfig.php');
-?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -13,7 +9,7 @@
 
     <body>
         <header class="header">
-            <a href="./seller_home.php"><img class="logopic" src="../images/logob.png"></a>
+            <a href="./seller_home.php"><img class="logopic" src="https://localhost/vegemart/public/images/logob.png"></a>
             
             <ul class="main-nav">
                 <?php  

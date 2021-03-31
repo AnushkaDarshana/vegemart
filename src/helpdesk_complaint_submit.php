@@ -1,33 +1,20 @@
 <?php
     include ('../config/dbconfig.php');
-    include ('./session.php');
-
-    if(isset($_SESSION["loggedInUserID"])||isset($_SESSION["loggedInSellerID"])){
-        if (isset($_SESSION["loggedInUserID"])) {
-            $userID = $_SESSION["loggedInUserID"];
-        }
-        elseif (isset($_SESSION["loggedInSellerID"])) {
-            $userID = $_SESSION["loggedInSellerID"];
-        }
-    }    
-    else{
-        echo"<li><button class=\"loginbtn\" onClick=\"location.href='https://localhost/vegemart/login.php';\">Login</button><li>";
-    } 
+    include ('./session.php');    
    
-   if(isset($_POST['submit'])){
-        // $first_name = $_POST['first_name'];
-        // $last_name = $_POST['last_name'];
+    if(isset($_POST['submit'])){
+        $name = $_POST['name'];
         $email = $_POST['email'];
-        // $phoneNum = $_POST['phoneNum'];
+        $phoneNum = $_POST['phoneNum'];
         $issue = $_POST['issue'];
         $issue_description = $_POST['issue_description'];
 
-        $insertComplaint = "INSERT INTO `help_desk` (`user_id`, `date_time`, `email`, `issue`, `description`, `complaint_status`) VALUES ('".$userID."', now(),'".$email."','".$issue."','".$issue_description."', 0;";
-        mysqli_query($con, $insertComplaint)  or die(mysqli_error($con));
-
+        $insertComplaint = "INSERT INTO `help_desk` ( `date_time`,`name`, `email`, `phoneNum`,`issue`, `description`, `complaint_status`) VALUES ( NOW(),'".$name."','".$email."','".$phoneNum."','".$issue."','".$issue_description."', 0);";
+        
         if (mysqli_query($con, $insertComplaint) === true) {
             $message = base64_encode(urlencode("Complaint recorded."));
-            header('Location:../public/helpdesk_after_complaint.php');
+            echo "<script>alert('Your complaint is submitted');</script>";
+            header('Location:../public/help_desk.php');
             exit();
         } 
         else {

@@ -12,11 +12,18 @@ include ('../src/session.php');
         <title>Forum | Vegemart</title>
         <link rel="stylesheet" href="./css/forum.css">
         <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" type="text/css" href="./css/nav.css">
         <link rel="stylesheet" href="./css/footer.css">
     </head>
 
     <body>
-        <?php include "./includes/nav.php"; ?>
+        <?php if (isset($_SESSION["loggedInUserID"])) {
+                include_once "./includes/nav.php";
+            }
+            if (isset($_SESSION["loggedInSellerID"])) {
+                include_once "./seller/seller_nav.php";
+            } 
+        ?>
         <div class="heading">
             <h1><i class="fa fa-comments" style="font-size:38px; color:white; padding-right:0.2em;"></i>Vegemart Forum</h1>
         </div>

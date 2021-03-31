@@ -54,7 +54,7 @@
             $topic_owner = $user_info_res['name'];
 
             //get number of posts
-            $get_num_posts = "SELECT count(post_id) from `forum_posts` where `topic_id` = $topic_id";
+            $get_num_posts = "SELECT count(post_id) from `forum_posts` where `topic_id` = $topic_id AND `post_status` = 1";
             $get_num_posts_res = mysqli_query($con,$get_num_posts) or die(mysqli_error($con));
             $num_posts = mysqli_result($get_num_posts_res,0,'count(post_id)');
             $encode_id=urlencode(base64_encode($topic_id));

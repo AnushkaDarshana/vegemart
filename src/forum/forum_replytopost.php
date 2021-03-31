@@ -63,7 +63,7 @@
      
         //add the post
         $add_post = "INSERT INTO `forum_posts` values ('', '".$topic_id."', '".$post_text."', now(), '".$post_owner."');";
-        mysqli_query($con,$add_post) or die(mysqli_error());
+        mysqli_query($con,$add_post);
      
         //redirect user to topic
         header("Location: ../../public/forum.php");
