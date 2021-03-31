@@ -36,7 +36,7 @@
         
             <div class="column is-3 mt-3 pt-2 ml-2 mr-0 pl-2 pr-2">
                 <fieldset>
-                    <legend><b>Admin Profile Details:</b></legend>
+                    <legend><b> Profile Details:</b></legend>
                     <?php
                         $sql_admin_profile_pic ="SELECT * FROM `admin` WHERE user_id='$userID'"; 
                         $result_admin_profile_pic = mysqli_query($con,$sql_admin_profile_pic);
@@ -108,7 +108,7 @@
         
             
             <div class="column is-8 mt-0 ml-2 pl-1 pr-1">
-            <h1 style="text-align:center; font-size: 30px; margin-bottom:0;">ADMIN DASHBOARD</h1>
+            <h1 style="text-align:center; font-size: 30px; margin-bottom:0;">ADMIN | CO-ADMIN DASHBOARD</h1>
                 <div class="row mt-2 ml-0 mr-0">
                     <div class="card pl-1 pr-1 ml-0 mr-0 pt-1 pb-1">
 
