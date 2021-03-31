@@ -37,6 +37,16 @@
         header('location:customer_view.php');
     }
 }
+if (isset($_POST['activate'])) {
+    $id = $_POST['id'];
+    $active_status = $_POST['active_status'];
+
+$sql4 = "UPDATE users SET active_status =1  WHERE id='$id' ";
+$result4 = mysqli_query($con, $sql4);
+if ($result4 == true ){ 
+    header('location:customer_view.php');
+}
+}
 
 
 ?>

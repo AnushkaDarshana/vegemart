@@ -20,52 +20,48 @@
             <div class="columns group mt-0">
                 <div class="column is-1"></div>
                 <div class="column is-10 pl-1">
-                    
-                    <table class="user" id="myTable">
-            <tr>
-                <th>Bid ID</th>
-                <th>Start Date & Time</th>
-                <th>Product Name</th>
-                <th>Total Quantity sold (kg)</th>
-                <th>Bid Amount </th>
-                <th> </th>
-            </tr>
-        
-            <?php
-    
-                $sql ="SELECT * FROM `bidding`";
-                $result = mysqli_query($con,$sql);        
-                while($row = mysqli_fetch_assoc($result)){ 
-            
-                    echo "
-                        <tr>
-                            <td>".$row['bidID']."</td>
-                            <td>".$row['startTime']."</td>
-                            <td>".$row['bidQuantity']."</td>
-                            <td>".$row['userID']."</td>
-                            <td>".$row['bidPrice']."</td>
-                        </tr>";
-                    
-                    } 
-            echo "</table>";
-            ?>
-
-                    <table class="user" id="myTable">
-
-                        <tr>                  
-                            <td>#5627481</td>
-                            <td>15.11.2020</td>
-                            <td>Potato</td>                         
-                            <td>8</td>
-                            <td>Kamal Silva</td>
-                            <td>65</td>
-                            <td class="has-text-centered"><a href="#">View All participants</a></td>
-                        </tr>
-                    </table>
+                <table class="user" id="myTable">
+                    <tr>
+                        <th>Bid ID</th>
+                        <th>Product ID </th>
+                        <th>Buyer ID</th>
+                        <th>Seller ID</th>
+                        <th>Start Date & Time</th>
+                        <th>End Date & Time</th>
+                        <th>Total Quantity sold (kg)</th>
+                        <th>Bid Amount </th>
+                        <th>Bid Status</th>
+                    </tr>
+                    <?php
+                        $sql ="SELECT * FROM `bidding`";
+                        $result = mysqli_query($con,$sql);        
+                        while($row = mysqli_fetch_assoc($result)) { 
+                            if ($row['bidStatus']== 1){
+                                $bidStatus = "On Going";
+                            }
+                            else{
+                                $bidStatus = "Not On Going";
+                            }
+                            
+                            echo "
+                                <tr>
+                                    <td>".$row['bidID']."</td>
+                                    <td>".$row['productID']."</td>
+                                    <td>".$row['userID']."</td>
+                                    <td>".$row['sellerID']."</td>
+                                    <td>".$row['startTime']."</td>
+                                    <td>".$row['endTime']."</td>
+                                    <td>".$row['bidQuantity']."</td>
+                                    <td>".$row['bidPrice']."</td>
+                                    <td>$bidStatus</td>   
+                            </tr>";
+                            
+                            } 
+                    echo "</table>";
+                    ?>
                 </div>
                 <div class="column is-1"></div>
             </div>
-            <br><br>
         </div>
     </body>
 </html>

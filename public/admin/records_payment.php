@@ -23,62 +23,43 @@
                     <table class="user" id="myTable">
                         <tr>
                             <th>Order ID</th>
-                            <th>Date</th>
-                            <th>Client Name</th>
-                            <th>Client Type</th>
-                            <th>Paid for</th>
+                            <th>Product Ordered </th>
+                            <th>In City</th>
+                            <th>Availability </th>
+                            <th>Expiry Date & time</th>
                             <th>Total Payment (Rs.)</th>
 
                         </tr>
-                        <tr>                  
-                            <td>#0001</td>
-                            <td>17.11.2020</td>
-                            <td>Kamala Perera</td>
-                            <td>Buyer</td>
-                            <td>Order</td>
-                            <td>740</td>
-                        </tr>
-                        <tr>                  
-                            <td>#0002</td>
-                            <td>18.11.2020</td>
-                            <td>Amal Fernando </td>
-                            <td>Seller</td>
-                            <td>Advertisement</td>
-                            <td>100</td>
-                        </tr>
-                        <tr>                  
-                            <td>#0003</td>
-                            <td>21.11.2020</td>
-                            <td>Nimal Bandara</td>
-                            <td>Buyer</td>
-                            <td>Order</td>
-                            <td>560</td>   
-                        </tr>
-                        <tr>                  
-                            <td>#0004</td>
-                            <td>23.11.2020</td>
-                            <td>Nimal Bandara</td>
-                            <td>Buyer</td>
-                            <td>Order</td>
-                            <td>450</td>
-                        </tr>
-                        <tr>                  
-                            <td>#0005</td>
-                            <td>29.11.2020</td>
-                            <td>Prem Raj</td>
-                            <td>Seller</td>
-                            <td>Advertisement</td>
-                            <td>150</td>
-                        </tr>
-                        <tr>                  
-                            <td>#0006</td>
-                            <td>02.12.2020</td>
-                            <td>Randimal Perera</td>
-                            <td>Seller</td>
-                            <td>Advertisement</td>
-                            <td>120</td>
-                        </tr>
-                    </table>
+                        <?php
+                        $sql ="SELECT pr. `orderID`, name,city, availability, expiredate, pr.`paid_amount`
+                        FROM products q, (SELECT `productID`, o.`orderID`, p.`paid_amount`
+                                        FROM orders o, (SELECT `orderID`, `paid_amount` 
+                                                        FROM `payment`) p
+                                        WHERE o.orderID= p.orderID) pr
+                        WHERE pr.`productID`= q.`productID`";
+
+                        $result = mysqli_query($con,$sql);        
+                        while($row = mysqli_fetch_assoc($result)) { 
+                            if ($row['availability']== 1){
+                                $availability = "Available";
+                            }
+                            else{
+                                $availability = "Unavailable";
+                            }
+                            
+                            echo "
+                                <tr>
+                                    <td>".$row['orderID']."</td>
+                                    <td>".$row['name']."</td>
+                                    <td>".$row['city']."</td>
+                                    <td>$availability</td>
+                                    <td>".$row['expiredate']."</td>
+                                    <td>".$row['paid_amount']."</td>  
+                            </tr>";
+                            
+                            } 
+                    echo "</table>";
+                    ?>
                 </div>
                 <div class="column is-1"></div>
             </div>

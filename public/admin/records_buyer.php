@@ -65,6 +65,11 @@ while($row1 = mysqli_fetch_assoc($result1)){
             FROM `payment`";
     $result6 = mysqli_query($con,$sql6);
     $row6 = mysqli_fetch_assoc($result6);
+    //total biddings
+    $sql7 ="SELECT COUNT(`bidID`) AS total7 
+            FROM `bidding`";
+    $result7 = mysqli_query($con,$sql7);
+    $row7 = mysqli_fetch_assoc($result7);
 ?>
 
 <!DOCTYPE html>
@@ -91,7 +96,7 @@ while($row1 = mysqli_fetch_assoc($result1)){
                             </div>
                             <div class="column is-5 pl-0 has-text-left">
                                 <h2 style="font-size:22px;" class="mb-0 pb-0"><?php echo $row2['total'];?></h2>
-                                <h3 class="mt-0 pt-0">Total Buyers Joined</h3>
+                                <h3 class="mt-0 pt-0">Total No of Buyers</h3>
                             </div>
                             <div class="column is-4 pl-0 has-text-left">
                                 <i class="fa fa-bar-chart mt-1 mb-1" style="font-size:50px; padding:0.2em 0.1em; margin:0.2em 0;color:#E5E7E9;"></i>
@@ -135,7 +140,7 @@ while($row1 = mysqli_fetch_assoc($result1)){
             <div class="columns group mb-1">
                 <div class="column is-1"> </div>
                 <div class="column is-5 pl-1">
-                    <h2 style="font-size:22px;" class="has-text-left">No Of Buyers Based on Orders made</h2>
+                    <h2 style="font-size:22px;" class="has-text-left">Buyers Based on No. of Orders made</h2>
                     <div class="card pl-1 pr-1 pt-1 pb-1">                       
                         <canvas id="buyer_month_chart"></canvas>
                     </div>
@@ -184,17 +189,17 @@ while($row1 = mysqli_fetch_assoc($result1)){
                     </div>
 
                     <div class="column is-4 pl-3 pr-3 mt-0 mb-2">
-                        <h2 style="font-size:22px;" class="has-text-left">Total Profit</h2>
+                        <h2 style="font-size:22px;" class="has-text-left">Total Biddings Made</h2>
                         <div class="card has-text-centered pt-1 pb-1 pl-1 pr-1">
                             <img id="cash" src="https://www.flaticon.com/svg/static/icons/svg/639/639365.svg" alt="cash">
                             <h3 class="has-text-centered mt-0 pt-0">Year 2020</h3>
                             <hr>
                             <div class="columns group">
                                 <div class="column is-6 pl-2 has-text-left">
-                                    <h3>Total Profit</h3>
+                                    <h3>Total Bidings</h3>
                                 </div>
                                 <div class="column is-6 pl-2 has-text-right">
-                                    <h3>Rs. 78,260</h3>
+                                    <h3><?php echo $row7['total7'];?></h3>
                                 </div>
                             </div>
                         </div>

@@ -19,19 +19,10 @@
             <?php include "../includes/admin_nav.php"; ?>
         </div>
         <!--End of nav-->
-
-        <div class="search-user-container">
-            <form name="form-display-selected">
-                <!--heading-->
-		        <h3>Search From Name , Email or ID</h3>
-		        <!--Input-------->
-		        <div class="search-input">
-                    <input type="text" id="myInput" onkeyup="myFunctionCustomer()" 
-                    placeholder="Enter Name , Email or ID"/>
-                </div>
-                <br/>
-            </form>
+        <div class="row">
+        <h2>Vegemart deliverer Details</h2>
         </div>
+
         <div class="row">
             <div class="col-1"></div>
             <div class="col-10">
@@ -62,10 +53,10 @@
                 $result_deliverer = mysqli_query($con,$sql_deliverer);
                 while($row_deliverer = mysqli_fetch_assoc($result_deliverer)){
                     if ($row['active_status'] == 1){
-                        $active_status = "active";
+                        $active_status = "Active";
                     }
                     else{
-                        $active_status = "Non-active";
+                        $active_status = "Deactivated";
                     }
             
                     echo "
@@ -169,7 +160,7 @@
                 <div class="col-3"></div>
                 <div class="col-2"><input name= "update" type ="submit" value="Update "class="button"></div>
                 <div class="col-2"><input name= "delete" type ="submit" value="Suspend "class="button"></div>
-                <div class="col-2"></div>
+                <div class="col-2"><input name= "activate" type ="submit" value="Activate "class="button"></div>
                 <div class="col-3"><a href="admin-dash.php" class="button"> Back </a></div>
     
                 </div>

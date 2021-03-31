@@ -45,10 +45,10 @@
                         $result_admin = mysqli_query($con,$sql_admin);
                         while($row_admin = mysqli_fetch_assoc($result_admin)){  
                             if ($row['active_status'] == 1){
-                                $active_status = "active";
+                                $active_status = "Active";
                             }
                             else{
-                                $active_status = "Non-active";
+                                $active_status = "Deactivated";
                             }                     
                             echo "
                                 <tr>                  
@@ -103,12 +103,13 @@
                                 </tr>
                                 <tr>
                                     <th> Status : </th>
-                                    <td><input class="input-l" type="text" placeholder="Active status" id="status" name="status"  required></td>
+                                    <td><input class="input-l" type="text" placeholder="Active status" id="status" name="status" readonly=true required></td>
                                 </tr>
                             </table>
 
                             <input type="submit" class="form-button" name="update" value="Update">
                             <input type="submit" class="form-button" name="delete" value="Suspend">
+                            <input type="submit" class="form-button" name="activate" value="Activate">
                         </form>
                         <button class="card-button" onClick="location.href='https://localhost/vegemart/public/admin/admin-dash.php';">Back</button>
                     </div>

@@ -16,10 +16,12 @@
     <body>
         <?php include "../includes/admin_nav.php"; ?>       
         <div class="row">
-            <h1 id="title" class="has-text-left ml-2 mt-1 mb-0">Help Desk (Administration)</h1>
+        <div class="heading-help">
+                <h1><i class="fa fa-question" style="font-size:25px; color:#138D75; padding:0.2em;"></i>Help Desk (Administration)</h1>
+            </div>
             <div class="tab has-text-centered">
-                <button id="tab-button" onClick="location.href='./helpdesk_complaints.php';">Home</button>
-                <button id="tab-button" style="background-color: #D7DBDD;" onClick="location.href='./helpdesk_resolved.php';">My Posts</button>
+                <button id="tab-button" onClick="location.href='./helpdesk_complaints.php';">Pending issues</button>
+                <button id="tab-button" style="background-color: #D7DBDD;" onClick="location.href='./helpdesk_resolved.php';">Resolved issues</button>
             </div>
             <div class="columns group mt-0">
                 <div class="column is-1"></div>
@@ -27,16 +29,15 @@
                     <table class="user" id="myTable">
                         <tr>
                             <th>Ref No.</th>
-                            <th>Date & Time Created</th>
-                            <th>Client</th>
-                            <th>Client Email</th>
-                            <th>Client Phone Number</th>
-                            <th>Complaint</th>
-                            <th>Complaint  Status</th>
-                            <th>Resolve</th>
+                            <th>Date & Time Solved</th>
+                            <th>User</th>
+                            <th>Phone Number</th>
+                            <th>Issue</th>
+                            <th>Description</th>
+                            <th>Solution</th>
                         </tr>        
                         <form method="post" action="../../src/forum/forum_review_posts.php">
-                            <?php include_once "../../src/helpdesk_solve_complaint.php"; ?>         
+                            <?php include_once "../../src/helpdesk_solved_complaints.php"; ?>         
                         </form> 
                         
                     

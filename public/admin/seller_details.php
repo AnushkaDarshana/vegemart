@@ -25,13 +25,24 @@
         
 	} 
 
-	if (isset($_POST['delete'])) {
+    if (isset($_POST['delete'])) {
+        $id = $_POST['id'];
+        $active_status = $_POST['active_status'];
+
+        $sql3 = "UPDATE users SET active_status =0  WHERE id='$id' ";
+        $result3 = mysqli_query($con, $sql3);
+        if ($result3 == true) {
+            header('location:seller_view.php');
+        }
+    }
+
+    if (isset($_POST['activate'])) {
 		$id = $_POST['id'];
         $active_status = $_POST['active_status'];
 
-    $sql3 = "UPDATE users SET active_status =0  WHERE id='$id' ";
-    $result3 = mysqli_query($con, $sql3);
-    if ($result3 == true ){ 
+    $sql4 = "UPDATE users SET active_status = 1 WHERE id='$id' ";
+    $result4 = mysqli_query($con, $sql4);
+    if ($result4 == true ){ 
         header('location:seller_view.php');
     }
 }

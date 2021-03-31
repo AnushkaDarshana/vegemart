@@ -98,7 +98,7 @@ while($row1 = mysqli_fetch_assoc($result1)){
                             </div>
                             <div class="column is-5 pl-0 has-text-left">
                                 <h2 style="font-size:22px;" class="mb-0 pb-0"><?php echo $row2['total'];?></h2>
-                                <h3 class="mt-0 pt-0">Total Deliverers Joined</h3>
+                                <h3 class="mt-0 pt-0">Total No of Deliverers</h3>
                             </div>
                             <div class="column is-4 pl-0 has-text-left">
                                 <i class="fa fa-bar-chart mt-1 mb-1" style="font-size:50px; padding:0.2em 0.1em; margin:0.2em 0;color:#E5E7E9;"></i>

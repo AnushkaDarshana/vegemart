@@ -12,7 +12,6 @@
         <link rel="stylesheet" type="text/css" href="../css/style.css">
 
         <title>Forum Review | Vegemart</title>
-        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
     </head>
     <body>
         <?php include "../includes/admin_nav.php"; ?>

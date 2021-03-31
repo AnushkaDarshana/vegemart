@@ -2,16 +2,14 @@
 
  include('../../config/dbconfig.php');
 
-
+ $id = $_POST["id"];
  $name = $_POST["name"];
  $email = $_POST["email"];
- $password = $_POST["password"];
- $phone = $_POST["phone"];
- $dob = $_POST["add1"];
+ $phone = $_POST["contact"];
+ $dob = $_POST["postal"];
  $street = $_POST["street"];
  $city = $_POST["city"];
- $active_status = $_POST["active_status"];
-
+ 
 
 if(isset($_POST['add'])){
 
@@ -33,25 +31,43 @@ if(isset($_POST['add'])){
             }
 }
 
-if(isset($_POST['delete'])){
+    if(isset($_POST['delete'])){
 
-
-        $delete_sql = "DELETE FROM co-admin WHERE email = '$email'";
-        if (mysqli_query($con,$delete_sql) == TRUE) {
-            $message = base64_encode(urlencode("Deleted Successful"));
-            header('Location:./view-co-admin.php?msg=' . $message);
-
-            echo "test 3";
-            exit();
-        } 
+        $suspend_sql = "UPDATE `users` 
+                        SET `active_status` = 0
+                        WHERE id = '$id' ";
         
-        else {
-             $message = base64_encode(urlencode("SQL Error"));
-             header('Location:view-co-admin.php?msg=' . $message);
-             echo "test 4";
-             exit();
+        if (mysqli_query($con, $suspend_sql) == true) {
+            $message = base64_encode(urlencode("Updated Successful"));
+            header('Location:co-admin_mgt.php?msg=' . $message);
+            exit();
         }
-}
+        else {
+            $message = base64_encode(urlencode("SQL Error"));
+            header('Location:co-admin_mgt.php?msg=' . $message);
+            exit();
+        }
+        
+    }
+
+    if(isset($_POST['activate'])){
+
+        $suspend_sql = "UPDATE `users` 
+                        SET `active_status` = 1
+                        WHERE id = '$id' ";
+        
+        if (mysqli_query($con, $suspend_sql) == true) {
+            $message = base64_encode(urlencode("Updated Successful"));
+            header('Location:co-admin_mgt.php?msg=' . $message);
+            exit();
+        }
+        else {
+            $message = base64_encode(urlencode("SQL Error"));
+            header('Location:co-admin_mgt.php?msg=' . $message);
+            exit();
+        }
+        
+    }
  
 
 if(isset($_POST["submit"])){
@@ -71,22 +87,24 @@ if(  mysqli_query($con,$sql))
 
 if(isset($_POST['update'])){
 
-
-    $update_sql = "UPDATE co-admin 
-                    SET name = '$name', email ='$email', phone = '$phone', type ='$type'
-                    WHERE email = '$email' ";
+    $update_sql = "UPDATE `admin` 
+                   SET `name` = '$name', `contactNum` ='$phone', `address1` = '$dob', `address2` = '$street' , `city` = '$city'
+                   WHERE user_id = '$id' ";
     
     if (mysqli_query($con,$update_sql) == TRUE) {
-        $message = base64_encode(urlencode("Updated Successful"));
-        header('Location:view-co-admin.php?msg=' . $message);
-        echo "test 5";
-        exit();
+        $update_email = "UPDATE `users` 
+        SET `email` = '$email'
+        WHERE id = '$id' ";
+        if (mysqli_query($con, $update_email) == true) {
+            $message = base64_encode(urlencode("Updated Successful"));
+            header('Location:co-admin_mgt.php?msg=' . $message);
+            exit();
+        }
     } 
     
     else {
          $message = base64_encode(urlencode("SQL Error"));
-         header('Location:view-co-admin.php?msg=' . $message);
-         echo "test 6";
+         header('Location:co-admin_mgt.php?msg=' . $message);
          exit();
     }
 }

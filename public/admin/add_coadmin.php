@@ -1,6 +1,7 @@
 <?php 
     include ('../../config/dbconfig.php'); 
     include ('../../src/session.php'); 
+
     $target_dir = "../images/users/";
     $target_file = $target_dir . basename($_FILES["profilePic"]["name"]);
     $uploadOk = 1;
@@ -35,6 +36,7 @@
         $city = $_POST["city"];
         $password = $_POST["password"];
         $userType="coadmin";
+        $active_status=1;
 
         $sql_e = "SELECT * FROM `users` WHERE email='".$email."'";            
         $res_e = mysqli_query($con, $sql_e);           
@@ -53,25 +55,18 @@
                 $imageName="default.png";
             }
             
-            $user = "INSERT INTO `users` (`email`,`password`, `salt`,`userType`) VALUES ('".$email."','".$password_hash."','".$salt."','".$userType."');";
+            $user = "INSERT INTO `users` (`email`,`password`, `salt`,`userType`, `active_status`) VALUES ('".$email."','".$password_hash."','".$salt."','".$userType."','".$active_status."');";
             $result1= mysqli_query($con,$user);
+
             $user_id = mysqli_insert_id($con);
 
             $admin = "INSERT INTO `admin` (`user_id`,`name`,`contactNum`,`address1`,`address2`,`city`,`profilePic`) VALUES ('".$user_id."','".$name."','".$phoneNum."','".$address1."','".$address2."','".$city."','".$imageName."');";
             $result2= mysqli_query($con,$admin);
 
-            if (($result1 == true) && ($resut2 ==true)) {
-                $message = base64_encode(urlencode("Successfully Edited!"));
-                header('Location:co-admin_mgt.php?msg=' . $message);
-                $logString = "ADMIN added ===> Co-Admin". $row['id'] ." to the system.";
-                writeAppLog($logString, "./logs");
-                exit();
-            } 
-            else {
-                $message = base64_encode(urlencode("SQL Error while Registering"));
-                header('Location:co-admin_mgt.php.php?msg=' . $message);
-                exit();
-            }
+            header('Location:co-admin_mgt.php?msg=' . $message);
+            $logString = "ADMIN added ===> Co-Admin". $row['id'] ." to the system.";
+            writeAppLog($logString, "./logs");
+            
         }
     }
 ?>  
