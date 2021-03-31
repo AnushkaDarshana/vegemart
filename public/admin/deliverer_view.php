@@ -154,12 +154,21 @@
                         </tr>
                     </table>
                     <br><br>
+                    <script>
+                        function myfunction(){
+                            var x = confirm("Confirm Suspend?");
+                        if (x)
+                            return true;
+                        else
+                            return false;
+                        }
 
+                    </script>
                 </div>
                 <div class="row">
                 <div class="col-3"></div>
                 <div class="col-2"><input name= "update" type ="submit" value="Update "class="button"></div>
-                <div class="col-2"><input name= "delete" type ="submit" value="Suspend "class="button"></div>
+                <div class="col-2"><input name= "delete" type ="submit" value="Suspend "class="button" onclick=" return myfunction()"></div>
                 <div class="col-2"><input name= "activate" type ="submit" value="Activate "class="button"></div>
                 <div class="col-3"><a href="admin-dash.php" class="button"> Back </a></div>
     
