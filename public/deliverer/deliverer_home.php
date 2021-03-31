@@ -154,10 +154,10 @@
                             <div class="column is-2">
                                 <p class="mb-0 pb-0"><?php echo $rowSeller['fName'] . " " . $rowSeller['lName']?></p>
                             </div>
-                            <div class="column is-3">
-                                <p class="mb-0 pb-0"><?php echo $rowSeller['address1']?>,</p>
-                                <p class="mb-0 pb-0"><?php echo $rowSeller['address2']?>,</p>
-                                <p><?php echo $rowSeller['city']?></p>
+                            <div class="column is-3 pl-5">
+                                <p style="text-align:left;" class="mb-0 pb-0"><?php echo $rowSeller['address1']?>,</p>
+                                <p style="text-align:left;" class="mb-0 pb-0"><?php echo $rowSeller['address2']?>,</p>
+                                <p style="text-align:left;"><?php echo $rowSeller['city']?></p>
                             </div>
                             <?php
                                 } ?>
@@ -184,10 +184,10 @@
                                 <p class="mb-0 pb-0"><?php echo $rowBuyer['fName'] . " " . $rowBuyer['lName']?></p>
                             </div>
                             
-                            <div class="column is-3">
-                                <p class="mb-0 pb-0"><?php echo $rowBuyer['address1']?>,</p>
-                                <p class="mb-0 pb-0"><?php echo $rowBuyer['address2']?></p>
-                                <p class="mb-0 pb-0"><?php echo $rowBuyer['city']?></p>
+                            <div class="column is-3 pl-5">
+                                <p style="text-align:left;" class="mb-0 pb-0"><?php echo $rowBuyer['address1']?>,</p>
+                                <p style="text-align:left;" class="mb-0 pb-0"><?php echo $rowBuyer['address2']?></p>
+                                <p style="text-align:left;" class="mb-0 pb-0"><?php echo $rowBuyer['city']?></p>
                                 <button class="button mt-1" onClick="location.href='https://localhost/vegemart/src/deliverer/accept_delivery.php?id=<?php echo $orderID ?>';">Accept</button>
                             </div>   
                         </div>

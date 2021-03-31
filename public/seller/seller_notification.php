@@ -1,20 +1,30 @@
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="http://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
-        <link rel="stylesheet" type="text/css" href="./css/notification.css">
-        <link rel="stylesheet" type="text/css" href="./css/style.css">
-        <link rel="stylesheet" type="text/css" href="./css/footer.css">
+        <link rel="stylesheet" type="text/css" href="../css/notification.css">
+        <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <link rel="stylesheet" type="text/css" href="../css/footer.css">
         <title>Notifications | Vegemart</title>
     </head>
     <body>  
     <?php 
-    include "./includes/nav.php"; 
-    include ('../config/dbconfig.php');
-    include ('../src/session.php');
     
+    include ('../../config/dbconfig.php');    
+    if(empty(session_id())){
+        session_start();
+    }
+    if((!isset($_SESSION["loggedInSellerID"])))
+        {
+        echo "<script>
+        alert('You have to login first');
+        window.location.href='../../public/login.php';
+        </script>";
+        } 
+    include "./seller_nav.php"; 
     ?>  
         <div class="row">
             <div class="columns group mt-0">
@@ -23,21 +33,19 @@
                 </div>
                 
                 <div class="column is-6 mt-0 ml-3">
-                    <div>            
-                        <?php include_once "../src/show_notification.php"; ?>              
+                    <div>
+                        <?php include_once "../../src/show_notification.php"; ?>
                     </div>
                     <div>
-                        <?php include_once "../src/forum/forum_notification.php"; ?>  
+                        <?php include_once "../../src/forum/forum_notification.php"; ?>
                     </div>
                 </div>
                 <div class="column is-6 mt-0"></div>
-                
             </div>   
         </div>
         <br>
-        <?php include_once "./includes/footer.php"; ?>  
-        
-        
+        <?php include_once "../includes/footer.php"; ?>  
+
         <!-- <script>
             function myFunction() { 
                 var e = document.getElementById("notif");

@@ -1,7 +1,5 @@
 <?php
-    include ('../config/dbconfig.php');
-    include ('../src/session.php');  
-
+    
     //type 10 = post is submitted to review
     //type 11 = post is accepted
     //type 12 = post is rejected

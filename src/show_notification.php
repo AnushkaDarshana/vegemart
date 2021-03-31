@@ -1,5 +1,4 @@
-<?php include ('../config/dbconfig.php');
-    include ('../src/session.php');  
+<?php    
 
     //type 1 = auction started
     //type 2 = bid win to buyer done
@@ -267,7 +266,7 @@
                     $type = $notification['type'];
 
                     if ($type == '1') {
-                        $get_notif = "SELECT * from `notification` where  where `type` = 1 order by `notif_time` desc";
+                        $get_notif = "SELECT * from `notification` where  `type` = 1 order by `notif_time` desc";
                         $get_notif_res = mysqli_query($con, $get_notif);
                     
                         if ((mysqli_num_rows($get_notif_res) > 0)) {
@@ -277,7 +276,7 @@
                                 $notif_time = $notification['notif_time'];
                                 $bidID = $notification['entityID'];
 
-                                $bid_product = "SELECT * from `bidding` where `productID` = $productID";
+                                $bid_product = "SELECT * from `bidding` where `bidID` = $bidID";
                                 $bid_product_res = mysqli_query($con, $bid_product) or die(mysqli_error($con));
                                 while ($notification = mysqli_fetch_array($bid_product_res)) {
                                     $productID = $notification['productID'];

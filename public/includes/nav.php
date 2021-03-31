@@ -206,6 +206,22 @@
                     justify-content: space-between;
                 }
             }
+            .number {
+                height: 17px;
+                width: 17px;
+                background-color: #d63031;
+                border-radius: 10px;
+                font-size: 11px;
+                color: white;
+                text-align: center;
+                position: absolute;
+                top: 20px;
+                right: 175px;
+                margin: 0;
+                padding: 0 0 1px 0;
+                border-style: solid;
+                border-width: 1px;
+            }
         </style>
     </head>
 
@@ -219,7 +235,10 @@
                 <li><a href="https://localhost/vegemart/public/forum_home.php">Forum</a></li>
                 <li><a href="https://localhost/vegemart/public/shopping_cart.php"><i class="fas fa-shopping-cart mr-0" style="font-size:16px; color:black; padding-right:0.4em;"></i>Cart</a></li>
                 
-                <?php  
+                <?php
+                    if(empty(session_id())){
+                        session_start();
+                    }  
                     if(isset($_SESSION["loggedInUserID"])||isset($_SESSION["loggedInSellerID"])){
                         if (isset($_SESSION["loggedInUserID"])) {
                             $userID = $_SESSION["loggedInUserID"];
@@ -230,16 +249,20 @@
                         $retrieveInfo =  "SELECT * FROM `client` WHERE `user_id`='$userID';"; //Selecting all data from Table
                         $resultInfo = mysqli_query($con, $retrieveInfo); //Passing SQL
                         while($rowUser  = mysqli_fetch_assoc($resultInfo)){
-                            echo "
-                        <li>
-                        <div class=\"nav-dropdown\">
-                            <i class=\"fa fa-bell\" style=\"font-size:16px; color:black; margin-left:1em; margin-right:0; padding-right:0;\"></i>
-                            <button class=\"notifbtn\" onClick=\"location.href='http://localhost/vegemart/public/notification.php';\">Notifications</button>
-                            <div id=\"notifDrop\" class=\"dropdown-content\">
-                                <a href=\"#home\">You have a message from Nimal Bandara</a>
-                            </div>
-                        </div>
-                        </li>
+
+                            $notificationQuery ="SELECT COUNT(notificationID) AS unread FROM `notification` WHERE forUser='$userID' AND notif_read=0";
+                            $resultNotification = mysqli_query($con,$notificationQuery);
+                            while ($rowNotification = mysqli_fetch_assoc($resultNotification)) {  
+                                $notification = $rowNotification['unread'];
+                            }
+                            if ($notification>0) {
+                                echo "
+                                <li>
+                                    <div class=\"number\">$notification</div>";
+                            }
+                                echo"
+                                    <i class=\"fa fa-bell\" style=\"font-size:20px; color:black; margin-left:1em; margin-right:0; padding-right:0;\"></i><button class=\"notifbtn\" onClick=\"location.href='http://localhost/vegemart/src/read_notification.php';\">Messages</button>
+                                </li>
 
                         <li>
                         <div class=\"nav-dropdown\">
