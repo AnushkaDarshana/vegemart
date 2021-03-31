@@ -61,7 +61,7 @@
             $message = base64_encode(urlencode("Successfully Edited!"));
             header('Location:../../public/forum_home.php?msg='.$message);
 
-            $notification = "INSERT INTO `notification` (`type`,`forUser`,`entityID`, `notif_read`, `notif_time`) VALUES (10,'".$userID."', '".$post_id."',0, now());";
+            $notification = "INSERT INTO `notification` (`type`,`forUser`,`entityID`, `notif_read`, `notif_time`) VALUES (11,'".$userID."', '".$post_id."',0, now());";
             mysqli_query($con,$notification); 
 
             exit();

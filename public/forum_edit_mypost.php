@@ -12,11 +12,18 @@ include ('../src/session.php');
         <title>Forum | Vegemart</title>
         <link rel="stylesheet" href="./css/forum.css">
         <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" type="text/css" href="./css/nav.css">
         <link rel="stylesheet" href="./css/footer.css">
     </head>
 
     <body>
-        <?php include "./includes/nav.php"; ?>
+        <?php if (isset($_SESSION["loggedInUserID"])) {
+                include_once "./includes/nav.php";
+            }
+            if (isset($_SESSION["loggedInSellerID"])) {
+                include_once "./seller/seller_nav.php";
+            } 
+        ?>
         <div class="heading">
             <h1><i class="fa fa-comments" style="font-size:38px; color:white; padding-right:0.2em;"></i>Vegemart Forum</h1>
         </div>
@@ -50,7 +57,7 @@ include ('../src/session.php');
                                 <textarea class="ml-1 pl-1" rows="10" cols="110" wrap=virtual name="post_content" form="editPost" placeholder="Post content" value=""><?php echo $row['post_text']?></textarea>
                                 <br>
                                 <input class="form-button"  type="submit" name="submit" value="Save" onclick="myFunction()">
-                                <input class="form-button" type="button" name="cancel" onclick="window.location.replace('./forum_show_myposts.php')" value="Cancel">                                           
+                                <input class="form-button" type="button" name="cancel" onclick="window.location.replace('./forum_myposts.php')" value="Cancel">                                           
                                 <?php 
                                 echo "<a style=\"text-decoration: none; color:#138D75; font-size:18px; font-family:Candara ; margin-top:10%;\" href=\"../src/forum/forum_delete_mypost.php?del=".$row['post_id']."\">Delete Post</a>
                             </form>";

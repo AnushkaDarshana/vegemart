@@ -1,6 +1,6 @@
 <?php
-    include ('../../config/dbconfig.php');
-    include ('../../src/session.php');
+    include ('../config/dbconfig.php');
+    include ('./session.php');
 
     $get_complaint = "SELECT * from `help_desk` where `complaint_status` = 1 order by `date_time` desc";
     $get_complaint_res = mysqli_query($con, $get_complaint) or trigger_error(mysqli_error($con));
@@ -16,9 +16,12 @@
             $date_time = $complaint_info['date_time'];
             $issue = nl2br(stripslashes($complaint_info['issue']));
             $description = nl2br(stripslashes($complaint_info['description']));
-            $solution = nl2br(stripslashes($complaint_info['solution']));
-            $user = stripslashes($complaint_info['name']);
-            $user_phone = $complaint_info['phoneNum'];
+            $user_id = stripslashes($complaint_info['user_id']);
+            // Get information from user table
+            $user_info = "SELECT CONCAT(fName, ' ', lName) AS name, `phoneNum` FROM client WHERE `user_id`=$user_id";
+            $user_info_res = mysqli_fetch_array(mysqli_query($con, $user_info));
+            $user = $user_info_res['name'];
+            $user_phone = $user_info_res['phoneNum'];
             
             //add to display
             $display_block .=
@@ -27,10 +30,10 @@
                 <td>$date_time</td>
                 <td>$user</td>
                 <td>$user_phone</td>
-                <td>$issue</td>
+                <td class=\"justify-text\">$issue</td>
                 <td>$description</td>
                 <td>$solution</td>
-                </tr>";    
+                </tr>";       
         }
     }
     $display_block .= "</div>";  //close up the table

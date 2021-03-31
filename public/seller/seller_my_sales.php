@@ -1,12 +1,15 @@
 <?php include('../database/dbconfig.php'); ?>
 <?php
-session_start();
-
-//Redirect User if not signed in
-if (!(isset($_SESSION['loggedInSellerID']) || isset($_SESSION['loggedInUserID']))) {
-  header('Location: ../login.php');
-}
-
+    if(empty(session_id())){
+        session_start();
+    }
+    if((!isset($_SESSION["loggedInSellerID"])))
+    {
+        echo "<script>
+        alert('You have to login first');
+        window.location.href='../../public/login.php';
+        </script>";
+    }
 ?>
 
 <!DOCTYPE html>

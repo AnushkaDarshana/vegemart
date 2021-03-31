@@ -18,7 +18,7 @@
                 $active_status = $row['active_status'];
                 
                 if($active_status==0){
-                    echo "<script>alert('Your account has been suspended, Visit to help desk to contact Admin');
+                    echo "<script>alert('Your account has been deactivated, Visit to help desk to contact Admin');
                     window.location = '../public/help_desk.php';
                     </script>";
                     $_SESSION["valid"] = 0;

@@ -1,19 +1,15 @@
-<?php     
-    include ('../../src/session.php');
-    include ('../../config/dbconfig.php');
-?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
         <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
-        <link rel="stylesheet" type="text/css" href="../css/nav.css">
+        <link rel="stylesheet" type="text/css" href="https://localhost/vegemart/public/css/nav.css">
     </head>
 
     <body>
         <header class="header">
-            <a href="./seller_home.php"><img class="logopic" src="../images/logob.png"></a>
+            <a href="./seller_home.php"><img class="logopic" src="https://localhost/vegemart/public/images/logob.png"></a>
             
             <ul class="main-nav">
                 <?php  

@@ -23,10 +23,11 @@
         </div>        
              
           <input type="submit" name="send" value="Send">
-          <input type="reset" name="" value="Reset">          
-         
+          <input type="reset" name="" value="Reset">        
+             
       </form>
-    
+      <a style="color:#3e8e41; font-size:16px; margin-top:10%;margin-left:42%;" href="">Visit Helpdesk</a>
+      
   </div>
 
 </body>

@@ -17,6 +17,16 @@
                 <?php
                 include ('../../config/dbconfig.php');
                 include ('../../src/session.php');
+                if(empty(session_id())){
+                    session_start();
+                }
+                if((!isset($_SESSION["loggedInDelivererID"])))
+                {
+                    echo "<script>
+                    alert('You have to login first');
+                    window.location.href='../../public/login.php';
+                    </script>";
+                }
 
                 $deliveryID = $_GET['id'];
                 $userID = $_SESSION["loggedInDelivererID"];

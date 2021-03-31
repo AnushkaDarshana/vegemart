@@ -1,7 +1,7 @@
 <?php
-    include('../../config/dbconfig.php');
-    include('../../src/session.php');
-    include('../../src/utils/helpers.php');
+    include ('../../config/dbconfig.php');
+    include ('../../src/session.php');
+    include ('../../src/utils/helpers.php');
 
     if (!function_exists('mysqli_result')) {
         function mysqli_result($res, $row, $field=0)
@@ -26,7 +26,7 @@
             $topicid = $posts_info['topic_id'];
             $post_text = nl2br(stripslashes($posts_info['post_text']));
             $post_create_time = $posts_info['fmt_post_create_time'];
-            $post_owner = stripslashes($posts_info['post_owner']);
+            $post_owner = $posts_info['post_owner'];
             // Get information from user table
             $user_info = "SELECT CONCAT(`fName`, ' ', `lName`) AS name, profilePic FROM `client` WHERE `user_id`=$post_owner";
             $user_info_res = mysqli_fetch_array(mysqli_query($con, $user_info));
@@ -71,7 +71,7 @@
             if (mysqli_query($con, $updateQuery) === true && mysqli_query($con, $updateStatus) === true) {
                 $message = base64_encode(urlencode("Successful!"));
 
-                $notification = "INSERT INTO `notification` (`type`,`forUser`,`entityID`, `notif_read`, `notif_time`) VALUES (11,'".$post_owner."', '".$post_id."',0, now());";
+                $notification = "INSERT INTO `notification` (`type`,`forUser`,`entityID`, `notif_read`, `notif_time`) VALUES (12,'".$post_owner."', '".$post_id."',0, now());";
                 mysqli_query($con,$notification); 
 
                 header('Location:../../public\admin\forum_review.php?msg='.$message);
@@ -89,7 +89,7 @@
                 $message = base64_encode(urlencode("Successful!"));
                 header('Location:../../public\admin\forum_review.php?msg='.$message);
 
-                $notification = "INSERT INTO `notification` (`type`,`forUser`,`entityID`, `notif_read`, `notif_time`) VALUES (11,'".$post_owner."', '".$post_id."',0, now());";
+                $notification = "INSERT INTO `notification` (`type`,`forUser`,`entityID`, `notif_read`, `notif_time`) VALUES (13,'".$post_owner."', '".$post_id."',0, now());";
                 mysqli_query($con,$notification); 
 
                 $logString = "ADMIN rejected post ". $post_id;

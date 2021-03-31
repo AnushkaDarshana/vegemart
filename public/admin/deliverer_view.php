@@ -1,12 +1,28 @@
 <?php include('../../config/dbconfig.php'); ?>
 <?php
-    session_start();
+    if(empty(session_id())){
+        session_start();
+    }
+    if((!isset($_SESSION["loggedInAdminID"])) && (!isset($_SESSION["loggedInCoAdminID"])))
+    {
+        echo "<script>
+        alert('You have to login first');
+        window.location.href='../../public/login.php';
+        </script>";
+    }  
+    else if(isset($_SESSION["loggedInAdminID"])){
+        $userID = $_SESSION["loggedInAdminID"];
+    } 
+    else if(isset($_SESSION["loggedInCoAdminID"])){
+        $userID = $_SESSION["loggedInCoAdminID"];
+    } 
 ?> 
 <html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> View Deliverer | Vegemart </title>
+        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
         <link rel="stylesheet" type="text/css" href="../css/admin1.css">
 
         <script src="../../js/manage-user-search.js"></script>
@@ -61,10 +77,10 @@
                 $result_deliverer = mysqli_query($con,$sql_deliverer);
                 while($row_deliverer = mysqli_fetch_assoc($result_deliverer)){
                     if ($row['active_status'] == 1){
-                        $active_status = "active";
+                        $active_status = "Active";
                     }
                     else{
-                        $active_status = "Non-active";
+                        $active_status = "Deactivated";
                     }
             
                     echo "
@@ -111,6 +127,26 @@
                 document.getElementById("vehicle_no").value = this.cells[9].innerHTML;
             };
         }
+        function myFunctionCustomer() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0]; // for column one
+                td1 = tr[i].getElementsByTagName("td")[2]; // for column two
+                td2 = tr[i].getElementsByTagName("td")[1]; // for column three
+            /* ADD columns here that you want you to filter to be used on */
+                if (td) {
+                if ( (td.innerHTML.toUpperCase().indexOf(filter) > -1) || (td1.innerHTML.toUpperCase().indexOf(filter) > -1) || (td2.innerHTML.toUpperCase().indexOf(filter) > -1) )  {            
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+                }
+            }
+            }
 
 </script>
     </div>
@@ -168,7 +204,7 @@
                 <div class="col-3"></div>
                 <div class="col-2"><input name= "update" type ="submit" value="Update "class="button"></div>
                 <div class="col-2"><input name= "delete" type ="submit" value="Suspend "class="button"></div>
-                <div class="col-2"></div>
+                <div class="col-2"><input name= "activate" type ="submit" value="Activate "class="button"></div>
                 <div class="col-3"><a href="admin-dash.php" class="button"> Back </a></div>
     
                 </div>

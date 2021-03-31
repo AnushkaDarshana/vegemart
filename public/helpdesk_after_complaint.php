@@ -11,7 +11,21 @@
         <title>Order Complete | Vegemart</title>
     </head>
     <body>  
-        <?php include "./includes/nav.php"; ?>
+        <?php 
+        
+        if (isset($_SESSION["loggedInUserID"])||isset($_SESSION["loggedInSellerID"])) {
+            if (isset($_SESSION["loggedInUserID"])) {
+                include_once "./includes/nav.php";
+            } elseif (isset($_SESSION["loggedInSellerID"])) {
+                include_once "./seller/seller_nav.php";
+            }
+        }            
+        else{
+            include_once "./includes/index_nav.php";
+        }
+        
+        
+        ?>
         <div class="columns group mb-0">
             <div class="column is-2"></div>
             <div class="column is-8 mt-2 mb-0">

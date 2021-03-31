@@ -28,8 +28,11 @@
             else
                 $alert="<div class='failed'>Failed to send the mail!</div>";
         }
-        else 
-        $alert="<p class='error'>The entered email is not a registerd email address!Please try with a valid email address.</p>";
+        else{
+            echo "<script>alert('Email you entered is incorrect,Contact admin through helpdesk for further details');
+                  window.location = '../public/email_verify.php';
+                  </script>"; 
+        }
     }
     mysqli_close($con);
 

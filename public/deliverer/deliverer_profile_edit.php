@@ -12,6 +12,16 @@
 
     <?php   
         include "../deliverer/deliverer_nav.php"; 
+        if(empty(session_id())){
+            session_start();
+        }
+        if((!isset($_SESSION["loggedInDelivererID"])))
+        {
+            echo "<script>
+            alert('You have to login first');
+            window.location.href='../../public/login.php';
+            </script>";
+        }
         include ('../../src/deliverer/deliverer_edit_details.php');
     ?>
           

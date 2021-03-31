@@ -11,6 +11,11 @@
     $orderStatus= "UPDATE `orders` SET `paymentStatus`=1 WHERE `orderID`='$orderID' ";
     if ($con->query($orderStatus) === true) {
 
+            $orderDetailsQuery = "SELECT * FROM orders WHERE `orderID`='$orderID'";
+            $orderDetailsResult = mysqli_query($con, $orderDetailsQuery);
+            $orderDetailsRow = mysqli_fetch_row($orderDetailsResult);
+            $sellerID = $orderDetailsRow[2];
+
             //buyerID
             $userIDQuery = mysqli_query($con, "SELECT userID FROM orders where orderID ='$orderID'");
             $rowUser = mysqli_fetch_row($userIDQuery);
@@ -22,7 +27,7 @@
             $email = $rowUserEmail[0];
 
             //sellerEmail
-            $emailSellerQuery = mysqli_query($con, "SELECT email FROM users where id ='$userID'");
+            $emailSellerQuery = mysqli_query($con, "SELECT email FROM users where id ='$sellerID'");
             $rowSellerEmail = mysqli_fetch_row($emailSellerQuery);
             $emailSeller = $rowSellerEmail[0];
 
@@ -35,7 +40,7 @@
 
             $to=$email;
             $from='vegemartucsc@gmail.com';
-            $subject= $orderID.' order has been confirmed';
+            $subject= '# '.$orderID.' order has been confirmed';
             $message='Thanks for the purchase, '.$user.'! Your order is confirmed';
             $header="From: {$from}\r\nContent-Type: text/html;";
 

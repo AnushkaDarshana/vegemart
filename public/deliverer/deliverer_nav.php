@@ -1,6 +1,6 @@
 <?php     
     include ('../../src/session.php');
-    include ('../../config/dbconfig.php');
+    include ('../../config/dbconfig.php');    
 ?>
 <!DOCTYPE html>
 <html lang="en">

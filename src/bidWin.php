@@ -16,7 +16,7 @@
         $bidPrice = $rowWinBid["bidPrice"];
         
         //date that notification will be sent your account will be suspended if you don't do the payment within 2 days
-        $cartExpirationDateQuery = "SELECT DATE_ADD(NOW(),INTERVAL 1 MINUTE) AS DateAdd;";
+        $cartExpirationDateQuery = "SELECT DATE_ADD(NOW(),INTERVAL 2 DAY) AS DateAdd;";
         $cartExpirationDateResult = mysqli_query($con,$cartExpirationDateQuery); 
         $rowCartExpirationDate = mysqli_fetch_assoc($cartExpirationDateResult);
         $cartExpirationDate = $rowCartExpirationDate['DateAdd'];

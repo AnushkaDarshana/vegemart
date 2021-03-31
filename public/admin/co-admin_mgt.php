@@ -1,5 +1,16 @@
 <?php include('../../config/dbconfig.php'); ?>
-<?php session_start(); ?>
+<?php 
+    if(empty(session_id())){
+        session_start();
+    }
+    if((!isset($_SESSION["loggedInAdminID"])))
+    {
+        echo "<script>
+        alert('You have to be a Admin to acess');
+        window.location.href='../../public/login.php';
+        </script>";
+    } 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,8 +18,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="../css/admin.css">
-
         <title> Manage Co-admin | Vegemart </title>
+        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
+        
     </head>
     <body>
         <?php include "../includes/admin_nav.php"; ?>
@@ -44,10 +56,10 @@
                         $result_admin = mysqli_query($con,$sql_admin);
                         while($row_admin = mysqli_fetch_assoc($result_admin)){  
                             if ($row['active_status'] == 1){
-                                $active_status = "active";
+                                $active_status = "Active";
                             }
                             else{
-                                $active_status = "Non-active";
+                                $active_status = "Deactivated";
                             }                     
                             echo "
                                 <tr>                  
@@ -102,12 +114,13 @@
                                 </tr>
                                 <tr>
                                     <th> Status : </th>
-                                    <td><input class="input-l" type="text" placeholder="Active status" id="status" name="status"  required></td>
+                                    <td><input class="input-l" type="text" placeholder="Active status" id="status" name="status" readonly=true required></td>
                                 </tr>
                             </table>
 
                             <input type="submit" class="form-button" name="update" value="Update">
-                            <input type="submit" class="form-button" name="delete" value="Delete">
+                            <input type="submit" class="form-button" name="delete" value="Suspend">
+                            <input type="submit" class="form-button" name="activate" value="Activate">
                         </form>
                         <button class="card-button" onClick="location.href='https://localhost/vegemart/public/admin/admin-dash.php';">Back</button>
                     </div>

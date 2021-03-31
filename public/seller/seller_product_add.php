@@ -10,8 +10,21 @@
     <title>Add New Product</title>
 </head>
     <body>
-        <?php include "./seller_nav.php"; ?> 
-        
+        <?php 
+        include ('../../config/dbconfig.php');
+        include ('../../src/session.php');
+        include "./seller_nav.php"; 
+        if(empty(session_id())){
+            session_start();
+        }
+        if((!isset($_SESSION["loggedInSellerID"])))
+        {
+            echo "<script>
+            alert('You have to login first');
+            window.location.href='../../public/login.php';
+            </script>";
+        }
+        ?> 
         <div class="row">
             <div class="columns group">
                 <div class="column is-3 pl-1 pr-1"></div>
@@ -40,32 +53,33 @@
                                             <option value="Sweetpotato">Sweet Potato</option>             
                                             <option value="Tomato">Tomato</option>                                          
                                         </select>          
-                                    </div>
-                                    
-                                    <!-- <div class="input-row">                                               
-                                        <label for="minPrice">Minimum price per unit(Rs):</label>
-                                        <input type="text" class="input-box" id="minPrice" name="minPrice" placeholder="ex: 100" required/><br>
-                                    </div> -->
-                                    
+                                    </div>                                    
                                     <div class="input-row">                                               
                                         <label for="image">Image:</label>
-                                        <input class="image-input has-text-left"type="file" id="fileToUpload" name="fileToUpload" required/><br> 
+                                        <input class="image-input has-text-left" type="file" id="fileToUpload" name="fileToUpload" required/><br> 
                                     </div>
+                                    <?php
+                                        include ('../../src/seller/seller_profile_details.php');
+                                        while($row = mysqli_fetch_assoc($userquery)){
+                                    ?>
                                     <div class="input-row">                                               
                                         <label for="address">Address:</label>
-                                    <input type="text" class="input-box" id="address1" name="address1" placeholder="ex: 75/2" required/><br>
+                                    <input type="text" class="input-box" id="address1" name="address1" placeholder="ex: 75/2" value="<?php echo $row['address1']?>" required/><br>
                                     </div>
                                     <div class="input-row">   
                                     <label for="address"></label>                                            
-                                        <input type="text" class="input-box" id="address2" name="address2"placeholder="ex: Bandarawella road" required/><br>
+                                        <input type="text" class="input-box" id="address2" name="address2"placeholder="ex: Bandarawella road" value="<?php echo $row['address2']?>" required/><br>
                                     </div>
                                     <div class="input-row">   
                                         <label for="address"></label>                                             
-                                        <input type="text" class="input-box" id="address3" name="city"placeholder="ex: Badulla" required/><br> 
+                                        <input type="text" class="input-box" id="address3" name="city"placeholder="ex: Badulla" value="<?php echo $row['city']?>" required/><br> 
                                     </div>
+                                    <?php
+                                        }
+                                    ?>
                                     <div class="input-row">   
                                         <label for="description">Description:</label>                                             
-                                        <textarea rows="5" cols="35" name="description" form="addProduct" placeholder="Product description"></textarea>
+                                        <textarea rows="5" cols="35" name="description" form="addProduct" placeholder="Product description" required></textarea>
                                     </div>                               
                                     <p style="color: red; text-align:center;">Your products will be automatically removed after 5 days.</p>                        
                                     

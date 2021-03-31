@@ -10,6 +10,12 @@ h1,h2,h3,h4{
     text-transform: capitalize;
     vertical-align: middle;
 }
+.heading-help {
+    flex: 1;
+    background-color: rgba(19, 141, 117, 0.1);
+    padding: 0.1rem 0.1rem 0.1rem 1rem;
+    color: #138d75;
+} 
 
 .heading{
     flex: 1;

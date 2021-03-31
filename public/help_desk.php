@@ -13,10 +13,20 @@
 
     <body>
     <?php 
-        if (isset($_SESSION["loggedInUserID"])) {
-            include_once "./includes/nav.php";
+        include ('../config/dbconfig.php');
+        include ('../src/session.php');
+        if(empty(session_id())){
+            session_start();
         }
+        if (isset($_SESSION["loggedInUserID"])||isset($_SESSION["loggedInSellerID"])) {
+            if (isset($_SESSION["loggedInUserID"])) {
+                include_once "./includes/nav.php";
+            } elseif (isset($_SESSION["loggedInSellerID"])) {
+                include_once "./seller/seller_nav.php";
+            }
+        }               
         else{
+            
             include_once "./includes/index_nav.php";
         }
         ?>
@@ -36,49 +46,51 @@
                         <div class="card">
                             <h3>Auction</h3>
                             <img class="img" src="./images/bid1.jpg">
-                            <p class="justify-text">If there's an issue with your order please tell us more here</p>
+                            <p class="justify-text">A buyer can select a product, decide on a bid price and a specific quantity set to join the auction. 
+                            You can either start a bid or join an ongoing bid. You can also join multiple bid at the same time. An auction lasts for 2 hours.</p>
                         </div> 
                         
                     </div>
-                    <div class="column is-4 ml-1 pl-1 pr-0">
+                    <div class="column is-4 ml-0 pl-1 pr-0">
                         <div class="card">
                             <h3>Your order</h3>
                             <img class="img" src="./images/order.jpg">
-                            <p class="justify-text">Your order is the product you won in the auction. It can be picked up your self or be delivered. For issues regarding order you can submit your questions here.</p>
+                            <p class="justify-text">Your order is the product you won in the auction. After winning the bid, it will be added to your cart. 
+                            From there on you can proceed to checkout. It can be picked up your self or be delivered.</p>
                         </div>
-                         
                     </div>
-                    <div class="column is-4 ml-1 pl-1 pr-0">
+                    <div class="column is-4 ml-0 pl-1 pr-0">
                         <div class="card">
                             <h3>Delivery</h3>
                             <img class="img" src="./images/order_deli.jpg">
-                            <p class="justify-text">If there's an issue with your order please tell us more here</p>
-                        </div> 
-                        
+                            <p class="justify-text">Once you request for delivery, a nearby deliverer will accept your request. 
+                            You will be notifies when a deliverer accepts the rquaest, when the product is picked up from the seller, and when he reaches your home.</p>
+                        </div>  
                     </div>
                 </div><div class="columns group has-text-centered ">
-                    <div class="column is-4 ml-1 pl-1 pr-0">
-                         
+                    <div class="column is-4 ml-0 pl-1 pr-0">
                         <div class="card">
                             <h3>Payments</h3>
                             <img class="img" src="./images/pay1.jpg">
-                            <p class="justify-text">If there's an issue with your order please tell us more here</p>
+                            <p class="justify-text">Vegemart only operates on online payment for now. Payments should be done withing 2 days of adding the itm to your cart. 
+                            If you fail to pay with 2 days you will be suspended. If there's an issue with your order please tell us more here</p>
                         </div> 
                     </div>
-                    <div class="column is-4 ml-1 pl-1 pr-0">
-                        
+                    <div class="column is-4 ml-0 pl-1 pr-0">
                         <div class="card">
                             <h3>Products</h3>
                             <img class="img" src="./images/food.jpg">
-                            <p class="justify-text">If there's an issue with your order please tell us more here</p>
+                            <p class="justify-text">Vegemart has farmers registered as sellers for them to get the maximum profit out of the sale. 
+                            The product we sell through vegemart are fresh and of high quality. To ensure only fresh products are sold, 
+                            we remove products after five days of them being added to the system.</p>
                         </div> 
                     </div>
-                    <div class="column is-4 ml-1 pl-1 pr-0">
-                        
+                    <div class="column is-4 ml-0 pl-1 pr-0">
                         <div class="card">
                             <h3>Forum</h3>
                             <img class="img" src="./images/forum.jpg">
-                            <p class="justify-text">When you post a topic or a post to the forum, it is submitted to review. Reviewed topics and posts will be displayed on the forum</p>
+                            <p class="justify-text">You can start discussion on the forum by posting topics with a post. When you post a topic or a post to the forum, 
+                            it is submitted to review. Your post might get rejected if it contains misleading irrelevent and harmful content.</p>
                         </div>
                     </div>
                 </div>
@@ -118,14 +130,14 @@
                 <div class="form-popup " id="myForm">
                     <form id="complaint-form" class="form-container " action="../src/helpdesk_complaint_submit.php" method="post">
                     <div class="has-text-left ml-1 pl-2">
-                        <!-- <label for="first_name">First Name</label><br> 
-                        <input type="text" name="first_name" placeholder="First Name" required><br>
+                        <label for="name">Name</label><br> 
+                        <input type="text" name="name" placeholder="Name" required><br>
 
-                        <label for="last_name">Last Name</label><br> 
-                        <input type="text" name="last_name" placeholder="Last Name" required><br>
+                        <!-- <label for="last_name">Last Name</label><br> 
+                        <input type="text" name="last_name" placeholder="Last Name" required><br> -->
 
                         <label for="phoneNum">Contact Number (Optional)</label><br> 
-                        <input type="text" name="phoneNum" placeholder="Contact number" ><br> -->
+                        <input type="text" name="phoneNum" placeholder="Contact number" ><br>
 
                         <label for="email">email</label><br> 
                         <input type="email" name="email" placeholder="Email address" required><br>

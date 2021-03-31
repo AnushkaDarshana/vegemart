@@ -3,7 +3,7 @@
     include ('../../src/session.php');
     $userID = $_SESSION["loggedInDelivererID"];
     
-    $selectusers = "SELECT * FROM `deliverer` WHERE delivererID='$userID'";
+    $selectusers = "SELECT * FROM `deliverer` WHERE user_id='$userID'";
     $selectemail = "SELECT * FROM `users` WHERE id='$userID'";
 
     $userquery = mysqli_query($con,$selectusers);

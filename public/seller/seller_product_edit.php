@@ -10,7 +10,19 @@
 </head>
     <body>
         <?php 
+            include ('../../config/dbconfig.php');
+            include ('../../src/session.php');
             include './seller_nav.php'; 
+            if(empty(session_id())){
+                session_start();
+            }
+            if((!isset($_SESSION["loggedInSellerID"])))
+            {
+                echo "<script>
+                alert('You have to login first');
+                window.location.href='../../public/login.php';
+                </script>";
+            }
             include ('../../src/seller/seller_product_edit_details.php');
             while($row = mysqli_fetch_assoc($productQuery)){?>
         <div class="row">
@@ -55,7 +67,7 @@
                                     </div>
                                     <div class="input-row">   
                                         <label for="description">Description</label>   <br> 
-                                        <textarea rows="5" cols="30" name="Description" form="UpdateProduct" placeholder="Product Description" value="<?php echo $row['description']?>"></textarea>
+                                        <textarea rows="5" cols="30" name="Description" form="UpdateProduct" placeholder="Product Description" value="<?php echo $row['description']?>"><?php echo $row['description']?></textarea>
                                     </div>
                                     <br>
                                 </div>
@@ -93,7 +105,7 @@
                                             <h2>Minimum price per unit(Rs)</h2>
                                             <div class="input-row">
                                                 <!-- <label for="bid_minPrice">Minimum price per unit(Rs):</label> -->
-                                                <input type="number" class="input-box" id="minPrice" name="minPrice" placeholder="ex: 30" min="30" step="10" /><br>
+                                                <input type="number" class="input-box" id="minPrice" name="minPrice" placeholder="ex: 100" min="100" step="10" /><br>
                                             </div>
                                         </div>
                                         <div class="column is-6 pl-1 pr-1">

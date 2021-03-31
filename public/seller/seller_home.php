@@ -17,7 +17,16 @@
     </head>
 
     <body>
-        <?php include "./seller_nav.php"; ?>
+        <?php 
+        include "./seller_nav.php"; 
+        if((!isset($_SESSION["loggedInSellerID"])) && (!isset($_SESSION["loggedInUserID"])))
+        {
+        echo "<script>
+        alert('You have to login first');
+        window.location.href='../../public/login.php';
+        </script>";
+        } 
+        ?>
         <div class="row">
 
             <div class="columns group mt-0">

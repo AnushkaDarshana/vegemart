@@ -1,17 +1,30 @@
 <?php
+    if(empty(session_id())){
+        session_start();
+    }
     include ('../../config/dbconfig.php');
+    if((!isset($_SESSION["loggedInAdminID"])) && (!isset($_SESSION["loggedInCoAdminID"])))
+    {
+        echo "<script>
+        alert('You have to login first');
+        window.location.href='../../public/login.php';
+        </script>";
+    }  
+    else if(isset($_SESSION["loggedInAdminID"])){
+        $userID = $_SESSION["loggedInAdminID"];
+    } 
+    else if(isset($_SESSION["loggedInCoAdminID"])){
+        $userID = $_SESSION["loggedInCoAdminID"];
+    } 
 
     // Sales total Graph
-    $sql ="SELECT p.`productID`,p.`name`, Qsum.`tot_quantity` 
-            FROM `products` p, (SELECT `productID`, SUM(`quantity`) AS tot_quantity 
-                                FROM `quantitysets`qs, (SELECT `quantityID` 
-                                                        FROM `cart` c, (SELECT `cartItemID`    
-                                                                        FROM `orders` 
-                                                                        WHERE `paymentStatus` = 1) s 
-                                                        WHERE c.`cartItemID`= s.`cartItemID` ) q 
-                                WHERE qs.`quantityID`= q.`quantityID`GROUP BY `productID`) Qsum 
+    $sql= "SELECT p.`productID`,p.`name`, Qsum.`tot_quantity` 
+           FROM `products` p, (SELECT `productID`, SUM(`quantity`) AS tot_quantity 
+                               FROM `quantitysets`qs, (SELECT `quantityID` 
+                                                       FROM `orders` 
+                                                       WHERE `paymentStatus` = 1) s 
+                               GROUP BY `productID`) Qsum 
             WHERE p.`productID`= Qsum.productID";
-
     $result = mysqli_query($con,$sql);
     $a=array(); 
     $b=array();   
@@ -22,18 +35,14 @@
      }
      $js_array_a = json_encode($a);
      $js_array_b = json_encode($b);
-
      // Location Graph
         $sql1 ="SELECT p.`city`, ct.`tot_count` 
-                FROM `products` p, (SELECT `productID`, COUNT(`productID`) AS tot_count 
-                                    FROM `quantitysets`qs, (SELECT `quantityID` 
-                                                            FROM `cart` c, (SELECT `cartItemID`    
-                                                                            FROM `orders` 
-                                                                            WHERE `paymentStatus` = 1) s 
-                                                            WHERE c.`cartItemID`= s.`cartItemID` ) q 
-                                    WHERE qs.`quantityID`= q.`quantityID`
-                                    GROUP BY `productID`) ct
-                WHERE p.`productID` = ct.productID";
+        FROM `products` p, (SELECT `productID`, COUNT(`productID`) AS tot_count 
+                            FROM `quantitysets`qs, (SELECT `quantityID` 
+                                                    FROM `orders` 
+                                                    WHERE `paymentStatus` = 1) s 
+                            GROUP BY `productID`) ct 
+        WHERE p.`productID` = ct.productID";
 
         $result1 = mysqli_query($con,$sql1);
         $c=array(); 
@@ -51,20 +60,40 @@
             FROM orders";
     $result2 = mysqli_query($con,$sql2);
     $row2 = mysqli_fetch_assoc($result2);
-
     //Successful orders
     $sql3 ="SELECT COUNT(orderID) AS total1
             FROM orders
             WHERE `paymentStatus` = 1"; 
     $result3 = mysqli_query($con,$sql3);
     $row3 = mysqli_fetch_assoc($result3);
-
     //Failed orders
     $sql4 ="SELECT COUNT(orderID) AS total2
             FROM orders
-            WHERE `paymentStatus` = 0"; 
+            WHERE `canceled_orders` = 1"; 
     $result4 = mysqli_query($con,$sql4);
     $row4 = mysqli_fetch_assoc($result4);
+    //Total on-going sales
+    $sql5 ="SELECT COUNT(deliveryID) AS total5
+            FROM `deliveries`
+            WHERE  pickupStatus= 1 ";
+    $result5 = mysqli_query($con,$sql5);
+    $row5 = mysqli_fetch_assoc($result5);
+    //total quantity 
+    $sql6 ="SELECT SUM(`tot_quantity`) AS total6
+            FROM `products` p, (SELECT `productID`, SUM(`quantity`) AS tot_quantity 
+                                FROM `quantitysets`qs, (SELECT `quantityID` 
+                                                        FROM `orders` 
+                                                        WHERE `paymentStatus` = 1) s 
+                        GROUP BY `productID`) Qsum 
+            WHERE p.`productID`= Qsum.productID";
+    $result6 = mysqli_query($con,$sql6);
+    $row6 = mysqli_fetch_assoc($result6);
+    //total income
+    $sql7 ="SELECT SUM(`paid_amount`) AS total7
+            FROM `payment`";
+    $result7 = mysqli_query($con,$sql7);
+    $row7 = mysqli_fetch_assoc($result7);
+    
 ?>
 
 <!DOCTYPE html>
@@ -76,6 +105,7 @@
         <link rel="stylesheet" type="text/css" href="../css/deliverer-home.css">
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <title>Product Records | Vegemart</title>
+        <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
     </head>
     <body>
         <?php include "../includes/admin_nav.php"; ?>
@@ -90,7 +120,7 @@
                             </div>
                             <div class="column is-5 pl-0 has-text-left">
                                 <h2 style="font-size:22px;" class="mb-0 pb-0"><?php echo $row2['total'];?></h2>
-                                <h3 class="mt-0 pt-0">Total Sales</h3>
+                                <h3 class="mt-0 pt-0">Total Orders</h3>
                             </div>
                             <div class="column is-4 pl-0 has-text-left">
                                 <i class="fa fa-bar-chart mt-1 mb-1" style="font-size:50px; padding:0.2em 0.1em; margin:0.2em 0;color:#E5E7E9;"></i>
@@ -150,18 +180,33 @@
             <hr>
             <div class="columns group mt-0">
                 <div class="column is-4 pl-3 pr-3 mt-0 mb-2">
+                        <h2 style="font-size:22px;" class="has-text-left">On -Going Sales</h2>
+                        <div class="card has-text-centered pt-1 pb-1 pl-1 pr-1">
+                            <img id="cash" src="https://www.flaticon.com/svg/static/icons/svg/3500/3500833.svg" alt="cash">
+                            <h3 class="has-text-centered mt-0 pt-0">Year 2020</h3>
+                            <hr>
+                            <div class="columns group">
+                                <div class="column is-6 pl-2 has-text-left">
+                                    <h3>On-Going Sales</h3>
+                                </div>
+                                <div class="column is-6 pl-2 has-text-right">
+                                    <h3><h3><?php echo $row5['total5'];?></h3></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="column is-4 pl-3 pr-3 mt-0 mb-2">
                         <h2 style="font-size:22px;" class="has-text-left">Total Products sold</h2>
                         <div class="card has-text-centered pt-1 pb-1 pl-1 pr-1">
                             <img id="cash" src="https://www.flaticon.com/svg/static/icons/svg/3082/3082050.svg" alt="cash">
-                            <h2 style="font-size:22px;" class="has-text-centered pt-0 pb-0 mb-0">177 kg</h2>
-                            <h3 class="has-text-centered mt-0 pt-0">December 2020</h3>
+                            <h3 class="has-text-centered mt-0 pt-0">Year 2020 </h3>
                             <hr>
                             <div class="columns group">
                                 <div class="column is-6 pl-2 has-text-left">
                                     <h3>Total Quantity</h3>
                                 </div>
                                 <div class="column is-6 pl-2 has-text-right">
-                                    <h3>5,313 kg</h3>
+                                    <h3><?php echo $row6['total6'];?> kg</h3>
                                 </div>
                             </div>
                         </div>
@@ -170,37 +215,18 @@
                         <h2 style="font-size:22px;" class="has-text-left">Total Income</h2>
                         <div class="card has-text-centered pt-1 pb-1 pl-1 pr-1">
                             <img id="cash" src="https://www.flaticon.com/svg/static/icons/svg/2331/2331717.svg" alt="cash">
-                            <h2 style="font-size:22px;" class="has-text-centered pt-0 pb-0 mb-0">Rs. 1,920</h2>
-                            <h3 class="has-text-centered mt-0 pt-0">December 2020</h3>
+                            <h3 class="has-text-centered mt-0 pt-0">Year 2020</h3>
                             <hr>
                             <div class="columns group">
                                 <div class="column is-6 pl-2 has-text-left">
                                     <h3>Total Income</h3>
                                 </div>
                                 <div class="column is-6 pl-2 has-text-right">
-                                    <h3>Rs. 538,260</h3>
+                                    <h3>Rs. <?php echo $row7['total7'];?></h3>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="column is-4 pl-3 pr-3 mt-0 mb-2">
-                        <h2 style="font-size:22px;" class="has-text-left">Total Profit</h2>
-                        <div class="card has-text-centered pt-1 pb-1 pl-1 pr-1">
-                            <img id="cash" src="https://www.flaticon.com/svg/static/icons/svg/639/639365.svg" alt="cash">
-                            <h2 style="font-size:22px;" class="has-text-centered pt-0 pb-0 mb-0">Rs. 920</h2>
-                            <h3 class="has-text-centered mt-0 pt-0">December 2020</h3>
-                            <hr>
-                            <div class="columns group">
-                                <div class="column is-6 pl-2 has-text-left">
-                                    <h3>Total Profit</h3>
-                                </div>
-                                <div class="column is-6 pl-2 has-text-right">
-                                    <h3>Rs. 78,260</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </div>   
                 </div>            
             </div>
         </div>

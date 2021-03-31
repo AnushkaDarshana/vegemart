@@ -11,7 +11,21 @@
         <title>Order Complete | Vegemart</title>
     </head>
     <body>  
-        <?php include "./includes/nav.php"; ?>
+        <?php 
+        
+        include "./includes/nav.php"; 
+        if(empty(session_id())){
+            session_start();
+        }
+        if(!isset($_SESSION["loggedInUserID"]))
+        {
+        echo "<script>
+        alert('You have to login first');
+        window.location.href='../public/login.php';
+        </script>";
+        }  
+        
+        ?>
         <div class="columns group mb-0">
             <div class="column is-2"></div>
             <div class="column is-8 mt-2 mb-0">

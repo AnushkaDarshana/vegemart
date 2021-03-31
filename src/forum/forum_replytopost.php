@@ -52,7 +52,7 @@
     } else if ($_POST['op'] == "addpost") {
         //check for required items from form
         if ((!$_POST['topic_id']) || (!$_POST['post_text']) || (!$_POST['post_owner'])) {
-            header("Location: ../../public/forum.php");
+            header("Location: ../../public/forum_home.php");
             exit;
         }
 
@@ -63,10 +63,10 @@
      
         //add the post
         $add_post = "INSERT INTO `forum_posts` values ('', '".$topic_id."', '".$post_text."', now(), '".$post_owner."');";
-        mysqli_query($con,$add_post) or die(mysqli_error());
+        mysqli_query($con,$add_post);
      
         //redirect user to topic
-        header("Location: ../../public/forum.php");
+        header("Location: ../../public/forum_home.php");
         exit;
     }
 ?>
