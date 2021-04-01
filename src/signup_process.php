@@ -78,7 +78,7 @@
                               
         }else {
             echo "<script type='text/javascript'>
-                alert('Email already exists');
+                alert('Password deos not match');
                 window.history.back();           
                 </script>";
         }
