@@ -167,6 +167,7 @@
                                         $display_block .="
                                         <h2>Your order at your door!</h2>
                                         <h4 class=\"mb-0\">Your order of product $product_name is delievered by $deliverer_name.</h4>
+                                        <button class=\"form-button\" onclick=\"\">Give feedback</button>
                                         <p class=\"mt-0 pl-3\">$notif_time</p>
                                         <br><hr>";
                                     }

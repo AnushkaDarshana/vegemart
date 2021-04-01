@@ -40,7 +40,7 @@
         $city = $_POST['city'];
         $description = $_POST['description'];
         $sellerID = $_SESSION["loggedInSellerID"];  
-        $expirationDateQuery = "SELECT DATE_ADD(NOW(),INTERVAL 5 DAY) AS DateAdd;";
+        $expirationDateQuery = "SELECT DATE_ADD(NOW(),INTERVAL 2 MINUTE) AS DateAdd;";
         $expirationDateResult = mysqli_query($con,$expirationDateQuery); 
         $rowExpirationDate = mysqli_fetch_assoc($expirationDateResult);
         $expirationDate = $rowExpirationDate['DateAdd'];

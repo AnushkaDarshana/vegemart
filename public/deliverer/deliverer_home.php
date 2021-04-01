@@ -302,40 +302,20 @@
         </div>
 
         <script>
-            var chart = new Chart('chart', {
-                type: 'bar',
+            var PieChart  = new Chart('chart', {
+                type: 'pie',
                 data: {
                     labels: <?php echo $js_array_a ?>,
-                    datasets: [
-                    {
-                        barPercentage: 1,
-                        barThickness: 1,
-                        maxBarThickness: 1,
-                        minBarLength: 1,
-                        backgroundColor: '#c46998',
-                        backgroundColor:'rgba(52, 152, 219, 0.3)',
-                        borderColor:'rgba(52, 152, 219, 1)',
-                        borderWidth: 1,
+                    datasets: [{
                         label: 'Number of orders',
+                        backgroundColor: ['#76D7C4','#F9E79F', '#C0392B', '#8E44AD' ,'#FADBD8',],
+                        borderWidth: 0.5,
                         data: <?php echo $js_array_b ?>
-                    }
-                    ]
+                    }]
                 },
                 options: {
-                    scales: {
-                        xAxes: [{
-                            gridLines: {
-                                color: "rgba(0, 0, 0, 0)",
-                            }
-                        }],
-                        yAxes: [{
-                            ticks: {
-                            beginAtZero: true
-                            },
-                            gridLines: {
-                                color: "rgba(0, 0, 0, 0)",
-                            }
-                        }]
+                    title: {
+                        display: true,
                     }
                 }
             });

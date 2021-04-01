@@ -81,7 +81,7 @@
                                         <label for="description">Description:</label>                                             
                                         <textarea rows="5" cols="35" name="description" form="addProduct" placeholder="Product description" required></textarea>
                                     </div>                               
-                                    <p style="color: red; text-align:center;">Your products will be automatically removed after 5 days.</p>                        
+                                    <p style="color: red; text-align:center;">Your products will be automatically removed after 7 days.</p>                        
                                     
                                 </div>
                                 

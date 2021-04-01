@@ -225,7 +225,7 @@ while($row1 = mysqli_fetch_assoc($result1)){
         </div>
         <script>
             var chart = new Chart('buyer_month_chart', {
-                type: 'line',
+                type: 'bar',
                 data: {
                     labels: <?php echo $js_array_a ?>,
                     datasets: [{

@@ -44,3 +44,4 @@
 2021-03-31T17:51:12+02:00  Buyer 25 won the bid 48
 2021-03-31T17:55:46+02:00  Buyer 33 won the bid 51
 2021-03-31T17:55:59+02:00  Buyer 33 won the bid 50
+2021-04-01T07:27:00+02:00  Buyer 25 won the bid 52

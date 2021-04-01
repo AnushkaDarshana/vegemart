@@ -18,6 +18,10 @@
         $buyerID = $deliveryConfirmRow[3];
         $sellerID = $deliveryConfirmRow[4];
 
+        //send notification to buyer
+        $notification = "INSERT INTO `notification` (`type`,`forUser`,`entityID`, `notif_read`, `notif_time`) VALUES (7,'".$userID."', '".$orderID."',0, now());";
+        mysqli_query($con,$notification);
+
         //get the email of the buyer
                     
         $emailQuery = mysqli_query($con, "SELECT email FROM users where id ='$buyerID'");
