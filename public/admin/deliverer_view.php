@@ -50,6 +50,18 @@
             </form>
         </div>
 
+        <div class="search-user-container">
+            <form name="form-display-selected">
+                <!--heading-->
+		        <h3>Search From Name , Email or ID</h3>
+		        <!--Input-------->
+		        <div class="search-input">
+                    <input type="text" id="myInput" onkeyup="myFunctionCustomer()" 
+                    placeholder="Enter Name , Email or ID"/>
+                </div>
+                <br/>
+            </form>
+        </div>
         <div class="row">
             <div class="col-1"></div>
             <div class="col-10">

@@ -231,8 +231,8 @@ while($row1 = mysqli_fetch_assoc($result1)){
                     labels: <?php echo $js_array_a ?>,
                     datasets: [{
                         fill: 'false',
-                        backgroundColor: '#239B56',
-                        borderColor:'rgba(35, 155, 86 , 1)',
+                        backgroundColor: '#23569B',
+                        borderColor:'rgba(10, 33, 123, 1)',
                         borderWidth: 1,
                         label: 'Number of Deliverers Joined',
                         data: <?php echo $js_array_b ?>
