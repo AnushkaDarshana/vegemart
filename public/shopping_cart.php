@@ -2,13 +2,16 @@
     include ('../config/dbconfig.php');
     include ('../src/session.php');
 
-    if(!isset($_SESSION["loggedInUserID"]) )
+    if(empty(session_id())){
+        session_start();
+    }
+    if(!isset($_SESSION["loggedInUserID"]))
     {
-            echo "<script>
-            alert('You have to login first');
-            window.location.href='../public/login.php';
-            </script>";
-    }  
+    echo "<script>
+    alert('You have to login first');
+    window.location.href='../public/login.php';
+    </script>";
+    }    
 ?>
 <!DOCTYPE html>
 <html lang="en">

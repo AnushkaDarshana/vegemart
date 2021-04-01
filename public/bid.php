@@ -29,16 +29,23 @@ include('../src/session.php');
         <h1 class="mt-1 mb-1 pt-0 ml-2 has-text-left" id="title">Bid now!</h1>
     </div>
 
-    <div class="columns group mt-0 mb-0">
+    <div class="columns group mt-1 mb-0">
         <div class="column is-1"></div>
         <div class="column is-10">
-            <table>
-                <th><p class="sub" >Seller Name</p></th>
-                <th><p class="sub" >Seller Location</p></th>
-                <th><p class="sub" >Product auctioned</p></th>
+            <table style="width: 100%">
+            <colgroup>
+                <col span="1" style="width: 25%;">
+                <col span="1" style="width: 25%;">
+                <col span="1" style="width: 25%;">
+                <col span="1" style="width: 25%;">
+            </colgroup>
+                <th><p class="sub" style="text-align:left!important;">Seller Name</p></th>
+                <th><p class="sub" style="text-align:left!important;" >Seller Location</p></th>
+                <th><p class="sub" style="text-align:left!important;" >Product Auctioned</p></th>
+                <th><p class="sub" style="text-align:left!important;" >Product Description</p></th>
                 
                 <tr>
-                    <td>
+                    <td valign="top" style="text-align:left!important;">
                     <?php
                         if(isset($_SESSION["loggedInUserID"]) )
                         {
@@ -67,23 +74,26 @@ include('../src/session.php');
                             <input type="hidden" id="sellerID" name="sellerID" value="<?php echo $rowUser['user_id'] ?>" required /><br>
                         </form>
                     </td>
-                    <td>
-                        <h3><?php echo $rowUser['address1'] ?></h3>
+                    <td valign="top" style="text-align:left!important;">
+                        <h3 ><?php echo $rowUser['address1'] ?>,</h3>
                         <h3><?php echo $rowUser['address2'] ?>,</h3>
-                        <h3><?php echo $rowUser['city'] ?></h3>
+                        <h3><?php echo $rowUser['city'] ?></h3>                       
+                        
                     <?php
                         }
                     ?>
                     </td>
-                    <td>
+                    <td valign="top" style="text-align:left!important;">
                     <?php
                         
                         include('../src/products.php');
                         while ($rowProduct  = mysqli_fetch_assoc($resultProduct)) {
                     ?>
-                        <h3><?php echo $rowProduct['name'] ?></h3>
+                        <h3 style="text-align:left!important;"><?php echo $rowProduct['name'] ?></h3>
                         <img class="item-image" src="https://localhost/vegemart/public/images/products/<?php echo $rowProduct['imageName'] ?>" alt="product">
+                        
                     </td>
+                    <td><h3 style="text-align:left;"><?php echo $rowProduct['description'] ?></h3></td>
                     
                 </tr>
             </table>
@@ -172,6 +182,7 @@ include('../src/session.php');
             </div>
         </div>
 
+        <!-- retrieve bid results -->
         <?php
             $bidingQuery = "SELECT * FROM bidding WHERE productID='$productID' AND bidStatus=0 GROUP BY quantityID";
             $resultBidding = mysqli_query($con, $bidingQuery);
@@ -309,81 +320,10 @@ include('../src/session.php');
             }
         ?>
         
-    </div>
+        </div>
     </div>
     <br>
-    
-
-    <a class="button" href="#popup1">bid win</a>
-    <div id="popup1" class="overlay">
-        <div class="popup">
-            <a class="close" href="#">&times;</a>
-            <h2 class="has-text-centered">Congratulation!! You won the bid!</h2>
-            <img class="popup-pic has-text-centered" src="https://www.flaticon.com/svg/static/icons/svg/744/744970.svg">
-            <div class="content has-text-centered">
-                <?php
-                $bid = "SELECT * FROM bidding WHERE productID='$productID' AND amount=(SELECT MAX(amount) AS amount FROM bidding WHERE productID='$productID');";
-                $bidQuery = mysqli_query($con, $bid);
-                while ($rowBid  = mysqli_fetch_assoc($bidQuery)) {
-                    $userID = $rowBid['userID'];
-                    $user = "SELECT * FROM client WHERE user_id='$userID'";
-                    $userQuery = mysqli_query($con, $user);
-                    while ($rowUser  = mysqli_fetch_assoc($userQuery)) {
-                        $product = "SELECT * FROM products WHERE productID='$productID'";
-                        $productQuery = mysqli_query($con, $product);
-                        while ($rowProduct  = mysqli_fetch_assoc($productQuery)) {
-                ?>
-                            <p>You have recieved the item <?php echo $rowProduct['name'] ?> for Rs. <?php echo $rowBid['amount'] ?>.00</p>
-                            <p>This item is added to your cart</p>
-                            <form action="" method="POST">
-                                <div class="has-text-centered mt-1">
-                                    <input type="hidden" name="bidID" value="<?php echo $rowBid['bidID'] ?>">
-                                    <input type="hidden" name="productID" value="<?php echo $rowBid['productID'] ?>">
-                                    <input type="hidden" name="userID" value="<?php echo $rowBid['userID'] ?>">
-                                    <input type="submit" name="won" class="button" value="Go to Shopping cart">
-                                </div>
-                            </form>
-                <?php
-                        }
-                    }
-                }
-                ?>
-                <p>To view your items click the button below</p>
-
-            </div>
-        </div>
-    </div>
-
-    <a class="button" href="#popup2">bid loss</a>
-    <div id="popup2" class="overlay">
-        <div class="popup">
-            <a class="close" href="#">&times;</a>
-            <h2 class="has-text-centered">Sorry! You lost the bid!</h2>
-            <img class="popup-pic has-text-centered" src="https://www.flaticon.com/svg/static/icons/svg/1048/1048203.svg">
-            <div class="content has-text-centered">
-                <p>Unfortunatley You have lost the bid for item Potato</p>
-                <p>To shop for more items click the button below</p>
-                <div class="has-text-centered mt-1">
-                    <button class="button" onClick="location.href='https://localhost/vegemart/public/shopping_cart.php?';"><i class="fas fa-shopping-basket mr-1"></i></i>Browse more products</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    </script>
-        <?php include_once "./includes/footer.php"; ?>
+    <?php include_once "./includes/footer.php"; ?>
     </body>
 </html>
 
-<?php
-    if (isset($_POST["won"])) {
-        $bidID = $_POST["bidID"];
-        $productID = $_POST["productID"];
-        $userID = $_POST["userID"];
-        $items = "INSERT INTO `cart` (`userID`,`bidID`,`productID`) VALUES ('" . $userID . "','" . $bidID . "','" . $productID . "');";
-        mysqli_query($con, $items);
-        header('Location:shopping_cart.php');
-    }
-    ob_end_flush();
-?>

@@ -1,8 +1,7 @@
 <?php    
     
     include ('../../config/dbconfig.php');
-    include ('../session.php');
-             
+    include ('../session.php');             
              
     //Uploading to Database
 

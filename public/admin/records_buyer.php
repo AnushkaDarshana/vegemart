@@ -156,7 +156,7 @@ while($row1 = mysqli_fetch_assoc($result1)){
             <div class="columns group mb-1">
                 <div class="column is-1"> </div>
                 <div class="column is-5 pl-1">
-                    <h2 style="font-size:22px;" class="has-text-left">Buyers Based on No. of Orders made</h2>
+                    <h2 style="font-size:22px;" class="has-text-left">No. of Orders made by buyers</h2>
                     <div class="card pl-1 pr-1 pt-1 pb-1">                       
                         <canvas id="buyer_month_chart"></canvas>
                     </div>

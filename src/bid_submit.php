@@ -35,7 +35,7 @@
                 
                 
                 //new buyer cannot bid the same max bid price
-                $maxBidQuery = "SELECT MAX(bidPrice) AS maxBid FROM bidding WHERE quantityID='$quantityID'";
+                $maxBidQuery = "SELECT MAX(bidPrice) AS maxBid FROM bidding WHERE quantityID='$quantityID' AND bidRemoveStatus=0";
                 $resultMaxBid = mysqli_query($con, $maxBidQuery);
                 while ($rowMaxBid = mysqli_fetch_assoc($resultMaxBid)) {
                     $maxBidPrice = $rowMaxBid['maxBid'];

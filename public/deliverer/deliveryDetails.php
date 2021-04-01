@@ -17,6 +17,16 @@
                 <?php
                 include ('../../config/dbconfig.php');
                 include ('../../src/session.php');
+                if(empty(session_id())){
+                    session_start();
+                }
+                if((!isset($_SESSION["loggedInDelivererID"])))
+                {
+                    echo "<script>
+                    alert('You have to login first');
+                    window.location.href='../../public/login.php';
+                    </script>";
+                }
 
                 $deliveryID = $_GET['id'];
                 $userID = $_SESSION["loggedInDelivererID"];
@@ -49,8 +59,10 @@
                                 <h3><?php echo $rowSeller['fName'] . " " . $rowSeller['lName'] ?></h3>
                                 <p><?php echo $rowSeller['address1']?>,</p>
                                 <p><?php echo $rowSeller['address2']?>,</p>
-                                <p><?php echo $rowSeller['city']?></p>                                                  
-                                <button class="button" onClick="location.href='https://localhost/vegemart/src/deliverer/delivery_pickedup.php?id=<?php echo $rowdelivery['deliveryID'] ?>';" >Confirm Pickup</button>                             
+                                <p><?php echo $rowSeller['city']?></p> 
+                                <div class="row pb-1">                                                 
+                                    <button class="button" onClick="location.href='https://localhost/vegemart/src/deliverer/delivery_pickedup.php?id=<?php echo $rowdelivery['deliveryID'] ?>';" >Confirm Pickup</button>                             
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -77,29 +89,28 @@
                     while ($rowUser = mysqli_fetch_assoc($buyerquery)) {                    
                 ?>
   
-                <div class="column is-5 pl-1 pr-1">
-                    <div class="row">
+                <div class="column is-5 pl-1 pr-1"><br>
+                    <div class="row mt-0 pt-0">
                         <div class="card">
-                            <div class="columns group">
-                                <div class="column is-12 has-text-centered">                               
-                                    <div class="mapouter">
-                                    <div class="gmap_canvas">
-                                        <iframe width="100%" height="120%" id="gmap_canvas" src="https://maps.google.com/maps?q=<?php echo $rowUser['address1']?>%20<?php echo $rowUser['address2']?>%20<?php echo $rowUser['city']?>&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>                               
-                                    </div>
-                                    </div>
-                                    <h2 class="mb-1">Buyer</h2>
-                                    <h3><?php echo $rowUser['fName'] . " " . $rowUser['lName'] ?></h3>
-                                    <p><?php echo $rowUser['address1']?>,</p>
-                                    <p><?php echo $rowUser['address2']?>,</p>
-                                    <p><?php echo $rowUser['city']?></p>
+                                                     
+                                <div class="mapouter">
+                                <div class="gmap_canvas">
+                                    <iframe width="100%" height="120%" id="gmap_canvas" src="https://maps.google.com/maps?q=<?php echo $rowUser['address1']?>%20<?php echo $rowUser['address2']?>%20<?php echo $rowUser['city']?>&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>                               
                                 </div>
-                            </div>
+                                </div>
+                                <h2 class="mb-1">Buyer</h2>
+                                <h3><?php echo $rowUser['fName'] . " " . $rowUser['lName'] ?></h3>
+                                <p><?php echo $rowUser['address1']?>,</p>
+                                <p><?php echo $rowUser['address2']?>,</p>
+                                <p><?php echo $rowUser['city']?></p>
+                            
                             <div class="row pb-1">
                                 <button class="button" onClick="location.href='https://localhost/vegemart/src/deliverer/confirmDelivery.php?id=<?php echo $rowdelivery['deliveryID'] ?>';">Confirm Delivery</button><br>
                             </div>
                         </div>
                     </div>
                 </div>
+                <br>
                 <?php
                         }
                     }

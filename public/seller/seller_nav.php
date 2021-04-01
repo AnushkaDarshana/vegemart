@@ -1,19 +1,15 @@
-<?php     
-    include ('../../src/session.php');
-    include ('../../config/dbconfig.php');
-?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
         <link href="https://localhost/vegemart/public/images/logo.png" rel="shortcut icon">
-        <link rel="stylesheet" type="text/css" href="../css/nav.css">
+        <link rel="stylesheet" type="text/css" href="https://localhost/vegemart/public/css/nav.css">
     </head>
 
     <body>
         <header class="header">
-            <a href="./seller_home.php"><img class="logopic" src="../images/logob.png"></a>
+            <a href="./seller_home.php"><img class="logopic" src="https://localhost/vegemart/public/images/logob.png"></a>
             
             <ul class="main-nav">
                 <?php  
@@ -42,16 +38,22 @@
                         $retrieveInfo =  "SELECT * FROM `client` WHERE `user_id`='$userID';"; //Selecting all data from Table
                         $resultInfo = mysqli_query($con, $retrieveInfo); //Passing SQL
                         while($rowUser  = mysqli_fetch_assoc($resultInfo)){
-                            echo "
-                        <li>
-                        <div class=\"nav-dropdown\">
-                        <i class=\"fa fa-bell\" style=\"font-size:16px; color:black; margin-left:1em; margin-right:0; padding-right:0;\"></i><button class=\"notifbtn\" onClick=\"location.href='http://localhost/vegemart/public/seller/seller_notification.php';\">Messages</button>
-                            <div id=\"notifDrop\" class=\"dropdown-content\">
-                                <a href=\"#home\">You have a message from Nimal Bandara</a>
-                            </div>
-                        </div>
-                        </li>
 
+                            $notificationQuery ="SELECT COUNT(notificationID) AS unread FROM `notification` WHERE forUser='$userID' AND notif_read=0";
+                            $resultNotification = mysqli_query($con,$notificationQuery);
+                            while ($rowNotification = mysqli_fetch_assoc($resultNotification)) {  
+                                $notification = $rowNotification['unread'];
+                            }
+                        
+                        if ($notification>0) {
+                            echo "
+                            <li>
+                            <div class=\"number\">$notification</div>";
+                        }
+                            echo"
+                                <i class=\"fa fa-bell\" style=\"font-size:20px; color:black; margin-left:1em; margin-right:8; padding-right:0;\"></i><button class=\"notifbtn\" onClick=\"location.href='http://localhost/vegemart/src/read_notification.php';\">Messages</button>
+                            </li>                        
+                        
                         <li>
                         <div class=\"nav-dropdown\">
                             <img class=\"dp\" src=\"https://localhost/vegemart/public/images/users/{$rowUser['profilePic']}\" alt=\"Avatar\">

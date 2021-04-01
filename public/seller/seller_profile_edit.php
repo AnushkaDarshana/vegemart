@@ -1,6 +1,16 @@
 <?php 
     include  ('../../config/dbconfig.php'); 
     include ('../../src/session.php');
+    if(empty(session_id())){
+        session_start();
+    }
+    if((!isset($_SESSION["loggedInSellerID"])))
+    {
+        echo "<script>
+        alert('You have to login first');
+        window.location.href='../../public/login.php';
+        </script>";
+    }
 
 ?>
 
@@ -87,16 +97,16 @@
                                         <span>Enter your password to confirm</span>
                                         <div class="input-row">
                                             <label>Password</label> 
-                                            <input class="input-box" type="password" name="Password" placeholder="Current password" required>                                         
+                                            <input class="input-box" type="password" name="password" placeholder="Current password" required>                                         
                                         </div>
                                     </div>
                                     <div class="column is-1 pl-1 pr-1"></div>
                                 </div>
                                 <div class="row">
-                                    <input type="hidden" value=<?php echo $row['id']?> name="ditID">
+                                    <input type="hidden" value=<?php echo $userID?> name="editID">
                                     <input class="form-button"  type="submit" name="submit" value="Save">
                                     <input class="form-button" type="button" name="cancel" onclick="window.location.replace('seller_home.php')" value="Cancel">                                           
-                                    <a style="color:#138D75; font-size:18px; font-family:Candara ; margin-top:10%;" href="#">Deactivate account</a>
+                                    <input class="form-button"  type="submit" name="deactivate" value="Deactivate">  
                                 </div>
                                 </form>
                                 <h3 class="error-msg"><?php include_once ('../includes/message.php'); ?></h3>
@@ -111,105 +121,69 @@
                         <div class="column is-10 mt-0">
                             <table>
                                 <tr>
-                                    <th>Order ID</th>
-                                    <th>Date</th>
-                                
+                                    <th>Product</th>
+                                    <th>Quantity</th>
                                     <th>Buyer Name</th>
-                                    <th>Picked up/ Delivered</th>
-                                    <th>Deliverer Name</th>
                                     <th>Earned amount (Rs.)</th>
-                                    <th></th>
+                                    
                                 </tr>
+                                <?php
+                                include ('../../config/dbconfig.php');
+                                include ('../../src/session.php');
+                
+                                $orderQuery = "SELECT * FROM orders WHERE `sellerID` ='$userID' AND paymentStatus=1";
+                                $orderResult = mysqli_query($con, $orderQuery);
+        
+                                while ($rowOrder = mysqli_fetch_assoc($orderResult)) {
+                                    $buyerID = $rowOrder['userID'];
+                                    $bidID = $rowOrder['bidID'];
+                                    $productID = $rowOrder['productID'];
+                                    $quantityID = $rowOrder['quantityID'];
+                
+                                    //bid details
+                                    $bidInfo = "SELECT * FROM bidding WHERE `bidID` ='$bidID' ";
+                                    $bidQuery = mysqli_query($con, $bidInfo);
+                                                
+                                    //buyer details
+                                    $buyerInfo = "SELECT * FROM client WHERE `user_id` ='$buyerID' ";
+                                    $buyerquery = mysqli_query($con, $buyerInfo);
+
+                                    //product details
+                                    $productInfo = "SELECT * FROM products WHERE `productID` ='$productID' ";
+                                    $productQuery = mysqli_query($con, $productInfo);
+
+                                    //quantity details
+                                    $quantityInfo = "SELECT * FROM quantitysets WHERE `quantityID` ='$quantityID' ";
+                                    $quantityQuery = mysqli_query($con, $quantityInfo);?>
+
+                                    
                                 <tr>
-                                    <td>#1</td>
-                                    <td>02/01/2020</td>
+                                    <?php
+                                    while ($rowProduct = mysqli_fetch_assoc($productQuery)) {?>
+                                    <td><?php echo $rowProduct['name'] ?></td>
+                                    <?php
+                                    }
+                                    while ($rowQuantity = mysqli_fetch_assoc($quantityQuery)) {
+                                    ?>                                    
+                                    <td><?php echo $rowQuantity['quantity'] ?></td>
+                                    <?php
+                                    }
+                                    while ($rowBuyer = mysqli_fetch_assoc($buyerquery)) {
+                                    ?>
+                                    <td><?php echo $rowBuyer['fName'] . " " . $rowBuyer['lName'] ?></td>
+                                    <?php
+                                    }
+                                    while ($rowBid = mysqli_fetch_assoc($bidQuery)) {
+                                        ?>
+                                    <td>Rs. <?php echo $rowBid['bidPrice'] ?>.00</td>
+                                    <?php
+                                    }
+                                    ?>
+                                </tr>
+                                <?php
+                                    }
                                 
-                                    <td>Nimal Perera</td>
-                                    <td>Delivered</td>
-                                    <td>Thusitha Bandara</td>
-                                    <td>200.00</td>
-                                    <td class="has-text-centered"><a href="#">View reciept</a></td>
-                                </tr>
-                                <tr>
-                                    <td>#2</td>
-                                    <td>07/03/2020</td>
-                                    
-                                    <td>Amal Silva</td>
-                                    <td>Delivered</td>
-                                    <td>Kamal Diaz</td>
-                                    <td>740.00</td>
-                                    <td  class="has-text-centered"><a href="#">View reciept</a></td>
-                                </tr>
-                                <tr>
-                                    <td>#3</td>
-                                    <td>02/01/2020</td>
-                                    
-                                    <td>Nimal Perera</td>
-                                    <td>Picked up</td>
-                                    <td>-</td>
-                                    <td>200.00</td>
-                                    <td class="has-text-centered"><a href="#">View reciept</a></td>
-                                </tr>
-                                <tr>
-                                    <td>#4</td>
-                                    <td>07/03/2020</td>
-                                    
-                                    <td>Amal Silva</td>
-                                    <td>Delivered</td>
-                                    <td>Kamal Diaz</td>
-                                    <td>740.00</td>
-                                    <td  class="has-text-centered"><a href="#">View reciept</a></td>
-                                </tr>
-                                <tr>
-                                    <td>#5</td>
-                                    <td>02/01/2020</td>
-                                    
-                                    <td>Nimal Perera</td>
-                                    <td>Delivered</td>
-                                    <td>Thusitha Bandara</td>
-                                    <td>200.00</td>
-                                    <td class="has-text-centered"><a href="#">View reciept</a></td>
-                                </tr>
-                                <tr>
-                                    <td>#6</td>
-                                    <td>07/03/2020</td>
-                                    
-                                    <td>Amal Silva</td>
-                                    <td>Picked up</td>
-                                    <td>-</td>
-                                    <td>740.00</td>
-                                    <td  class="has-text-centered"><a href="#">View reciept</a></td>
-                                </tr>
-                                <tr>
-                                    <td>#7</td>
-                                    <td>02/01/2020</td>
-                                
-                                    <td>Nimal Perera</td>
-                                    <td>Delivered</td>
-                                    <td>Thusitha Bandara</td>
-                                    <td>200.00</td>
-                                    <td class="has-text-centered"><a href="#">View reciept</a></td>
-                                </tr>
-                                <tr>
-                                    <td>#8</td>
-                                    <td>07/03/2020</td>
-                                    
-                                    <td>Amal Silva</td>
-                                    <td>Delivered</td>
-                                    <td>Kamal Diaz</td>
-                                    <td>740.00</td>
-                                    <td  class="has-text-centered"><a href="#">View reciept</a></td>
-                                </tr>
-                                <tr>
-                                    <td>#9</td>
-                                    <td>02/01/2020</td>
-                                    
-                                    <td>Nimal Perera</td>
-                                    <td>Picked up</td>
-                                    <td>-</td>
-                                    <td>200.00</td>
-                                    <td class="has-text-centered"><a href="#">View reciept</a></td>
-                                </tr>
+                                ?>                                
                             </table><br><br>
                         </div>
                         <div class="column is-1 mt-0">

@@ -25,7 +25,7 @@
             }
     }
 
-    if(isset($_POST['submit'])){
+    if(isset($_POST['submit']) || isset($_POST['deactivate'])){
         $id= $_SESSION["loggedInSellerID"];;
         $newFName = $_POST['editFName'];
         $newLName = $_POST['editLName'];
@@ -37,14 +37,24 @@
         $imageName = $_FILES["profilePic"]["name"];
         $imageData = $_FILES["profilePic"]["tmp_name"];
         $imageType = $_FILES["profilePic"]["type"];
-        $newUsername = $_POST['editUsername'];
-        $oldPassword = md5($_POST['Password']);
-        $newPassword = md5($_POST['editPassword']);
-        $newConfirmPassword = md5($_POST['editConfirmPassword']);
+        
     
         $user = "SELECT * FROM users WHERE id='".$id."'";
         $resultuser = mysqli_query($con, $user);
+
         while($row = mysqli_fetch_assoc($resultuser)){
+
+            $salt = $row['salt'];
+            $oldPassword = md5($salt.$_POST['password']);
+            if($_POST['editPassword'] == ""){
+                $newPassword=$oldPassword;
+                $newConfirmPassword=$oldPassword;
+            } else{
+                $newPassword = md5($salt.$_POST['editPassword']);
+                $newConfirmPassword = md5($salt.$_POST['editConfirmPassword']);
+            }
+
+
             if($oldPassword === $row['password']) {    
         
                 if ($newPassword != $newConfirmPassword){
@@ -54,25 +64,39 @@
                 }
                 
                 else{ 
-                    if($newPassword=="d41d8cd98f00b204e9800998ecf8427e"){
-                        $newPassword=$oldPassword;
-                    } 
-                        $updateUser= "UPDATE `users` SET email = '".$newEmail."',`password` = '".$newPassword."' WHERE id = '".$id."' ";
-                    if($imageName==""){
-                        $updateQuery= "UPDATE `client` SET fName = '".$newFName."', lName = '".$newLName."', phoneNum = '".$newPhoneNum."', address1 = '".$newAddress1."', address2 = '".$newAddress2."', city = '".$newCity."' WHERE user_id = '".$id."' ";
+                    
+                    //deactivate account
+                    
+                    if(isset($_POST['deactivate'])){
+                        $userDeactivate= "UPDATE `users` SET `active_status`=0 WHERE `id`='$id' ";
+                        
+                        if ($con->query($userDeactivate) === true) {
+                            echo "Record updated successfully";        
+                            header('Location:https://localhost/vegemart/public/login.php');
+                        } else {
+                            echo "Error updating record: " . $con->error;
+                        }
                     }
-                    else{
-                        $updateQuery= "UPDATE `client` SET fName = '".$newFName."', lName = '".$newLName."', phoneNum = '".$newPhoneNum."',profilePic = '".$imageName."', address1 = '".$newAddress1."', address2 = '".$newAddress2."', city = '".$newCity."' WHERE user_id = '".$id."' ";   
-                    }   
-                    if (mysqli_query($con,$updateQuery) && mysqli_query($con,$updateUser)) {
-                        $message = base64_encode(urlencode("Successfully Edited!"));
-                        header('Location:../../public/seller/seller_home.php?msg=' . $message);
-                        exit();
-                    } 
-                    else {
-                        $message = base64_encode(urlencode("SQL Error while Registering"));
-                     //   header('Location:../../public/seller/seller_profile_edit.php?msg=' . $message);
-                        exit();
+
+                    //update profile
+                    else{                    
+                        $updateUser= "UPDATE `users` SET email = '".$newEmail."',`password` = '".$newPassword."' WHERE id = '".$id."' ";
+                        if($imageName==""){
+                            $updateQuery= "UPDATE `client` SET fName = '".$newFName."', lName = '".$newLName."', phoneNum = '".$newPhoneNum."', address1 = '".$newAddress1."', address2 = '".$newAddress2."', city = '".$newCity."' WHERE user_id = '".$id."' ";
+                        }
+                        else{
+                            $updateQuery= "UPDATE `client` SET fName = '".$newFName."', lName = '".$newLName."', phoneNum = '".$newPhoneNum."',profilePic = '".$imageName."', address1 = '".$newAddress1."', address2 = '".$newAddress2."', city = '".$newCity."' WHERE user_id = '".$id."' ";   
+                        }   
+                        if (mysqli_query($con,$updateQuery) && mysqli_query($con,$updateUser)) {
+                            $message = base64_encode(urlencode("Successfully Edited!"));
+                            header('Location:../../public/seller/seller_home.php?msg=' . $message);
+                            exit();
+                        } 
+                        else {
+                            $message = base64_encode(urlencode("SQL Error while Registering"));
+                            header('Location:../../public/seller/seller_profile_edit.php?msg=' . $message);
+                            exit();
+                        }
                     }
                 }
             }

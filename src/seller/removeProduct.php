@@ -1,6 +1,7 @@
 <?php
     include ('../../config/dbconfig.php');
     include ('../session.php');
+    
 
     $productID=$_GET['id'];
 

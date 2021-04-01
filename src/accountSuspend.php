@@ -13,7 +13,7 @@
         $userID = $rowUser[0];
 
         $suspendAccount= "UPDATE `users` SET `active_status`=0 WHERE `id`='$userID'";
-        if ($con->query($productAvailable) === true) {
+        if ($con->query($suspendAccount) === true) {
             echo "Record updated successfully";
 
             $emailQuery = mysqli_query($con, "SELECT email FROM users where id ='$userID'");
@@ -28,6 +28,7 @@
             while ($rowOrder  = mysqli_fetch_assoc($orderDetailsQuery)) {
                 $productID = $rowOrder['productID'];
                 $quantityID = $rowOrder['quantityID'];
+                $bidID = $rowOrder['bidID'];                
 
                 $productAvailable = "UPDATE `products` SET `availability`=1 WHERE `productID`='$productID'";
                 if ($con->query($productAvailable) === true) {
@@ -35,7 +36,26 @@
 
                     $quantitySetAvailable = "UPDATE `quantitysets` SET `quantitySetStatus`=0 WHERE `quantityID`='$quantityID'";
                     if ($con->query($quantitySetAvailable) === true) {
-                        echo "Record updated successfully";
+
+                        
+                        $bidRemove = "UPDATE `bidding` SET `bidRemoveStatus`=1 WHERE `bidID`='$bidID'";
+                        if ($con->query($bidRemove) === TRUE) {
+                            $message = base64_encode(urlencode("Bid was deleted"));
+                            echo "Record updated successfully";
+                            //send email product removed from cart
+                            $to=$email;
+                            $from='vegemartucsc@gmail.com';
+                            $subject= 'Account suspended.';
+                            $message=$user.' your account has been suspended. Visit helpdesk and contact admin for more details';
+                            $header="From: {$from}\r\nContent-Type: text/html;";
+
+                            $send_result=mail($to, $subject, $message, $header);
+                            header('Location:../public/login.php');
+                          
+                        } else {
+                            $message = base64_encode(urlencode("SQL Error while Deleting bid"));
+                            header('Location:../../public/products.php?msg=' . $message);                            
+                        }
                     }
                     else{
                         echo "Error updating record: " . $con->error;
@@ -45,15 +65,7 @@
                     echo "Error updating record: " . $con->error;
                 }
             }
-            //send email product removed from cart
-                $to=$email;
-                $from='vegemartucsc@gmail.com';
-                $subject= 'Account suspended.';
-                $message=$user.' your account has been suspended. Visit helpdesk and contact admin for more details';
-                $header="From: {$from}\r\nContent-Type: text/html;";
-
-                $send_result=mail($to, $subject, $message, $header);
-                header('Location:../public/login.php');
+            
             
         }
         else{

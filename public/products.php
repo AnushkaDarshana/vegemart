@@ -152,11 +152,11 @@
         <!--search box ends here -->
 
         <!-- products block starts here-->
-        <div class="row mt-1 mb-0">
-            <div class="items-container">
+        <div class="row mt-1 mb-0 has-text-centered">
+            <div class="items-container pl-2">
                 <?php 
                 function showProducts($rowProduct){?>
-                    <div class= "block" onclick= "window.location.href = 'bid.php?id=<?php echo $rowProduct['productID'] ?>'" style="cursor: pointer;">
+                    <div class= "block"  onclick= "window.location.href = 'bid.php?id=<?php echo $rowProduct['productID'] ?>'" style="cursor: pointer;">
                         <img src= images/products/<?php echo $rowProduct['imageName'] ?>>
                         <h3 style="text-transform: capitalize;"><?php echo $rowProduct['name'] ?></h3>
                         <?php

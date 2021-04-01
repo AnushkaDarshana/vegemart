@@ -18,26 +18,6 @@
             <div class="columns group mt-0">
                 <div class="column is-1 mt-0"></div>
                 <div class="column is-10 mt-0">
-                    <?php
-                        include ('../../config/dbconfig.php');
-                        include ('../../src/session.php');
-        
-                        $userID = $_SESSION["loggedInDelivererID"];
-                        $delivery = "SELECT * FROM deliveries WHERE `delivererID` ='$userID' AND deliveryStatus=1";
-                        $deliveryresult = mysqli_query($con, $delivery);
-
-                        while ($rowdelivery = mysqli_fetch_assoc($deliveryresult)) {
-                            $buyerID = $rowdelivery['buyerID'];
-                            $sellerID = $rowdelivery['sellerID'];
-        
-                            //buyer details
-                            $buyerInfo = "SELECT * FROM client WHERE `user_id` ='$buyerID' ";
-                            $buyerquery = mysqli_query($con, $buyerInfo);
-                                        
-                            //seller details
-                            $sellerInfo = "SELECT * FROM client WHERE `user_id` ='$sellerID' ";
-                            $sellerquery = mysqli_query($con, $sellerInfo); ?>
-
                     <table>
                         <tr>
                             <th>Seller Name</th>
@@ -46,22 +26,52 @@
                             <th>Delivered Location</th>                         
                             
                         </tr>
-                        <tr>
-                            <?php
-                            while ($rowSeller = mysqli_fetch_assoc($sellerquery)) {?>
-                            <td><?php echo $rowSeller['fName'] . " " . $rowSeller['lName'] ?></td>
-                            <td><?php echo $rowSeller['address1'] . ", " . $rowSeller['address2'] . ", " . $rowSeller['city'] ?></td>
-                            <?php
+                        <?php
+                            include ('../../config/dbconfig.php');
+                            include ('../../src/session.php');
+                            if(empty(session_id())){
+                                session_start();
                             }
-                            while ($rowUser = mysqli_fetch_assoc($buyerquery)) {
-                                ?>
-                            <td><?php echo $rowUser['fName'] . " " . $rowUser['lName'] ?></td>
-                            <td><?php echo $rowUser['address1'] . ", " . $rowUser['address2'] . ", " . $rowUser['city'] ?></td>
-                            <?php
+                            if((!isset($_SESSION["loggedInDelivererID"])))
+                            {
+                                echo "<script>
+                                alert('You have to login first');
+                                window.location.href='../../public/login.php';
+                                </script>";
                             }
-                        }
+            
+                            $userID = $_SESSION["loggedInDelivererID"];
+                            $delivery = "SELECT * FROM deliveries WHERE `delivererID` ='$userID' AND deliveryStatus=1";
+                            $deliveryresult = mysqli_query($con, $delivery);
+    
+                            while ($rowdelivery = mysqli_fetch_assoc($deliveryresult)) {
+                                $buyerID = $rowdelivery['buyerID'];
+                                $sellerID = $rowdelivery['sellerID'];
+            
+                                //buyer details
+                                $buyerInfo = "SELECT * FROM client WHERE `user_id` ='$buyerID' ";
+                                $buyerquery = mysqli_query($con, $buyerInfo);
+                                            
+                                //seller details
+                                $sellerInfo = "SELECT * FROM client WHERE `user_id` ='$sellerID' ";
+                                $sellerquery = mysqli_query($con, $sellerInfo);
+
+                                while ($rowSeller = mysqli_fetch_assoc($sellerquery)) {?>
+                            <tr>
+                        
+                                <td><?php echo $rowSeller['fName'] . " " . $rowSeller['lName'] ?></td>
+                                <td><?php echo $rowSeller['address1'] . ", " . $rowSeller['address2'] . ", " . $rowSeller['city'] ?></td>
+                                <?php
+                                }
+                                while ($rowUser = mysqli_fetch_assoc($buyerquery)) {
+                                    ?>
+                                <td><?php echo $rowUser['fName'] . " " . $rowUser['lName'] ?></td>
+                                <td><?php echo $rowUser['address1'] . ", " . $rowUser['address2'] . ", " . $rowUser['city'] ?></td>
+                                <?php
+                                }
+                            }
                             ?>                            
-                        </tr>
+                            </tr>
                         
                         
                     </table><br><br>

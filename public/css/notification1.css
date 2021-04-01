@@ -1,0 +1,95 @@
+@import url(./style.css);
+
+h1,h2,h3,h4,h5,h6,p,span,i {
+    flex-wrap: wrap;
+}
+
+.heading{
+    flex: 1;
+}
+
+#title{
+    text-align:left; 
+    padding: 0 1em; 
+    font-family:Candara; 
+    margin:auto;
+    font-size: 27px;
+    color: black;
+}
+
+.notif{
+    background-color: #F2F3F4;
+    padding: 0.5em 1.5em 0;
+    cursor: pointer;
+}
+
+.item-table h1 {
+    display: grid;
+    place-items: center;
+    font-size: 1em;
+}
+.item-img{
+    height: 70px;
+    margin: auto;
+}
+.item-row{
+    /* padding: 5px !important; */
+    vertical-align: middle;
+}
+
+hr{
+    margin: 0%;
+    padding: 0%;
+}
+ 
+#ordersum {
+    margin-top:3%!important;
+    display:grid;
+    place-items: center;
+    margin: 4em 0;
+    background-color: #F2F3F4;
+    /* padding: 1em 0; */
+
+}
+
+button {
+    background-color: #138D75;
+    border-color: transparent;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    justify-content: center;
+    padding-bottom: calc(0.5em - 1px);
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: calc(0.5em - 1px);
+    text-align: center;
+    margin-top: 1em;
+    border-radius: 0.3em;
+}
+
+button > i{
+    color: white !important
+}
+
+button > i{
+    color: white !important
+}
+
+button:hover{
+    background-color: #1cc4a2;
+    color: white;
+}
+
+button > i{
+    color: white !important
+}
+
+#ab{
+    color:#138D75; 
+    text-decoration: none;
+    font-size:20px; 
+    font-weight: bold;
+    margin: 2rem; 
+    text-align:left;
+}

@@ -51,6 +51,16 @@
             <div class="column is-1"></div>
             <div class="column is-5 pr-4">
                 <?php
+                    if(empty(session_id())){
+                        session_start();
+                    }
+                    if(!isset($_SESSION["loggedInUserID"]))
+                    {
+                    echo "<script>
+                    alert('You have to login first');
+                    window.location.href='../public/login.php';
+                    </script>";
+                    }  
                     $orderID=$_GET['id'];
                     $orderQuery= "SELECT * FROM orders WHERE orderID='$orderID';";  
                     $orderResult=mysqli_query($con,$orderQuery);
@@ -183,7 +193,7 @@
                             </div>
                             <div class="column is-7 pr-2 has-text-right">
                                 <h2 style="text-align:right;">Rs. <?php echo "$price"?>.00</h2>
-                                <h2 style="text-align:right;display:none;" id="charge">50.00</h2>
+                                <h2 style="text-align:right;display:none;" id="charge">250.00</h2>
                                 <h1 style="text-align:right;" id="total">Rs. <?php echo "$price"?>.00</h1>
                             </div>
                         </div>
@@ -259,7 +269,7 @@
         if(checkBox.checked==true){
             charge.style.display="block";
             label.style.display="block"; 
-            <?php $x= "$price"+50?>            
+            <?php $x= "$price"+250?>            
             total.innerHTML = "Rs. <?php echo "$x"?>.00";
             amount.value = <?php echo "$x"?>;  
             url.value="https://localhost/vegemart/src/order_done.php?amount=<?php echo "$x"?>";          

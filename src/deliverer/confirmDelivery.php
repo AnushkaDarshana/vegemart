@@ -1,6 +1,7 @@
 <?php
     include ('../../config/dbconfig.php');
     include ('../../src/session.php');
+    
 
     $deliveryID = $_GET['id'];
     $userID = $_SESSION["loggedInDelivererID"];
@@ -60,7 +61,4 @@
     else{
         echo "Error updating record: " . $con->error;
     }
-
-
-
 ?>

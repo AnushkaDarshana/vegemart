@@ -83,8 +83,8 @@
                             <a class=\"close\" href=\"./forum_home.php\">&times;</a>
                             <h2 id=\"title\">Add a new post</h2>
                             <form method=\"POST\" action=\"../src/forum/forum_add_post.php\">
-                                <input type=\"text\" class=\"input-box\" id=\"topic_title\" name=\"topic_title\" value=$topic_title readonly=true required/><br>
-                                <textarea rows=\"6\" cols=\"70\" wrap=virtual name=\"post_text\" placeholder=\"Post Text\"></textarea>
+                                <input type=\"text\" class=\"input-box\" width=\"10000\" id=\"topic_title\" name=\"topic_title\" value=$topic_title readonly=true required/><br>
+                                <textarea rows=\"6\" cols=\"60\" wrap=virtual name=\"post_text\" placeholder=\"Post Text\"></textarea>
                                 <div class=\"row\">
                                     <input type=\"hidden\" name=\"op\" value=\"addpost\">
                                     <input type=\"hidden\" name=\"topic_id\" value=\"$topic_id\"> 

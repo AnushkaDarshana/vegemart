@@ -36,6 +36,16 @@
                             <img class="typic mt-1 pt-1" src="https://www.flaticon.com/svg/static/icons/svg/1145/1145941.svg">
                             <h2 class="title mt-0">We recieved your Order!</h2>
                             <?php
+                                if(empty(session_id())){
+                                    session_start();
+                                }
+                                if(!isset($_SESSION["loggedInUserID"]))
+                                {
+                                echo "<script>
+                                alert('You have to login first');
+                                window.location.href='../public/login.php';
+                                </script>";
+                                }  
                                     $orderID = $_GET['id'];
                                     $orderQuery= "SELECT * FROM orders WHERE orderID='$orderID';";  
                                     $orderResult=mysqli_query($con,$orderQuery);

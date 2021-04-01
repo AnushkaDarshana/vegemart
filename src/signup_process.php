@@ -78,7 +78,7 @@
                               
         }else {
             echo "<script type='text/javascript'>
-                alert('password does not match');
+                alert('Email already exists');
                 window.history.back();           
                 </script>";
         }

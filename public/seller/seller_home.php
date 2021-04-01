@@ -17,7 +17,16 @@
     </head>
 
     <body>
-        <?php include "./seller_nav.php"; ?>
+        <?php 
+        include "./seller_nav.php"; 
+        if((!isset($_SESSION["loggedInSellerID"])) && (!isset($_SESSION["loggedInUserID"])))
+        {
+        echo "<script>
+        alert('You have to login first');
+        window.location.href='../../public/login.php';
+        </script>";
+        } 
+        ?>
         <div class="row">
 
             <div class="columns group mt-0">
@@ -202,14 +211,7 @@
                     <h1 id="title" style="text-align:center;">Reviews from Customers</h1>
                         <div class="user-data pt-1 pb-1">
                             <img src="https://www.flaticon.com/svg/static/icons/svg/1484/1484836.svg" class="user-image" alt="Use Image">
-                            <h2>4.3</h2>
-                            <div class="rating-block">
-                                <i class="fas fa-star star-colored"></i>
-                                <i class="fas fa-star star-colored"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
+                            
                         </div>
                         <?php
                             include ('../../src/seller/seller_dashboard/reviews.php');                               

@@ -1,6 +1,7 @@
 <?php
     include ('../../config/dbconfig.php') ;
     include ('../session.php') ;
+    
       
     $target_dir = "../../public/images/users/";
     $target_file = $target_dir . basename($_FILES["profilePic"]["name"]);

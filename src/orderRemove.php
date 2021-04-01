@@ -5,7 +5,7 @@
      $orderID=$_GET['id'];
  
      //order will be removed after 2 days of time if you didn't pay
-     $cartExpirationDateQuery = "SELECT DATE_ADD(NOW(),INTERVAL 1 MINUTE) AS DateAdd;";
+     $cartExpirationDateQuery = "SELECT DATE_ADD(NOW(),INTERVAL 2 DAY) AS DateAdd;";
      $cartExpirationDateResult = mysqli_query($con,$cartExpirationDateQuery); 
      $rowCartExpirationDate = mysqli_fetch_assoc($cartExpirationDateResult);
      $cartExpirationDate = $rowCartExpirationDate['DateAdd'];

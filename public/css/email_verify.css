@@ -1,157 +1,149 @@
 html {
     height: 100%;
-    
-} 
-body{
+}
+
+body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background-image: url('../images/bg.png');    
+    background-image: url('../images/bg.png');
     background-size: cover;
-    backdrop-filter: brightness(60%); 
-    background-repeat: no-repeat; 
-  }
-  
-  .reset{
-      position: absolute;
-      top: 5%;
-      left: 50%;
-      transform: translate(-50%,50%);
-      width: 40%;
-      padding: 45px;
-      background: rgba(0,0,0,.8);
-      box-sizing: border-box;
-      box-shadow: 0 15px 25px rgba(0,0,0,.5);
-      border-radius: 10px;
-  }
-  
-  .reset h3
-  {
-      margin: 0 0 30px;
-      padding: 0;
-      color: #fff;
-      text-align: center;
-  
-  }
-  
-  .reset .inputBox
-  {
-      position: relative;
-  }
-  
-  .reset .inputBox input
-  {
-      width: 100%;
-      padding: 12px 0;
-      font-size: 16px;
-      color: #fff;
-      letter-spacing: 1px;
-      margin-bottom: 16px;
-      border: none;
-      border-bottom: 1px solid #fff;
-      outline: none;
-      background: transparent;
-  }
-  
-  .reset .inputBox label
-  {
-     position: absolute;
-     top: 0;
-     left: 0;  
-     padding: 15px 0;
-     font-size: 18px; 
-     color: #fff;
-     pointer-events: none;
-     transition: .5s;
-  
-  }
-  .reset .inputBox input:focus ~ label,
-  .reset .inputBox input:valid ~ label 
-  {
-      top: -20px;
-      left: 0;
-      color: #03a9f4;
-      font-size: 14px;
-  
-  } 
-  
-  .reset input[type="submit" i]
-  {
-      margin-top: 8px;  
-      margin-left: 22%;
-      margin-bottom: 2px;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: #fff;
-      background: #138D75;
-      padding: 10px 20px;
-      cursor: pointer;
-      border-radius: 5px;
-      display: inline-block;
-      font-size: 16px;
-  }
-  
-  .reset input[type="reset" i]
-  {
-      margin-top: 8px;  
-      margin-left: 15%;
-      margin-bottom: 2px;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: #fff;
-      background:#138D75;
-      padding: 10px 20px;
-      cursor: pointer;
-      border-radius: 5px;
-      display: inline-block;
-      font-size: 16px;
-  }
-  .reset input[type="reset" i]:hover
-  {
-      background-color: #1cc4a2;
-      color: white;
-  }
-  .reset input[type="submit" i]:hover
-  {
-      background-color: #1cc4a2;
-      color: white;
-  }
-  .anchor{
+    backdrop-filter: brightness(60%);
+    background-repeat: no-repeat;
+}
+
+.reset {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    width: 40%;
+    padding: 45px;
+    background: rgba(0, 0, 0, .8);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .5);
+    border-radius: 10px;
+}
+
+.reset h3 {
+    margin: 0 0 30px;
+    padding: 0;
+    color: #fff;
+    text-align: center;
+}
+
+.reset .inputBox {
+    position: relative;
+}
+
+.reset .inputBox input {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 16px;
+    color: #fff;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: transparent;
+}
+
+.reset .inputBox label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 15px 0;
+    font-size: 18px;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.reset .inputBox input:focus~label,
+.reset .inputBox input:valid~label {
+    top: -20px;
+    left: 0;
+    color: #03a9f4;
+    font-size: 14px;
+}
+
+.reset input[type="submit" i] {
+    margin-top: 8px;
+    margin-left: 22%;
+    margin-bottom: 0px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #138D75;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.reset input[type="reset" i] {
+    margin-top: 8px;
+    margin-left: 15%;
+    margin-bottom: 0px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #138D75;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.reset input[type="reset" i]:hover {
+    background-color: #1cc4a2;
+    color: white;
+}
+
+.reset input[type="submit" i]:hover {
+    background-color: #1cc4a2;
+    color: white;
+}
+
+.anchor {
     display: block;
     position: relative;
     top: 0px;
-    margin-bottom: 15px;
-      
-  }
-  .message{
-      color: white;
-  }
-  p{
-      color: white;
-  }
-  a {
+    margin-bottom: 0px;
+}
+
+.message {
+    color: white;
+}
+
+p {
+    color: white;
+}
+
+a {
     position: relative;
-    top: -15px; 
-    left: -35px; 
+    top: -15px;
+    left: -35px;
     text-decoration: none;
     display: inline-block;
-    padding: 8px 16px;
-    
-  }
-  
-  a:hover {
+    padding: 0px 0px;
+}
+
+a:hover {
     background-color: #ddd;
     color: black;
-  }
-  
-  .previous {
+}
+
+.previous {
     font-size: 18px;
     color: white;
-  }
-  
-  
-  .round {
+}
+
+.round {
     border-radius: 50%;
-  }
+}

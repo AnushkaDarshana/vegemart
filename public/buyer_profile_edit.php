@@ -13,7 +13,20 @@
 
     <?php 
         include "./includes/nav.php";
-        include ('../src/buyer_profile_details.php'); 
+        if(empty(session_id())){
+            session_start();
+        }
+        if(!isset($_SESSION["loggedInUserID"]))
+        {
+        echo "<script>
+        alert('You have to login first');
+        window.location.href='../public/login.php';
+        </script>";
+        }  
+        else{
+            $userID = $_SESSION["loggedInUserID"];
+        } 
+        include ('../src/buyer_profile_details.php');        
         while($row = mysqli_fetch_assoc($userquery)){?>
         <div class="tab has-text-centered">
             <button class="tabButton" onclick="openfun(event, 'profile')" id="defaultOpen">My Profile</button>
@@ -88,10 +101,10 @@
                             <div class="column is-1 pl-1 pr-1"></div>
                         </div>
                         <div class="row">
-                            <input type="hidden" value="<?php echo $row['id']?>" name="editID">
+                            <input type="hidden" name="editID" value="<?php echo $userID ?>" required>                        
                             <input class="form-button"  type="submit" name="submit" value="Save">
                             <input class="form-button" type="button" name="cancel" onclick="window.location.replace('index.php')" value="Cancel">                                           
-                            <a style="text-decoration:none; color:#138D75; font-size:18px; font-family:Candara ; margin-top:10%;" href="#">Deactivate account</a>
+                            <input class="form-button"  type="submit" name="deactivate" value="Deactivate">                            
                         </div>
                         </form>
                         <h3 class="error-msg"><?php include_once ('./includes/message.php'); ?></h3>
@@ -107,104 +120,66 @@
                 <div class="column is-10 mt-1 pt-1">
                     <table>
                         <tr>
-                            <th>Order ID</th>
-                            <th>Date</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
                             <th>Seller Name</th>
-                            <th>Picked up/ Delivered</th>
-                            <th>Deliverer Name</th>
-                            <th>Amount spent (Rs.)</th>
-                            <th></th>
+                            <th>Paid amount (Rs.)</th>
                         </tr>
-                        <tr>
-                            <td>#1</td>
-                            <td>02/01/2020</td>
-                        
-                            <td>Nimal Perera</td>
-                            <td>Delivered</td>
-                            <td>Thusitha Bandara</td>
-                            <td>200.00</td>
-                            <td class="has-text-centered"><a href="#">View reciept</a></td>
-                        </tr>
-                        <tr>
-                            <td>#2</td>
-                            <td>07/03/2020</td>
+                        <?php
+                            include ('../config/dbconfig.php');
+                            include ('../src/session.php');
+                
+                            $orderQuery = "SELECT * FROM orders WHERE `userID` ='$userID' AND paymentStatus=1";
+                            $orderResult = mysqli_query($con, $orderQuery);
                             
-                            <td>Amal Silva</td>
-                            <td>Delivered</td>
-                            <td>Kamal Diaz</td>
-                            <td>740.00</td>
-                            <td  class="has-text-centered"><a href="#">View reciept</a></td>
-                        </tr>
+                            while ($rowOrder = mysqli_fetch_assoc($orderResult)) {
+                                //$buyerID = $rowOrder['userID'];
+                                $orderID = $rowOrder['orderID'];
+                                $sellerID = $rowOrder['sellerID'];
+                                $productID = $rowOrder['productID'];
+                                $quantityID = $rowOrder['quantityID'];
+                
+                                //payment details
+                                $paymentInfo = "SELECT * FROM payment WHERE `orderID` ='$orderID' ";
+                                $paymentquery = mysqli_query($con, $paymentInfo);
+                                                
+                                //seller details
+                                $sellerInfo = "SELECT * FROM client WHERE `user_id` ='$sellerID' ";
+                                $sellerquery = mysqli_query($con, $sellerInfo);
+
+                                //product details
+                                $productInfo = "SELECT * FROM products WHERE `productID` ='$productID' ";
+                                $productQuery = mysqli_query($con, $productInfo);
+
+                                //quantity details
+                                $quantityInfo = "SELECT * FROM quantitysets WHERE `quantityID` ='$quantityID' ";
+                                $quantityQuery = mysqli_query($con, $quantityInfo);?>
                         <tr>
-                            <td>#3</td>
-                            <td>02/01/2020</td>
-                            
-                            <td>Nimal Perera</td>
-                            <td>Picked up</td>
-                            <td>-</td>
-                            <td>200.00</td>
-                            <td class="has-text-centered"><a href="#">View reciept</a></td>
+                            <?php
+                            while ($rowProduct = mysqli_fetch_assoc($productQuery)) {?>
+                            <td><?php echo $rowProduct['name'] ?></td>
+                            <?php
+                            }
+                            while ($rowQuantity = mysqli_fetch_assoc($quantityQuery)) {
+                            ?>
+                            <td><?php echo $rowQuantity['quantity'] ?></td> 
+                            <?php
+                            }
+                            while ($rowSeller = mysqli_fetch_assoc($sellerquery)) {
+                            ?>                       
+                            <td><?php echo $rowSeller['fName'] . " " . $rowSeller['lName'] ?></td>
+                            <?php
+                            }
+                            while ($rowPayment = mysqli_fetch_assoc($paymentquery)) {
+                            ?>
+                            <td>Rs. <?php echo $rowPayment['paid_amount'] ?>.00</td>
+                            <?php
+                                }
+                            ?>                           
                         </tr>
-                        <tr>
-                            <td>#4</td>
-                            <td>07/03/2020</td>
-                            
-                            <td>Amal Silva</td>
-                            <td>Delivered</td>
-                            <td>Kamal Diaz</td>
-                            <td>740.00</td>
-                            <td  class="has-text-centered"><a href="#">View reciept</a></td>
-                        </tr>
-                        <tr>
-                            <td>#5</td>
-                            <td>02/01/2020</td>
-                            
-                            <td>Nimal Perera</td>
-                            <td>Delivered</td>
-                            <td>Thusitha Bandara</td>
-                            <td>200.00</td>
-                            <td class="has-text-centered"><a href="#">View reciept</a></td>
-                        </tr>
-                        <tr>
-                            <td>#6</td>
-                            <td>07/03/2020</td>
-                            
-                            <td>Amal Silva</td>
-                            <td>Picked up</td>
-                            <td>-</td>
-                            <td>740.00</td>
-                            <td  class="has-text-centered"><a href="#">View reciept</a></td>
-                        </tr>
-                        <tr>
-                            <td>#7</td>
-                            <td>02/01/2020</td>
-                        
-                            <td>Nimal Perera</td>
-                            <td>Delivered</td>
-                            <td>Thusitha Bandara</td>
-                            <td>200.00</td>
-                            <td class="has-text-centered"><a href="#">View reciept</a></td>
-                        </tr>
-                        <tr>
-                            <td>#8</td>
-                            <td>07/03/2020</td>
-                            
-                            <td>Amal Silva</td>
-                            <td>Delivered</td>
-                            <td>Kamal Diaz</td>
-                            <td>740.00</td>
-                            <td  class="has-text-centered"><a href="#">View reciept</a></td>
-                        </tr>
-                        <tr>
-                            <td>#9</td>
-                            <td>02/01/2020</td>
-                            
-                            <td>Nimal Perera</td>
-                            <td>Picked up</td>
-                            <td>-</td>
-                            <td>200.00</td>
-                            <td class="has-text-centered"><a href="#">View reciept</a></td>
-                        </tr>
+                        <?php
+                            }
+                        ?>                        
                     </table><br><br>
                 </div>
                 <div class="column is-1 mt-0">
