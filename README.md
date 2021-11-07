@@ -1,2 +1,2 @@
 # vegemart
-Second year group project
+2nd year group project
